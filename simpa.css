@@ -1,0 +1,1104 @@
+/**
+ * Simpa.css
+ * CSS definitions for Single-Page Applications
+ *
+ * @author Yassuo Toda
+ */
+
+/**
+ * BorderLayout
+ */
+
+.BorderLayout {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+.BorderLayout>* {
+    grid-row: 2 !important;
+    grid-column: 2 !important;
+}
+
+.BorderLayout>[data-constraints="page-start"] {
+    grid-row: 1 !important;
+    grid-column: 1 / -1 !important;
+}
+
+.BorderLayout>[data-constraints="page-end"] {
+    grid-row: 3 !important;
+    grid-column: 1 / -1 !important;
+}
+
+.BorderLayout>[data-constraints="line-start"] {
+    grid-row: 2 !important;
+    grid-column: 1 !important;
+}
+
+.BorderLayout>[data-constraints="line-end"] {
+    grid-row: 2 !important;
+    grid-column: 3 !important;
+}
+
+.BorderLayout>[data-constraints="center"] {
+    grid-row: 2 !important;
+    grid-column: 2 !important;
+}
+
+.PageStartBorderLayout {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+.PageStartBorderLayout>* {
+    grid-column: 1 !important;
+}
+
+.PageStartBorderLayout>:first-child {
+    order: 1 !important;
+}
+
+.PageStartBorderLayout>:last-child {
+    order: 2 !important;
+}
+
+.PageStartBorderLayout>[data-constraints="page-start"] {
+    order: 0 !important;
+}
+
+.PageStartBorderLayout>[data-constraints="center"] {
+    order: 3 !important;
+}
+
+.PageEndBorderLayout {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) auto !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+.PageEndBorderLayout>* {
+    grid-column: 1 !important;
+}
+
+.PageEndBorderLayout>:last-child {
+    order: 2 !important;
+}
+
+.PageEndBorderLayout>:first-child {
+    order: 1 !important;
+}
+
+.PageEndBorderLayout>[data-constraints="page-end"] {
+    order: 3 !important;
+}
+
+.PageEndBorderLayout>[data-constraints="center"] {
+    order: 0 !important;
+}
+
+.LineStartBorderLayout {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+.LineStartBorderLayout>* {
+    grid-row: 1 !important;
+}
+
+.LineStartBorderLayout>:first-child {
+    order: 1 !important;
+}
+
+.LineStartBorderLayout>:last-child {
+    order: 2 !important;
+}
+
+.LineStartBorderLayout>[data-constraints="line-start"] {
+    order: 0 !important;
+}
+
+.LineStartBorderLayout>[data-constraints="center"] {
+    order: 3 !important;
+}
+
+.LineEndBorderLayout {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+.LineEndBorderLayout>* {
+    grid-row: 1 !important;
+}
+
+.LineEndBorderLayout>:last-child {
+    order: 2 !important;
+}
+
+.LineEndBorderLayout>:first-child {
+    order: 1 !important;
+}
+
+.LineEndBorderLayout>[data-constraints="line-end"] {
+    order: 3 !important;
+}
+
+.LineEndBorderLayout>[data-constraints="center"] {
+    order: 0 !important;
+}
+
+.PageBorderLayout {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+.PageBorderLayout>* {
+    grid-column: 1 !important;
+}
+
+.PageBorderLayout>:last-child {
+    order: 3 !important;
+}
+
+.PageBorderLayout>:first-child {
+    order: 1 !important;
+}
+
+.PageBorderLayout>:nth-child(2) {
+    order: 2 !important;
+}
+
+.PageBorderLayout>[data-constraints="page-end"] {
+    order: 4 !important;
+}
+
+.PageBorderLayout>[data-constraints="page-start"] {
+    order: 0 !important;
+}
+
+.PageBorderLayout>[data-constraints="center"] {
+    order: 2 !important;
+}
+
+.LineBorderLayout {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    align-items: stretch;
+    justify-items: stretch;
+}
+
+.LineBorderLayout>* {
+    grid-row: 1 !important;
+}
+
+.LineBorderLayout>:last-child {
+    order: 3 !important;
+}
+
+.LineBorderLayout>:first-child {
+    order: 1 !important;
+}
+
+.LineBorderLayout>:nth-child(2) {
+    order: 2 !important;
+}
+
+.LineBorderLayout>[data-constraints="line-end"] {
+    order: 4 !important;
+}
+
+.LineBorderLayout>[data-constraints="line-start"] {
+    order: 0 !important;
+}
+
+.LineBorderLayout>[data-constraints="center"] {
+    order: 2 !important;
+}
+
+/**
+ * BoxLayout
+ */
+
+.BoxLayout,
+.LineAxisBoxLayout {
+    display: grid !important;
+    justify-content: start !important;
+    align-items: center;
+}
+
+.PageAxisBoxLayout {
+    display: grid !important;
+    align-content: start !important;
+    justify-items: center;
+}
+
+.StretchBoxLayout,
+.LineAxisStretchBoxLayout {
+    display: grid !important;
+    justify-content: start !important;
+    align-items: stretch;
+}
+
+.PageAxisStretchBoxLayout {
+    display: grid !important;
+    align-content: start !important;
+    justify-items: stretch;
+}
+
+.BoxLayout>*,
+.LineAxisBoxLayout>*,
+.StretchBoxLayout>*,
+.LineAxisStretchBoxLayout>* {
+    grid-row: 1 !important;
+}
+
+.PageAxisBoxLayout>*
+.PageAxisStretchBoxLayout>* {
+    grid-column: 1 !important;
+}
+
+/**
+ * CenterLayout
+ */
+
+.CenterLayout {
+    display: grid !important;
+    align-content: center !important;
+    justify-content: center !important;
+}
+
+/**
+ * CardLayout
+ */
+
+.CardLayout {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    justify-items: stretch !important;
+}
+
+.CardLayout>* {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+    visibility: hidden;
+}
+
+
+/**
+ * FlowLayout
+ */
+
+.FlowLayout,
+.LeadingFlowLayout,
+.TrailingFlowLayout {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-content: start !important;
+    align-items: center;
+    gap: 5px;
+}
+
+.FlowLayout,
+.CenterFlowLayout {
+    justify-content: center !important;
+}
+
+.LeadingFlowLayout {
+    justify-content: start !important;
+}
+
+.TrailingFlowLayout {
+    justify-content: end !important;
+}
+
+/**
+ * GridBagLayout
+ */
+
+.GridBagLayout {
+    display: grid !important;
+    align-content: center;
+    justify-content: center;
+}
+
+.GridBagLayout>[data-anchor="page-start"] {
+    display: grid !important;
+    align-content: start !important;
+    justify-content: center !important;
+}
+
+.GridBagLayout>[data-anchor="page-end"] {
+    display: grid !important;
+    align-content: end !important;
+    justify-content: center !important;
+}
+
+.GridBagLayout>[data-anchor="line-start"] {
+    display: grid !important;
+    align-content: center !important;
+    justify-content: start !important;
+}
+
+.GridBagLayout>[data-anchor="line-end"] {
+    display: grid !important;
+    align-content: center !important;
+    justify-content: end !important;
+}
+
+.GridBagLayout>[data-anchor="first-line-start"] {
+    display: grid !important;
+    align-content: start !important;
+    justify-content: start !important;
+}
+
+.GridBagLayout>[data-anchor="first-line-end"] {
+    display: grid !important;
+    align-content: start !important;
+    justify-content: end !important;
+}
+
+.GridBagLayout>[data-anchor="last-line-start"] {
+    display: grid !important;
+    align-content: end !important;
+    justify-content: start !important;
+}
+
+.GridBagLayout>[data-anchor="last-line-end"] {
+    display: grid !important;
+    align-content: end !important;
+    justify-content: end !important;
+}
+
+.GridBagLayout>[data-anchor="center"] {
+    display: grid !important;
+    align-content: center !important;
+    justify-content: center !important;
+}
+
+.GridBagLayout>[data-fill="horizontal"] {
+    display: grid !important;
+    justify-content: stretch !important;
+}
+
+.GridBagLayout>[data-fill="vertical"] {
+    display: grid !important;
+    align-content: stretch !important;
+}
+
+.GridBagLayout>[data-fill="both"] {
+    display: grid !important;
+    align-content: stretch !important;
+    justify-content: stretch !important;
+}
+
+/**
+ * Dialog
+ */
+
+.Dialog {
+    position: fixed !important;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    background-color: whitesmoke;
+}
+
+.ModalLayer {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 200;
+    background-color: rgba(0, 0, 0, 0.25);
+    display: grid;
+    align-content: center;
+    justify-content: center;
+}
+
+/**
+ * Drag layer
+ */
+
+.DragLayer {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 400;
+}
+
+/**
+ * Image
+ */
+
+img {
+    width: 1rem;
+    height: 1rem;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.material-icons {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+}
+
+/**
+ * Menu bar
+ */
+
+.MenuBar {
+    user-select: none !important;
+}
+
+.MenuBar,
+.MenuBar ul {
+    list-style-type: none !important;
+    white-space: nowrap !important;
+    margin: 0;
+    padding: 0;
+}
+
+.MenuBar .MenuItem,
+.MenuBar .Menu {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: auto 1fr auto;
+    gap: 5px;
+    align-items: center;
+}
+
+.MenuBar li {
+    position: relative !important;
+}
+
+.MenuBar ul {
+    position: absolute !important;
+    display: none !important;
+    z-index: 300;
+}
+
+.MenuBar[data-open] li[data-selected]>ul {
+    display: block !important;
+}
+
+.MenuBar li>* {
+    padding-inline: 5px;
+}
+
+.MenuBar li>ul {
+    inset-inline-start: calc(100% - 5px);
+    inset-block-start: -5px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    background-color: whitesmoke;
+    padding-block: 5px;
+    padding-inline: 0;
+}
+
+.MenuBar li>:not(ul) {
+    cursor: pointer;
+}
+
+.MenuBar li.Separator {
+    padding-block: 5px;
+}
+
+.MenuBar hr {
+    margin: 0;
+    padding: 0;
+}
+
+.MenuBar input {
+    pointer-events: none !important;
+    width: 12px;
+    margin: 0px;
+}
+
+.MenuBar [data-shortcut] {
+    display: grid !important;
+    grid-template-columns: 1fr auto !important;
+    column-gap: 20px;
+}
+
+.MenuBar>li {
+    display: grid;
+}
+
+.MenuBar>li>* {
+    grid-column: 1;
+}
+
+.MenuBar>li>.Menu {
+    grid-template-columns: 1fr;
+    align-items: center;
+}
+
+.MenuBar>li>ul {
+    inset-block-start: 100%;
+    inset-inline-start: auto;
+}
+
+.MenuBar li:not(.Separator):hover,
+.MenuBar:not(:hover) li[data-selected] {
+    background-color: rgba(128, 128, 128, .25);
+}
+
+.MenuBar .BorderLayout,
+.Menu .BorderLayout,
+.MenuItem .BorderLayout {
+    grid-template-rows: auto 1fr auto !important;
+    grid-template-columns: auto 1fr auto !important;
+}
+
+.MenuBar .PageStartBorderLayout,
+.Menu .PageStartBorderLayout,
+.MenuItem .PageStartBorderLayout {
+    grid-template-rows: auto 1fr !important;
+    grid-template-columns: 1fr !important;
+}
+
+.MenuBar .PageEndBorderLayout,
+.Menu .PageEndBorderLayout,
+.MenuItem .PageEndBorderLayout {
+    grid-template-rows: 1fr auto !important;
+    grid-template-columns: 1fr !important;
+}
+
+.MenuBar .LineStartBorderLayout,
+.Menu .LineStartBorderLayout,
+.MenuItem .LineStartBorderLayout {
+    grid-template-rows: 1fr !important;
+    grid-template-columns: auto 1fr !important;
+}
+
+.MenuBar .LineEndBorderLayout,
+.Menu .LineEndBorderLayout,
+.MenuItem .LineEndBorderLayout {
+    grid-template-rows: 1fr !important;
+    grid-template-columns: 1fr auto !important;
+}
+
+.MenuBar .PageBorderLayout,
+.Menu .PageBorderLayout,
+.MenuItem .PageBorderLayout {
+    grid-template-rows: auto 1fr auto !important;
+    grid-template-columns: 1fr !important;
+}
+
+.MenuBar .LineBorderLayout,
+.Menu .LineBorderLayout,
+.MenuItem .LineBorderLayout {
+    grid-template-rows: 1fr !important;
+    grid-template-columns: auto 1fr auto !important;
+}
+
+.MenuItem>:first-child,
+.MenuItem>:last-child,
+.Menu>:first-child {
+    width: 1rem;
+}
+
+.MenuBar>li>.Menu>:first-child {
+    width: unset;
+}
+
+/**
+ * Scroll pane
+ */
+
+.ScrollPane {
+    overflow: overlay !important;
+}
+
+.HorizontalScrollPane {
+    overflow: overlay hidden !important;
+}
+
+.VerticalScrollPane {
+    overflow: hidden overlay !important;
+}
+
+.ScrollPane .RowHeader,
+.HorizontalScrollPane .RowHeader,
+.VerticalScrollPane .RowHeader {
+    position: sticky !important;
+    inset-inline-start: 0 !important;
+}
+
+.ScrollPane .ColumnHeader,
+.HorizontalScrollPane .ColumnHeader,
+.VerticalScrollPane .ColumnHeader {
+    position: sticky !important;
+    inset-block-start: 0 !important;
+}
+
+.ScrollPane::-webkit-scrollbar,
+.HorizontalScrollPane::-webkit-scrollbar,
+.VerticalScrollPane::-webkit-scrollbar {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* always visible */
+.ScrollPane::-webkit-scrollbar-thumb,
+.HorizontalScrollPane::-webkit-scrollbar-thumb,
+.VerticalScrollPane::-webkit-scrollbar-thumb {
+    background-color: rgba(128, 128, 128, .25);
+}
+
+/* only visible on hover
+.ScrollPane:hover::-webkit-scrollbar-thumb,
+.HorizontalScrollPane:hover::-webkit-scrollbar-thumb,
+.VerticalScrollPane:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(128, 128, 128, .25);
+}
+*/
+
+.ScrollPane::-webkit-scrollbar-corner,
+.HorizontalScrollPane::-webkit-scrollbar-corner,
+.VerticalScrollPane::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+/**
+ * SplitPane
+ */
+
+.SplitPane,
+.SplitPane[data-orientation="horizontal-split"],
+.SplitPane[data-orientation="horizontal-split"][data-divider-anchor="line-start"] {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: auto auto minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    justify-items: stretch !important;
+}
+
+.SplitPane[data-orientation="horizontal-split"][data-divider-anchor="line-end"] {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) auto auto !important;
+    align-items: stretch !important;
+    justify-items: stretch !important;
+}
+
+.SplitPane[data-orientation="vertical-split"],
+.SplitPane[data-orientation="vertical-split"][data-divider-anchor="page-start"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    justify-items: stretch !important;
+}
+
+.SplitPane[data-orientation="vertical-split"][data-divider-anchor="page-end"] {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, 1fr) auto auto !important;
+    align-items: stretch !important;
+    justify-items: stretch !important;
+}
+
+.SplitPane>* {
+    padding: 0 !important;
+}
+
+.SplitPane>:nth-child(2),
+.SplitPane[data-orientation="horizontal-split"]>:nth-child(2) {
+    cursor: ew-resize;
+}
+
+.SplitPane[data-orientation="vertical-split"]>:nth-child(2) {
+    cursor: ns-resize;
+}
+
+/**
+ * Tabbed pane
+ */
+
+.TabbedPane,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"],
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"],
+.TabbedPane[data-tab-placement="page-start"],
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"],
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"] {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+}
+
+.TabbedPane>.TabContainer,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.TabContainer,
+.TabbedPane[data-tab-placement="page-start"]>.TabContainer,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+}
+
+.TabbedPane>.ButtonContainer,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.ButtonContainer,
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.ButtonContainer,
+.TabbedPane[data-tab-placement="page-start"]>.ButtonContainer,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.ButtonContainer,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.ButtonContainer {
+    grid-row: 1 !important;
+    grid-column: 2 !important;
+}
+
+.TabbedPane>.CardContainer,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.CardContainer,
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.CardContainer,
+.TabbedPane[data-tab-placement="page-start"]>.CardContainer,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.CardContainer,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.CardContainer {
+    grid-row: 2 !important;
+    grid-column: 1 / -1 !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"],
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"],
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"] {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) auto !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"]>.TabContainer,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+    grid-row: 2 !important;
+    grid-column: 1 !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"]>.ButtonContainer,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.ButtonContainer,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.ButtonContainer {
+    grid-row: 2 !important;
+    grid-column: 2 !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"]>.CardContainer,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.CardContainer,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.CardContainer {
+    grid-row: 1 !important;
+    grid-column: 1 / -1 !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"],
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"],
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"] {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) !important;
+    grid-template-columns: auto minmax(0, 1fr) !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"]>.ButtonContainer,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.ButtonContainer,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.ButtonContainer {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"]>.TabContainer,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+    grid-row: 2 !important;
+    grid-column: 1 !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"]>.CardContainer,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.CardContainer,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.CardContainer {
+    grid-row: 1 / -1 !important;
+    grid-column: 2 !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"],
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"],
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"] {
+    display: grid !important;
+    grid-template-rows: auto minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) auto !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"]>.ButtonContainer,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.ButtonContainer,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.ButtonContainer {
+    grid-row: 1 !important;
+    grid-column: 2 !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"]>.TabContainer,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+    grid-row: 2 !important;
+    grid-column: 2 !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"]>.CardContainer,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.CardContainer,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.CardContainer {
+    grid-row: 1 / -1 !important;
+    grid-column: 1 !important;
+}
+
+.TabContainer {
+    gap: 1px;
+    background-color: whitesmoke;
+}
+
+.TabbedPane>.TabContainer,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
+.TabbedPane[data-tab-placement="page-start"]>.TabContainer,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-content: end !important;
+    justify-content: start !important;
+    align-items: end !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"]>.TabContainer,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap-reverse !important;
+    align-content: start !important;
+    justify-content: start !important;
+    align-items: start !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"]>.TabContainer,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap !important;
+    align-content: start !important;
+    justify-content: end !important;
+    justify-items: end !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"]>.TabContainer,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: wrap-reverse !important;
+    align-content: start !important;
+    justify-content: start !important;
+    justify-items: start !important;
+}
+
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.TabContainer,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+    display: grid !important;
+    justify-content: start !important;
+    align-items: end !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+    display: grid !important;
+    justify-content: start !important;
+    align-items: start !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+    display: grid !important;
+    align-content: start !important;
+    justify-items: end !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+    display: grid !important;
+    align-content: start !important;
+    justify-items: start !important;
+}
+
+.TabComponent {
+    user-select: none !important;
+    cursor: pointer;
+    background-color: rgba(128, 128, 128, .25);
+}
+
+.TabComponent[data-selected] {
+    background-color: white;
+}
+
+.TabbedPane>.TabContainer>.TabComponent,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.TabContainer>.TabComponent,
+.TabbedPane[data-tab-placement="page-start"]>.TabContainer>.TabComponent,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer>.TabComponent,
+.TabbedPane[data-tab-placement="page-end"]>.TabContainer>.TabComponent,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer>.TabComponent,
+.TabbedPane[data-tab-placement="line-start"]>.TabContainer>.TabComponent,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer>.TabComponent,
+.TabbedPane[data-tab-placement="line-end"]>.TabContainer>.TabComponent,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer>.TabComponent {
+    flex-shrink: 0 !important;
+}
+
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.TabContainer>.TabComponent,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer>.TabComponent {
+    grid-row: 1 !important;
+    grid-column: auto !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer>.TabComponent {
+    grid-row: 1 !important;
+    grid-column: auto !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer>.TabComponent {
+    grid-row: auto !important;
+    grid-column: 1 !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer>.TabComponent {
+    grid-row: auto !important;
+    grid-column: 1 !important;
+}
+
+/*
+ * close button only if tab is selected
+  .TabComponent:not([data-selected]) .material-icons.close::after,
+  .TabComponent:not([data-selected]) .material-icons.close::before {
+      content: "";
+  }
+ */
+
+.ButtonContainer button {
+    border: none;
+    background: none;
+}
+
+.CardContainer {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    align-items: stretch !important;
+    justify-items: stretch !important;
+}
+
+.CardContainer>* {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+    visibility: hidden;
+}
+
+/**
+ * Table
+ */
+
+table {
+    border-collapse: collapse !important;
+    white-space: nowrap;
+    background-color: white;
+}
+
+thead {
+    position: sticky !important;
+    inset-block-start: 0 !important;
+    background-color: inherit;
+}
+
+thead>tr>th {
+    padding: 0px;
+}
+
+thead>tr>th>:first-child {
+    border-block-end: 1px solid gray;
+    padding: 1px;
+}
+
+tbody>tr:not(:first-child):not(:last-child) {
+    border-block: 1px solid gray;
+}
+
+th:not(:first-child):not(:last-child),
+td:not(:first-child):not(:last-child) {
+    border-inline: 1px solid gray;
+}
+
+table.RowHeader>thead>tr>th:first-child,
+table.RowHeader>tbody>tr>td:first-child {
+    border-inline-end: 1px solid gray;
+}
+
+/**
+ * Tree
+ */
+
+.Tree {
+    user-select: none;
+}
+
+.Tree,
+.Tree ul {
+    list-style-type: none !important;
+    margin: 0;
+    padding: 0;
+}
+
+.Tree ul {
+    display: none !important;
+}
+
+.Tree li[data-open]>ul {
+    display: block !important;
+}
+
+.Tree .TreeNode {
+    display: grid !important;
+    justify-content: start !important;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 8px;
+}
+
+.Tree .TreeNode>* {
+    grid-row: 1 !important;
+}
+
+.Tree .material-icons.icon::after {
+    content: "insert_drive_file";
+    color: gray;
+}
+
+.Tree li[data-closed]>.material-icons.icon::after,
+.Tree li[data-closed]>:not(ul) .material-icons.icon::after {
+    content: "keyboard_arrow_right";
+}
+
+.Tree li[data-open]>.material-icons.icon::after,
+.Tree li[data-open]>:not(ul) .material-icons.icon::after {
+    content: "keyboard_arrow_down";
+}
+
+.Tree li[data-selected]>:not(ul) {
+    background-color: rgba(128, 128, 255, .25);
+}
+
+.Tree li>:not(ul):hover {
+    background-color: rgba(128, 128, 128, .25);
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description"
+        content="This example shows how to use a tree using html, css and javascript. It is based on the example found at 'How to Use Trees' https://docs.oracle.com/javase/tutorial/uiswing/components/tree.html">
+    <meta name="author" content="Yassuo Toda">
+    <title>Tree Example</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="../../../simpa.css">
+    <script src="../../../simpa.js"></script>
+
+    <style>
+        .Tree {
+            white-space: nowrap;
+        }
+
+        .Tree .material-icons.icon::after {
+            content: "auto_stories";
+            color: gray;
+        }
+
+        .Tree .material-icons.icon.star::after {
+            content: "star";
+            color: gold;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            const tree = document.getElementById("tree");
+            tree.addEventListener("tree-selection-listener", function (ev) {
+                const treeNode = ev.target;
+                const userObject = treeNode.dataset.userObject;
+                if (userObject === undefined) {
+                    return;
+                }
+                const src = "tree-example/" + userObject;
+                if (src !== iframe.getAttribute("src")) {
+                    iframe.setAttribute("src", src);
+                }
+            });
+        });
+    </script>
+</head>
+
+<body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
+    <div class="CenterLayout">
+        <div class="SplitPane" data-orientation="vertical-split" data-divider-location="175" onpointerdown="SplitPane.pointerdown(event);" style="width: 500px; height: 400px;" id="split-pane">
+            <div class="ScrollPane" style="border: 1px solid gray; padding: 5px;">
+                <ul class="Tree" data-selection-mode="single-tree-selection" id="tree">
+                    <li data-closed>
+                        <div class="TreeNode" data-user-object="TreeDemoHelp.html">
+                            <span class="material-icons icon"></span>
+                            <span class="TreeNode-text">Books for Java Programmers</span>
+                        </div>
+                        <ul>
+                            <li>
+                                <div class="TreeNode" data-user-object="tutorial.html">
+                                    <span class="material-icons icon star"></span>
+                                    <span class="TreeNode-text">The Java Tutorial: A Short Course on the Basics</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="TreeNode" data-user-object="tutorialcont.html">
+                                    <span class="material-icons icon star"></span>
+                                    <span class="TreeNode-text">The Java Tutorial Continued: The Rest of the JDK</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="TreeNode" data-user-object="swingtutorial.html">
+                                    <span class="material-icons icon star"></span>
+                                    <span class="TreeNode-text">The Swing Tutorial: A Guide to Constructing GUIs</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="TreeNode" data-user-object="bloch.html">
+                                    <span class="material-icons icon"></span>
+                                    <span class="TreeNode-text">Effective Java Programming Language Guide</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="TreeNode" data-user-object="arnold.html">
+                                    <span class="material-icons icon"></span>
+                                    <span class="TreeNode-text">The Java Programming Language</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="TreeNode" data-user-object="chan.html">
+                                    <span class="material-icons icon"></span>
+                                    <span class="TreeNode-text">The Java Developers Almanac</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li data-closed>
+                        <div class="TreeNode" data-user-object="TreeDemoHelp.html">
+                            <span class="material-icons icon"></span>
+                            <span class="TreeNode-text">Books for Java Implementers</span>
+                        </div>
+                        <ul>
+                            <li>
+                                <div class="TreeNode" data-user-object="vm.html">
+                                    <span class="material-icons icon"></span>
+                                    <span class="TreeNode-text">The Java Virtual Machine Specification</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="TreeNode" data-user-object="jls.html">
+                                    <span class="material-icons icon"></span>
+                                    <span class="TreeNode-text">The Java Language Specification</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- <div style="min-width: 5px; min-height: 5px;"></div> -->
+            <div style="position: relative; border-block-start: 1px solid gray;">
+                <div style="position: absolute; inset-block-start: -6px; height: 11px; width: 100%;"></div>
+            </div>
+            <iframe src="tree-example/TreeDemoHelp.html" style="overflow: visible;" id="iframe"></iframe>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description"
+        content="This example shows how to use a tabbed pane using html, css and javascript. It is based on the example found at 'How to Use Tabbed Panes' https://docs.oracle.com/javase/tutorial/uiswing/components/tabbedpane.html">
+    <meta name="author" content="Yassuo Toda">
+    <title>Tabbed Pane Example</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="../../../simpa.css">
+    <script src="../../../simpa.js"></script>
+
+    <style>
+        .TabComponent .material-icons.icon::after {
+            content: "star";
+            color: gold;
+        }
+
+        .TabComponent .material-icons.close::after {
+            content: "close";
+            color: gray;
+        }
+
+        .TabComponent .material-icons.close:hover::after {
+            color: red;
+        }
+    </style>
+    <script>
+        function closeTab(ev) {
+            const tabComponent = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' TabComponent ')]", ev.target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            if (tabComponent === null) {
+                return;
+            }
+            const tabContainer = tabComponent.parentElement;
+            const tabbedPane = tabContainer.parentElement;
+            const cardContainer = tabbedPane.querySelector(":scope>.CardContainer");
+            const cardComponent = cardContainer.querySelector(`:scope>.CardComponent[name="${tabComponent.getAttribute("name")}"]`);
+            // remove selected tab and its card
+            cardComponent.remove();
+            tabComponent.remove();
+            if (tabComponent.dataset.selected !== undefined) {
+                // select another tab
+                if (tabContainer.children.length === 0) {
+                    return;
+                }
+                tabContainer.children[0].click();
+            }
+            ev.stopPropagation();
+        };
+    </script>
+</head>
+
+<body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
+    <div class="CenterLayout">
+        <div class="BorderLayout" style="border: 1px solid gray; width: 400px; height: 300px;">
+            <!-- tabbed pane -->
+            <div class="TabbedPane">
+                <!-- tab container -->
+                <div class="TabContainer">
+                    <!-- tab1 -->
+                    <div class="TabComponent BoxLayout" style="gap: 5px; padding-inline: 5px;" name="first" data-selected>
+                        <!-- tab icon -->
+                        <span class="material-icons icon"></span>
+                        <!-- tab title -->
+                        <span class="tab-title">Tab 1</span>
+                        <!-- tab close button -->
+                        <span class="material-icons close" onclick="closeTab(event);"></span>
+                    </div>
+                    <!-- tab2 -->
+                    <div class="TabComponent BoxLayout" style="gap: 5px; padding-inline: 5px;" name="second">
+                        <span class="material-icons icon"></span>
+                        <span>Tab 2</span>
+                        <span class="material-icons close" onclick="closeTab(event);"></span>
+                    </div>
+                    <!-- tab3 -->
+                    <div class="TabComponent BoxLayout" style="gap: 5px; padding-inline: 5px;" name="third">
+                        <span class="material-icons icon"></span>
+                        <span>Tab 3</span>
+                        <span class="material-icons close" onclick="closeTab(event);"></span>
+                    </div>
+                    <!-- tab4 -->
+                    <div class="TabComponent BoxLayout" style="gap: 5px; padding-inline: 5px;" name="fourth">
+                        <span class="material-icons icon"></span>
+                        <span>Tab 4</span>
+                        <span class="material-icons close" onclick="closeTab(event);"></span>
+                    </div>
+                </div>
+                <!-- card container -->
+                <div class="CardContainer">
+                    <!-- card1 -->
+                    <div class="CardComponent CenterLayout" name="first" style="visibility: visible;">
+                        <span>Panel #1</span>
+                    </div>
+                    <!-- card2 -->
+                    <div class="CardComponent CenterLayout" name="second">
+                        <span>Panel #2</span>
+                    </div>
+                    <!-- card3 -->
+                    <div class="CardComponent CenterLayout" name="third">
+                        <span>Panel #3</span>
+                    </div>
+                    <!-- card4 -->
+                    <div class="CardComponent CenterLayout" name="fourth">
+                        <span>Panel #4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
