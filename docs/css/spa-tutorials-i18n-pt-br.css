@@ -1,0 +1,81 @@
+@charset "ISO-8859-1";
+
+html[lang="pt-BR"] .i18n-preferences::before {
+    content: "Preferências";
+}
+
+html[lang="pt-BR"] .i18n-language::before {
+    content: "Linguagem";
+}
+
+html[lang="pt-BR"] .i18n-en::before {
+    content: "Inglês";
+}
+
+html[lang="pt-BR"] .i18n-us::before {
+    content: "(Estados Unidos)";
+}
+
+html[lang="pt-BR"] .i18n-pt::before {
+    content: "Português";
+}
+
+html[lang="pt-BR"] .i18n-br::before {
+    content: "(Brasil)";
+}
+
+html[lang="pt-BR"] .i18n-help::before {
+    content: "Ajuda";
+}
+
+html[lang="pt-BR"] .i18n-about::before {
+    content: "Sobre";
+}
+
+html[lang="pt-BR"] .i18n-title::before {
+    content: "Tutoriais para Aplicação de Página Única";
+}
+
+html[lang="pt-BR"] .i18n-index::before {
+    content: "Como criar uma Aplicação de Página Única";
+}
+
+html[lang="pt-BR"] .i18n-layouts::before {
+    content: "Layouts";
+}
+
+html[lang="pt-BR"] .i18n-border-layout::before {
+    content: "Como Criar um Border Layout";
+}
+
+html[lang="pt-BR"] .i18n-box-layout::before {
+    content: "Como Criar um Box Layout";
+}
+
+html[lang="pt-BR"] .i18n-grid-layout::before {
+    content: "Como Criar um Grid Layout";
+}
+
+html[lang="pt-BR"] .i18n-flow-layout::before {
+    content: "Como Criar um Flow Layout";
+}
+
+html[lang="pt-BR"] .i18n-card-layout::before {
+    content: "Como Criar um Card Layout";
+}
+
+html[lang="pt-BR"] .i18n-controllers::before {
+    content: "Controles";
+}
+
+html[lang="pt-BR"] .i18n-action::before {
+    content: "Como Criar e Usar Ações";
+}
+
+html[lang="pt-BR"] .i18n-components::before {
+    content: "Componentes";
+}
+
+html[lang="pt-BR"] .i18n-button::before {
+    content: "How Usar Botões";
+}

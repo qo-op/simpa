@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>SPA Tutorials</title>
+    <meta name="description"
+        content="These tutorials show how to build a single-page application (SPA) using html, css and javascript.">
+
+    <!-- material icons -->
+    <link rel="preload" href="../woff2/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2" as="font" type="font/woff2" />
+    <link rel="preload" href="../css/material-icons.css" as="style" />
+    <link rel="stylesheet" href="../css/material-icons.css" />
+
+    <!-- simpa -->
+    <link rel="preload" href="../css/simpa.css" as="style" />
+    <link rel="stylesheet" href="../css/simpa.css" />
+    <script src="../js/simpa.js" defer></script>
+
+    <!-- spa tutorials -->
+    <link rel="preload" href="../css/spa-tutorials.css" as="style" />
+    <link rel="stylesheet" href="../css/spa-tutorials.css" />
+    <script src="../js/spa-tutorials.js" defer></script>
+
+    <link rel="preload" href="../css/spa-tutorials-i18n.css" as="style" />
+    <link rel="stylesheet" href="../css/spa-tutorials-i18n.css" />
+
+    <link rel="preload" href="../css/spa-tutorials-i18n-pt-BR.css" as="style" />
+    <link rel="stylesheet" href="../css/spa-tutorials-i18n-pt-BR.css" />
+</head>
+
+<body class="border-layout">
+    <div class="page-start both-fill" style="height: 2rem; background-color: whitesmoke">
+        <!-- menu bar -->
+        <ul class="menu-bar line-axis-stretch-box-layout">
+            <!-- Preferences -->
+            <li>
+                <div class="menu">
+                    <span class="i18n-preferences"></span>
+                </div>
+                <ul>
+                    <li>
+                        <div class="menu">
+                            <img class="menu-item-icon" src="../images/Web.svg">
+                            <span class="i18n-language"></span>
+                            <span class="menu-item-icon material-icons">navigate_next</span>
+                        </div>
+                        <ul>
+                            <li>
+                                <div class="menu-item" data-action="i18n-en-us">
+                                    <input type="radio" name="i18n" checked>
+                                    <div class="border-layout">
+                                        <img class="line-start menu-item-icon" src="../images/US.svg">
+                                        <div class="border-layout">
+                                            <span class="line-start i18n-en"></span>
+                                            <span style="min-width: 10px;"></span>
+                                            <span class="line-end i18n-us"></span>
+                                        </div>
+                                    </div>
+                                    <span class="menu-item-icon"></span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="menu-item" data-action="i18n-pt-br">
+                                    <input type="radio" name="i18n">
+                                    <div class="border-layout">
+                                        <img class="line-start menu-item-icon" src="../images/BR.svg">
+                                        <div class="border-layout">
+                                            <span class="line-start i18n-pt"></span>
+                                            <span style="min-width: 10px;"></span>
+                                            <span class="line-end i18n-br"></span>
+                                        </div>
+                                    </div>
+                                    <span class="menu-item-icon"></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <!-- Help -->
+            <li>
+                <div class="menu">
+                    <span class="i18n-help"></span>
+                </div>
+                <ul>
+                    <li>
+                        <div class="menu-item" data-action="about">
+                            <img class="menu-item-icon" src="../images/StatusInformation.svg">
+                            <span class="i18n-about"></span>
+                            <span class="menu-item-icon"></span>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- split pane -->
+    <div class="center split-pane">
+        <!-- tree -->
+        <ul class="tree single-tree-selection scroll-pane">
+            <div style="padding-block-start: 10px;"></div>
+            <!-- index.html -->
+            <li>
+                <div class="tree-node" data-user-object="index.html">
+                    <span class="tree-node-icon material-icons"></span>
+                    <span class="i18n-index"></span>
+                </div>
+            </li>
+            <!-- layouts -->
+            <li class="closed">
+                <div class="tree-node">
+                    <span class="tree-node-icon material-icons"></span>
+                    <span class="i18n-layouts"></span>
+                </div>
+                <ul>
+                    <li>
+                        <div class="tree-node" data-user-object="border-layout.html"
+                            style="padding-inline-start: calc(1rem + 5px);">
+                            <span class="tree-node-icon material-icons"></span>
+                            <span class="i18n-border-layout"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tree-node" data-user-object="box-layout.html"
+                            style="padding-inline-start: calc(1rem + 5px);">
+                            <span class="tree-node-icon material-icons"></span>
+                            <span class="i18n-box-layout"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tree-node" data-user-object="grid-layout.html"
+                            style="padding-inline-start: calc(1rem + 5px);">
+                            <span class="tree-node-icon material-icons"></span>
+                            <span class="i18n-grid-layout"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tree-node" data-user-object="flow-layout.html"
+                            style="padding-inline-start: calc(1rem + 5px);">
+                            <span class="tree-node-icon material-icons"></span>
+                            <span class="i18n-flow-layout"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="tree-node" data-user-object="card-layout.html"
+                            style="padding-inline-start: calc(1rem + 5px);">
+                            <span class="tree-node-icon material-icons"></span>
+                            <span class="i18n-card-layout"></span>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <!-- controllers -->
+            <li class="closed">
+                <div class="tree-node">
+                    <span class="tree-node-icon material-icons"></span>
+                    <span class="i18n-controllers"></span>
+                </div>
+                <ul>
+                    <li>
+                        <div class="tree-node" data-user-object="action.html"
+                            style="padding-inline-start: calc(1rem + 5px);">
+                            <span class="tree-node-icon material-icons"></span>
+                            <span class="i18n-action"></span>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <!-- components -->
+            <li class="closed">
+                <div class="tree-node">
+                    <span class="tree-node-icon material-icons"></span>
+                    <span class="i18n-components"></span>
+                </div>
+                <ul>
+                    <li>
+                        <div class="tree-node" data-user-object="button.html"
+                            style="padding-inline-start: calc(1rem + 5px);">
+                            <span class="tree-node-icon material-icons"></span>
+                            <span class="i18n-button"></span>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div style="position: relative; border-inline-start: 1px solid lightgray;">
+            <div style="position: absolute; inset-inline-start: -6px; width: 11px; height: 100%;"></div>
+        </div>
+        <!-- line end split pane -->
+        <div class="line-end-split-pane">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- content pane -->
+            <div class="scroll-pane">
+                <div style="padding-inline: 20px;">
+                    <h1 class="page-axis-box-layout">
+                        <span>How to Create a Single-Page Application</span>
+                    </h1>
+                    <p>
+                        These tutorials show how to create a Single-Page Application (SPA) with HTML, CSS and
+                        JavaScript.
+                    </p>
+                    <p>
+                        Layout tutorials:
+                    </p>
+                    <ul>
+                        <li><a href="border-layout.html">How to Create a Border Layout</a></li>
+                        <li><a href="box-layout.html">How to Create a Box Layout</a></li>
+                        <li><a href="grid-layout.html">How to Create a Grid Layout</a></li>
+                        <li><a href="flow-layout.html">How to Create a Flow Layout</a></li>
+                        <li><a href="card-layout.html">How to Create a Card Layout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="position: relative; border-inline-start: 1px solid lightgray;">
+                <div style="position: absolute; inset-inline-start: -6px; width: 11px; height: 100%;"></div>
+            </div>
+            <!-- div -->
+            <div style="min-width: 320px;">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

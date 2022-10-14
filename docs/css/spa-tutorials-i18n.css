@@ -1,0 +1,81 @@
+@charset "ISO-8859-1";
+
+.i18n-preferences::before {
+    content: "Preferences";
+}
+
+.i18n-language::before {
+    content: "Language";
+}
+
+.i18n-en::before {
+    content: "English";
+}
+
+.i18n-us::before {
+    content: "(United States)";
+}
+
+.i18n-pt::before {
+    content: "Portuguese";
+}
+
+.i18n-br::before {
+    content: "(Brazil)";
+}
+
+.i18n-help::before {
+    content: "Help";
+}
+
+.i18n-about::before {
+    content: "About";
+}
+
+.i18n-title::before {
+    content: "Single-Page Application Tutorials";
+}
+
+.i18n-index::before {
+    content: "How to Create a Single-Page Application";
+}
+
+.i18n-layouts::before {
+    content: "Layouts";
+}
+
+.i18n-border-layout::before {
+    content: "How to Create a Border Layout";
+}
+
+.i18n-box-layout::before {
+    content: "How to Create a Box Layout";
+}
+
+.i18n-grid-layout::before {
+    content: "How to Create a Grid Layout";
+}
+
+.i18n-flow-layout::before {
+    content: "How to Create a Flow Layout";
+}
+
+.i18n-card-layout::before {
+    content: "How to Create a Card Layout";
+}
+
+.i18n-controllers::before {
+    content: "Controllers";
+}
+
+.i18n-action::before {
+    content: "How to Create and Use Actions";
+}
+
+.i18n-components::before {
+    content: "Components";
+}
+
+.i18n-button::before {
+    content: "How to Use Buttons";
+}

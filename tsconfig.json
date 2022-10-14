@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+      "noImplicitAny": true,
+      "removeComments": true,
+      "preserveConstEnums": true,
+      "target": "ES6",
+      "outFile": "docs/js/simpa.js",
+      "sourceMap": true
+    },
+    "include": ["src/main/resources/static/ts/**/*"]
+  }

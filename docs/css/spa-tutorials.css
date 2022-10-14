@@ -1,0 +1,14 @@
+/**
+ * Simpa Tutorials
+ *
+ * @author Yassuo Toda
+ */
+
+h1 {
+    font-size: 1.25rem;
+    margin-block: 10px;
+}
+
+@media (min-width: 60rem) and (orientation: landscape) {
+
+}

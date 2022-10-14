@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="description"
+        content="This example shows how to use a tabbed pane using html, css and javascript. It is based on the example found at 'How to Use Tabbed Panes' https://docs.oracle.com/javase/tutorial/uiswing/components/tabbedpane.html">
+    <meta name="author" content="Yassuo Toda">
+    <title>Tabbed Pane Example</title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <link rel="stylesheet" href="css/simpa.css">
+    <script src="js/simpa.js" defer></script>
+
+    <style>
+        .tab-component .tab-icon.material-icons::before {
+            content: "star";
+            color: gold;
+        }
+    </style>
+    <script>
+        document.addEventListener("tab-close-action", function (ev) {
+            const tabbedPane = ev.detail.tabbedPane;
+            const tabContainer = ev.detail.tabContainer;
+            const cardContainer = ev.detail.cardContainer;
+            const selectedTabComponent = ev.detail.tabComponent;
+            const selectedCardComponent = cardContainer.querySelector(`:scope>.card-component[name="${selectedTabComponent.getAttribute("name")}"]`);
+            // remove selected tab and its card
+            selectedCardComponent.remove();
+            selectedTabComponent.remove();
+            if (selectedTabComponent.classList.contains("selected")) {
+                // select another tab
+                if (tabContainer.children.length === 0) {
+                    return;
+                }
+                const tabComponent = tabContainer.children[0];
+                tabComponent.click();
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="center-anchor" style="height: 100%;">
+        <div class="border-layout" style="border: 1px solid gray; width: 400px; height: 300px;">
+            <!-- tabbed pane -->
+            <div class="tabbed-pane" id="tabbed-pane">
+                <!-- tab container -->
+                <div class="tab-container">
+                    <!-- tab1 -->
+                    <div class="tab-component box-layout selected" style="gap: 5px; padding-inline: 5px;"
+                        name="first">
+                        <!-- tab icon -->
+                        <span class="tab-icon material-icons"></span>
+                        <!-- tab title -->
+                        <span class="tab-title">Tab 1</span>
+                        <!-- tab close button -->
+                        <span class="tab-close material-icons"></span>
+                    </div>
+                    <!-- tab2 -->
+                    <div class="tab-component box-layout" style="gap: 5px; padding-inline: 5px;" name="second">
+                        <span class="tab-icon material-icons"></span>
+                        <span class="tab-title">Tab 2</span>
+                        <span class="tab-close material-icons"></span>
+                    </div>
+                    <!-- tab3 -->
+                    <div class="tab-component box-layout" style="gap: 5px; padding-inline: 5px;" name="third">
+                        <span class="tab-icon material-icons"></span>
+                        <span class="tab-title">Tab 3</span>
+                        <span class="tab-close material-icons"></span>
+                    </div>
+                    <!-- tab4 -->
+                    <div class="tab-component box-layout" style="gap: 5px; padding-inline: 5px;" name="fourth">
+                        <span class="tab-icon material-icons"></span>
+                        <span class="tab-title">Tab 4</span>
+                        <span class="tab-close material-icons"></span>
+                    </div>
+                </div>
+                <!-- card container -->
+                <div class="card-container">
+                    <!-- card1 -->
+                    <div class="card-component center-anchor visible" name="first">
+                        <span>Panel #1</span>
+                    </div>
+                    <!-- card2 -->
+                    <div class="card-component center-anchor" name="second">
+                        <span>Panel #2</span>
+                    </div>
+                    <!-- card3 -->
+                    <div class="card-component center-anchor" name="third">
+                        <span>Panel #3</span>
+                    </div>
+                    <!-- card4 -->
+                    <div class="card-component center-anchor" name="fourth">
+                        <span>Panel #4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
