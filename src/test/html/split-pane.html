@@ -11,6 +11,79 @@
     <script src="../../../simpa.js"></script>
 </head>
 
+<script>
+    function drag(ev) {
+        const divider = ev.currentTarget;
+        const splitPane = divider.parentElement;
+        const leftComponent = splitPane.children[0];
+        const rightComponent = splitPane.children[2];
+        const leftComponentRect = leftComponent.getBoundingClientRect();
+        const rightComponentRect = rightComponent.getBoundingClientRect();
+        const leftComponentComputedStyle = getComputedStyle(leftComponent);
+        const rightComponentComputedStyle = getComputedStyle(rightComponent);
+        const verticalSplit = splitPane.dataset.orientation === "vertical-split";
+        const pageEndSplitPane = splitPane.dataset.dividerAnchor === "page-end";
+        const lineEndSplitPane = splitPane.dataset.dividerAnchor === "line-end";
+        let offset = 0;
+        let maximumDividerLocation = 0;
+        if (verticalSplit) {
+            if (pageEndSplitPane) {
+                offset = ev.clientY + rightComponentRect.height;
+            } else {
+                offset = ev.clientY - leftComponentRect.height;
+            }
+            maximumDividerLocation = leftComponentRect.height - +leftComponentComputedStyle.borderTopWidth.replace("px", "") - +leftComponentComputedStyle.borderBottomWidth.replace("px", "");
+            maximumDividerLocation += rightComponentRect.height - +rightComponentComputedStyle.borderTopWidth.replace("px", "") - +rightComponentComputedStyle.borderBottomWidth.replace("px", "");
+        } else {
+            if (lineEndSplitPane) {
+                offset = ev.clientX + rightComponentRect.width;
+            } else {
+                offset = ev.clientX - leftComponentRect.width;
+            }
+            maximumDividerLocation = leftComponentRect.width - +leftComponentComputedStyle.borderLeftWidth.replace("px", "") - +leftComponentComputedStyle.borderRightWidth.replace("px", "");
+            maximumDividerLocation += rightComponentRect.width - +rightComponentComputedStyle.borderLeftWidth.replace("px", "") - +rightComponentComputedStyle.borderRightWidth.replace("px", "");
+        }
+        const dragLayer = document.createElement("div");
+        dragLayer.classList.add("DragLayer");
+        if (verticalSplit) {
+            dragLayer.style.cursor = "ns-resize";
+        } else {
+            dragLayer.style.cursor = "ew-resize";
+        }
+        document.body.appendChild(dragLayer);
+        const dragLayerEventListener = {
+            pointermove(ev) {
+                if (verticalSplit) {
+                    if (pageEndSplitPane) {
+                        const location = Math.min(Math.max(offset - ev.clientY, 0), maximumDividerLocation);
+                        rightComponent.style.height = location + "px";
+                    } else {
+                        const location = Math.min(Math.max(ev.clientY - offset, 0), maximumDividerLocation);
+                        leftComponent.style.height = location + "px";
+                    }
+                } else {
+                    if (lineEndSplitPane) {
+                        const location = Math.min(Math.max(offset - ev.clientX, 0), maximumDividerLocation);
+                        rightComponent.style.width = location + "px";
+                    } else {
+                        const location = Math.min(Math.max(ev.clientX - offset, 0), maximumDividerLocation);
+                        leftComponent.style.width = location + "px";
+                    }
+                }
+            },
+            pointerup(ev) {
+                dragLayer.remove();
+            },
+            pointerleave(ev) {
+                dragLayer.remove();
+            }
+        };
+        dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
+        dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
+        dragLayer.addEventListener("pointerleave", dragLayerEventListener.pointerleave);
+    }
+</script>
+
 <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
     <div class="CenterLayout">
         <!-- split pane -->
@@ -20,8 +93,8 @@
                 <button>left</button>
             </div>
             <!-- divider -->
-            <div style="position: relative; border-inline-start: 1px solid gray;">
-                <div class="SplitPaneDivider" style="position: absolute; inset-inline-start: -6px; width: 11px; height: 100%;"></div>
+            <div onpointerdown="drag(event);" style="position: relative; border-inline-start: 1px solid gray;">
+                <div style="position: absolute; inset-inline-start: -6px; width: 11px; height: 100%;"></div>
             </div>
             <!-- scroll pane -->
             <div class="ScrollPane">

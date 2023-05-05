@@ -431,7 +431,7 @@ var SplitPane = /** @class */ (function () {
     };
     return SplitPane;
 }());
-document.addEventListener("pointerdown", SplitPane.pointerdown);
+// document.addEventListener("pointerdown", SplitPane.pointerdown);
 /**
  * TabbedPane
  *

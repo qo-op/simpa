@@ -156,4 +156,4 @@ class SplitPane {
 	}
 }
 
-document.addEventListener("pointerdown", SplitPane.pointerdown);
+// document.addEventListener("pointerdown", SplitPane.pointerdown);
