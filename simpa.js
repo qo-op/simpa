@@ -343,7 +343,8 @@ var SplitPane = /** @class */ (function () {
         }
     };
     SplitPane.pointerdown = function (ev) {
-        var splitPane = ev.detail.event.currentTarget;
+        var splitPaneDivider = ev.detail.event.currentTarget;
+        var splitPane = splitPaneDivider.parentElement;
         var leftComponent = splitPane.children[0];
         var rightComponent = splitPane.children[2];
         var leftComponentRect = leftComponent.getBoundingClientRect();
@@ -432,8 +433,9 @@ var SplitPane = /** @class */ (function () {
     };
     return SplitPane;
 }());
-document.addEventListener("splitpanepointerdown", SplitPane.pointerdown);
-console.log("splitpanepointerdown added");
+document.removeEventListener("splitpanedividerpointerdown", SplitPane.pointerdown);
+document.addEventListener("splitpanedividerpointerdown", SplitPane.pointerdown);
+console.log("splitpanedividerpointerdown added");
 /**
  * TabbedPane
  *

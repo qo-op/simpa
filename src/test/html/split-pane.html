@@ -13,7 +13,7 @@
 
 <script>
     function pointerdown(ev) {
-        document.dispatchEvent(new CustomEvent("splitpanepointerdown", {
+        document.dispatchEvent(new CustomEvent("splitpanedividerpointerdown", {
             detail: {
                 event: ev
             }
@@ -24,13 +24,13 @@
 <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
     <div class="CenterLayout">
         <!-- split pane -->
-        <div class="SplitPane" onpointerdown="pointerdown(event);" style="width: 200px; height: 100px; border: 1px solid gray" id="split-pane">
+        <div class="SplitPane" style="width: 200px; height: 100px; border: 1px solid gray" id="split-pane">
             <!-- scroll pane -->
             <div class="ScrollPane">
                 <button>left</button>
             </div>
             <!-- divider -->
-            <div style="position: relative; border-inline-start: 1px solid gray;">
+            <div onpointerdown="pointerdown(event);" style="position: relative; border-inline-start: 1px solid gray;">
                 <div style="position: absolute; inset-inline-start: -6px; width: 11px; height: 100%;"></div>
             </div>
             <!-- scroll pane -->

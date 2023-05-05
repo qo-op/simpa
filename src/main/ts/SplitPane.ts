@@ -87,7 +87,8 @@ class SplitPane {
   };
 
   static pointerdown = (ev: CustomEvent) => {
-    const splitPane = ev.detail.event.currentTarget as HTMLElement;
+    const splitPaneDivider = ev.detail.event.currentTarget as HTMLElement;
+    const splitPane: HTMLElement = splitPaneDivider.parentElement as HTMLElement;
     const leftComponent: HTMLElement = splitPane.children[0] as HTMLElement;
     const rightComponent: HTMLElement = splitPane.children[2] as HTMLElement;
     const leftComponentRect: DOMRect = leftComponent.getBoundingClientRect();
@@ -192,5 +193,6 @@ class SplitPane {
   };
 }
 
-document.addEventListener("splitpanepointerdown", SplitPane.pointerdown);
-console.log("splitpanepointerdown added");
+document.removeEventListener("splitpanedividerpointerdown", SplitPane.pointerdown);
+document.addEventListener("splitpanedividerpointerdown", SplitPane.pointerdown);
+console.log("splitpanedividerpointerdown added");
