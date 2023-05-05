@@ -9,17 +9,17 @@
  */
 class MenuBar {
 
-	static open(menuBar: HTMLElement): void {
+	static open = (menuBar: HTMLElement) => {
 		menuBar.dataset.open = "";
 	}
 
-	static close(menuBar: HTMLElement): void {
+	static close = (menuBar: HTMLElement) => {
 		menuBar.dataset.closed = "";
 		menuBar.removeAttribute("data-open");
 		MenuBar.select(menuBar, menuBar, null);
 	}
 
-	static select(menuBar: HTMLElement, ul: HTMLElement, li: HTMLElement | null): void {
+	static select = (menuBar: HTMLElement, ul: HTMLElement, li: HTMLElement | null) => {
 		MenuBar.clearTimeout(menuBar);
 		if (ul === menuBar) {
 			if (li !== null && li.dataset.selected !== undefined) {
@@ -41,7 +41,7 @@ class MenuBar {
 			} else {
 				MenuBar.setTimeout(menuBar, function () {
 					for (let i: number = 0; i < ul.children.length; i++) {
-						const child: HTMLElement = <HTMLElement>ul.children[i];
+						const child: HTMLElement = ul.children[i] as HTMLElement;
 						if (child === li) {
 							child.dataset.selected = "";
 						} else {
@@ -53,24 +53,24 @@ class MenuBar {
 		}
 	}
 
-	static clearTimeout(menuBar: HTMLElement): void {
+	static clearTimeout = (menuBar: HTMLElement) => {
 		if (menuBar.dataset.timeoutId !== undefined) {
 			clearTimeout(+menuBar.dataset.timeoutId);
 		}
 	}
 
-	static setTimeout(menuBar: HTMLElement, handler: TimerHandler, timeout: number): void {
+	static setTimeout = (menuBar: HTMLElement, handler: TimerHandler, timeout: number) => {
 		menuBar.dataset.timeoutId = "" + setTimeout(handler, timeout);
 	}
 
 	static shortcuts: Map<string, HTMLElement> = new Map();
 
-	static addShortcuts(menuBar: HTMLElement) {
+	static addShortcuts = (menuBar: HTMLElement) => {
 		menuBar
 			.querySelectorAll(":scope [data-shortcut]")
 			.forEach(function (element: Element) {
-				const accelerator: HTMLElement = <HTMLElement>element;
-				const shortcut: string | undefined = (<HTMLElement>accelerator).dataset.shortcut;
+				const accelerator: HTMLElement = element as HTMLElement;
+				const shortcut: string | undefined = accelerator.dataset.shortcut;
 				if (shortcut === undefined || shortcut.trim() === "") {
 					return;
 				}
@@ -97,7 +97,7 @@ class MenuBar {
 					s = s.replace(" shift ", " ");
 				}
 				key += s.trim();
-				MenuBar.shortcuts.set(key, <HTMLElement>element);
+				MenuBar.shortcuts.set(key, element as HTMLElement);
 				const span: HTMLSpanElement = document.createElement("span");
 				span.textContent = (" " + key + " ")
 					.replaceAll(" alt ", " Alt ")
@@ -110,17 +110,17 @@ class MenuBar {
 			});
 	}
 
-	static pointerdown(ev: PointerEvent): void {
-		const currentTarget: EventTarget = <EventTarget>ev.currentTarget;
-		const target: HTMLElement = <HTMLElement>ev.target;
+	static pointerdown = (ev: PointerEvent) => {
+		const currentTarget: EventTarget = ev.currentTarget;
+		const target: HTMLElement = ev.target as HTMLElement;
 		let menuBar: HTMLElement;
 		if (currentTarget === document) {
-			menuBar = <HTMLElement>document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' MenuBar ')]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+			menuBar = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' MenuBar ')]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
 			if (!menuBar) {
 				document
 					.querySelectorAll(".MenuBar")
 					.forEach(function (menuBar: Element) {
-						MenuBar.close(<HTMLElement>menuBar);
+						MenuBar.close(menuBar as HTMLElement);
 					});
 				return;
 			}
@@ -141,7 +141,7 @@ class MenuBar {
 				menuBar.dataset.shortcuts = "true";
 			}
 		} else {
-			menuBar = <HTMLElement>ev.currentTarget;
+			menuBar = ev.currentTarget as HTMLElement;
 		}
 		try {
 			if (menuBar.dataset.open !== undefined) {
@@ -151,7 +151,7 @@ class MenuBar {
 				return;
 			}
 			menuBar.dataset.closed = "";
-			const li: HTMLElement = <HTMLElement>document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+			const li: HTMLElement = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
 			if (li === null) {
 				return;
 			}
@@ -162,9 +162,9 @@ class MenuBar {
 		}
 	}
 
-	static pointerup(ev: PointerEvent): void {
-		const target: HTMLElement = <HTMLElement>ev.target;
-		const li: HTMLElement = <HTMLElement>document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+	static pointerup = (ev: PointerEvent) => {
+		const target: HTMLElement = ev.target as HTMLElement;
+		const li: HTMLElement = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
 		if (li === null) {
 			return;
 		}
@@ -178,7 +178,7 @@ class MenuBar {
 				input.checked = !input.checked;
 			}
 		}
-		const menuBar: HTMLElement = <HTMLElement>ev.currentTarget;
+		const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
 		if (li.parentElement === menuBar) {
 			// menu
 			if (menuBar.dataset.closed !== undefined) {
@@ -200,13 +200,13 @@ class MenuBar {
 		MenuBar.close(menuBar);
 	}
 
-	static pointerover(ev: PointerEvent): void {
-		const menuBar: HTMLElement = <HTMLElement>ev.currentTarget;
+	static pointerover = (ev: PointerEvent) => {
+		const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
 		if (menuBar.dataset.open === undefined) {
 			return;
 		}
-		const target: HTMLElement = <HTMLElement>ev.target;
-		const li: HTMLElement = <HTMLElement>document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+		const target: HTMLElement = ev.target as HTMLElement;
+		const li: HTMLElement = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
 		if (li === null) {
 			return;
 		}
@@ -217,8 +217,8 @@ class MenuBar {
 		MenuBar.select(menuBar, ul, li);
 	}
 
-	static pointerleave(ev: PointerEvent): void {
-		const menuBar: HTMLElement = <HTMLElement>ev.currentTarget;
+	static pointerleave = (ev: PointerEvent) => {
+		const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
 		MenuBar.clearTimeout(menuBar);
 		menuBar.querySelectorAll(":scope li[data-selected]").forEach(function (selected: Element) {
 			const ul: HTMLElement | null = selected.querySelector(":scope>ul");
@@ -228,11 +228,11 @@ class MenuBar {
 		});
 	}
 
-	static keydown(ev: KeyboardEvent): void {
+	static keydown = (ev: KeyboardEvent) => {
 		document
 			.querySelectorAll(".MenuBar")
 			.forEach(function (element: Element) {
-				const menuBar: HTMLElement = <HTMLElement>element;
+				const menuBar: HTMLElement = element as HTMLElement;
 				if (!menuBar.dataset.shortcuts) {
 					MenuBar.addShortcuts(menuBar);
 					menuBar.dataset.shortcuts = "true";

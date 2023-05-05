@@ -12,100 +12,26 @@
     <link rel="stylesheet" href="../../../simpa.css">
     <script src="../../../simpa.js"></script>
 
-    <style>
-        .Dialog>:first-child {
-            padding: 5px;
-            gap: 5px;
-            background-color: lightgray;
-            user-select: none;
-        }
-        .Dialog>:first-child>.material-icons.close::after {
-            content: "close";
-            color: gray;
-        }
-        .Dialog>:first-child>.material-icons.close:hover::after {
-            color: red;
-        }
-        .Dialog>:last-child {
-            padding: 5px;
-            gap: 5px;
-        }
-    </style>
     <script>
         function hello(ev) {
-            showMessageDialog("Hello, World! You can drag this dialog if you want.");
-        };
-        function eggs(ev) {
-            showMessageDialog("Eggs aren't supposed to be green.", "Error");
-        };
-        function showMessageDialog(message, title = "Message") {
-            // ModalLayer
-            const modalLayer = document.createElement("div");
-		    modalLayer.classList.add("ModalLayer");
-		    document.body.appendChild(modalLayer);
-            // Message Dialog
-            const dialog = document.createElement("div");
-            dialog.classList.add("Dialog");
-            dialog.classList.add("PageStartBorderLayout");
-            // Message dialog title pane
-            const dialogTitlePane = document.createElement("div");
-            dialog.appendChild(dialogTitlePane);
-            dialogTitlePane.classList.add("LineEndBorderLayout");
-            // Message dialog title label
-            const dialogTitleLabel = document.createElement("span");
-            dialogTitleLabel.textContent = title;
-            dialogTitlePane.appendChild(dialogTitleLabel);
-            // Message dialog close button
-            const dialogCloseButton = document.createElement("span");
-            dialogCloseButton.classList.add("material-icons");
-            dialogCloseButton.classList.add("close");
-            dialogCloseButton.onclick = closeDialog;
-            dialogTitlePane.appendChild(dialogCloseButton);
-            // Message dialog content pane
-            const dialogContentPane = document.createElement("div");
-            dialogContentPane.textContent = message;
-            dialog.appendChild(dialogContentPane);
-            // Center message dialog
-            dialog.style.alignSelf = "center";
-            dialog.style.justifySelf = "center";
-            // Show
-            modalLayer.appendChild(dialog);
-            // Dialog can be dragged by its title pane
-            dialog.onpointerdown = move;
-        }
-        function closeDialog(ev) {
+            const dialog = document.getElementById("dialog");
+            const title = document.querySelector(":scope .Title");
+            title.textContent = "Message";
+            const message = document.querySelector(":scope .Message");
+            message.textContent = "Hello, World!"
             const modalLayer = document.querySelector(".ModalLayer");
-            modalLayer.remove();
+            modalLayer.style.visibility = "visible";
+        };
+        function hide(ev) {
+            const modalLayer = document.querySelector(".ModalLayer");
+            modalLayer.style.visibility = "hidden";
         }
-        function move(ev) {
-            const currentTarget = ev.currentTarget;
-		    const target = ev.target;
-		    const dialog = currentTarget;
-		    const dialogTopPane = dialog.firstElementChild;
-            if (!dialogTopPane.contains(target) || target.onclick) {
-                return;
-            }
-		    var rect = dialog.getBoundingClientRect();
-		    let x = ev.clientX - rect.left;
-		    let y = ev.clientY - rect.top;
-		    const dragLayer = document.createElement("div");
-            document.body.appendChild(dragLayer);
-            dragLayer.classList.add("DragLayer");
-            const dragLayerEventListener = {
-                pointermove(ev) {
-                    dialog.style.left = (ev.clientX - x) + "px";
-                    dialog.style.top = (ev.clientY - y) + "px";
-                },
-                pointerup(ev) {
-                    dragLayer.remove();
-                },
-                pointerleave(ev) {
-                    dragLayer.remove();
+        function pointerdown(ev) {
+            document.dispatchEvent(new CustomEvent("dialogtitlepanepointerdown", {
+                detail: {
+                    event: ev
                 }
-            };
-            dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
-            dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
-            dragLayer.addEventListener("pointerleave", dragLayerEventListener.pointerleave);
+            }));
         }
     </script>
 </head>
@@ -118,9 +44,22 @@
                 <button onclick="hello(event);">
                     <span>Click me!</span>
                 </button>
-                <button onclick="eggs(event);">
-                    <span>Click me too!</span>
-                </button>
+            </div>
+        </div>
+    </div>
+    <div class="ModalLayer">
+        <div class="Dialog PageStartBorderLayout" id="dialog">
+            <div class="LineEndBorderLayout" style="align-items: center;">
+                <span onpointerdown="pointerdown(event);">
+                    <b class="Title"></b>
+                </span>
+                <span class="material-icons close" onclick="hide(event);"></span>
+            </div>
+            <div class="PageEndBorderLayout" style="gap: 5px; padding: 5px;">
+                <span class="Message"></span>
+                <div class="CenterLayout">
+                    <button onclick="hide(event);">OK</button>
+                </div>
             </div>
         </div>
     </div>

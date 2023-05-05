@@ -275,8 +275,7 @@ body {
     grid-row: 1 !important;
 }
 
-.PageAxisBoxLayout>*
-.PageAxisStretchBoxLayout>* {
+.PageAxisBoxLayout>* .PageAxisStretchBoxLayout>* {
     grid-column: 1 !important;
 }
 
@@ -422,26 +421,26 @@ body {
 
 /* fallback */
 @font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
 }
 
 .material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
 }
 
 /**
@@ -452,6 +451,29 @@ body {
     position: fixed !important;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
     background-color: whitesmoke;
+    align-self: center;
+    justify-self: center;
+}
+
+.Dialog>:first-child {
+    padding: 5px;
+    gap: 5px;
+    background-color: lightgray;
+    user-select: none;
+}
+
+.Dialog>:first-child>.material-icons.close::after {
+    content: "close";
+    color: gray;
+}
+
+.Dialog>:first-child>.material-icons.close:hover::after {
+    color: red;
+}
+
+.Dialog>:last-child {
+    padding: 5px;
+    gap: 5px;
 }
 
 .ModalLayer {
@@ -465,6 +487,7 @@ body {
     display: grid;
     align-content: center;
     justify-content: center;
+    visibility: hidden;
 }
 
 /**

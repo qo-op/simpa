@@ -1,4 +1,49 @@
 /**
+ * Dialog
+ *
+ * Based on the javax.swing.JDialog
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JDialog.html
+ *
+ * @author Yassuo Toda
+ */
+/**
+ * DialogTitlePane
+ *
+ * @author Yassuo Toda
+ */
+var DialogTitlePane = /** @class */ (function () {
+    function DialogTitlePane() {
+    }
+    DialogTitlePane.pointerdown = function (ev) {
+        var dialogTitle = ev.detail.event.currentTarget;
+        var dialog = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' Dialog ')]", dialogTitle, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var rect = dialog.getBoundingClientRect();
+        var x = ev.detail.event.clientX - rect.left;
+        var y = ev.detail.event.clientY - rect.top;
+        var dragLayer = document.createElement("div");
+        document.body.appendChild(dragLayer);
+        dragLayer.classList.add("DragLayer");
+        var dragLayerEventListener = {
+            pointermove: function (ev) {
+                dialog.style.left = ev.clientX - x + "px";
+                dialog.style.top = ev.clientY - y + "px";
+            },
+            pointerup: function (ev) {
+                dragLayer.remove();
+            },
+            pointerleave: function (ev) {
+                dragLayer.remove();
+            },
+        };
+        dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
+        dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
+        dragLayer.addEventListener("pointerleave", dragLayerEventListener.pointerleave);
+    };
+    return DialogTitlePane;
+}());
+document.addEventListener("dialogtitlepanepointerdown", DialogTitlePane.pointerdown);
+/**
  * MenuBar
  *
  * Based on the javax.swing.JMenu
@@ -62,6 +107,7 @@ var MenuBar = /** @class */ (function () {
     MenuBar.setTimeout = function (menuBar, handler, timeout) {
         menuBar.dataset.timeoutId = "" + setTimeout(handler, timeout);
     };
+    MenuBar.shortcuts = new Map();
     MenuBar.addShortcuts = function (menuBar) {
         menuBar
             .querySelectorAll(":scope [data-shortcut]")
@@ -254,7 +300,6 @@ var MenuBar = /** @class */ (function () {
             ev.preventDefault();
         }
     };
-    MenuBar.shortcuts = new Map();
     return MenuBar;
 }());
 document.addEventListener("pointerdown", MenuBar.pointerdown);
