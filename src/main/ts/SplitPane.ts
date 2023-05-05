@@ -193,6 +193,4 @@ class SplitPane {
   };
 }
 
-document.removeEventListener("splitpanedividerpointerdown", SplitPane.pointerdown);
 document.addEventListener("splitpanedividerpointerdown", SplitPane.pointerdown);
-console.log("splitpanedividerpointerdown added");
