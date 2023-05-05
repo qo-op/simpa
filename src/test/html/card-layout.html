@@ -11,7 +11,7 @@
     <script src="../../../simpa.js"></script>
     
     <script>
-        function itemStateChanged(ev) {
+        function change(ev) {
             const cardContainer = document.getElementById("cards");
             const name = ev.target.value;
             for (let i = 0; i < cardContainer.children.length; i++) {
@@ -30,7 +30,7 @@
     <div class="CenterLayout">
         <div class="PageStartBorderLayout" style="border: 1px solid gray; padding: 5px;">
             <div class="FlowLayout" style="padding: 5px;">
-                <select id="cb" onchange="itemStateChanged(event);">
+                <select id="cb" onchange="change(event);">
                     <option value="Card with buttons" selected>Card with buttons</option>
                     <option value="Card with text field">Card with text field</option>
                 </select>

@@ -445,57 +445,62 @@ document.addEventListener("splitpanedividerpointerdown", SplitPane.pointerdown);
  *
  * @author Yassuo Toda
  */
-var TabbedPane = /** @class */ (function () {
-    function TabbedPane() {
+/**
+ * TabContainer
+ *
+ * @author Yassuo Toda
+ */
+var TabContainer = /** @class */ (function () {
+    function TabContainer() {
     }
-    TabbedPane.first = function (tabContainer, cardContainer) {
+    TabContainer.first = function (tabContainer, cardContainer) {
         if (tabContainer.children.length === 0) {
             return;
         }
-        TabbedPane.setSelectedTabIndex(tabContainer, cardContainer, 0);
+        TabContainer.setSelectedTabIndex(tabContainer, cardContainer, 0);
     };
-    TabbedPane.next = function (tabContainer, cardContainer) {
+    TabContainer.next = function (tabContainer, cardContainer) {
         if (tabContainer.children.length === 0) {
             return;
         }
-        var selectedTabIndex = TabbedPane.getSelectedTabIndex(tabContainer);
+        var selectedTabIndex = TabContainer.getSelectedTabIndex(tabContainer);
         if (selectedTabIndex === -1) {
             selectedTabIndex = 0;
         }
         else {
             selectedTabIndex = (selectedTabIndex + 1) % tabContainer.children.length;
         }
-        TabbedPane.setSelectedTabIndex(tabContainer, cardContainer, selectedTabIndex);
+        TabContainer.setSelectedTabIndex(tabContainer, cardContainer, selectedTabIndex);
     };
-    TabbedPane.previous = function (tabContainer, cardContainer) {
+    TabContainer.previous = function (tabContainer, cardContainer) {
         if (tabContainer.children.length === 0) {
             return;
         }
-        var selectedTabIndex = TabbedPane.getSelectedTabIndex(tabContainer);
+        var selectedTabIndex = TabContainer.getSelectedTabIndex(tabContainer);
         if (selectedTabIndex === -1) {
             selectedTabIndex = tabContainer.children.length - 1;
         }
         else {
             selectedTabIndex = (selectedTabIndex + tabContainer.children.length - 1) % tabContainer.children.length;
         }
-        TabbedPane.setSelectedTabIndex(tabContainer, cardContainer, selectedTabIndex);
+        TabContainer.setSelectedTabIndex(tabContainer, cardContainer, selectedTabIndex);
     };
-    TabbedPane.last = function (tabContainer, cardContainer) {
+    TabContainer.last = function (tabContainer, cardContainer) {
         if (tabContainer.children.length === 0) {
             return;
         }
-        TabbedPane.setSelectedTabIndex(tabContainer, cardContainer, tabContainer.children.length - 1);
+        TabContainer.setSelectedTabIndex(tabContainer, cardContainer, tabContainer.children.length - 1);
     };
-    TabbedPane.show = function (tabContainer, cardContainer, name) {
+    TabContainer.show = function (tabContainer, cardContainer, name) {
         for (var i = 0; i < tabContainer.children.length; i++) {
             var tabComponent = tabContainer.children[i];
             if (tabComponent.getAttribute("name") === name) {
-                TabbedPane.setSelectedTabIndex(tabContainer, cardContainer, i);
+                TabContainer.setSelectedTabIndex(tabContainer, cardContainer, i);
                 break;
             }
         }
     };
-    TabbedPane.getSelectedTabIndex = function (tabContainer) {
+    TabContainer.getSelectedTabIndex = function (tabContainer) {
         for (var i = 0; i < tabContainer.children.length; i++) {
             var tabComponent = tabContainer.children[i];
             if (tabComponent.dataset.selected !== undefined) {
@@ -504,7 +509,7 @@ var TabbedPane = /** @class */ (function () {
         }
         return -1;
     };
-    TabbedPane.setSelectedTabIndex = function (tabContainer, cardContainer, selectedTabIndex) {
+    TabContainer.setSelectedTabIndex = function (tabContainer, cardContainer, selectedTabIndex) {
         for (var i = 0; i < tabContainer.children.length; i++) {
             var tabComponent = tabContainer.children[i];
             if (i === selectedTabIndex) {
@@ -517,7 +522,7 @@ var TabbedPane = /** @class */ (function () {
             }
         }
     };
-    TabbedPane.getSelectedTabComponent = function (tabContainer) {
+    TabContainer.getSelectedTabComponent = function (tabContainer) {
         for (var i = 0; i < tabContainer.children.length; i++) {
             var tabComponent = tabContainer.children[i];
             if (tabComponent.dataset.selected !== undefined) {
@@ -526,7 +531,7 @@ var TabbedPane = /** @class */ (function () {
         }
         return null;
     };
-    TabbedPane.setSelectedTabComponent = function (tabContainer, cardContainer, selectedTabComponent) {
+    TabContainer.setSelectedTabComponent = function (tabContainer, cardContainer, selectedTabComponent) {
         for (var i = 0; i < tabContainer.children.length; i++) {
             var tabComponent = tabContainer.children[i];
             if (tabComponent === selectedTabComponent) {
@@ -539,47 +544,7 @@ var TabbedPane = /** @class */ (function () {
             }
         }
     };
-    TabbedPane.click = function (ev) {
-        var currentTarget = ev.currentTarget;
-        var tabComponent;
-        if (currentTarget === document) {
-            var target = ev.target;
-            if (target.classList.contains("TabComponent")) {
-                tabComponent = target;
-            }
-            else if (target.parentElement !== null && target.parentElement.classList.contains("TabComponent")) {
-                tabComponent = target.parentElement;
-            }
-            else {
-                return;
-            }
-            if (!tabComponent.onclick) {
-                tabComponent.onclick = TabbedPane.click;
-            }
-        }
-        else {
-            tabComponent = currentTarget;
-        }
-        try {
-            var tabContainer = tabComponent.parentElement;
-            if (tabContainer === null) {
-                return;
-            }
-            var tabbedPane = tabContainer.parentElement;
-            if (tabbedPane === null) {
-                return;
-            }
-            var cardContainer = tabbedPane.querySelector(":scope>.CardContainer");
-            if (cardContainer === null) {
-                return;
-            }
-            TabbedPane.setSelectedTabComponent(tabContainer, cardContainer, tabComponent);
-        }
-        finally {
-            ev.stopPropagation();
-        }
-    };
-    return TabbedPane;
+    return TabContainer;
 }());
 /**
  * CardContainer
@@ -658,5 +623,36 @@ var CardContainer = /** @class */ (function () {
     };
     return CardContainer;
 }());
-document.addEventListener("click", TabbedPane.click);
+/**
+ * TabComponent
+ *
+ * @author Yassuo Toda
+ */
+var TabComponent = /** @class */ (function () {
+    function TabComponent() {
+    }
+    TabComponent.pointerdown = function (ev) {
+        var tabComponent = ev.detail.event.currentTarget;
+        try {
+            var tabContainer = tabComponent.parentElement;
+            if (tabContainer === null) {
+                return;
+            }
+            var tabbedPane = tabContainer.parentElement;
+            if (tabbedPane === null) {
+                return;
+            }
+            var cardContainer = tabbedPane.querySelector(":scope>.CardContainer");
+            if (cardContainer === null) {
+                return;
+            }
+            TabContainer.setSelectedTabComponent(tabContainer, cardContainer, tabComponent);
+        }
+        finally {
+            ev.stopPropagation();
+        }
+    };
+    return TabComponent;
+}());
+document.addEventListener("tabcomponentpointerdow", TabComponent.pointerdown);
 //# sourceMappingURL=simpa.js.map
