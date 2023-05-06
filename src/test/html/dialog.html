@@ -20,6 +20,8 @@
             const message = document.querySelector(":scope .Message");
             message.textContent = "Hello, World!"
             const modalLayer = document.querySelector(".ModalLayer");
+            dialog.style.left = null;
+            dialog.style.top = null;
             modalLayer.style.visibility = "visible";
         };
         function hide(ev) {
@@ -47,7 +49,7 @@
             </div>
         </div>
     </div>
-    <div class="ModalLayer">
+    <div class="ModalLayer" style="visibility: hidden;">
         <div class="Dialog PageStartBorderLayout" id="dialog">
             <div class="LineEndCenterBorderLayout">
                 <span onpointerdown="pointerdown(event);">
