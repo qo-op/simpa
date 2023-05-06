@@ -40,13 +40,11 @@
 
 <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
     <div class="CenterLayout">
-        <div class="PageAxisBoxLayout">
+        <div class="BoxLayout" data-axis="page-axis">
             <h2>Dialog Example</h2>
-            <div class="LineAxisBoxLayout" style="gap: 5px;">
-                <button onclick="hello(event);">
-                    <span>Click me!</span>
-                </button>
-            </div>
+            <button onclick="hello(event);">
+                <span>Click me!</span>
+            </button>
         </div>
     </div>
     <div class="ModalLayer" style="visibility: hidden;">

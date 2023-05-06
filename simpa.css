@@ -429,39 +429,42 @@ body {
  */
 
 .BoxLayout,
-.LineAxisBoxLayout {
+.BoxLayout[data-axis="line-axis"] {
     display: grid !important;
+    align-content: stretch !important;
     justify-content: start !important;
     align-items: center;
 }
 
-.PageAxisBoxLayout {
+.BoxLayout[data-axis="page-axis"] {
     display: grid !important;
     align-content: start !important;
+    justify-content: stretch !important;
     justify-items: center;
 }
 
-.StretchBoxLayout,
-.LineAxisStretchBoxLayout {
+.BoxLayout[data-alignment="stretch"],
+.BoxLayout[data-axis="line-axis"][data-alignment="stretch"] {
     display: grid !important;
+    align-content: stretch !important;
     justify-content: start !important;
     align-items: stretch;
 }
 
-.PageAxisStretchBoxLayout {
+.BoxLayout[data-axis="page-axis"][data-alignment="stretch"] {
     display: grid !important;
     align-content: start !important;
+    justify-content: stretch !important;
     justify-items: stretch;
 }
 
 .BoxLayout>*,
-.LineAxisBoxLayout>*,
-.StretchBoxLayout>*,
-.LineAxisStretchBoxLayout>* {
+.BoxLayout[data-axis="line-axis"]>* {
     grid-row: 1 !important;
 }
 
-.PageAxisBoxLayout>* .PageAxisStretchBoxLayout>* {
+.BoxLayout[data-axis="page-axis"]>* {
+    grid-row: unset !important;
     grid-column: 1 !important;
 }
 

@@ -34,16 +34,16 @@
 
 <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
     <div class="CenterLayout">
-        <div class="LineAxisBoxLayout" style="gap: 5px;">
-            <button class="LineAxisBoxLayout" onclick="disable(event);" style="gap: 5px;" id="b1">
+        <div class="BoxLayout" style="gap: 5px;">
+            <button class="BoxLayout" onclick="disable(event);" style="gap: 5px;" id="b1">
                 <span>Disable middle button</span>
                 <span class="material-icons">arrow_circle_right</span>
             </button>
-            <button class="PageAxisBoxLayout" style="gap: 5px;" id="b2">
+            <button class="BoxLayout" data-axis="page-axis" style="gap: 5px;" id="b2">
                 <span class="material-icons" style="color: gold;">star</span>
                 <span>Middle button</span>
             </button>
-            <button class="LineAxisBoxLayout" onclick="enable(event);" style="gap: 5px;" id="b3" disabled>
+            <button class="BoxLayout" onclick="enable(event);" style="gap: 5px;" id="b3" disabled>
                 <span class="material-icons">arrow_circle_left</span>
                 <span>Enable middle button</span>
             </button>
