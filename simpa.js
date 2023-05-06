@@ -373,7 +373,7 @@ var SplitPane = /** @class */ (function () {
         document.body.appendChild(dragLayer);
         var callback = ev.detail.callback;
         var dragLayerEventListener = {
-            dividerLocation: 0,
+            dividerLocation: null,
             pointermove: function (ev) {
                 if (verticalSplit) {
                     if (pageEndSplitPane) {
