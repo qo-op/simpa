@@ -8,86 +8,9 @@
  * @author Yassuo Toda
  */
 class SplitPane {
-  static setDividerProportionalLocation = (
-    splitPane: HTMLElement,
-    proportionalLocation: number
-  ) => {
-    const verticalSplit: boolean =
-      splitPane.dataset.orientation === "vertical-split";
-    const pageEndSplitPane: boolean =
-      splitPane.dataset.dividerAnchor === "page-end";
-    const lineEndSplitPane: boolean =
-      splitPane.dataset.dividerAnchor === "line-end";
-    const leftComponent = splitPane.children[0] as HTMLElement;
-    const rightComponent = splitPane.children[2] as HTMLElement;
-    const leftComponentRect: DOMRect = leftComponent.getBoundingClientRect();
-    const rightComponentRect: DOMRect = rightComponent.getBoundingClientRect();
-    const leftComponentComputedStyle: CSSStyleDeclaration =
-      getComputedStyle(leftComponent);
-    const rightComponentComputedStyle: CSSStyleDeclaration =
-      getComputedStyle(rightComponent);
-    let maximumDividerLocation: number = 0;
-    if (verticalSplit) {
-      maximumDividerLocation =
-        leftComponentRect.height -
-        +leftComponentComputedStyle.borderTopWidth.replace("px", "") -
-        +leftComponentComputedStyle.borderBottomWidth.replace("px", "");
-      maximumDividerLocation +=
-        rightComponentRect.height -
-        +rightComponentComputedStyle.borderTopWidth.replace("px", "") -
-        +rightComponentComputedStyle.borderBottomWidth.replace("px", "");
-      const dividerLocation = proportionalLocation * maximumDividerLocation;
-      if (pageEndSplitPane) {
-        rightComponent.style.height = dividerLocation + "px";
-      } else {
-        leftComponent.style.height = dividerLocation + "px";
-      }
-    } else {
-      maximumDividerLocation =
-        leftComponentRect.width -
-        +leftComponentComputedStyle.borderLeftWidth.replace("px", "") -
-        +leftComponentComputedStyle.borderRightWidth.replace("px", "");
-      maximumDividerLocation +=
-        rightComponentRect.width -
-        +rightComponentComputedStyle.borderLeftWidth.replace("px", "") -
-        +rightComponentComputedStyle.borderRightWidth.replace("px", "");
-      const dividerLocation = proportionalLocation * maximumDividerLocation;
-      if (lineEndSplitPane) {
-        rightComponent.style.width = dividerLocation + "px";
-      } else {
-        leftComponent.style.width = dividerLocation + "px";
-      }
-    }
-  };
-
-  static setDividerLocation = (splitPane: HTMLElement, location: number) => {
-    const verticalSplit: boolean =
-      splitPane.dataset.orientation === "vertical-split";
-    const pageEndSplitPane: boolean =
-      splitPane.dataset.dividerAnchor === "page-end";
-    const lineEndSplitPane: boolean =
-      splitPane.dataset.dividerAnchor === "line-end";
-    if (verticalSplit) {
-      if (pageEndSplitPane) {
-        const rightComponent = splitPane.children[2] as HTMLElement;
-        rightComponent.style.height = location + "px";
-      } else {
-        const leftComponent = splitPane.children[0] as HTMLElement;
-        leftComponent.style.height = location + "px";
-      }
-    } else {
-      if (lineEndSplitPane) {
-        const rightComponent = splitPane.children[2] as HTMLElement;
-        rightComponent.style.width = location + "px";
-      } else {
-        const leftComponent = splitPane.children[0] as HTMLElement;
-        leftComponent.style.width = location + "px";
-      }
-    }
-  };
-
+  
   static pointerdown = (ev: CustomEvent) => {
-    const splitPaneDivider = ev.detail.event.currentTarget as HTMLElement;
+    const splitPaneDivider: HTMLElement = ev.detail.event.currentTarget;
     const splitPane: HTMLElement = splitPaneDivider.parentElement as HTMLElement;
     const leftComponent: HTMLElement = splitPane.children[0] as HTMLElement;
     const rightComponent: HTMLElement = splitPane.children[2] as HTMLElement;
@@ -142,54 +65,56 @@ class SplitPane {
       dragLayer.style.cursor = "ew-resize";
     }
     document.body.appendChild(dragLayer);
+    const callback: (dividerLocation: number) => void = ev.detail.callback;
     const dragLayerEventListener = {
-      pointermove(ev: PointerEvent): void {
+      dividerLocation: null,
+      pointermove(ev: PointerEvent) {
         if (verticalSplit) {
           if (pageEndSplitPane) {
-            const location = Math.min(
+            this.dividerLocation = Math.min(
               Math.max(offset - ev.clientY, 0),
               maximumDividerLocation
             );
-            rightComponent.style.height = location + "px";
+            rightComponent.style.height = this.dividerLocation + "px";
           } else {
-            const location = Math.min(
+            this.dividerLocation = Math.min(
               Math.max(ev.clientY - offset, 0),
               maximumDividerLocation
             );
-            leftComponent.style.height = location + "px";
+            leftComponent.style.height = this.dividerLocation + "px";
           }
         } else {
           if (lineEndSplitPane) {
-            const location = Math.min(
+            this.dividerLocation = Math.min(
               Math.max(offset - ev.clientX, 0),
               maximumDividerLocation
             );
-            rightComponent.style.width = location + "px";
+            rightComponent.style.width = this.dividerLocation + "px";
           } else {
-            const location = Math.min(
+            this.dividerLocation = Math.min(
               Math.max(ev.clientX - offset, 0),
               maximumDividerLocation
             );
-            leftComponent.style.width = location + "px";
+            leftComponent.style.width = this.dividerLocation + "px";
           }
         }
       },
-      pointerup(ev: PointerEvent): void {
+      pointerup(ev: PointerEvent) {
         dragLayer.remove();
+        if (callback) {
+          callback(this.dividerLocation);
+        }
       },
-      pointerleave(ev: PointerEvent): void {
+      pointerleave(ev: PointerEvent) {
         dragLayer.remove();
-      },
+        if (callback) {
+          callback(this.dividerLocation);
+        }
+      }
     };
-    dragLayer.addEventListener(
-      "pointermove",
-      dragLayerEventListener.pointermove
-    );
+    dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
     dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
-    dragLayer.addEventListener(
-      "pointerleave",
-      dragLayerEventListener.pointerleave
-    );
+    dragLayer.addEventListener("pointerleave", dragLayerEventListener.pointerleave);
   };
 }
 

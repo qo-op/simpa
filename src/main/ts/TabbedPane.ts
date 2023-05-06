@@ -201,7 +201,7 @@ class CardContainer {
 class TabComponent {
 
 	static pointerdown = (ev: CustomEvent) => {
-		const tabComponent = ev.detail.event.currentTarget as HTMLElement;
+		const tabComponent: HTMLElement = ev.detail.event.currentTarget;
 		try {
 			const tabContainer: HTMLElement | null = tabComponent.parentElement;
 			if (tabContainer === null) {

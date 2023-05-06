@@ -316,77 +316,6 @@ document.addEventListener("keydown", MenuBar.keydown);
 var SplitPane = /** @class */ (function () {
     function SplitPane() {
     }
-    SplitPane.setDividerProportionalLocation = function (splitPane, proportionalLocation) {
-        var verticalSplit = splitPane.dataset.orientation === "vertical-split";
-        var pageEndSplitPane = splitPane.dataset.dividerAnchor === "page-end";
-        var lineEndSplitPane = splitPane.dataset.dividerAnchor === "line-end";
-        var leftComponent = splitPane.children[0];
-        var rightComponent = splitPane.children[2];
-        var leftComponentRect = leftComponent.getBoundingClientRect();
-        var rightComponentRect = rightComponent.getBoundingClientRect();
-        var leftComponentComputedStyle = getComputedStyle(leftComponent);
-        var rightComponentComputedStyle = getComputedStyle(rightComponent);
-        var maximumDividerLocation = 0;
-        if (verticalSplit) {
-            maximumDividerLocation =
-                leftComponentRect.height -
-                    +leftComponentComputedStyle.borderTopWidth.replace("px", "") -
-                    +leftComponentComputedStyle.borderBottomWidth.replace("px", "");
-            maximumDividerLocation +=
-                rightComponentRect.height -
-                    +rightComponentComputedStyle.borderTopWidth.replace("px", "") -
-                    +rightComponentComputedStyle.borderBottomWidth.replace("px", "");
-            var dividerLocation = proportionalLocation * maximumDividerLocation;
-            if (pageEndSplitPane) {
-                rightComponent.style.height = dividerLocation + "px";
-            }
-            else {
-                leftComponent.style.height = dividerLocation + "px";
-            }
-        }
-        else {
-            maximumDividerLocation =
-                leftComponentRect.width -
-                    +leftComponentComputedStyle.borderLeftWidth.replace("px", "") -
-                    +leftComponentComputedStyle.borderRightWidth.replace("px", "");
-            maximumDividerLocation +=
-                rightComponentRect.width -
-                    +rightComponentComputedStyle.borderLeftWidth.replace("px", "") -
-                    +rightComponentComputedStyle.borderRightWidth.replace("px", "");
-            var dividerLocation = proportionalLocation * maximumDividerLocation;
-            if (lineEndSplitPane) {
-                rightComponent.style.width = dividerLocation + "px";
-            }
-            else {
-                leftComponent.style.width = dividerLocation + "px";
-            }
-        }
-    };
-    SplitPane.setDividerLocation = function (splitPane, location) {
-        var verticalSplit = splitPane.dataset.orientation === "vertical-split";
-        var pageEndSplitPane = splitPane.dataset.dividerAnchor === "page-end";
-        var lineEndSplitPane = splitPane.dataset.dividerAnchor === "line-end";
-        if (verticalSplit) {
-            if (pageEndSplitPane) {
-                var rightComponent = splitPane.children[2];
-                rightComponent.style.height = location + "px";
-            }
-            else {
-                var leftComponent = splitPane.children[0];
-                leftComponent.style.height = location + "px";
-            }
-        }
-        else {
-            if (lineEndSplitPane) {
-                var rightComponent = splitPane.children[2];
-                rightComponent.style.width = location + "px";
-            }
-            else {
-                var leftComponent = splitPane.children[0];
-                leftComponent.style.width = location + "px";
-            }
-        }
-    };
     SplitPane.pointerdown = function (ev) {
         var splitPaneDivider = ev.detail.event.currentTarget;
         var splitPane = splitPaneDivider.parentElement;
@@ -442,35 +371,43 @@ var SplitPane = /** @class */ (function () {
             dragLayer.style.cursor = "ew-resize";
         }
         document.body.appendChild(dragLayer);
+        var callback = ev.detail.callback;
         var dragLayerEventListener = {
+            dividerLocation: 0,
             pointermove: function (ev) {
                 if (verticalSplit) {
                     if (pageEndSplitPane) {
-                        var location_1 = Math.min(Math.max(offset - ev.clientY, 0), maximumDividerLocation);
-                        rightComponent.style.height = location_1 + "px";
+                        this.dividerLocation = Math.min(Math.max(offset - ev.clientY, 0), maximumDividerLocation);
+                        rightComponent.style.height = this.dividerLocation + "px";
                     }
                     else {
-                        var location_2 = Math.min(Math.max(ev.clientY - offset, 0), maximumDividerLocation);
-                        leftComponent.style.height = location_2 + "px";
+                        this.dividerLocation = Math.min(Math.max(ev.clientY - offset, 0), maximumDividerLocation);
+                        leftComponent.style.height = this.dividerLocation + "px";
                     }
                 }
                 else {
                     if (lineEndSplitPane) {
-                        var location_3 = Math.min(Math.max(offset - ev.clientX, 0), maximumDividerLocation);
-                        rightComponent.style.width = location_3 + "px";
+                        this.dividerLocation = Math.min(Math.max(offset - ev.clientX, 0), maximumDividerLocation);
+                        rightComponent.style.width = this.dividerLocation + "px";
                     }
                     else {
-                        var location_4 = Math.min(Math.max(ev.clientX - offset, 0), maximumDividerLocation);
-                        leftComponent.style.width = location_4 + "px";
+                        this.dividerLocation = Math.min(Math.max(ev.clientX - offset, 0), maximumDividerLocation);
+                        leftComponent.style.width = this.dividerLocation + "px";
                     }
                 }
             },
             pointerup: function (ev) {
                 dragLayer.remove();
+                if (callback) {
+                    callback(this.dividerLocation);
+                }
             },
             pointerleave: function (ev) {
                 dragLayer.remove();
-            },
+                if (callback) {
+                    callback(this.dividerLocation);
+                }
+            }
         };
         dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
         dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
