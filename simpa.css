@@ -1338,21 +1338,6 @@ table.RowHeader>tbody>tr>td:first-child {
     grid-row: 1 !important;
 }
 
-.Tree .material-icons::after {
-    content: "description";
-    color: gray;
-}
-
-.Tree li>.material-icons.folder::after,
-.Tree li>:not(ul) .material-icons.folder::after {
-    content: "keyboard_arrow_right";
-}
-
-.Tree li[data-folder="open"]>.material-icons.folder::after,
-.Tree li[data-folder="open"]>:not(ul) .material-icons.folder::after {
-    content: "keyboard_arrow_down";
-}
-
 .Tree li[data-selected]>:not(ul) {
     background-color: rgba(128, 128, 255, .25);
 }

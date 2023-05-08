@@ -17,9 +17,24 @@
             white-space: nowrap;
         }
 
+        .Tree .material-icons::after {
+            content: "description";
+            color: gray;
+        }
+
         .Tree .material-icons.star::after {
             content: "star";
             color: gold;
+        }
+
+        .Tree li>.material-icons.folder::after,
+        .Tree li>:not(ul) .material-icons.folder::after {
+            content: "keyboard_arrow_right";
+        }
+
+        .Tree li[data-folder="open"]>.material-icons.folder::after,
+        .Tree li[data-folder="open"]>:not(ul) .material-icons.folder::after {
+            content: "keyboard_arrow_down";
         }
     </style>
     <script>
@@ -63,7 +78,8 @@
                             </div>
                         </li>
                         <li>
-                            <div class="TreeNode" data-user-object="swingtutorial.html" onclick="showUserObject(event);">
+                            <div class="TreeNode" data-user-object="swingtutorial.html"
+                                onclick="showUserObject(event);">
                                 <span class="material-icons star"></span>
                                 <span class="TreeNode-text">The Swing Tutorial: A Guide to Constructing GUIs</span>
                             </div>
