@@ -12,6 +12,15 @@
     <link rel="stylesheet" href="../../../simpa.css">
     <script src="../../../simpa.js"></script>
 
+    <style>
+        .Dialog .material-icons {
+            color: gray;
+        }
+
+        .Dialog .material-icons:hover {
+            color: red;
+        }
+    </style>
     <script>
         function hello(ev) {
             const dialog = document.getElementById("dialog");
@@ -48,17 +57,23 @@
         </div>
     </div>
     <div class="ModalLayer" style="visibility: hidden;">
-        <div class="Dialog PageStartBorderLayout" id="dialog">
-            <div class="LineEndCenterBorderLayout">
-                <span onpointerdown="pointerdown(event);">
-                    <b class="Title"></b>
-                </span>
-                <span class="material-icons close" onclick="hide(event);"></span>
+        <div class="Dialog BorderLayout" id="dialog">
+            <div class="PageStart">
+                <div class="BorderLayout">
+                    <span class="BoxLayout" onpointerdown="pointerdown(event);">
+                        <b class="Title"></b>
+                    </span>
+                    <div class="LineEnd">
+                        <span class="material-icons" onclick="hide(event);">close</span>
+                    </div>
+                </div>
             </div>
-            <div class="PageEndBorderLayout" style="gap: 5px; padding: 5px;">
+            <div class="BorderLayout" style="gap: 5px; padding: 5px;">
                 <span class="Message"></span>
-                <div class="CenterLayout">
-                    <button onclick="hide(event);">OK</button>
+                <div class="PageEnd">
+                    <div class="CenterLayout">
+                        <button onclick="hide(event);">OK</button>
+                    </div>
                 </div>
             </div>
         </div>

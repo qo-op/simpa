@@ -28,12 +28,14 @@
 
 <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
     <div class="CenterLayout">
-        <div class="PageStartBorderLayout" style="border: 1px solid gray; padding: 5px;">
-            <div class="FlowLayout" style="padding: 5px;">
-                <select id="cb" onchange="change(event);">
-                    <option value="Card with buttons" selected>Card with buttons</option>
-                    <option value="Card with text field">Card with text field</option>
-                </select>
+        <div class="BorderLayout" style="border: 1px solid gray; padding: 5px;">
+            <div class="PageStart">
+                <div class="FlowLayout" style="padding: 5px;">
+                    <select id="cb" onchange="change(event);">
+                        <option value="Card with buttons" selected>Card with buttons</option>
+                        <option value="Card with text field">Card with text field</option>
+                    </select>
+                </div>
             </div>
             <!-- card container -->
             <div class="CardLayout" style="padding: 5px;" id="cards">
