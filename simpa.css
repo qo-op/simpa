@@ -13,20 +13,59 @@ body {
 }
 
 /**
- * BorderLayout
- */
+  * BorderLayout
+  */
 
 .BorderLayout {
     display: grid !important;
     grid-template-rows: auto minmax(0, 1fr) auto !important;
     grid-template-columns: auto minmax(0, 1fr) auto !important;
-    align-items: stretch;
-    justify-items: stretch;
+    align-items: stretch !important;
+    justify-items: stretch !important;
 }
 
 .BorderLayout>* {
     grid-row: 2 !important;
     grid-column: 2 !important;
+}
+
+.BorderLayout>.PageStart {
+    grid-row: 1 !important;
+    grid-column: 1 / -1 !important;
+    display: grid !important;
+}
+
+.BorderLayout>.PageEnd {
+    grid-row: 3 !important;
+    grid-column: 1 / -1 !important;
+    display: grid !important;
+}
+
+.BorderLayout>.LineStart {
+    grid-row: 2 !important;
+    grid-column: 1 !important;
+    display: grid !important;
+}
+
+.BorderLayout>.LineEnd {
+    grid-row: 2 !important;
+    grid-column: 3 !important;
+    display: grid !important;
+}
+
+.BorderLayout>.Center {
+    grid-row: 2 !important;
+    grid-column: 2 !important;
+    display: grid !important;
+}
+
+.BorderLayout>.PageStart>*,
+.BorderLayout>.PageEnd>*,
+.BorderLayout>.LineStart>*,
+.BorderLayout>.LineEnd>*,
+.BorderLayout>.Center>* {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
 }
 
 .BorderLayout>[data-constraints="page-start"] {
@@ -425,8 +464,8 @@ body {
 }
 
 /**
- * BoxLayout
- */
+  * BoxLayout
+  */
 
 .BoxLayout,
 .BoxLayout[data-axis="line-axis"] {
@@ -469,8 +508,8 @@ body {
 }
 
 /**
- * CenterLayout
- */
+  * CenterLayout
+  */
 
 .CenterLayout {
     display: grid !important;
@@ -478,9 +517,14 @@ body {
     justify-content: center !important;
 }
 
+.CenterLayout>* {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+}
+
 /**
- * CardLayout
- */
+  * CardLayout
+  */
 
 .CardLayout {
     display: grid !important;
@@ -498,8 +542,8 @@ body {
 
 
 /**
- * FlowLayout
- */
+  * FlowLayout
+  */
 
 .FlowLayout,
 .LeadingFlowLayout,
@@ -525,8 +569,8 @@ body {
 }
 
 /**
- * GridBagLayout
- */
+  * GridBagLayout
+  */
 
 .GridBagLayout {
     display: grid !important;
@@ -605,8 +649,8 @@ body {
 }
 
 /**
- * Material Icons
- */
+  * Material Icons
+  */
 
 /* fallback */
 @font-face {
@@ -633,8 +677,8 @@ body {
 }
 
 /**
- * Dialog
- */
+  * Dialog
+  */
 
 .Dialog {
     position: fixed !important;
@@ -679,8 +723,8 @@ body {
 }
 
 /**
- * Drag layer
- */
+  * Drag layer
+  */
 
 .DragLayer {
     position: fixed !important;
@@ -692,8 +736,8 @@ body {
 }
 
 /**
- * Image
- */
+  * Image
+  */
 
 img {
     width: 1rem;
@@ -702,9 +746,24 @@ img {
     user-select: none;
 }
 
+/*
+  * LayeredPane
+  */
+
+.LayeredPane {
+    display: grid !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.LayeredPane>* {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+}
+
 /**
- * Menu bar
- */
+  * Menu bar
+  */
 
 .MenuBar {
     user-select: none !important;
@@ -880,8 +939,8 @@ img {
 }
 
 /**
- * Scroll pane
- */
+  * Scroll pane
+  */
 
 .ScrollPane {
     overflow: overlay !important;
@@ -924,12 +983,12 @@ img {
 }
 
 /* only visible on hover
-.ScrollPane:hover::-webkit-scrollbar-thumb,
-.HorizontalScrollPane:hover::-webkit-scrollbar-thumb,
-.VerticalScrollPane:hover::-webkit-scrollbar-thumb {
-    background-color: rgba(128, 128, 128, .25);
-}
-*/
+ .ScrollPane:hover::-webkit-scrollbar-thumb,
+ .HorizontalScrollPane:hover::-webkit-scrollbar-thumb,
+ .VerticalScrollPane:hover::-webkit-scrollbar-thumb {
+     background-color: rgba(128, 128, 128, .25);
+ }
+ */
 
 .ScrollPane::-webkit-scrollbar-corner,
 .HorizontalScrollPane::-webkit-scrollbar-corner,
@@ -938,8 +997,8 @@ img {
 }
 
 /**
- * SplitPane
- */
+  * SplitPane
+  */
 
 .SplitPane,
 .SplitPane[data-orientation="horizontal-split"],
@@ -990,8 +1049,8 @@ img {
 }
 
 /**
- * Tabbed pane
- */
+  * Tabbed pane
+  */
 
 .TabbedPane,
 .TabbedPane[data-tab-layout-policy="wrap-tab-layout"],
@@ -1238,12 +1297,12 @@ img {
 }
 
 /*
- * close button only if tab is selected
-  .TabComponent:not([data-selected]) .material-icons.close::after,
-  .TabComponent:not([data-selected]) .material-icons.close::before {
-      content: "";
-  }
- */
+  * close button only if tab is selected
+   .TabComponent:not([data-selected]) .material-icons.close::after,
+   .TabComponent:not([data-selected]) .material-icons.close::before {
+       content: "";
+   }
+  */
 
 .ButtonContainer button {
     border: none;
@@ -1265,8 +1324,8 @@ img {
 }
 
 /**
- * Table
- */
+  * Table
+  */
 
 table {
     border-collapse: collapse !important;
@@ -1304,8 +1363,8 @@ table.RowHeader>tbody>tr>td:first-child {
 }
 
 /**
- * Tree
- */
+  * Tree
+  */
 
 .Tree {
     user-select: none;
