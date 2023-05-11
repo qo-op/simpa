@@ -157,8 +157,8 @@ body {
 
 .CenterLayout {
     display: grid !important;
-    align-content: center !important;
-    justify-content: center !important;
+    align-items: center !important;
+    justify-items: center !important;
 }
 
 .CenterLayout>* {
