@@ -15,11 +15,19 @@
 <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
     <div class="CenterLayout">
         <div class="BorderLayout">
-            <button data-constraints="page-start">Button 1 (page-start)</button>
-            <button data-constraints="center" style="width: 200px; height: 100px">Button 2 (center)</button>
-            <button data-constraints="line-start">Button 3 (line-start)</button>
-            <button data-constraints="page-end">Long-Named Button 4 (page-end)</button>
-            <button data-constraints="line-end">5 (line-end)</button>
+        	<div class="PageStart">
+            	<button>Button 1 (PageStart)</button>
+        	</div>
+            <button style="width: 200px; height: 100px">Button 2 (Center)</button>
+        	<div class="LineStart">
+            	<button>Button 3 (LineStart)</button>
+        	</div>
+            <div class="PageEnd">
+            	<button>Long-Named Button 4 (PageEnd)</button>
+            </div>
+            <div class="LineEnd">
+            	<button>5 (LineEnd)</button>
+            </div>
         </div>
     </div>
 </body>
