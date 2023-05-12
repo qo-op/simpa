@@ -9,7 +9,7 @@
             const name = ev.target.value;
             const container = document.getElementById("container");
             const cards = container.children;
-            for (i = 0; i < cards.length; i++) {
+            for (let i = 0; i < cards.length; i++) {
                 const card = container.children[i];
                 if (card.getAttribute("name") === name) {
                     card.style.visibility = "visible";
@@ -22,7 +22,7 @@
 </head>
 
 <body class="CenterLayout"
-      style="height: 100vh;">
+      style="margin: 0; height: 100vh;">
     <div class="BorderLayout"
          style="border: 1px solid gray; height: 100px; padding: 10px">
         <div class="PageStart">

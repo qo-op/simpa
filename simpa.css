@@ -185,26 +185,23 @@ body {
   * FlowLayout
   */
 
-.FlowLayout,
-.LeadingFlowLayout,
-.TrailingFlowLayout {
+.FlowLayout {
     display: flex !important;
     flex-wrap: wrap !important;
     align-content: start !important;
     align-items: center;
-    gap: 5px;
 }
 
 .FlowLayout,
-.CenterFlowLayout {
+.FlowLayout[data-alignment="center"] {
     justify-content: center !important;
 }
 
-.LeadingFlowLayout {
+.FlowLayout[data-alignment="leading"] {
     justify-content: start !important;
 }
 
-.TrailingFlowLayout {
+.FlowLayout[data-alignment="trailing"] {
     justify-content: end !important;
 }
 
@@ -331,7 +328,7 @@ body {
 .Dialog>:first-child {
     padding: 5px;
     gap: 5px;
-    background-color: lightgray;
+    background-color: LightGray;
     user-select: none;
 }
 
