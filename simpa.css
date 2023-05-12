@@ -172,8 +172,6 @@ body {
 
 .CardLayout {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) !important;
     align-items: stretch !important;
     justify-items: stretch !important;
 }
@@ -181,9 +179,7 @@ body {
 .CardLayout>* {
     grid-row: 1 !important;
     grid-column: 1 !important;
-    visibility: hidden;
 }
-
 
 /**
   * FlowLayout
@@ -218,8 +214,8 @@ body {
 
 .GridBagLayout {
     display: grid !important;
-    align-content: center;
-    justify-content: center;
+    align-content: center !important;
+    justify-content: center !important;
 }
 
 .GridBagLayout>[data-anchor="page-start"] {

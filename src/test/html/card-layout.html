@@ -2,52 +2,53 @@
 <html>
 
 <head>
-    <meta name="description"
-        content="This example shows how to use a card layout using html, css and javascript. It is based on the example found at 'How to Use CardLayout' https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html">
-    <meta name="author" content="Yassuo Toda">
-    <title>Card Layout Example</title>
-
-    <link rel="stylesheet" href="../../../simpa.css">
-    <script src="../../../simpa.js"></script>
-    
+    <link rel="stylesheet"
+          href="https://qo-op.github.io/simpa/simpa.css">
     <script>
         function change(ev) {
-            const cardContainer = document.getElementById("cards");
             const name = ev.target.value;
-            for (let i = 0; i < cardContainer.children.length; i++) {
-                const cardComponent = cardContainer.children[i];
-                if (cardComponent.getAttribute("name") === name) {
-                    cardComponent.style.visibility = "visible";
+            const container = document.getElementById("container");
+            const cards = container.children;
+            for (i = 0; i < cards.length; i++) {
+                const card = container.children[i];
+                if (card.getAttribute("name") === name) {
+                    card.style.visibility = "visible";
                 } else {
-                    cardComponent.style.visibility = "hidden";
+                    card.style.visibility = "hidden";
                 }
             }
         };
     </script>
 </head>
 
-<body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
-    <div class="CenterLayout">
-        <div class="BorderLayout" style="border: 1px solid gray; padding: 5px;">
-            <div class="PageStart">
-                <div class="FlowLayout" style="padding: 5px;">
-                    <select id="cb" onchange="change(event);">
-                        <option value="Card with buttons" selected>Card with buttons</option>
-                        <option value="Card with text field">Card with text field</option>
-                    </select>
-                </div>
-            </div>
-            <!-- card container -->
-            <div class="CardLayout" style="padding: 5px;" id="cards">
-                <div class="FlowLayout" name="Card with buttons" style="visibility: visible;">
-                    <button>Button 1</button>
-                    <button>Button 2</button>
-                    <button>Button 3</button>
-                </div>
-                <div class="FlowLayout" name="Card with text field">
-                    <input type="text" value="TextField">
-                </div>
-            </div>
+<body class="CenterLayout"
+      style="height: 100vh;">
+    <div class="BorderLayout"
+         style="border: 1px solid gray; height: 100px; padding: 10px">
+        <div class="PageStart">
+            <select onchange="change(event);">
+                <option value="Card 1"
+                        selected>1st card</option>
+                <option value="Card 2">2nd card</option>
+                <option value="Card 3">3rd card</option>
+            </select>
+        </div>
+        <!-- card container -->
+        <div class="CardLayout"
+             id="container"
+             style="padding: 10px">
+            <button name="Card 1"
+                    style="visibility: visible;">
+                <u>First</u> Button
+            </button>
+            <button name="Card 2"
+                    style="visibility: hidden;">
+                <u>Second</u> Button
+            </button>
+            <button name="Card 3"
+                    style="visibility: hidden;">
+                <u>Third</u> Button
+            </button>
         </div>
     </div>
 </body>
