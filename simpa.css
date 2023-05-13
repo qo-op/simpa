@@ -20,8 +20,6 @@ body {
     display: grid !important;
     grid-template-rows: auto minmax(0, 1fr) auto !important;
     grid-template-columns: auto minmax(0, 1fr) auto !important;
-    align-items: stretch !important;
-    justify-items: stretch !important;
 }
 
 .BorderLayout>* {
@@ -32,30 +30,33 @@ body {
 .BorderLayout>.PageStart {
     grid-row: 1 !important;
     grid-column: 1 / -1 !important;
-    display: grid !important;
 }
 
 .BorderLayout>.PageEnd {
     grid-row: 3 !important;
     grid-column: 1 / -1 !important;
-    display: grid !important;
 }
 
 .BorderLayout>.LineStart {
     grid-row: 2 !important;
     grid-column: 1 !important;
-    display: grid !important;
 }
 
 .BorderLayout>.LineEnd {
     grid-row: 2 !important;
     grid-column: 3 !important;
-    display: grid !important;
 }
 
 .BorderLayout>.Center {
     grid-row: 2 !important;
     grid-column: 2 !important;
+}
+
+.BorderLayout>.PageStart,
+.BorderLayout>.PageEnd,
+.BorderLayout>.LineStart,
+.BorderLayout>.LineEnd,
+.BorderLayout>.Center {
     display: grid !important;
 }
 
