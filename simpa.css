@@ -29,29 +29,25 @@ body {
     grid-column: 2 !important;
 }
 
-.BorderLayout>.PageStart,
-.BorderLayout>.North {
+.BorderLayout>.PageStart {
     grid-row: 1 !important;
     grid-column: 1 / -1 !important;
     display: grid !important;
 }
 
-.BorderLayout>.PageEnd,
-.BorderLayout>.South {
+.BorderLayout>.PageEnd {
     grid-row: 3 !important;
     grid-column: 1 / -1 !important;
     display: grid !important;
 }
 
-.BorderLayout>.LineStart,
-.BorderLayout>.West {
+.BorderLayout>.LineStart {
     grid-row: 2 !important;
     grid-column: 1 !important;
     display: grid !important;
 }
 
-.BorderLayout>.LineEnd,
-.BorderLayout>.East {
+.BorderLayout>.LineEnd {
     grid-row: 2 !important;
     grid-column: 3 !important;
     display: grid !important;
@@ -64,13 +60,9 @@ body {
 }
 
 .BorderLayout>.PageStart>*,
-.BorderLayout>.North>*,
 .BorderLayout>.PageEnd>*,
-.BorderLayout>.South>*,
 .BorderLayout>.LineStart>*,
-.BorderLayout>.West>*,
 .BorderLayout>.LineEnd>*,
-.BorderLayout>.East>*,
 .BorderLayout>.Center>* {
     grid-row: 1 !important;
     grid-column: 1 !important;
@@ -206,83 +198,76 @@ body {
 }
 
 /**
-  * GridBagLayout
+  * GridBagConstraints
   */
 
-.GridBagLayout {
+.GridBagConstraints {
     display: grid !important;
-    align-content: center !important;
-    justify-content: center !important;
+    align-items: center !important;
+    justify-items: center !important;
 }
 
-.GridBagLayout>[data-anchor="page-start"] {
-    display: grid !important;
-    align-content: start !important;
-    justify-content: center !important;
+.GridBagConstraints[data-anchor="page-start"] {
+    align-items: start !important;
+    justify-items: center !important;
 }
 
-.GridBagLayout>[data-anchor="page-end"] {
-    display: grid !important;
-    align-content: end !important;
-    justify-content: center !important;
+.GridBagConstraints[data-anchor="page-end"] {
+    align-items: end !important;
+    justify-items: center !important;
 }
 
-.GridBagLayout>[data-anchor="line-start"] {
-    display: grid !important;
-    align-content: center !important;
-    justify-content: start !important;
+.GridBagConstraints[data-anchor="line-start"] {
+    align-items: center !important;
+    justify-items: start !important;
 }
 
-.GridBagLayout>[data-anchor="line-end"] {
-    display: grid !important;
-    align-content: center !important;
-    justify-content: end !important;
+.GridBagConstraints[data-anchor="line-end"] {
+    align-items: center !important;
+    justify-items: end !important;
 }
 
-.GridBagLayout>[data-anchor="first-line-start"] {
-    display: grid !important;
-    align-content: start !important;
-    justify-content: start !important;
+.GridBagConstraints[data-anchor="first-line-start"] {
+    align-items: start !important;
+    justify-items: start !important;
 }
 
-.GridBagLayout>[data-anchor="first-line-end"] {
-    display: grid !important;
-    align-content: start !important;
-    justify-content: end !important;
+.GridBagConstraints[data-anchor="first-line-end"] {
+    align-items: start !important;
+    justify-items: end !important;
 }
 
-.GridBagLayout>[data-anchor="last-line-start"] {
-    display: grid !important;
-    align-content: end !important;
-    justify-content: start !important;
+.GridBagConstraints[data-anchor="last-line-start"] {
+    align-items: end !important;
+    justify-items: start !important;
 }
 
-.GridBagLayout>[data-anchor="last-line-end"] {
-    display: grid !important;
-    align-content: end !important;
-    justify-content: end !important;
+.GridBagConstraints[data-anchor="last-line-end"] {
+    align-items: end !important;
+    justify-items: end !important;
 }
 
-.GridBagLayout>[data-anchor="center"] {
-    display: grid !important;
-    align-content: center !important;
-    justify-content: center !important;
+.GridBagConstraints[data-anchor="center"] {
+    align-items: center !important;
+    justify-items: center !important;
 }
 
-.GridBagLayout>[data-fill="horizontal"] {
-    display: grid !important;
-    justify-content: stretch !important;
+.GridBagConstraints[data-fill="horizontal"] {
+    justify-items: stretch !important;
 }
 
-.GridBagLayout>[data-fill="vertical"] {
-    display: grid !important;
-    align-content: stretch !important;
+.GridBagConstraints[data-fill="vertical"] {
+    align-items: stretch !important;
 }
 
-.GridBagLayout>[data-fill="both"] {
-    display: grid !important;
-    align-content: stretch !important;
-    justify-content: stretch !important;
+.GridBagConstraints[data-fill="both"] {
+    align-items: stretch !important;
+    justify-items: stretch !important;
+}
+
+.GridBagConstraints>* {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
 }
 
 /**
