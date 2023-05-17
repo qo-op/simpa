@@ -2,6 +2,8 @@
  * Simpa.css
  * CSS definitions for Single-Page Applications
  *
+ * ^ +\*
+ *
  * @author Yassuo Toda
  */
 
@@ -13,8 +15,8 @@ body {
 }
 
 /**
-  * BorderLayout
-  */
+ * BorderLayout
+ */
 
 .BorderLayout {
     display: grid !important;
@@ -70,8 +72,8 @@ body {
 }
 
 /**
-  * BoxLayout
-  */
+ * BoxLayout
+ */
 
 .BoxLayout,
 .BoxLayout[data-axis="line-axis"] {
@@ -145,8 +147,8 @@ body {
 }
 
 /**
-  * CenterLayout
-  */
+ * CenterLayout
+ */
 
 .CenterLayout {
     display: grid !important;
@@ -160,8 +162,8 @@ body {
 }
 
 /**
-  * CardLayout
-  */
+ * CardLayout
+ */
 
 .CardLayout {
     display: grid !important;
@@ -175,8 +177,8 @@ body {
 }
 
 /**
-  * FlowLayout
-  */
+ * FlowLayout
+ */
 
 .FlowLayout {
     display: flex !important;
@@ -199,8 +201,8 @@ body {
 }
 
 /**
-  * GridBagConstraints
-  */
+ * GridBagConstraints
+ */
 
 .GridBagConstraints {
     display: grid !important;
@@ -263,8 +265,8 @@ body {
 }
 
 /**
-  * Material Icons
-  */
+ * Material Icons
+ */
 
 /* fallback */
 @font-face {
@@ -291,8 +293,8 @@ body {
 }
 
 /**
-  * Dialog
-  */
+ * Dialog
+ */
 
 .Dialog {
     position: fixed !important;
@@ -337,8 +339,8 @@ body {
 }
 
 /**
-  * Drag layer
-  */
+ * Drag layer
+ */
 
 .DragLayer {
     position: fixed !important;
@@ -350,8 +352,8 @@ body {
 }
 
 /**
-  * Image
-  */
+ * Image
+ */
 
 img {
     width: 1rem;
@@ -361,8 +363,8 @@ img {
 }
 
 /*
-  * LayeredPane
-  */
+ * LayeredPane
+ */
 
 .LayeredPane {
     display: grid !important;
@@ -376,8 +378,8 @@ img {
 }
 
 /**
-  * Menu bar
-  */
+ * Menu bar
+ */
 
 .MenuBar {
     user-select: none !important;
@@ -433,6 +435,22 @@ img {
 }
 
 /**
+ * MenuBar layout
+ */
+.MenuBar {
+    display: grid !important;
+    align-content: stretch !important;
+    justify-content: start !important;
+    align-items: stretch !important;
+}
+
+.MenuBar>* {
+    grid-row: 1 !important;
+    display: grid;
+    align-items: center;
+}
+
+/**
  * MenuItem layout
  */
 
@@ -463,8 +481,8 @@ img {
 }
 
 /**
-  * Scroll pane
-  */
+ * Scroll pane
+ */
 
 .ScrollPane {
     overflow: overlay !important;
@@ -507,11 +525,11 @@ img {
 }
 
 /* only visible on hover
- .ScrollPane:hover::-webkit-scrollbar-thumb,
- .HorizontalScrollPane:hover::-webkit-scrollbar-thumb,
- .VerticalScrollPane:hover::-webkit-scrollbar-thumb {
-     background-color: rgba(128, 128, 128, .25);
- }
+   .ScrollPane:hover::-webkit-scrollbar-thumb,
+   .HorizontalScrollPane:hover::-webkit-scrollbar-thumb,
+   .VerticalScrollPane:hover::-webkit-scrollbar-thumb {
+       background-color: rgba(128, 128, 128, .25);
+   }
  */
 
 .ScrollPane::-webkit-scrollbar-corner,
@@ -521,8 +539,8 @@ img {
 }
 
 /**
-  * SplitPane
-  */
+ * SplitPane
+ */
 
 .SplitPane,
 .SplitPane[data-orientation="horizontal-split"],
@@ -573,8 +591,8 @@ img {
 }
 
 /**
-  * Tabbed pane
-  */
+ * Tabbed pane
+ */
 
 .TabbedPane,
 .TabbedPane[data-tab-layout-policy="wrap-tab-layout"],
@@ -821,12 +839,12 @@ img {
 }
 
 /*
-  * close button only if tab is selected
-   .TabComponent:not([data-selected]) .material-icons.close::after,
-   .TabComponent:not([data-selected]) .material-icons.close::before {
-       content: "";
-   }
-  */
+ * close button only if tab is selected
+     .TabComponent:not([data-selected]) .material-icons.close::after,
+     .TabComponent:not([data-selected]) .material-icons.close::before {
+         content: "";
+     }
+ */
 
 .ButtonContainer button {
     border: none;
@@ -848,8 +866,8 @@ img {
 }
 
 /**
-  * Table
-  */
+ * Table
+ */
 
 table {
     border-collapse: collapse !important;
@@ -887,8 +905,8 @@ table.RowHeader>tbody>tr>td:first-child {
 }
 
 /**
-  * Tree
-  */
+ * Tree
+ */
 
 .Tree {
     user-select: none;
