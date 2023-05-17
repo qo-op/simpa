@@ -429,7 +429,7 @@ img {
     cursor: pointer;
 }
 
-.MenuBar li:not(.Separator):hover,
+.MenuBar li:not(hr):hover,
 .MenuBar:not(:hover) li[data-selected] {
     background-color: rgba(128, 128, 128, .25);
 }
@@ -467,17 +467,21 @@ img {
 .MenuBar ul .Menu>:first-child,
 .MenuBar ul .Menu>:last-child {
     width: 1em;
-    height: 1em;
     margin: 0;
     font-size: 1em;
 }
 
 /**
- * MenuItemShortCut layout
+ * MenuItemShortcut layout
  */
-.MenuItemShortCut {
+.MenuItemShortcut {
+    display: grid;
     grid-template-columns: 1fr auto;
     gap: 2em;
+}
+
+.MenuItemShortcut>:last-child {
+    font-family: monospace;
 }
 
 /**
@@ -525,11 +529,11 @@ img {
 }
 
 /* only visible on hover
-   .ScrollPane:hover::-webkit-scrollbar-thumb,
-   .HorizontalScrollPane:hover::-webkit-scrollbar-thumb,
-   .VerticalScrollPane:hover::-webkit-scrollbar-thumb {
-       background-color: rgba(128, 128, 128, .25);
-   }
+     .ScrollPane:hover::-webkit-scrollbar-thumb,
+     .HorizontalScrollPane:hover::-webkit-scrollbar-thumb,
+     .VerticalScrollPane:hover::-webkit-scrollbar-thumb {
+         background-color: rgba(128, 128, 128, .25);
+     }
  */
 
 .ScrollPane::-webkit-scrollbar-corner,
@@ -840,10 +844,10 @@ img {
 
 /*
  * close button only if tab is selected
-     .TabComponent:not([data-selected]) .material-icons.close::after,
-     .TabComponent:not([data-selected]) .material-icons.close::before {
-         content: "";
-     }
+       .TabComponent:not([data-selected]) .material-icons.close::after,
+       .TabComponent:not([data-selected]) .material-icons.close::before {
+           content: "";
+       }
  */
 
 .ButtonContainer button {
