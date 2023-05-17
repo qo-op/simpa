@@ -63,53 +63,6 @@ class MenuBar {
 		menuBar.dataset.timeoutId = "" + setTimeout(handler, timeout);
 	}
 
-	static shortcuts: Map<string, HTMLElement> = new Map();
-
-	static addShortcuts = (menuBar: HTMLElement) => {
-		menuBar
-			.querySelectorAll(":scope [data-shortcut]")
-			.forEach(function (element: Element) {
-				const accelerator: HTMLElement = element as HTMLElement;
-				const shortcut: string | undefined = accelerator.dataset.shortcut;
-				if (shortcut === undefined || shortcut.trim() === "") {
-					return;
-				}
-				let s: string = " " + shortcut.toLowerCase() + " ";
-				let key: string = "";
-				if (s.includes(" alt ")) {
-					key += "alt ";
-					s = s.replace(" alt ", " ");
-				}
-				if (s.includes(" control ")) {
-					key += "ctrl ";
-					s = s.replace(" control ", " ");
-				}
-				if (s.includes(" ctrl ")) {
-					key += "ctrl ";
-					s = s.replace(" ctrl ", " ");
-				}
-				if (s.includes(" meta ")) {
-					key += "meta ";
-					s = s.replace(" meta ", " ");
-				}
-				if (s.includes(" shift ")) {
-					key += "shift ";
-					s = s.replace(" shift ", " ");
-				}
-				key += s.trim();
-				MenuBar.shortcuts.set(key, element as HTMLElement);
-				const span: HTMLSpanElement = document.createElement("span");
-				span.textContent = (" " + key + " ")
-					.replaceAll(" alt ", " Alt ")
-					.replaceAll(" ctrl ", " Ctrl ")
-					.replaceAll(" meta ", " Meta ")
-					.replaceAll(" shift ", " Shift ")
-					.trim()
-					.replaceAll(/ +/g, "+")
-				accelerator.appendChild(span);
-			});
-	}
-
 	static pointerdown = (ev: PointerEvent) => {
 		const currentTarget: EventTarget = ev.currentTarget;
 		const target: HTMLElement = ev.target as HTMLElement;
@@ -135,10 +88,6 @@ class MenuBar {
 			}
 			if (!menuBar.onpointerleave) {
 				menuBar.onpointerleave = MenuBar.pointerleave;
-			}
-			if (!menuBar.dataset.shortcuts) {
-				MenuBar.addShortcuts(menuBar);
-				menuBar.dataset.shortcuts = "true";
 			}
 		} else {
 			menuBar = ev.currentTarget as HTMLElement;
@@ -227,38 +176,6 @@ class MenuBar {
 			}
 		});
 	}
-
-	static keydown = (ev: KeyboardEvent) => {
-		document
-			.querySelectorAll(".MenuBar")
-			.forEach(function (element: Element) {
-				const menuBar: HTMLElement = element as HTMLElement;
-				if (!menuBar.dataset.shortcuts) {
-					MenuBar.addShortcuts(menuBar);
-					menuBar.dataset.shortcuts = "true";
-				}
-			});
-		let key: string = "";
-		if (ev.ctrlKey) {
-			key += "ctrl ";
-		}
-		if (ev.shiftKey) {
-			key += "shift ";
-		}
-		if (ev.altKey) {
-			key += "alt ";
-		}
-		if (ev.metaKey) {
-			key += "meta ";
-		}
-		key += ev.key.toLowerCase();
-		const element: HTMLElement | undefined = MenuBar.shortcuts.get(key);
-		if (element) {
-			element.click();
-			ev.preventDefault();
-		}
-	}
 }
 
 document.addEventListener("pointerdown", MenuBar.pointerdown);
-document.addEventListener("keydown", MenuBar.keydown);

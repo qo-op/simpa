@@ -58,8 +58,6 @@ body {
 .BorderLayout>.LineEnd,
 .BorderLayout>.Center {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) !important;
 }
 
 .BorderLayout>.PageStart>*,
@@ -152,8 +150,6 @@ body {
 
 .CenterLayout {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) !important;
     align-items: center !important;
     justify-items: center !important;
 }
@@ -171,8 +167,6 @@ body {
     display: grid !important;
     grid-template-rows: minmax(0, 1fr) !important;
     grid-template-columns: minmax(0, 1fr) !important;
-    align-items: stretch !important;
-    justify-items: stretch !important;
 }
 
 .CardLayout>* {
@@ -210,8 +204,6 @@ body {
 
 .GridBagConstraints {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) !important;
     align-items: center !important;
     justify-items: center !important;
 }
@@ -399,15 +391,6 @@ img {
     padding: 0;
 }
 
-.MenuBar .MenuItem,
-.MenuBar .Menu {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: auto 1fr auto;
-    gap: 5px;
-    align-items: center;
-}
-
 .MenuBar li {
     position: relative !important;
 }
@@ -423,59 +406,25 @@ img {
 }
 
 .MenuBar li>* {
-    padding-inline: 5px;
+    padding-inline: .5em;
 }
 
 .MenuBar li>ul {
-    inset-inline-start: calc(100% - 5px);
-    inset-block-start: -5px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
+    inset-inline-start: calc(100% - .5em);
+    inset-block-start: -.5em;
+    box-shadow: 0 .5em 1em 0 rgba(0, 0, 0, 0.25);
     background-color: whitesmoke;
-    padding-block: 5px;
+    padding-block: .5em;
     padding-inline: 0;
 }
 
-.MenuBar li>:not(ul) {
-    cursor: pointer;
-}
-
-.MenuBar li.Separator {
-    padding-block: 5px;
-}
-
-.MenuBar hr {
-    margin: 0;
-    padding: 0;
-}
-
-.MenuBar input {
-    pointer-events: none !important;
-    width: 12px;
-    margin: 0px;
-}
-
-.MenuBar [data-shortcut] {
-    display: grid !important;
-    grid-template-columns: 1fr auto !important;
-    column-gap: 20px;
-}
-
-.MenuBar>li {
-    display: grid;
-}
-
-.MenuBar>li>* {
-    grid-column: 1;
-}
-
-.MenuBar>li>.Menu {
-    grid-template-columns: 1fr;
-    align-items: center;
-}
-
 .MenuBar>li>ul {
+    inset-inline-start: 0;
     inset-block-start: 100%;
-    inset-inline-start: auto;
+}
+
+.MenuBar li>:not(ul):not(hr) {
+    cursor: pointer;
 }
 
 .MenuBar li:not(.Separator):hover,
@@ -483,81 +432,34 @@ img {
     background-color: rgba(128, 128, 128, .25);
 }
 
-.MenuBar .BorderLayout,
-.Menu .BorderLayout,
-.MenuItem .BorderLayout {
-    grid-template-rows: auto 1fr auto !important;
-    grid-template-columns: auto 1fr auto !important;
-}
+/**
+ * MenuItem layout
+ */
 
-.MenuBar .PageStartBorderLayout,
-.Menu .PageStartBorderLayout,
-.MenuItem .PageStartBorderLayout,
-.MenuBar .PageStartCenterBorderLayout,
-.Menu .PageStartCenterBorderLayout,
-.MenuItem .PageStartCenterBorderLayout {
-    grid-template-rows: auto 1fr !important;
-    grid-template-columns: 1fr !important;
-}
-
-.MenuBar .PageEndBorderLayout,
-.Menu .PageEndBorderLayout,
-.MenuItem .PageEndBorderLayout,
-.MenuBar .PageEndCenterBorderLayout,
-.Menu .PageEndCenterBorderLayout,
-.MenuItem .PageEndCenterBorderLayout {
-    grid-template-rows: 1fr auto !important;
-    grid-template-columns: 1fr !important;
-}
-
-.MenuBar .LineStartBorderLayout,
-.Menu .LineStartBorderLayout,
-.MenuItem .LineStartBorderLayout,
-.MenuBar .LineStartCenterBorderLayout,
-.Menu .LineStartCenterBorderLayout,
-.MenuItem .LineStartCenterBorderLayout {
-    grid-template-rows: 1fr !important;
-    grid-template-columns: auto 1fr !important;
-}
-
-.MenuBar .LineEndBorderLayout,
-.Menu .LineEndBorderLayout,
-.MenuItem .LineEndBorderLayout,
-.MenuBar .LineEndCenterBorderLayout,
-.Menu .LineEndCenterBorderLayout,
-.MenuItem .LineEndCenterBorderLayout {
-    grid-template-rows: 1fr !important;
-    grid-template-columns: 1fr auto !important;
-}
-
-.MenuBar .PageBorderLayout,
-.Menu .PageBorderLayout,
-.MenuItem .PageBorderLayout,
-.MenuBar .PageCenterBorderLayout,
-.Menu .PageCenterBorderLayout,
-.MenuItem .PageCenterBorderLayout {
-    grid-template-rows: auto 1fr auto !important;
-    grid-template-columns: 1fr !important;
-}
-
-.MenuBar .LineBorderLayout,
-.Menu .LineBorderLayout,
-.MenuItem .LineBorderLayout,
-.MenuBar .LineCenterBorderLayout,
-.Menu .LineCenterBorderLayout,
-.MenuItem .LineCenterBorderLayout {
-    grid-template-rows: 1fr !important;
-    grid-template-columns: auto 1fr auto !important;
+.MenuItem,
+.MenuBar ul .Menu {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: .5em;
+    align-items: center;
 }
 
 .MenuItem>:first-child,
 .MenuItem>:last-child,
-.Menu>:first-child {
-    width: 1rem;
+.MenuBar ul .Menu>:first-child,
+.MenuBar ul .Menu>:last-child {
+    width: 1em;
+    height: 1em;
+    margin: 0;
+    font-size: 1em;
 }
 
-.MenuBar>li>.Menu>:first-child {
-    width: unset;
+/**
+ * MenuItemShortCut layout
+ */
+.MenuItemShortCut {
+    grid-template-columns: 1fr auto;
+    gap: 2em;
 }
 
 /**
