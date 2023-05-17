@@ -14,21 +14,21 @@
 
 <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
     <div class="CenterLayout">
-        <div class="GridBagLayout" style="gap: 5px; grid-template-columns: 1fr 1fr 1fr;">
-            <div data-fill="horizontal" style="grid-row: 1; grid-column: 1;">
+        <div style="display: grid; gap: 5px; grid-template-columns: 1fr 1fr 1fr;">
+            <div class="GridBagConstraints" data-fill="horizontal" style="grid-row: 1; grid-column: 1;">
                 <button>Button 1</button>
             </div>
-            <div data-fill="horizontal" style="grid-row: 1; grid-column: 2;">
+            <div class="GridBagConstraints" data-fill="horizontal" style="grid-row: 1; grid-column: 2;">
                 <button>Button 2</button>
             </div>
-            <div data-fill="horizontal" style="grid-row: 1; grid-column: 3;">
+            <div class="GridBagConstraints" data-fill="horizontal" style="grid-row: 1; grid-column: 3;">
                 <button>Button 3</button>
             </div>
-            <div data-fill="horizontal" style="grid-row: 2; grid-column: 1 / span 3;">
+            <div class="GridBagConstraints" data-fill="horizontal" style="grid-row: 2; grid-column: 1 / span 3;">
                 <button style="padding: 40px 0;">Long-Named Button 4</button>
             </div>
-            <div data-fill="horizontal" data-anchor="page-end" style="grid-row: 3; grid-column: 2 / span 2;">
-                <button style="margin: 10px 0 0;">5</button>
+            <div class="GridBagConstraints" data-fill="horizontal" data-anchor="page-end" style="grid-row: 3; grid-column: 2 / span 2;">
+                <button style="margin: 10px 0 0 0;">5</button>
             </div>
         </div>
     </div>
