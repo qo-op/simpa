@@ -53,6 +53,16 @@ class MenuBar {
 		}
 	}
 
+	static getSelected(menuBar: HTMLElement): HTMLElement | null {
+		for (let i: number = 0; i < menuBar.children.length; i++) {
+			const li: HTMLElement = <HTMLElement>menuBar.children[i];
+			if (li.dataset.selected !== undefined) {
+				return li;
+			}
+		}
+		return null;
+	}
+
 	static clearTimeout = (menuBar: HTMLElement) => {
 		if (menuBar.dataset.timeoutId !== undefined) {
 			clearTimeout(+menuBar.dataset.timeoutId);
@@ -83,29 +93,39 @@ class MenuBar {
 			if (!menuBar.onpointerup) {
 				menuBar.onpointerup = MenuBar.pointerup;
 			}
-			if (!menuBar.onpointerover) {
-				menuBar.onpointerover = MenuBar.pointerover;
-			}
-			if (!menuBar.onpointerleave) {
-				menuBar.onpointerleave = MenuBar.pointerleave;
+			if (ev.pointerType === "mouse") {
+				if (!menuBar.onmouseover) {
+					menuBar.onmouseover = MenuBar.mouseover;
+				}
+				if (!menuBar.onmouseleave) {
+					menuBar.onmouseleave = MenuBar.mouseleave;
+				}
 			}
 		} else {
-			menuBar = ev.currentTarget as HTMLElement;
+			menuBar = currentTarget as HTMLElement;
 		}
 		try {
-			if (menuBar.dataset.open !== undefined) {
-				if (target === menuBar || (target.parentElement === menuBar && target.tagName !== "li")) {
-					MenuBar.close(menuBar);
-				}
-				return;
-			}
-			menuBar.dataset.closed = "";
 			const li: HTMLElement = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
 			if (li === null) {
 				return;
 			}
-			li.dataset.selected = "";
-			MenuBar.open(menuBar);
+			const ul: HTMLElement | null = li.parentElement;
+			if (ul === null) {
+				return;
+			}
+			const selected: HTMLElement = MenuBar.getSelected(menuBar);
+			if (selected === li) {
+				if (menuBar.dataset.open === undefined) {
+					menuBar.dataset.closed = "";
+					MenuBar.open(menuBar);
+				}
+			} else {
+				MenuBar.select(menuBar, ul, li);
+				menuBar.dataset.closed = "";
+				if (menuBar.dataset.open === undefined) {
+					MenuBar.open(menuBar);
+				}
+			}
 		} finally {
 			ev.stopPropagation();
 		}
@@ -133,9 +153,7 @@ class MenuBar {
 			if (menuBar.dataset.closed !== undefined) {
 				menuBar.removeAttribute("data-closed");
 			} else {
-				if (ev.pointerType === "mouse") {
-					MenuBar.close(menuBar);
-				}
+				MenuBar.close(menuBar);
 			}
 			return;
 		}
@@ -151,7 +169,7 @@ class MenuBar {
 		MenuBar.close(menuBar);
 	}
 
-	static pointerover = (ev: PointerEvent) => {
+	static mouseover = (ev: MouseEvent) => {
 		const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
 		if (menuBar.dataset.open === undefined) {
 			return;
@@ -165,21 +183,10 @@ class MenuBar {
 		if (ul === null) {
 			return;
 		}
-		if (ev.pointerType === "mouse") {
-			MenuBar.select(menuBar, ul, li);
-		} else {
-			for (let i: number = 0; i < ul.children.length; i++) {
-				const child: HTMLElement = ul.children[i] as HTMLElement;
-				if (child === li) {
-					child.dataset.selected = "";
-				} else {
-					child.removeAttribute("data-selected");
-				}
-			}
-		}
+		MenuBar.select(menuBar, ul, li);
 	}
 
-	static pointerleave = (ev: PointerEvent) => {
+	static mouseleave = (ev: MouseEvent) => {
 		const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
 		MenuBar.clearTimeout(menuBar);
 		menuBar.querySelectorAll(":scope li[data-selected]").forEach(function (selected: Element) {

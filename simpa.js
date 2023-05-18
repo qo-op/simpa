@@ -55,6 +55,15 @@ document.addEventListener("dialogtitlepanepointerdown", DialogTitlePane.pointerd
 var MenuBar = /** @class */ (function () {
     function MenuBar() {
     }
+    MenuBar.getSelected = function (menuBar) {
+        for (var i = 0; i < menuBar.children.length; i++) {
+            var li = menuBar.children[i];
+            if (li.dataset.selected !== undefined) {
+                return li;
+            }
+        }
+        return null;
+    };
     MenuBar.open = function (menuBar) {
         menuBar.dataset.open = "";
     };
@@ -127,30 +136,41 @@ var MenuBar = /** @class */ (function () {
             if (!menuBar.onpointerup) {
                 menuBar.onpointerup = MenuBar.pointerup;
             }
-            if (!menuBar.onpointerover) {
-                menuBar.onpointerover = MenuBar.pointerover;
-            }
-            if (!menuBar.onpointerleave) {
-                menuBar.onpointerleave = MenuBar.pointerleave;
+            if (ev.pointerType === "mouse") {
+                if (!menuBar.onmouseover) {
+                    menuBar.onmouseover = MenuBar.mouseover;
+                }
+                if (!menuBar.onmouseleave) {
+                    menuBar.onmouseleave = MenuBar.mouseleave;
+                }
             }
         }
         else {
-            menuBar = ev.currentTarget;
+            menuBar = currentTarget;
         }
         try {
-            if (menuBar.dataset.open !== undefined) {
-                if (target === menuBar || (target.parentElement === menuBar && target.tagName !== "li")) {
-                    MenuBar.close(menuBar);
-                }
-                return;
-            }
-            menuBar.dataset.closed = "";
             var li = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
             if (li === null) {
                 return;
             }
-            li.dataset.selected = "";
-            MenuBar.open(menuBar);
+            var ul = li.parentElement;
+            if (ul === null) {
+                return;
+            }
+            var selected = MenuBar.getSelected(menuBar);
+            if (selected === li) {
+                if (menuBar.dataset.open === undefined) {
+                    menuBar.dataset.closed = "";
+                    MenuBar.open(menuBar);
+                }
+            }
+            else {
+                MenuBar.select(menuBar, ul, li);
+                menuBar.dataset.closed = "";
+                if (menuBar.dataset.open === undefined) {
+                    MenuBar.open(menuBar);
+                }
+            }
         }
         finally {
             ev.stopPropagation();
@@ -180,9 +200,7 @@ var MenuBar = /** @class */ (function () {
                 menuBar.removeAttribute("data-closed");
             }
             else {
-                if (ev.pointerType === "mouse") {
-                    MenuBar.close(menuBar);
-                }
+                MenuBar.close(menuBar);
             }
             return;
         }
@@ -197,7 +215,7 @@ var MenuBar = /** @class */ (function () {
         }
         MenuBar.close(menuBar);
     };
-    MenuBar.pointerover = function (ev) {
+    MenuBar.mouseover = function (ev) {
         var menuBar = ev.currentTarget;
         if (menuBar.dataset.open === undefined) {
             return;
@@ -211,22 +229,9 @@ var MenuBar = /** @class */ (function () {
         if (ul === null) {
             return;
         }
-        if (ev.pointerType === "mouse") {
-            MenuBar.select(menuBar, ul, li);
-        }
-        else {
-            for (var i = 0; i < ul.children.length; i++) {
-                var child = ul.children[i];
-                if (child === li) {
-                    child.dataset.selected = "";
-                }
-                else {
-                    child.removeAttribute("data-selected");
-                }
-            }
-        }
+        MenuBar.select(menuBar, ul, li);
     };
-    MenuBar.pointerleave = function (ev) {
+    MenuBar.mouseleave = function (ev) {
         var menuBar = ev.currentTarget;
         MenuBar.clearTimeout(menuBar);
         menuBar.querySelectorAll(":scope li[data-selected]").forEach(function (selected) {
