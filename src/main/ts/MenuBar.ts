@@ -16,11 +16,17 @@ class MenuBar {
 	static close = (menuBar: HTMLElement) => {
 		menuBar.dataset.closed = "";
 		menuBar.removeAttribute("data-open");
-		MenuBar.select(menuBar, menuBar, null, 0);
+		MenuBar.select(menuBar, menuBar, null);
 	}
 
-	static select = (menuBar: HTMLElement, ul: HTMLElement, li: HTMLElement | null, timeout: number) => {
+	static select = (menuBar: HTMLElement, ul: HTMLElement, li: HTMLElement | null) => {
 		MenuBar.clearTimeout(menuBar);
+		/*
+		console.log("select");
+		console.log(menuBar);
+		console.log(ul);
+		console.log(li);
+		*/
 		if (ul === menuBar) {
 			if (li !== null && li.dataset.selected !== undefined) {
 				return;
@@ -37,7 +43,7 @@ class MenuBar {
 					for (let i: number = 0; i < ul.children.length; i++) {
 						ul.children[i].removeAttribute("data-selected");
 					}
-				}, timeout);
+				}, 250);
 			} else {
 				MenuBar.setTimeout(menuBar, () => {
 					for (let i: number = 0; i < ul.children.length; i++) {
@@ -48,7 +54,7 @@ class MenuBar {
 							child.removeAttribute("data-selected");
 						}
 					}
-				}, timeout);
+				}, 250);
 			}
 		}
 	}
@@ -93,7 +99,7 @@ class MenuBar {
 			menuBar = ev.currentTarget as HTMLElement;
 		}
 		if (ev.pointerType !== "mouse") {
-			MenuBar._select(menuBar, target, 0);
+			MenuBar._select(menuBar, target);
 		}
 		try {
 			if (menuBar.dataset.open !== undefined) {
@@ -158,11 +164,11 @@ class MenuBar {
 		if (ev.pointerType === "mouse") {
 			const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
 			const target: HTMLElement = ev.target as HTMLElement;
-			MenuBar._select(menuBar, target, 250);
+			MenuBar._select(menuBar, target);
 		}
 	}
 
-	static _select = (menuBar: HTMLElement, target: HTMLElement, timeout: number) => {
+	static _select = (menuBar: HTMLElement, target: HTMLElement) => {
 		if (menuBar.dataset.open === undefined) {
 			return;
 		}
@@ -174,7 +180,7 @@ class MenuBar {
 		if (ul === null) {
 			return;
 		}
-		MenuBar.select(menuBar, ul, li, timeout);
+		MenuBar.select(menuBar, ul, li);
 	}
 
 	static pointerleave = (ev: PointerEvent) => {

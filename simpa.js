@@ -61,10 +61,16 @@ var MenuBar = /** @class */ (function () {
     MenuBar.close = function (menuBar) {
         menuBar.dataset.closed = "";
         menuBar.removeAttribute("data-open");
-        MenuBar.select(menuBar, menuBar, null, 0);
+        MenuBar.select(menuBar, menuBar, null);
     };
-    MenuBar.select = function (menuBar, ul, li, timeout) {
+    MenuBar.select = function (menuBar, ul, li) {
         MenuBar.clearTimeout(menuBar);
+        /*
+        console.log("select");
+        console.log(menuBar);
+        console.log(ul);
+        console.log(li);
+        */
         if (ul === menuBar) {
             if (li !== null && li.dataset.selected !== undefined) {
                 return;
@@ -82,7 +88,7 @@ var MenuBar = /** @class */ (function () {
                     for (var i = 0; i < ul.children.length; i++) {
                         ul.children[i].removeAttribute("data-selected");
                     }
-                }, timeout);
+                }, 250);
             }
             else {
                 MenuBar.setTimeout(menuBar, function () {
@@ -95,7 +101,7 @@ var MenuBar = /** @class */ (function () {
                             child.removeAttribute("data-selected");
                         }
                     }
-                }, timeout);
+                }, 250);
             }
         }
     };
@@ -138,7 +144,7 @@ var MenuBar = /** @class */ (function () {
             menuBar = ev.currentTarget;
         }
         if (ev.pointerType !== "mouse") {
-            MenuBar._select(menuBar, target, 0);
+            MenuBar._select(menuBar, target);
         }
         try {
             if (menuBar.dataset.open !== undefined) {
@@ -204,10 +210,10 @@ var MenuBar = /** @class */ (function () {
         if (ev.pointerType === "mouse") {
             var menuBar = ev.currentTarget;
             var target = ev.target;
-            MenuBar._select(menuBar, target, 250);
+            MenuBar._select(menuBar, target);
         }
     };
-    MenuBar._select = function (menuBar, target, timeout) {
+    MenuBar._select = function (menuBar, target) {
         if (menuBar.dataset.open === undefined) {
             return;
         }
@@ -219,7 +225,7 @@ var MenuBar = /** @class */ (function () {
         if (ul === null) {
             return;
         }
-        MenuBar.select(menuBar, ul, li, timeout);
+        MenuBar.select(menuBar, ul, li);
     };
     MenuBar.pointerleave = function (ev) {
         var menuBar = ev.currentTarget;
