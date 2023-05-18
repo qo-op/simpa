@@ -855,7 +855,7 @@ img {
 }
 
 .ScrollTable table {
-    border-collapse: collapse !important;
+    border-spacing: 0;
     white-space: nowrap;
 }
 
@@ -876,11 +876,8 @@ img {
     border: 1px solid gray;
 }
 
-.ScrollTable:not([data-show-grid="false"]) thead>tr>th>:first-child {
-    border-block-end: 1px solid gray;
-}
-
-.ScrollTable:not([data-show-grid="false"]) tbody>tr:not(:last-child) {
+.ScrollTable:not([data-show-grid="false"]) th,
+.ScrollTable:not([data-show-grid="false"]) tr:not(:last-child)>td {
     border-block-end: 1px solid gray;
 }
 
