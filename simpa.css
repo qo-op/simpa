@@ -485,8 +485,31 @@ img {
 }
 
 /**
- * Scroll pane
+ * ScrollPane
  */
+
+.ScrollPane {
+    overflow: auto;
+}
+
+@supports (overflow: overlay) {
+    .ScrollPane {
+        overflow: overlay;
+    }
+
+    .ScrollPane::-webkit-scrollbar {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .ScrollPane::-webkit-scrollbar-thumb {
+        background-color: rgba(128, 128, 128, .25);
+    }
+
+    .ScrollPane::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}
 
 /**
  * SplitPane
@@ -790,10 +813,10 @@ img {
 
 /*
  * close button only if tab is selected
-       .TabComponent:not([data-selected]) .material-icons.close::after,
-       .TabComponent:not([data-selected]) .material-icons.close::before {
-           content: "";
-       }
+         .TabComponent:not([data-selected]) .material-icons.close::after,
+         .TabComponent:not([data-selected]) .material-icons.close::before {
+             content: "";
+         }
  */
 
 .ButtonContainer button {
@@ -832,7 +855,7 @@ img {
 }
 
 .ScrollTable table {
-    border-spacing: 0;
+    border-collapse: collapse !important;
     white-space: nowrap;
 }
 
@@ -853,8 +876,11 @@ img {
     border: 1px solid gray;
 }
 
-.ScrollTable:not([data-show-grid="false"]) th,
-.ScrollTable:not([data-show-grid="false"]) tr:not(:last-child)>td {
+.ScrollTable:not([data-show-grid="false"]) thead>tr>th>:first-child {
+    border-block-end: 1px solid gray;
+}
+
+.ScrollTable:not([data-show-grid="false"]) tbody>tr:not(:last-child) {
     border-block-end: 1px solid gray;
 }
 
