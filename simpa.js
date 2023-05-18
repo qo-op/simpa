@@ -61,9 +61,9 @@ var MenuBar = /** @class */ (function () {
     MenuBar.close = function (menuBar) {
         menuBar.dataset.closed = "";
         menuBar.removeAttribute("data-open");
-        MenuBar.select(menuBar, menuBar, null);
+        MenuBar.select(menuBar, menuBar, null, 0);
     };
-    MenuBar.select = function (menuBar, ul, li) {
+    MenuBar.select = function (menuBar, ul, li, timeout) {
         MenuBar.clearTimeout(menuBar);
         if (ul === menuBar) {
             if (li !== null && li.dataset.selected !== undefined) {
@@ -82,7 +82,7 @@ var MenuBar = /** @class */ (function () {
                     for (var i = 0; i < ul.children.length; i++) {
                         ul.children[i].removeAttribute("data-selected");
                     }
-                }, 250);
+                }, timeout);
             }
             else {
                 MenuBar.setTimeout(menuBar, function () {
@@ -95,7 +95,7 @@ var MenuBar = /** @class */ (function () {
                             child.removeAttribute("data-selected");
                         }
                     }
-                }, 250);
+                }, timeout);
             }
         }
     };
@@ -136,6 +136,9 @@ var MenuBar = /** @class */ (function () {
         }
         else {
             menuBar = ev.currentTarget;
+        }
+        if (ev.pointerType !== "mouse") {
+            MenuBar._select(menuBar, target, 0);
         }
         try {
             if (menuBar.dataset.open !== undefined) {
@@ -180,7 +183,9 @@ var MenuBar = /** @class */ (function () {
                 menuBar.removeAttribute("data-closed");
             }
             else {
-                MenuBar.close(menuBar);
+                if (ev.pointerType === "mouse") {
+                    MenuBar.close(menuBar);
+                }
             }
             return;
         }
@@ -196,11 +201,16 @@ var MenuBar = /** @class */ (function () {
         MenuBar.close(menuBar);
     };
     MenuBar.pointerover = function (ev) {
-        var menuBar = ev.currentTarget;
+        if (ev.pointerType === "mouse") {
+            var menuBar = ev.currentTarget;
+            var target = ev.target;
+            MenuBar._select(menuBar, target, 250);
+        }
+    };
+    MenuBar._select = function (menuBar, target, timeout) {
         if (menuBar.dataset.open === undefined) {
             return;
         }
-        var target = ev.target;
         var li = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (li === null) {
             return;
@@ -209,7 +219,7 @@ var MenuBar = /** @class */ (function () {
         if (ul === null) {
             return;
         }
-        MenuBar.select(menuBar, ul, li);
+        MenuBar.select(menuBar, ul, li, timeout);
     };
     MenuBar.pointerleave = function (ev) {
         var menuBar = ev.currentTarget;
