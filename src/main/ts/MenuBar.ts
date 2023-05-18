@@ -21,12 +21,6 @@ class MenuBar {
 
 	static select = (menuBar: HTMLElement, ul: HTMLElement, li: HTMLElement | null) => {
 		MenuBar.clearTimeout(menuBar);
-		/*
-		console.log("select");
-		console.log(menuBar);
-		console.log(ul);
-		console.log(li);
-		*/
 		if (ul === menuBar) {
 			if (li !== null && li.dataset.selected !== undefined) {
 				return;
@@ -98,9 +92,6 @@ class MenuBar {
 		} else {
 			menuBar = ev.currentTarget as HTMLElement;
 		}
-		if (ev.pointerType !== "mouse") {
-			MenuBar._select(menuBar, target);
-		}
 		try {
 			if (menuBar.dataset.open !== undefined) {
 				if (target === menuBar || (target.parentElement === menuBar && target.tagName !== "li")) {
@@ -161,17 +152,11 @@ class MenuBar {
 	}
 
 	static pointerover = (ev: PointerEvent) => {
-		if (ev.pointerType === "mouse") {
-			const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
-			const target: HTMLElement = ev.target as HTMLElement;
-			MenuBar._select(menuBar, target);
-		}
-	}
-
-	static _select = (menuBar: HTMLElement, target: HTMLElement) => {
+		const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
 		if (menuBar.dataset.open === undefined) {
 			return;
 		}
+		const target: HTMLElement = ev.target as HTMLElement;
 		const li: HTMLElement = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
 		if (li === null) {
 			return;
@@ -180,7 +165,18 @@ class MenuBar {
 		if (ul === null) {
 			return;
 		}
-		MenuBar.select(menuBar, ul, li);
+		if (ev.pointerType === "mouse") {
+			MenuBar.select(menuBar, ul, li);
+		} else {
+			for (let i: number = 0; i < ul.children.length; i++) {
+				const child: HTMLElement = ul.children[i] as HTMLElement;
+				if (child === li) {
+					child.dataset.selected = "";
+				} else {
+					child.removeAttribute("data-selected");
+				}
+			}
+		}
 	}
 
 	static pointerleave = (ev: PointerEvent) => {

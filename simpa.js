@@ -65,12 +65,6 @@ var MenuBar = /** @class */ (function () {
     };
     MenuBar.select = function (menuBar, ul, li) {
         MenuBar.clearTimeout(menuBar);
-        /*
-        console.log("select");
-        console.log(menuBar);
-        console.log(ul);
-        console.log(li);
-        */
         if (ul === menuBar) {
             if (li !== null && li.dataset.selected !== undefined) {
                 return;
@@ -143,9 +137,6 @@ var MenuBar = /** @class */ (function () {
         else {
             menuBar = ev.currentTarget;
         }
-        if (ev.pointerType !== "mouse") {
-            MenuBar._select(menuBar, target);
-        }
         try {
             if (menuBar.dataset.open !== undefined) {
                 if (target === menuBar || (target.parentElement === menuBar && target.tagName !== "li")) {
@@ -207,16 +198,11 @@ var MenuBar = /** @class */ (function () {
         MenuBar.close(menuBar);
     };
     MenuBar.pointerover = function (ev) {
-        if (ev.pointerType === "mouse") {
-            var menuBar = ev.currentTarget;
-            var target = ev.target;
-            MenuBar._select(menuBar, target);
-        }
-    };
-    MenuBar._select = function (menuBar, target) {
+        var menuBar = ev.currentTarget;
         if (menuBar.dataset.open === undefined) {
             return;
         }
+        var target = ev.target;
         var li = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         if (li === null) {
             return;
@@ -225,7 +211,20 @@ var MenuBar = /** @class */ (function () {
         if (ul === null) {
             return;
         }
-        MenuBar.select(menuBar, ul, li);
+        if (ev.pointerType === "mouse") {
+            MenuBar.select(menuBar, ul, li);
+        }
+        else {
+            for (var i = 0; i < ul.children.length; i++) {
+                var child = ul.children[i];
+                if (child === li) {
+                    child.dataset.selected = "";
+                }
+                else {
+                    child.removeAttribute("data-selected");
+                }
+            }
+        }
     };
     MenuBar.pointerleave = function (ev) {
         var menuBar = ev.currentTarget;
