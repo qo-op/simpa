@@ -449,7 +449,7 @@ body {
  * ScrollPane
  */
 
- .ScrollPane {
+.ScrollPane {
     overflow: auto;
 }
 
@@ -516,6 +516,7 @@ body {
     grid-template-rows: minmax(0, 1fr) !important;
     grid-template-columns: auto minmax(0, 1fr) !important;
     overflow: auto;
+    overscroll-behavior: none;
 }
 
 .ScrollTable[data-vertical-policy="scrollbar-as-needed"] {
