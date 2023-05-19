@@ -446,6 +446,68 @@ body {
 }
 
 /**
+ * ScrollPane
+ */
+
+ .ScrollPane {
+    overflow: auto;
+}
+
+.ScrollPane[data-vertical-policy="scrollbar-as-needed"] {
+    overflow-y: auto;
+}
+
+.ScrollPane[data-vertical-policy="scrollbar-never"] {
+    overflow-y: hidden;
+}
+
+.ScrollPane[data-vertical-policy="scrollbar-always"] {
+    overflow-y: scroll;
+}
+
+.ScrollPane[data-horizontal-policy="scrollbar-as-needed"] {
+    overflow-x: auto;
+}
+
+.ScrollPane[data-horizontal-policy="scrollbar-never"] {
+    overflow-x: hidden;
+}
+
+.ScrollPane[data-horizontal-policy="scrollbar-always"] {
+    overflow-x: scroll;
+}
+
+@supports (overflow: overlay) {
+
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]) {
+        overflow: overlay;
+    }
+
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-as-needed"],
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-always"] {
+        overflow-y: overlay;
+    }
+
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-as-needed"],
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-always"] {
+        overflow-x: overlay;
+    }
+
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])::-webkit-scrollbar {
+        width: 16px;
+        height: 16px;
+    }
+
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]):hover::-webkit-scrollbar-thumb {
+        background-color: rgba(128, 128, 128, .25);
+    }
+
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])::-webkit-scrollbar-corner {
+        background-color: transparent;
+    }
+}
+
+/**
  * ScrollTable
  */
 
@@ -482,30 +544,30 @@ body {
 
 @supports (overflow: overlay) {
 
-    .ScrollTable[data-overlay]:not([data-overlay="false"]) {
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]) {
         overflow: overlay;
     }
 
-    .ScrollTable[data-overlay]:not([data-overlay="false"])[data-vertical-policy="scrollbar-as-needed"],
-    .ScrollTable[data-overlay]:not([data-overlay="false"])[data-vertical-policy="scrollbar-always"] {
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-as-needed"],
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-always"] {
         overflow-y: overlay;
     }
 
-    .ScrollTable[data-overlay]:not([data-overlay="false"])[data-horizontal-policy="scrollbar-as-needed"],
-    .ScrollTable[data-overlay]:not([data-overlay="false"])[data-horizontal-policy="scrollbar-always"] {
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-as-needed"],
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-always"] {
         overflow-x: overlay;
     }
 
-    .ScrollTable[data-overlay]:not([data-overlay="false"])::-webkit-scrollbar {
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])::-webkit-scrollbar {
         width: 16px;
         height: 16px;
     }
 
-    .ScrollTable[data-overlay]:not([data-overlay="false"]):hover::-webkit-scrollbar-thumb {
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]):hover::-webkit-scrollbar-thumb {
         background-color: rgba(128, 128, 128, .25);
     }
 
-    .ScrollTable[data-overlay]:not([data-overlay="false"])::-webkit-scrollbar-corner {
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])::-webkit-scrollbar-corner {
         background-color: transparent;
     }
 }
@@ -523,10 +585,6 @@ body {
 .ScrollTable thead {
     position: sticky !important;
     inset-block-start: 0 !important;
-}
-
-.ScrollTable thead>tr>th {
-    padding: 0px;
 }
 
 .ScrollTable thead {
@@ -569,68 +627,6 @@ body {
 .ScrollTable:not([data-show-grid="false"])>:not(:last-child)>thead>tr>th,
 .ScrollTable:not([data-show-grid="false"])>:not(:last-child)>tbody>tr>td {
     border-inline-end: 1px solid gray;
-}
-
-/**
- * ScrollPane
- */
-
-.ScrollPane {
-    overflow: auto;
-}
-
-.ScrollPane[data-vertical-policy="scrollbar-as-needed"] {
-    overflow-y: auto;
-}
-
-.ScrollPane[data-vertical-policy="scrollbar-never"] {
-    overflow-y: hidden;
-}
-
-.ScrollPane[data-vertical-policy="scrollbar-always"] {
-    overflow-y: scroll;
-}
-
-.ScrollPane[data-horizontal-policy="scrollbar-as-needed"] {
-    overflow-x: auto;
-}
-
-.ScrollPane[data-horizontal-policy="scrollbar-never"] {
-    overflow-x: hidden;
-}
-
-.ScrollPane[data-horizontal-policy="scrollbar-always"] {
-    overflow-x: scroll;
-}
-
-@supports (overflow: overlay) {
-
-    .ScrollPane[data-overlay]:not([data-overlay="false"]) {
-        overflow: overlay;
-    }
-
-    .ScrollPane[data-overlay]:not([data-overlay="false"])[data-vertical-policy="scrollbar-as-needed"],
-    .ScrollPane[data-overlay]:not([data-overlay="false"])[data-vertical-policy="scrollbar-always"] {
-        overflow-y: overlay;
-    }
-
-    .ScrollPane[data-overlay]:not([data-overlay="false"])[data-horizontal-policy="scrollbar-as-needed"],
-    .ScrollPane[data-overlay]:not([data-overlay="false"])[data-horizontal-policy="scrollbar-always"] {
-        overflow-x: overlay;
-    }
-
-    .ScrollPane[data-overlay]:not([data-overlay="false"])::-webkit-scrollbar {
-        width: 16px;
-        height: 16px;
-    }
-
-    .ScrollPane[data-overlay]:not([data-overlay="false"]):hover::-webkit-scrollbar-thumb {
-        background-color: rgba(128, 128, 128, .25);
-    }
-
-    .ScrollPane[data-overlay]:not([data-overlay="false"])::-webkit-scrollbar-corner {
-        background-color: transparent;
-    }
 }
 
 /**
