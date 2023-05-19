@@ -514,7 +514,7 @@ body {
 .ScrollTable {
     display: grid !important;
     grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: auto minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     overflow: auto;
     overscroll-behavior: none;
 }
@@ -573,9 +573,9 @@ body {
     }
 }
 
-.ScrollTable>:last-child {
+.ScrollTable>* {
     grid-row: 1 !important;
-    grid-column: 2 !important;
+    grid-column: 1 !important;
 }
 
 .ScrollTable table {
