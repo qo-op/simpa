@@ -167,8 +167,8 @@ body {
 
 .CardLayout {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, auto) !important;
+    grid-template-columns: minmax(0, auto) !important;
 }
 
 .CardLayout>* {
@@ -329,8 +329,8 @@ body {
 
 .LayeredPane {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, auto) !important;
+    grid-template-columns: minmax(0, auto) !important;
 }
 
 .LayeredPane>* {
@@ -513,6 +513,8 @@ body {
 
 .ScrollTable {
     display: grid !important;
+    grid-template-rows: minmax(0, auto) !important;
+    grid-template-columns: minmax(0, auto) !important;
     overflow: auto;
     overscroll-behavior: none;
 }
@@ -571,16 +573,13 @@ body {
     }
 }
 
-.ScrollTable>:last-child {
+.ScrollTable>* {
     grid-row: 1 !important;
-    grid-column: 2 !important;
+    grid-column: 1 !important;
 }
 
 .ScrollTable table {
     border-spacing: 0;
-/*
- *  white-space: nowrap;
- */
 }
 
 .ScrollTable thead {
@@ -610,30 +609,6 @@ body {
     inset-inline-start: 0 !important;
     background-color: WhiteSmoke;
 }
-
-/**
- * Row header table
- *
- * .ScrollTable>:not(:last-child) {
- *     grid-row: 1 !important;
- *     grid-column: 1 !important;
- *     z-index: 2;
- * }
- * 
- * .ScrollTable>:not(:last-child) {
- *     position: sticky !important;
- *     inset-inline-start: 0 !important;
- * }
- * 
- * .ScrollTable>:not(:last-child) tbody {
- *     background-color: WhiteSmoke;
- * }
- * 
- * .ScrollTable:not([data-show-grid="false"])>:not(:last-child)>thead>tr>th,
- * .ScrollTable:not([data-show-grid="false"])>:not(:last-child)>tbody>tr>td {
- *     border-inline-end: 1px solid gray;
- * }
- */
 
 /**
  * SplitPane
