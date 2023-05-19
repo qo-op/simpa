@@ -362,7 +362,7 @@ img {
     user-select: none;
 }
 
-/*
+/**
  * LayeredPane
  */
 
@@ -492,9 +492,42 @@ img {
     overflow: auto;
 }
 
+.ScrollPane[data-vertical-policy="vertical-scrollbar-as-needed"] {
+    overflow-y: auto;
+}
+
+.ScrollPane[data-vertical-policy="vertical-scrollbar-never"] {
+    overflow-y: hidden;
+}
+
+.ScrollPane[data-vertical-policy="vertical-scrollbar-always"] {
+    overflow-y: scroll;
+}
+
+.ScrollPane[data-horizontal-policy="horizontal-scrollbar-as-needed"] {
+    overflow-y: auto;
+}
+
+.ScrollPane[data-horizontal-policy="horizontal-scrollbar-never"] {
+    overflow-y: hidden;
+}
+
+.ScrollPane[data-horizontal-policy="horizontal-scrollbar-always"] {
+    overflow-y: scroll;
+}
+
 @supports (overflow: overlay) {
+
     .ScrollPane {
         overflow: overlay;
+    }
+
+    .ScrollPane[data-vertical-scroll-bar-policy="vertical-scrollbar-as-needed"] {
+        overflow-y: overlay;
+    }
+
+    .ScrollPane[data-horizontal-scroll-bar-policy="horizontal-scrollbar-as-needed"] {
+        overflow-y: overlay;
     }
 
     .ScrollPane::-webkit-scrollbar {
@@ -810,14 +843,6 @@ img {
     grid-row: auto !important;
     grid-column: 1 !important;
 }
-
-/*
- * close button only if tab is selected
-         .TabComponent:not([data-selected]) .material-icons.close::after,
-         .TabComponent:not([data-selected]) .material-icons.close::before {
-             content: "";
-         }
- */
 
 .ButtonContainer button {
     border: none;
