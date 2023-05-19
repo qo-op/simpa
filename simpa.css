@@ -590,17 +590,17 @@ body {
 }
 
 .ScrollTable:not([data-show-grid="false"]) {
-    border: 1px solid gray;
+    border: 1px solid Gray;
 }
 
 .ScrollTable:not([data-show-grid="false"]) th,
 .ScrollTable:not([data-show-grid="false"]) tr:not(:last-child)>td {
-    border-block-end: 1px solid gray;
+    border-block-end: 1px solid Gray;
 }
 
 .ScrollTable:not([data-show-grid="false"]) th:not(:last-child),
 .ScrollTable:not([data-show-grid="false"]) td:not(:last-child) {
-    border-inline-end: 1px solid gray;
+    border-inline-end: 1px solid Gray;
 }
 
 .ScrollTable[data-row-header]:not([data-row-header="false"]) th:first-child,
@@ -917,8 +917,8 @@ body {
 
 .CardContainer {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, auto) !important;
+    grid-template-columns: minmax(0, auto) !important;
     align-items: stretch !important;
     justify-items: stretch !important;
 }
@@ -945,19 +945,18 @@ body {
 }
 
 .Tree ul {
-    display: none !important;
+    display: block !important;
 }
 
-.Tree li[data-folder="open"]>ul {
-    display: block !important;
+.Tree .TreeNode[data-closed]:not([data-closed="false"])~ul {
+    display: none !important;
 }
 
 .Tree .TreeNode {
     display: grid !important;
     justify-content: start !important;
     align-items: center;
-    gap: 5px;
-    padding-inline: 8px;
+    gap: .2em;
 }
 
 .Tree .TreeNode>* {
