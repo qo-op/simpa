@@ -28,7 +28,7 @@ class SplitPane {
       return;
     }
     SplitPane.dragStart = true;
-    document.body.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
+    document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
     let splitPaneDivider: HTMLElement = target;
     const splitPane: HTMLElement = splitPaneDivider.closest(".SplitPane");
     SplitPane.leftComponent = splitPane.children[0] as HTMLElement;
@@ -119,7 +119,7 @@ class SplitPane {
 
   static pointerup = (ev: PointerEvent) => {
     SplitPane.dragStart = false;
-    document.body.removeEventListener("touchmove", SplitPane.preventTouchMove);
+    document.removeEventListener("touchmove", SplitPane.preventTouchMove);
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
@@ -128,7 +128,7 @@ class SplitPane {
 
   static pointerenter = (ev: PointerEvent) => {
     SplitPane.dragStart = false;
-    document.body.removeEventListener("touchmove", SplitPane.preventTouchMove);
+    document.removeEventListener("touchmove", SplitPane.preventTouchMove);
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);

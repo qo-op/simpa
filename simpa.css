@@ -464,8 +464,7 @@ body {
 }
 
 .ScrollPane[data-policy="scrollbar-never"],
-.ScrollPane[data-vertical-policy="scrollbar-never"],
-.ScrollPane[data-disabled]:not([data-disabled="false"]) {
+.ScrollPane[data-vertical-policy="scrollbar-never"] {
     overflow-y: hidden;
 }
 
@@ -480,9 +479,8 @@ body {
 }
 
 .ScrollPane[data-policy="scrollbar-never"],
-.ScrollPane[data-horizontal-policy="scrollbar-never"],
-.ScrollPane[data-disabled]:not([data-disabled="false"]) {
-        overflow-x: hidden;
+.ScrollPane[data-horizontal-policy="scrollbar-never"] {
+    overflow-x: hidden;
 }
 
 .ScrollPane[data-policy="scrollbar-always"],
@@ -727,7 +725,7 @@ body {
         width: 9px;
         height: 100%;
     }
-    
+
     .SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
         position: absolute;
         inset-block-start: -5px;

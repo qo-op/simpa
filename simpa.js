@@ -267,7 +267,7 @@ var SplitPane = /** @class */ (function () {
             return;
         }
         SplitPane.dragStart = true;
-        document.body.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
+        document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
         var splitPaneDivider = target;
         var splitPane = splitPaneDivider.closest(".SplitPane");
         SplitPane.leftComponent = splitPane.children[0];
@@ -349,7 +349,7 @@ var SplitPane = /** @class */ (function () {
     };
     SplitPane.pointerup = function (ev) {
         SplitPane.dragStart = false;
-        document.body.removeEventListener("touchmove", SplitPane.preventTouchMove);
+        document.removeEventListener("touchmove", SplitPane.preventTouchMove);
         document.removeEventListener("pointermove", SplitPane.pointermove);
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("pointerenter", SplitPane.pointerenter);
@@ -357,7 +357,7 @@ var SplitPane = /** @class */ (function () {
     };
     SplitPane.pointerenter = function (ev) {
         SplitPane.dragStart = false;
-        document.body.removeEventListener("touchmove", SplitPane.preventTouchMove);
+        document.removeEventListener("touchmove", SplitPane.preventTouchMove);
         document.removeEventListener("pointermove", SplitPane.pointermove);
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("pointerenter", SplitPane.pointerenter);
