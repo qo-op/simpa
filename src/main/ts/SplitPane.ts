@@ -15,9 +15,6 @@ class SplitPane {
       return;
     }
     const splitPaneDivider: HTMLElement = target;
-    if (!splitPaneDivider.onpointerdown) {
-      splitPaneDivider.onpointerdown = SplitPane.pointerdown;
-    }
     const splitPane: HTMLElement = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' SplitPane ')]", splitPaneDivider, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
     const leftComponent: HTMLElement = splitPane.children[0] as HTMLElement;
     const rightComponent: HTMLElement = splitPane.children[2] as HTMLElement;

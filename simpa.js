@@ -262,9 +262,6 @@ var SplitPane = /** @class */ (function () {
             return;
         }
         var splitPaneDivider = target;
-        if (!splitPaneDivider.onpointerdown) {
-            splitPaneDivider.onpointerdown = SplitPane.pointerdown;
-        }
         var splitPane = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' SplitPane ')]", splitPaneDivider, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         var leftComponent = splitPane.children[0];
         var rightComponent = splitPane.children[2];
