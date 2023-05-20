@@ -256,6 +256,9 @@ document.addEventListener("pointerdown", MenuBar.pointerdown);
 var SplitPane = /** @class */ (function () {
     function SplitPane() {
     }
+    SplitPane.preventDefault = function (ev) {
+        ev.preventDefault();
+    };
     SplitPane.dragStart = false;
     SplitPane.verticalSplit = false;
     SplitPane.pointerdown = function (ev) {
@@ -264,13 +267,10 @@ var SplitPane = /** @class */ (function () {
             return;
         }
         SplitPane.dragStart = true;
-        /*
         SplitPane.scrollPane = target.closest(".ScrollPane");
         if (SplitPane.scrollPane) {
-          SplitPane.scrollPane.dataset.disabled = "true";
+            SplitPane.scrollPane.addEventListener("touchmove", SplitPane.preventDefault, { passive: false });
         }
-        */
-        document.body.style.overflow = "hidden";
         var splitPaneDivider = target;
         var splitPane = splitPaneDivider.closest(".SplitPane");
         SplitPane.leftComponent = splitPane.children[0];
@@ -352,7 +352,9 @@ var SplitPane = /** @class */ (function () {
     };
     SplitPane.pointerup = function (ev) {
         SplitPane.dragStart = false;
-        document.body.style.overflow = "";
+        if (SplitPane.scrollPane) {
+            SplitPane.scrollPane.removeEventListener("touchmove", SplitPane.preventDefault);
+        }
         document.removeEventListener("pointermove", SplitPane.pointermove);
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("pointerenter", SplitPane.pointerenter);
@@ -360,7 +362,9 @@ var SplitPane = /** @class */ (function () {
     };
     SplitPane.pointerenter = function (ev) {
         SplitPane.dragStart = false;
-        document.body.style.overflow = "";
+        if (SplitPane.scrollPane) {
+            SplitPane.scrollPane.removeEventListener("touchmove", SplitPane.preventDefault);
+        }
         document.removeEventListener("pointermove", SplitPane.pointermove);
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("pointerenter", SplitPane.pointerenter);
