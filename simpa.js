@@ -256,121 +256,109 @@ document.addEventListener("pointerdown", MenuBar.pointerdown);
 var SplitPane = /** @class */ (function () {
     function SplitPane() {
     }
-    SplitPane.splitpanedividerpointerdown = function (ev) {
-        var splitPaneDivider = ev.detail.event.target;
-        if (!splitPaneDivider.classList.contains("SplitPaneDivider")) {
-            splitPaneDivider = ev.detail.event.currentTarget;
-        }
-        var splitPane = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' SplitPane ')]", splitPaneDivider, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-        var leftComponent = splitPane.children[0];
-        var rightComponent = splitPane.children[2];
-        var leftComponentRect = leftComponent.getBoundingClientRect();
-        var rightComponentRect = rightComponent.getBoundingClientRect();
-        var leftComponentComputedStyle = getComputedStyle(leftComponent);
-        var rightComponentComputedStyle = getComputedStyle(rightComponent);
-        var verticalSplit = splitPane.dataset.orientation === "vertical-split";
-        var pageEndSplitPane = splitPane.dataset.dividerAnchor === "page-end";
-        var lineEndSplitPane = splitPane.dataset.dividerAnchor === "line-end";
-        var offset = 0;
-        var maximumDividerLocation = 0;
-        if (verticalSplit) {
-            if (pageEndSplitPane) {
-                offset = ev.detail.event.clientY + rightComponentRect.height;
-            }
-            else {
-                offset = ev.detail.event.clientY - leftComponentRect.height;
-            }
-            maximumDividerLocation =
-                leftComponentRect.height -
-                    +leftComponentComputedStyle.borderTopWidth.replace("px", "") -
-                    +leftComponentComputedStyle.borderBottomWidth.replace("px", "");
-            maximumDividerLocation +=
-                rightComponentRect.height -
-                    +rightComponentComputedStyle.borderTopWidth.replace("px", "") -
-                    +rightComponentComputedStyle.borderBottomWidth.replace("px", "");
-        }
-        else {
-            if (lineEndSplitPane) {
-                offset = ev.detail.event.clientX + rightComponentRect.width;
-            }
-            else {
-                offset = ev.detail.event.clientX - leftComponentRect.width;
-            }
-            maximumDividerLocation =
-                leftComponentRect.width -
-                    +leftComponentComputedStyle.borderLeftWidth.replace("px", "") -
-                    +leftComponentComputedStyle.borderRightWidth.replace("px", "");
-            maximumDividerLocation +=
-                rightComponentRect.width -
-                    +rightComponentComputedStyle.borderLeftWidth.replace("px", "") -
-                    +rightComponentComputedStyle.borderRightWidth.replace("px", "");
-        }
-        var dragLayer = document.createElement("div");
-        dragLayer.classList.add("DragLayer");
-        if (verticalSplit) {
-            dragLayer.style.cursor = "ns-resize";
-        }
-        else {
-            dragLayer.style.cursor = "ew-resize";
-        }
-        document.body.appendChild(dragLayer);
-        var callback = ev.detail.callback;
-        var dragLayerEventListener = {
-            dividerLocation: null,
-            pointermove: function (ev) {
-                if (verticalSplit) {
-                    if (pageEndSplitPane) {
-                        this.dividerLocation = Math.min(Math.max(offset - ev.clientY, 0), maximumDividerLocation);
-                        rightComponent.style.height = this.dividerLocation + "px";
-                    }
-                    else {
-                        this.dividerLocation = Math.min(Math.max(ev.clientY - offset, 0), maximumDividerLocation);
-                        leftComponent.style.height = this.dividerLocation + "px";
-                    }
-                }
-                else {
-                    if (lineEndSplitPane) {
-                        this.dividerLocation = Math.min(Math.max(offset - ev.clientX, 0), maximumDividerLocation);
-                        rightComponent.style.width = this.dividerLocation + "px";
-                    }
-                    else {
-                        this.dividerLocation = Math.min(Math.max(ev.clientX - offset, 0), maximumDividerLocation);
-                        leftComponent.style.width = this.dividerLocation + "px";
-                    }
-                }
-            },
-            pointerup: function (ev) {
-                dragLayer.remove();
-                if (callback) {
-                    callback(this.dividerLocation);
-                }
-            },
-            pointerleave: function (ev) {
-                dragLayer.remove();
-                if (callback) {
-                    callback(this.dividerLocation);
-                }
-            }
-        };
-        dragLayer.onpointermove = dragLayerEventListener.pointermove;
-        dragLayer.onpointerup = dragLayerEventListener.pointerup;
-        dragLayer.onpointerleave = dragLayerEventListener.pointerleave;
-        ev.detail.event.stopPropagation();
-    };
+    SplitPane.dragStart = false;
+    SplitPane.verticalSplit = false;
     SplitPane.pointerdown = function (ev) {
         var target = ev.target;
         if (!target.classList.contains("SplitPaneDivider")) {
             return;
         }
-        document.dispatchEvent(new CustomEvent("splitpanedividerpointerdown", {
-            detail: {
-                event: ev
+        SplitPane.dragStart = true;
+        var splitPaneDivider = target;
+        var splitPane = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' SplitPane ')]", splitPaneDivider, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        SplitPane.leftComponent = splitPane.children[0];
+        SplitPane.rightComponent = splitPane.children[2];
+        var leftComponentRect = SplitPane.leftComponent.getBoundingClientRect();
+        var rightComponentRect = SplitPane.rightComponent.getBoundingClientRect();
+        var leftComponentComputedStyle = getComputedStyle(SplitPane.leftComponent);
+        var rightComponentComputedStyle = getComputedStyle(SplitPane.rightComponent);
+        SplitPane.verticalSplit =
+            splitPane.dataset.orientation === "vertical-split";
+        SplitPane.endAnchor =
+            splitPane.dataset.dividerAnchor === "end";
+        if (SplitPane.verticalSplit) {
+            if (SplitPane.endAnchor) {
+                SplitPane.offset = ev.clientY + rightComponentRect.height;
             }
-        }));
+            else {
+                SplitPane.offset = ev.clientY - leftComponentRect.height;
+            }
+            SplitPane.maximumDividerLocation =
+                leftComponentRect.height -
+                    +leftComponentComputedStyle.borderTopWidth.replace("px", "") -
+                    +leftComponentComputedStyle.borderBottomWidth.replace("px", "");
+            SplitPane.maximumDividerLocation +=
+                rightComponentRect.height -
+                    +rightComponentComputedStyle.borderTopWidth.replace("px", "") -
+                    +rightComponentComputedStyle.borderBottomWidth.replace("px", "");
+        }
+        else {
+            if (SplitPane.endAnchor) {
+                SplitPane.offset = ev.clientX + rightComponentRect.width;
+            }
+            else {
+                SplitPane.offset = ev.clientX - leftComponentRect.width;
+            }
+            SplitPane.maximumDividerLocation =
+                leftComponentRect.width -
+                    +leftComponentComputedStyle.borderLeftWidth.replace("px", "") -
+                    +leftComponentComputedStyle.borderRightWidth.replace("px", "");
+            SplitPane.maximumDividerLocation +=
+                rightComponentRect.width -
+                    +rightComponentComputedStyle.borderLeftWidth.replace("px", "") -
+                    +rightComponentComputedStyle.borderRightWidth.replace("px", "");
+        }
+        if (SplitPane.verticalSplit) {
+            document.body.style.cursor = "ns-resize";
+        }
+        else {
+            document.body.style.cursor = "ew-resize";
+        }
+        document.addEventListener("pointermove", SplitPane.pointermove);
+        document.addEventListener("pointerup", SplitPane.pointerup);
+        document.addEventListener("pointerenter", SplitPane.pointerenter);
+    };
+    SplitPane.pointermove = function (ev) {
+        if (!SplitPane.dragStart) {
+            return;
+        }
+        if (SplitPane.verticalSplit) {
+            if (SplitPane.endAnchor) {
+                var dividerLocation = Math.min(Math.max(SplitPane.offset - ev.clientY, 0), SplitPane.maximumDividerLocation);
+                SplitPane.rightComponent.style.height = dividerLocation + "px";
+            }
+            else {
+                var dividerLocation = Math.min(Math.max(ev.clientY - SplitPane.offset, 0), SplitPane.maximumDividerLocation);
+                SplitPane.leftComponent.style.height = dividerLocation + "px";
+            }
+        }
+        else {
+            if (SplitPane.endAnchor) {
+                var dividerLocation = Math.min(Math.max(SplitPane.offset - ev.clientX, 0), SplitPane.maximumDividerLocation);
+                SplitPane.rightComponent.style.width = dividerLocation + "px";
+            }
+            else {
+                var dividerLocation = Math.min(Math.max(ev.clientX - SplitPane.offset, 0), SplitPane.maximumDividerLocation);
+                SplitPane.leftComponent.style.width = dividerLocation + "px";
+            }
+        }
+    };
+    SplitPane.pointerup = function (ev) {
+        SplitPane.dragStart = false;
+        document.removeEventListener("pointermove", SplitPane.pointermove);
+        document.removeEventListener("pointerup", SplitPane.pointerup);
+        document.removeEventListener("pointerenter", SplitPane.pointerenter);
+        document.body.style.cursor = "";
+    };
+    SplitPane.pointerenter = function (ev) {
+        SplitPane.dragStart = false;
+        document.removeEventListener("pointermove", SplitPane.pointermove);
+        document.removeEventListener("pointerup", SplitPane.pointerup);
+        document.removeEventListener("pointerenter", SplitPane.pointerenter);
+        document.body.style.cursor = "";
     };
     return SplitPane;
 }());
-document.addEventListener("splitpanedividerpointerdown", SplitPane.splitpanedividerpointerdown);
 document.addEventListener("pointerdown", SplitPane.pointerdown);
 /**
  * TabbedPane
