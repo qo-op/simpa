@@ -30,10 +30,13 @@ class SplitPane {
       return;
     }
     SplitPane.dragStart = true;
+    document.body.addEventListener("touchmove", SplitPane.preventDefault, { passive: false });
+    /*
     SplitPane.scrollPane = target.closest(".ScrollPane");
     if (SplitPane.scrollPane) {
-      SplitPane.scrollPane.addEventListener("touchmove", SplitPane.preventDefault, { passive: false });
+      document.body.addEventListener("touchmove", SplitPane.preventDefault, { passive: false });
     }
+    */
     let splitPaneDivider: HTMLElement = target;
     const splitPane: HTMLElement = splitPaneDivider.closest(".SplitPane");
     SplitPane.leftComponent = splitPane.children[0] as HTMLElement;
@@ -124,9 +127,7 @@ class SplitPane {
 
   static pointerup = (ev: PointerEvent) => {
     SplitPane.dragStart = false;
-    if (SplitPane.scrollPane) {
-      SplitPane.scrollPane.removeEventListener("touchmove", SplitPane.preventDefault);
-    }
+    document.body.removeEventListener("touchmove", SplitPane.preventDefault);
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
@@ -135,9 +136,7 @@ class SplitPane {
 
   static pointerenter = (ev: PointerEvent) => {
     SplitPane.dragStart = false;
-    if (SplitPane.scrollPane) {
-      SplitPane.scrollPane.removeEventListener("touchmove", SplitPane.preventDefault);
-    }
+    document.body.removeEventListener("touchmove", SplitPane.preventDefault);
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
