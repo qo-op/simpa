@@ -78,7 +78,7 @@ class MenuBar {
 		const target: HTMLElement = ev.target as HTMLElement;
 		let menuBar: HTMLElement;
 		if (currentTarget === document) {
-			menuBar = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' MenuBar ')]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
+			menuBar = target.closest(".MenuBar");
 			if (!menuBar) {
 				document
 					.querySelectorAll(".MenuBar")
@@ -105,7 +105,7 @@ class MenuBar {
 			menuBar = currentTarget as HTMLElement;
 		}
 		try {
-			const li: HTMLElement = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
+			const li: HTMLElement = target.closest("li");
 			if (li === null) {
 				return;
 			}
@@ -133,7 +133,7 @@ class MenuBar {
 
 	static pointerup = (ev: PointerEvent) => {
 		const target: HTMLElement = ev.target as HTMLElement;
-		const li: HTMLElement = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
+		const li: HTMLElement = target.closest("li");
 		if (li === null) {
 			return;
 		}
@@ -175,7 +175,7 @@ class MenuBar {
 			return;
 		}
 		const target: HTMLElement = ev.target as HTMLElement;
-		const li: HTMLElement = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
+		const li: HTMLElement = target.closest("li");
 		if (li === null) {
 			return;
 		}

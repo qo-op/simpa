@@ -17,7 +17,7 @@ class DialogTitlePane {
 
 	static pointerdown = (ev: CustomEvent) => {
 		const dialogTitle: HTMLElement = ev.detail.event.currentTarget;
-		const dialog: HTMLElement = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' Dialog ')]", dialogTitle, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
+		const dialog: HTMLElement = dialogTitle.closest(".Dialog");
 		var rect = dialog.getBoundingClientRect();
 		let x = ev.detail.event.clientX - rect.left;
 		let y = ev.detail.event.clientY - rect.top;

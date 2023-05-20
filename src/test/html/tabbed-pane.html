@@ -36,7 +36,7 @@
             }));
         }
         function closeTab(ev) {
-            const tabComponent = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' TabComponent ')]", ev.target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            const tabComponent = ev.target.closest(".TabComponent");
             if (tabComponent === null) {
                 return;
             }

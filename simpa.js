@@ -17,7 +17,7 @@ var DialogTitlePane = /** @class */ (function () {
     }
     DialogTitlePane.pointerdown = function (ev) {
         var dialogTitle = ev.detail.event.currentTarget;
-        var dialog = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' Dialog ')]", dialogTitle, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var dialog = dialogTitle.closest(".Dialog");
         var rect = dialog.getBoundingClientRect();
         var x = ev.detail.event.clientX - rect.left;
         var y = ev.detail.event.clientY - rect.top;
@@ -121,7 +121,7 @@ var MenuBar = /** @class */ (function () {
         var target = ev.target;
         var menuBar;
         if (currentTarget === document) {
-            menuBar = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' MenuBar ')]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            menuBar = target.closest(".MenuBar");
             if (!menuBar) {
                 document
                     .querySelectorAll(".MenuBar")
@@ -149,7 +149,7 @@ var MenuBar = /** @class */ (function () {
             menuBar = currentTarget;
         }
         try {
-            var li = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            var li = target.closest("li");
             if (li === null) {
                 return;
             }
@@ -178,7 +178,7 @@ var MenuBar = /** @class */ (function () {
     };
     MenuBar.pointerup = function (ev) {
         var target = ev.target;
-        var li = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var li = target.closest("li");
         if (li === null) {
             return;
         }
@@ -221,7 +221,7 @@ var MenuBar = /** @class */ (function () {
             return;
         }
         var target = ev.target;
-        var li = document.evaluate("ancestor-or-self::li[position() = 1]", target, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var li = target.closest("li");
         if (li === null) {
             return;
         }
@@ -265,7 +265,7 @@ var SplitPane = /** @class */ (function () {
         }
         SplitPane.dragStart = true;
         var splitPaneDivider = target;
-        var splitPane = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' SplitPane ')]", splitPaneDivider, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+        var splitPane = splitPaneDivider.closest(".SplitPane");
         SplitPane.leftComponent = splitPane.children[0];
         SplitPane.rightComponent = splitPane.children[2];
         var leftComponentRect = SplitPane.leftComponent.getBoundingClientRect();

@@ -25,7 +25,7 @@ class SplitPane {
     }
     SplitPane.dragStart = true;
     let splitPaneDivider: HTMLElement = target;
-    const splitPane: HTMLElement = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' SplitPane ')]", splitPaneDivider, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
+    const splitPane: HTMLElement = splitPaneDivider.closest(".SplitPane");
     SplitPane.leftComponent = splitPane.children[0] as HTMLElement;
     SplitPane.rightComponent = splitPane.children[2] as HTMLElement;
     const leftComponentRect: DOMRect = SplitPane.leftComponent.getBoundingClientRect();
