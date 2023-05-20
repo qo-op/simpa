@@ -26,10 +26,13 @@ class SplitPane {
       return;
     }
     SplitPane.dragStart = true;
+    /*
     SplitPane.scrollPane = target.closest(".ScrollPane");
     if (SplitPane.scrollPane) {
       SplitPane.scrollPane.dataset.disabled = "true";
     }
+    */
+    document.body.style.overflow = "hidden";
     let splitPaneDivider: HTMLElement = target;
     const splitPane: HTMLElement = splitPaneDivider.closest(".SplitPane");
     SplitPane.leftComponent = splitPane.children[0] as HTMLElement;
@@ -120,9 +123,7 @@ class SplitPane {
 
   static pointerup = (ev: PointerEvent) => {
     SplitPane.dragStart = false;
-    if (SplitPane.scrollPane) {
-      SplitPane.scrollPane.removeAttribute("data-disabled");
-    }
+    document.body.style.overflow = "";
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
@@ -131,6 +132,7 @@ class SplitPane {
 
   static pointerenter = (ev: PointerEvent) => {
     SplitPane.dragStart = false;
+    document.body.style.overflow = "";
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
