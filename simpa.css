@@ -684,33 +684,38 @@ body {
     border-block-start: 1px solid gray;
 }
 
-.SplitPane .SplitPaneDivider,
-.SplitPane[data-orientation="horizontal-split"] .SplitPaneDivider {
-    position: absolute;
-    inset-inline-start: -5px;
-    width: 9px;
-    height: 100%;
-}
-
-.SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
-    position: absolute;
-    inset-block-start: -5px;
-    height: 9px;
-    width: 100%;
-}
-
-@media (pointer: none) {
+@media (pointer: coarse) {
 
     .SplitPane .SplitPaneDivider,
     .SplitPane[data-orientation="horizontal-split"] .SplitPaneDivider {
+        position: absolute;
         inset-inline-start: -25px;
         width: 49px;
         height: 100%;
     }
 
     .SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
+        position: absolute;
         inset-block-start: -25px;
         height: 49px;
+        width: 100%;
+    }
+}
+
+@media (pointer: fine) {
+
+    .SplitPane .SplitPaneDivider,
+    .SplitPane[data-orientation="horizontal-split"] .SplitPaneDivider {
+        position: absolute;
+        inset-inline-start: -5px;
+        width: 9px;
+        height: 100%;
+    }
+    
+    .SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
+        position: absolute;
+        inset-block-start: -5px;
+        height: 9px;
         width: 100%;
     }
 }
