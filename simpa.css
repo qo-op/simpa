@@ -697,14 +697,14 @@ body {
 
     .SplitPane .SplitPaneDivider,
     .SplitPane[data-orientation="horizontal-split"] .SplitPaneDivider {
-        inset-inline-start: -17px;
-        width: 33px;
+        inset-inline-start: -25px;
+        width: 49px;
         height: 100%;
     }
 
     .SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
-        inset-block-start: -17px;
-        height: 33px;
+        inset-block-start: -25px;
+        height: 49px;
         width: 100%;
     }
 }
