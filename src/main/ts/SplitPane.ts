@@ -8,10 +8,17 @@
  * @author Yassuo Toda
  */
 class SplitPane {
-  
-  static pointerdown = (ev: CustomEvent) => {
-    const splitPaneDivider: HTMLElement = ev.detail.event.currentTarget;
-    const splitPane: HTMLElement = splitPaneDivider.parentElement as HTMLElement;
+
+  static pointerdown = (ev: PointerEvent) => {
+    const target: HTMLElement = ev.target as HTMLElement;
+    if (!target.classList.contains("SplitPaneDivider")) {
+      return;
+    }
+    const splitPaneDivider: HTMLElement = target;
+    if (!splitPaneDivider.onpointerdown) {
+      splitPaneDivider.onpointerdown = SplitPane.pointerdown;
+    }
+    const splitPane: HTMLElement = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' SplitPane ')]", splitPaneDivider, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue as HTMLElement;
     const leftComponent: HTMLElement = splitPane.children[0] as HTMLElement;
     const rightComponent: HTMLElement = splitPane.children[2] as HTMLElement;
     const leftComponentRect: DOMRect = leftComponent.getBoundingClientRect();
@@ -30,9 +37,9 @@ class SplitPane {
     let maximumDividerLocation: number = 0;
     if (verticalSplit) {
       if (pageEndSplitPane) {
-        offset = ev.detail.event.clientY + rightComponentRect.height;
+        offset = ev.clientY + rightComponentRect.height;
       } else {
-        offset = ev.detail.event.clientY - leftComponentRect.height;
+        offset = ev.clientY - leftComponentRect.height;
       }
       maximumDividerLocation =
         leftComponentRect.height -
@@ -44,9 +51,9 @@ class SplitPane {
         +rightComponentComputedStyle.borderBottomWidth.replace("px", "");
     } else {
       if (lineEndSplitPane) {
-        offset = ev.detail.event.clientX + rightComponentRect.width;
+        offset = ev.clientX + rightComponentRect.width;
       } else {
-        offset = ev.detail.event.clientX - leftComponentRect.width;
+        offset = ev.clientX - leftComponentRect.width;
       }
       maximumDividerLocation =
         leftComponentRect.width -
@@ -65,7 +72,6 @@ class SplitPane {
       dragLayer.style.cursor = "ew-resize";
     }
     document.body.appendChild(dragLayer);
-    const callback: (dividerLocation: number) => void = ev.detail.callback;
     const dragLayerEventListener = {
       dividerLocation: null,
       pointermove(ev: PointerEvent) {
@@ -101,21 +107,12 @@ class SplitPane {
       },
       pointerup(ev: PointerEvent) {
         dragLayer.remove();
-        if (callback) {
-          callback(this.dividerLocation);
-        }
+        splitPaneDivider.dispatchEvent(ev);
       },
-      pointerleave(ev: PointerEvent) {
-        dragLayer.remove();
-        if (callback) {
-          callback(this.dividerLocation);
-        }
-      }
     };
     dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
     dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
-    dragLayer.addEventListener("pointerleave", dragLayerEventListener.pointerleave);
   };
 }
 
-document.addEventListener("splitpanedividerpointerdown", SplitPane.pointerdown);
+document.addEventListener("pointerdown", SplitPane.pointerdown);

@@ -11,16 +11,6 @@
     <script src="../../../simpa.js"></script>
 </head>
 
-<script>
-    function pointerdown(ev) {
-        document.dispatchEvent(new CustomEvent("splitpanedividerpointerdown", {
-            detail: {
-                event: ev
-            }
-        }));
-    }
-</script>
-
 <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
     <div class="CenterLayout">
         <!-- split pane -->
@@ -30,8 +20,8 @@
                 <button>left</button>
             </div>
             <!-- divider -->
-            <div onpointerdown="pointerdown(event);" style="position: relative; border-inline-start: 1px solid gray;">
-                <div style="position: absolute; inset-inline-start: -6px; width: 11px; height: 100%;"></div>
+            <div style="position: relative; border-inline-start: 1px solid gray;">
+                <div class="SplitPaneDivider" style="position: absolute; inset-inline-start: -6px; width: 11px; height: 100%;"></div>
             </div>
             <!-- scroll pane -->
             <div class="ScrollPane">

@@ -257,8 +257,15 @@ var SplitPane = /** @class */ (function () {
     function SplitPane() {
     }
     SplitPane.pointerdown = function (ev) {
-        var splitPaneDivider = ev.detail.event.currentTarget;
-        var splitPane = splitPaneDivider.parentElement;
+        var target = ev.target;
+        if (!target.classList.contains("SplitPaneDivider")) {
+            return;
+        }
+        var splitPaneDivider = target;
+        if (!splitPaneDivider.onpointerdown) {
+            splitPaneDivider.onpointerdown = SplitPane.pointerdown;
+        }
+        var splitPane = document.evaluate("ancestor-or-self::*[contains(concat(' ', @class, ' '), ' SplitPane ')]", splitPaneDivider, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
         var leftComponent = splitPane.children[0];
         var rightComponent = splitPane.children[2];
         var leftComponentRect = leftComponent.getBoundingClientRect();
@@ -272,10 +279,10 @@ var SplitPane = /** @class */ (function () {
         var maximumDividerLocation = 0;
         if (verticalSplit) {
             if (pageEndSplitPane) {
-                offset = ev.detail.event.clientY + rightComponentRect.height;
+                offset = ev.clientY + rightComponentRect.height;
             }
             else {
-                offset = ev.detail.event.clientY - leftComponentRect.height;
+                offset = ev.clientY - leftComponentRect.height;
             }
             maximumDividerLocation =
                 leftComponentRect.height -
@@ -288,10 +295,10 @@ var SplitPane = /** @class */ (function () {
         }
         else {
             if (lineEndSplitPane) {
-                offset = ev.detail.event.clientX + rightComponentRect.width;
+                offset = ev.clientX + rightComponentRect.width;
             }
             else {
-                offset = ev.detail.event.clientX - leftComponentRect.width;
+                offset = ev.clientX - leftComponentRect.width;
             }
             maximumDividerLocation =
                 leftComponentRect.width -
@@ -311,7 +318,6 @@ var SplitPane = /** @class */ (function () {
             dragLayer.style.cursor = "ew-resize";
         }
         document.body.appendChild(dragLayer);
-        var callback = ev.detail.callback;
         var dragLayerEventListener = {
             dividerLocation: null,
             pointermove: function (ev) {
@@ -338,24 +344,15 @@ var SplitPane = /** @class */ (function () {
             },
             pointerup: function (ev) {
                 dragLayer.remove();
-                if (callback) {
-                    callback(this.dividerLocation);
-                }
+                splitPaneDivider.dispatchEvent(ev);
             },
-            pointerleave: function (ev) {
-                dragLayer.remove();
-                if (callback) {
-                    callback(this.dividerLocation);
-                }
-            }
         };
         dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
         dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
-        dragLayer.addEventListener("pointerleave", dragLayerEventListener.pointerleave);
     };
     return SplitPane;
 }());
-document.addEventListener("splitpanedividerpointerdown", SplitPane.pointerdown);
+document.addEventListener("pointerdown", SplitPane.pointerdown);
 /**
  * TabbedPane
  *
