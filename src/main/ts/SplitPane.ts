@@ -107,7 +107,7 @@ class SplitPane {
       },
       pointerup(ev: PointerEvent) {
         dragLayer.remove();
-        splitPaneDivider.dispatchEvent(ev);
+        splitPaneDivider.dispatchEvent(new Event("pointerup"));
       },
     };
     dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);

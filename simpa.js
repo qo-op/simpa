@@ -344,7 +344,7 @@ var SplitPane = /** @class */ (function () {
             },
             pointerup: function (ev) {
                 dragLayer.remove();
-                splitPaneDivider.dispatchEvent(ev);
+                splitPaneDivider.dispatchEvent(new Event("pointerup"));
             },
         };
         dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
