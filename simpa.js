@@ -264,6 +264,10 @@ var SplitPane = /** @class */ (function () {
             return;
         }
         SplitPane.dragStart = true;
+        SplitPane.scrollPane = target.closest(".ScrollPane");
+        if (SplitPane.scrollPane) {
+            SplitPane.scrollPane.dataset.disabled = "true";
+        }
         var splitPaneDivider = target;
         var splitPane = splitPaneDivider.closest(".SplitPane");
         SplitPane.leftComponent = splitPane.children[0];
@@ -345,6 +349,9 @@ var SplitPane = /** @class */ (function () {
     };
     SplitPane.pointerup = function (ev) {
         SplitPane.dragStart = false;
+        if (SplitPane.scrollPane) {
+            SplitPane.scrollPane.removeAttribute("data-disabled");
+        }
         document.removeEventListener("pointermove", SplitPane.pointermove);
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("pointerenter", SplitPane.pointerenter);

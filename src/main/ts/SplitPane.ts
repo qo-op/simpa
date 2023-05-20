@@ -11,6 +11,8 @@ class SplitPane {
 
   static dragStart: boolean = false;
 
+  static scrollPane: HTMLElement;
+
   static verticalSplit: boolean = false;
   static endAnchor: boolean;
   static offset: number;
@@ -24,6 +26,10 @@ class SplitPane {
       return;
     }
     SplitPane.dragStart = true;
+    SplitPane.scrollPane = target.closest(".ScrollPane");
+    if (SplitPane.scrollPane) {
+      SplitPane.scrollPane.dataset.disabled = "true";
+    }
     let splitPaneDivider: HTMLElement = target;
     const splitPane: HTMLElement = splitPaneDivider.closest(".SplitPane");
     SplitPane.leftComponent = splitPane.children[0] as HTMLElement;
@@ -114,6 +120,9 @@ class SplitPane {
 
   static pointerup = (ev: PointerEvent) => {
     SplitPane.dragStart = false;
+    if (SplitPane.scrollPane) {
+      SplitPane.scrollPane.removeAttribute("data-disabled");
+    }
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);

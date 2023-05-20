@@ -458,26 +458,34 @@ body {
     overflow: auto;
 }
 
+.ScrollPane[data-policy="scrollbar-as-needed"],
 .ScrollPane[data-vertical-policy="scrollbar-as-needed"] {
     overflow-y: auto;
 }
 
-.ScrollPane[data-vertical-policy="scrollbar-never"] {
+.ScrollPane[data-policy="scrollbar-never"],
+.ScrollPane[data-vertical-policy="scrollbar-never"],
+.ScrollPane[data-disabled]:not([data-disabled="false"]) {
     overflow-y: hidden;
 }
 
+.ScrollPane[data-policy="scrollbar-always"],
 .ScrollPane[data-vertical-policy="scrollbar-always"] {
     overflow-y: scroll;
 }
 
+.ScrollPane[data-policy="scrollbar-as-needed"],
 .ScrollPane[data-horizontal-policy="scrollbar-as-needed"] {
     overflow-x: auto;
 }
 
-.ScrollPane[data-horizontal-policy="scrollbar-never"] {
-    overflow-x: hidden;
+.ScrollPane[data-policy="scrollbar-never"],
+.ScrollPane[data-horizontal-policy="scrollbar-never"],
+.ScrollPane[data-disabled]:not([data-disabled="false"]) {
+        overflow-x: hidden;
 }
 
+.ScrollPane[data-policy="scrollbar-always"],
 .ScrollPane[data-horizontal-policy="scrollbar-always"] {
     overflow-x: scroll;
 }
@@ -488,11 +496,15 @@ body {
         overflow: overlay;
     }
 
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-as-needed"],
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-always"],
     .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-as-needed"],
     .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-always"] {
         overflow-y: overlay;
     }
 
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-as-needed"],
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-always"],
     .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-as-needed"],
     .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-always"] {
         overflow-x: overlay;
@@ -560,11 +572,15 @@ body {
         overflow: overlay;
     }
 
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-as-needed"],
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-always"],
     .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-as-needed"],
     .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-always"] {
         overflow-y: overlay;
     }
 
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-as-needed"],
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-always"],
     .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-as-needed"],
     .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-always"] {
         overflow-x: overlay;
