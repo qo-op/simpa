@@ -61,10 +61,10 @@ class SplitPane {
         +rightComponentComputedStyle.borderLeftWidth.replace("px", "") -
         +rightComponentComputedStyle.borderRightWidth.replace("px", "");
     }
-    let dragLayer: HTMLElement = document.body.querySelector(":scope>.DragLayer");
+    let dragLayer: HTMLElement = document.querySelector(".SplitPaneDragLayer");
     if (!dragLayer) {
       dragLayer = document.createElement("div");
-      dragLayer.classList.add("DragLayer");
+      dragLayer.classList.add("SplitPaneDragLayer");
       document.body.appendChild(dragLayer);
     }
     const dragLayerGlassPane: HTMLElement = document.createElement("div");

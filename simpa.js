@@ -306,10 +306,10 @@ var SplitPane = /** @class */ (function () {
                     +rightComponentComputedStyle.borderLeftWidth.replace("px", "") -
                     +rightComponentComputedStyle.borderRightWidth.replace("px", "");
         }
-        var dragLayer = document.body.querySelector(":scope>.DragLayer");
+        var dragLayer = document.querySelector(".SplitPaneDragLayer");
         if (!dragLayer) {
             dragLayer = document.createElement("div");
-            dragLayer.classList.add("DragLayer");
+            dragLayer.classList.add("SplitPaneDragLayer");
             document.body.appendChild(dragLayer);
         }
         var dragLayerGlassPane = document.createElement("div");
