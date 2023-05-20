@@ -306,15 +306,21 @@ var SplitPane = /** @class */ (function () {
                     +rightComponentComputedStyle.borderLeftWidth.replace("px", "") -
                     +rightComponentComputedStyle.borderRightWidth.replace("px", "");
         }
-        var dragLayer = document.createElement("div");
-        dragLayer.classList.add("DragLayer");
+        var dragLayer = document.body.querySelector(":scope>.DragLayer");
+        if (!dragLayer) {
+            dragLayer = document.createElement("div");
+            dragLayer.classList.add("DragLayer");
+            document.body.appendChild(dragLayer);
+        }
+        var dragLayerGlassPane = document.createElement("div");
+        dragLayer.appendChild(dragLayerGlassPane);
+        dragLayer.style.visibility = "visible";
         if (verticalSplit) {
-            dragLayer.style.cursor = "ns-resize";
+            dragLayerGlassPane.style.cursor = "ns-resize";
         }
         else {
-            dragLayer.style.cursor = "ew-resize";
+            dragLayerGlassPane.style.cursor = "ew-resize";
         }
-        document.body.appendChild(dragLayer);
         var dragLayerEventListener = {
             dividerLocation: null,
             pointermove: function (ev) {
@@ -340,12 +346,17 @@ var SplitPane = /** @class */ (function () {
                 }
             },
             pointerup: function (ev) {
-                dragLayer.remove();
-                splitPaneDivider.dispatchEvent(new Event("pointerup"));
+                dragLayer.style.visibility = "hidden";
+                dragLayerGlassPane.remove();
+            },
+            pointerleave: function (ev) {
+                dragLayer.style.visibility = "hidden";
+                dragLayerGlassPane.remove();
             },
         };
-        dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
-        dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
+        dragLayerGlassPane.addEventListener("pointermove", dragLayerEventListener.pointermove);
+        dragLayerGlassPane.addEventListener("pointerup", dragLayerEventListener.pointerup);
+        dragLayerGlassPane.addEventListener("pointerleave", dragLayerEventListener.pointerleave);
     };
     return SplitPane;
 }());

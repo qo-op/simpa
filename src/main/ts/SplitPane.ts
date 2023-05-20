@@ -61,14 +61,20 @@ class SplitPane {
         +rightComponentComputedStyle.borderLeftWidth.replace("px", "") -
         +rightComponentComputedStyle.borderRightWidth.replace("px", "");
     }
-    const dragLayer: HTMLElement = document.createElement("div");
-    dragLayer.classList.add("DragLayer");
-    if (verticalSplit) {
-      dragLayer.style.cursor = "ns-resize";
-    } else {
-      dragLayer.style.cursor = "ew-resize";
+    let dragLayer: HTMLElement = document.body.querySelector(":scope>.DragLayer");
+    if (!dragLayer) {
+      dragLayer = document.createElement("div");
+      dragLayer.classList.add("DragLayer");
+      document.body.appendChild(dragLayer);
     }
-    document.body.appendChild(dragLayer);
+    const dragLayerGlassPane: HTMLElement = document.createElement("div");
+    dragLayer.appendChild(dragLayerGlassPane);
+    dragLayer.style.visibility = "visible";
+    if (verticalSplit) {
+      dragLayerGlassPane.style.cursor = "ns-resize";
+    } else {
+      dragLayerGlassPane.style.cursor = "ew-resize";
+    }
     const dragLayerEventListener = {
       dividerLocation: null,
       pointermove(ev: PointerEvent) {
@@ -103,12 +109,17 @@ class SplitPane {
         }
       },
       pointerup(ev: PointerEvent) {
-        dragLayer.remove();
-        splitPaneDivider.dispatchEvent(new Event("pointerup"));
+        dragLayer.style.visibility = "hidden";
+        dragLayerGlassPane.remove();
+      },
+      pointerleave(ev: PointerEvent) {
+        dragLayer.style.visibility = "hidden";
+        dragLayerGlassPane.remove();
       },
     };
-    dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
-    dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
+    dragLayerGlassPane.addEventListener("pointermove", dragLayerEventListener.pointermove);
+    dragLayerGlassPane.addEventListener("pointerup", dragLayerEventListener.pointerup);
+    dragLayerGlassPane.addEventListener("pointerleave", dragLayerEventListener.pointerleave);
   };
 }
 
