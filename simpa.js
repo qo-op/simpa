@@ -355,6 +355,7 @@ var SplitPane = /** @class */ (function () {
         dragLayer.onpointermove = dragLayerEventListener.pointermove;
         dragLayer.onpointerup = dragLayerEventListener.pointerup;
         dragLayer.onpointerleave = dragLayerEventListener.pointerleave;
+        ev.detail.event.stopPropagation();
     };
     SplitPane.pointerdown = function (ev) {
         var target = ev.target;

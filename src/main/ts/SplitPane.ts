@@ -118,6 +118,7 @@ class SplitPane {
     dragLayer.onpointermove = dragLayerEventListener.pointermove;
     dragLayer.onpointerup = dragLayerEventListener.pointerup;
     dragLayer.onpointerleave = dragLayerEventListener.pointerleave;
+    ev.detail.event.stopPropagation();
   }
 
   static pointerdown = (ev: PointerEvent) => {
