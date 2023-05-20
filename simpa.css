@@ -524,26 +524,32 @@ body {
     overscroll-behavior: none;
 }
 
+.ScrollTable[data-policy="scrollbar-as-needed"],
 .ScrollTable[data-vertical-policy="scrollbar-as-needed"] {
     overflow-y: auto;
 }
 
+.ScrollTable[data-policy="scrollbar-never"],
 .ScrollTable[data-vertical-policy="scrollbar-never"] {
     overflow-y: hidden;
 }
 
+.ScrollTable[data-policy="scrollbar-always"],
 .ScrollTable[data-vertical-policy="scrollbar-always"] {
     overflow-y: scroll;
 }
 
+.ScrollTable[data-policy="scrollbar-as-needed"],
 .ScrollTable[data-horizontal-policy="scrollbar-as-needed"] {
     overflow-x: auto;
 }
 
+.ScrollTable[data-policy="scrollbar-never"],
 .ScrollTable[data-horizontal-policy="scrollbar-never"] {
     overflow-x: hidden;
 }
 
+.ScrollTable[data-policy="scrollbar-always"],
 .ScrollTable[data-horizontal-policy="scrollbar-always"] {
     overflow-x: scroll;
 }
