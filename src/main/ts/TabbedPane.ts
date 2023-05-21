@@ -82,8 +82,8 @@ class TabContainer {
 			const tabComponent: HTMLElement = tabContainer.children[i] as HTMLElement;
 			if (i === selectedTabIndex) {
 				tabComponent.tabIndex = -1;
-				const name: string = tabComponent.getAttribute("name");
-				CardContainer.show(cardContainer, name);
+				const value: string = tabComponent.getAttribute("value");
+				CardContainer.show(cardContainer, value);
 			} else {
 				tabComponent.tabIndex = 0;
 			}
@@ -105,8 +105,8 @@ class TabContainer {
 			const tabComponent: HTMLElement = tabContainer.children[i] as HTMLElement;
 			if (tabComponent === selectedTabComponent) {
 				tabComponent.tabIndex = -1;
-				const name: string = tabComponent.getAttribute("name");
-				CardContainer.show(cardContainer, name);
+				const value: string = tabComponent.getAttribute("value");
+				CardContainer.show(cardContainer, value);
 			} else {
 				tabComponent.tabIndex = 0;
 			}
@@ -164,7 +164,7 @@ class CardContainer {
 	static show = (cardContainer: HTMLElement, name: string) => {
 		for (let i: number = 0; i < cardContainer.children.length; i++) {
 			const cardComponent: HTMLElement = cardContainer.children[i] as HTMLElement;
-			if (cardComponent.getAttribute("name") === name) {
+			if (cardComponent.dataset.name === name) {
 				CardContainer.setSelectedIndex(cardContainer, i);
 				break;
 			}

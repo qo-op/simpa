@@ -446,8 +446,8 @@ var TabContainer = /** @class */ (function () {
             var tabComponent = tabContainer.children[i];
             if (i === selectedTabIndex) {
                 tabComponent.tabIndex = -1;
-                var name_1 = tabComponent.getAttribute("name");
-                CardContainer.show(cardContainer, name_1);
+                var value = tabComponent.getAttribute("value");
+                CardContainer.show(cardContainer, value);
             }
             else {
                 tabComponent.tabIndex = 0;
@@ -468,8 +468,8 @@ var TabContainer = /** @class */ (function () {
             var tabComponent = tabContainer.children[i];
             if (tabComponent === selectedTabComponent) {
                 tabComponent.tabIndex = -1;
-                var name_2 = tabComponent.getAttribute("name");
-                CardContainer.show(cardContainer, name_2);
+                var value = tabComponent.getAttribute("value");
+                CardContainer.show(cardContainer, value);
             }
             else {
                 tabComponent.tabIndex = 0;
@@ -527,7 +527,7 @@ var CardContainer = /** @class */ (function () {
     CardContainer.show = function (cardContainer, name) {
         for (var i = 0; i < cardContainer.children.length; i++) {
             var cardComponent = cardContainer.children[i];
-            if (cardComponent.getAttribute("name") === name) {
+            if (cardComponent.dataset.name === name) {
                 CardContainer.setSelectedIndex(cardContainer, i);
                 break;
             }
