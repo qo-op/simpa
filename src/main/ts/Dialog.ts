@@ -29,10 +29,12 @@ class Dialog {
 		Dialog.dragStart = true;
 		const dialogTitle: HTMLElement = target;
 		Dialog.dialog = dialogTitle.closest(".Dialog");
-		Dialog.dialog.style.position = "absolute";
 		var rect = Dialog.dialog.getBoundingClientRect();
 		Dialog.x = ev.clientX - rect.left;
 		Dialog.y = ev.clientY - rect.top;
+		Dialog.dialog.style.position = "absolute";
+		Dialog.dialog.style.top = rect.top + "px";
+		Dialog.dialog.style.left = rect.left + "px";
 		document.addEventListener("touchmove", Dialog.preventTouchMove, { passive: false });
 		document.addEventListener("pointermove", Dialog.pointermove);
 		document.addEventListener("pointerup", Dialog.pointerup);
@@ -47,8 +49,8 @@ class Dialog {
 		if (!Dialog.dragStart) {
 			return;
 		}
-		Dialog.dialog.style.left = (ev.clientX - Dialog.x) + "px";
 		Dialog.dialog.style.top = (ev.clientY - Dialog.y) + "px";
+		Dialog.dialog.style.left = (ev.clientX - Dialog.x) + "px";
 	}
 
 	static pointerup = (ev: PointerEvent) => {
