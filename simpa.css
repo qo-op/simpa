@@ -273,11 +273,11 @@ body {
     box-shadow: 0 .5em 1em 0 rgba(0, 0, 0, 0.25);
 }
 
-.Dialog .DialogTitle {
+.Dialog .DialogTitleBar {
     user-select: none;
 }
 
-.Dialog .DialogTitle * {
+.Dialog .DialogTitleBar * {
     pointer-events: none;
 }
 

@@ -21,7 +21,7 @@ var Dialog = /** @class */ (function () {
     Dialog.dragStart = false;
     Dialog.pointerdown = function (ev) {
         var target = ev.target;
-        if (!target.classList.contains("DialogTitle")) {
+        if (!target.classList.contains("DialogTitleBar")) {
             return;
         }
         Dialog.dragStart = true;

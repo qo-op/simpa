@@ -23,7 +23,7 @@ class Dialog {
 
 	static pointerdown = (ev: PointerEvent) => {
 		const target: HTMLElement = ev.target as HTMLElement;
-		if (!target.classList.contains("DialogTitle")) {
+		if (!target.classList.contains("DialogTitleBar")) {
 			return;
 		}
 		Dialog.dragStart = true;
