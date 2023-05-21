@@ -81,11 +81,11 @@ class TabContainer {
 		for (let i: number = 0; i < tabContainer.children.length; i++) {
 			const tabComponent: HTMLElement = tabContainer.children[i] as HTMLElement;
 			if (i === selectedTabIndex) {
-				tabComponent.dataset.selected = "";
-				const name: string | null= tabComponent.getAttribute("name");
+				tabComponent.tabIndex = -1;
+				const name: string = tabComponent.getAttribute("name");
 				CardContainer.show(cardContainer, name);
 			} else {
-				tabComponent.removeAttribute("data-selected");
+				tabComponent.tabIndex = 0;
 			}
 		}
 	}
@@ -104,11 +104,11 @@ class TabContainer {
 		for (let i: number = 0; i < tabContainer.children.length; i++) {
 			const tabComponent: HTMLElement = tabContainer.children[i] as HTMLElement;
 			if (tabComponent === selectedTabComponent) {
-				tabComponent.dataset.selected = "";
-				const name: string | null = tabComponent.getAttribute("name");
+				tabComponent.tabIndex = -1;
+				const name: string = tabComponent.getAttribute("name");
 				CardContainer.show(cardContainer, name);
 			} else {
-				tabComponent.removeAttribute("data-selected");
+				tabComponent.tabIndex = 0;
 			}
 		}
 	}
@@ -161,7 +161,7 @@ class CardContainer {
 		CardContainer.setSelectedIndex(cardContainer, cardContainer.children.length - 1);
 	}
 
-	static show = (cardContainer: HTMLElement, name: string | null) => {
+	static show = (cardContainer: HTMLElement, name: string) => {
 		for (let i: number = 0; i < cardContainer.children.length; i++) {
 			const cardComponent: HTMLElement = cardContainer.children[i] as HTMLElement;
 			if (cardComponent.getAttribute("name") === name) {
@@ -200,26 +200,25 @@ class CardContainer {
  */
 class TabComponent {
 
-	static pointerdown = (ev: CustomEvent) => {
-		const tabComponent: HTMLElement = ev.detail.event.currentTarget;
-		try {
-			const tabContainer: HTMLElement | null = tabComponent.parentElement;
-			if (tabContainer === null) {
-				return;
-			}
-			const tabbedPane: HTMLElement | null = tabContainer.parentElement;
-			if (tabbedPane === null) {
-				return;
-			}
-			const cardContainer: HTMLElement | null = tabbedPane.querySelector(":scope>.CardContainer");
-			if (cardContainer === null) {
-				return;
-			}
-			TabContainer.setSelectedTabComponent(tabContainer, cardContainer, tabComponent);
-		} finally {
-			ev.stopPropagation();
+	static pointerdown = (ev: PointerEvent) => {
+		const tabComponent: HTMLElement = ev.target as HTMLElement;
+		const tabContainer: HTMLElement = tabComponent.parentElement;
+		if (!tabContainer) {
+			return;
 		}
+		const tabbedPane: HTMLElement = tabContainer.parentElement;
+		if (!tabbedPane) {
+			return;
+		}
+		if (!tabbedPane.classList.contains("TabbedPane")) {
+			return;
+		}
+		const cardContainer: HTMLElement = tabbedPane.children[tabbedPane.childElementCount - 1] as HTMLElement;
+		if (cardContainer === null) {
+			return;
+		}
+		TabContainer.setSelectedTabComponent(tabContainer, cardContainer, tabComponent);
 	}
 }
 
-document.addEventListener("tabcomponentpointerdow", TabComponent.pointerdown);
+document.addEventListener("pointerdown", TabComponent.pointerdown);

@@ -445,12 +445,12 @@ var TabContainer = /** @class */ (function () {
         for (var i = 0; i < tabContainer.children.length; i++) {
             var tabComponent = tabContainer.children[i];
             if (i === selectedTabIndex) {
-                tabComponent.dataset.selected = "";
+                tabComponent.tabIndex = -1;
                 var name_1 = tabComponent.getAttribute("name");
                 CardContainer.show(cardContainer, name_1);
             }
             else {
-                tabComponent.removeAttribute("data-selected");
+                tabComponent.tabIndex = 0;
             }
         }
     };
@@ -467,12 +467,12 @@ var TabContainer = /** @class */ (function () {
         for (var i = 0; i < tabContainer.children.length; i++) {
             var tabComponent = tabContainer.children[i];
             if (tabComponent === selectedTabComponent) {
-                tabComponent.dataset.selected = "";
+                tabComponent.tabIndex = -1;
                 var name_2 = tabComponent.getAttribute("name");
                 CardContainer.show(cardContainer, name_2);
             }
             else {
-                tabComponent.removeAttribute("data-selected");
+                tabComponent.tabIndex = 0;
             }
         }
     };
@@ -564,27 +564,25 @@ var TabComponent = /** @class */ (function () {
     function TabComponent() {
     }
     TabComponent.pointerdown = function (ev) {
-        var tabComponent = ev.detail.event.currentTarget;
-        try {
-            var tabContainer = tabComponent.parentElement;
-            if (tabContainer === null) {
-                return;
-            }
-            var tabbedPane = tabContainer.parentElement;
-            if (tabbedPane === null) {
-                return;
-            }
-            var cardContainer = tabbedPane.querySelector(":scope>.CardContainer");
-            if (cardContainer === null) {
-                return;
-            }
-            TabContainer.setSelectedTabComponent(tabContainer, cardContainer, tabComponent);
+        var tabComponent = ev.target;
+        var tabContainer = tabComponent.parentElement;
+        if (!tabContainer) {
+            return;
         }
-        finally {
-            ev.stopPropagation();
+        var tabbedPane = tabContainer.parentElement;
+        if (!tabbedPane) {
+            return;
         }
+        if (!tabbedPane.classList.contains("TabbedPane")) {
+            return;
+        }
+        var cardContainer = tabbedPane.children[tabbedPane.childElementCount - 1];
+        if (cardContainer === null) {
+            return;
+        }
+        TabContainer.setSelectedTabComponent(tabContainer, cardContainer, tabComponent);
     };
     return TabComponent;
 }());
-document.addEventListener("tabcomponentpointerdow", TabComponent.pointerdown);
+document.addEventListener("pointerdown", TabComponent.pointerdown);
 //# sourceMappingURL=simpa.js.map

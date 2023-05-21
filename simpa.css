@@ -734,6 +734,10 @@ body {
     }
 }
 
+.SplitPane .SplitPaneDivider * {
+    pointer-events: none;
+}
+
 /**
  * Tabbed pane
  */
@@ -749,32 +753,32 @@ body {
     grid-template-columns: minmax(0, 1fr) auto !important;
 }
 
-.TabbedPane>.TabContainer,
-.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
-.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.TabContainer,
-.TabbedPane[data-tab-placement="page-start"]>.TabContainer,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+.TabbedPane>:first-child,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>:first-child,
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>:first-child,
+.TabbedPane[data-tab-placement="page-start"]>:first-child,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>:first-child,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>:first-child {
     grid-row: 1 !important;
     grid-column: 1 !important;
 }
 
-.TabbedPane>.ButtonContainer,
-.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.ButtonContainer,
-.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.ButtonContainer,
-.TabbedPane[data-tab-placement="page-start"]>.ButtonContainer,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.ButtonContainer,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.ButtonContainer {
+.TabbedPane>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="page-start"]>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>:not(:first-child):not(:last-child) {
     grid-row: 1 !important;
     grid-column: 2 !important;
 }
 
-.TabbedPane>.CardContainer,
-.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.CardContainer,
-.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.CardContainer,
-.TabbedPane[data-tab-placement="page-start"]>.CardContainer,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.CardContainer,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.CardContainer {
+.TabbedPane>:last-child,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>:last-child,
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>:last-child,
+.TabbedPane[data-tab-placement="page-start"]>:last-child,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>:last-child,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>:last-child {
     grid-row: 2 !important;
     grid-column: 1 / -1 !important;
 }
@@ -787,23 +791,23 @@ body {
     grid-template-columns: minmax(0, 1fr) auto !important;
 }
 
-.TabbedPane[data-tab-placement="page-end"]>.TabContainer,
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+.TabbedPane[data-tab-placement="page-end"]>:first-child,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>:first-child,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>:first-child {
     grid-row: 2 !important;
     grid-column: 1 !important;
 }
 
-.TabbedPane[data-tab-placement="page-end"]>.ButtonContainer,
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.ButtonContainer,
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.ButtonContainer {
+.TabbedPane[data-tab-placement="page-end"]>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>:not(:first-child):not(:last-child) {
     grid-row: 2 !important;
     grid-column: 2 !important;
 }
 
-.TabbedPane[data-tab-placement="page-end"]>.CardContainer,
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.CardContainer,
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.CardContainer {
+.TabbedPane[data-tab-placement="page-end"]>:last-child,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>:last-child,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>:last-child {
     grid-row: 1 !important;
     grid-column: 1 / -1 !important;
 }
@@ -816,23 +820,23 @@ body {
     grid-template-columns: auto minmax(0, 1fr) !important;
 }
 
-.TabbedPane[data-tab-placement="line-start"]>.ButtonContainer,
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.ButtonContainer,
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.ButtonContainer {
+.TabbedPane[data-tab-placement="line-start"]>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>:not(:first-child):not(:last-child) {
     grid-row: 1 !important;
     grid-column: 1 !important;
 }
 
-.TabbedPane[data-tab-placement="line-start"]>.TabContainer,
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+.TabbedPane[data-tab-placement="line-start"]>:first-child,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>:first-child,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>:first-child {
     grid-row: 2 !important;
     grid-column: 1 !important;
 }
 
-.TabbedPane[data-tab-placement="line-start"]>.CardContainer,
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.CardContainer,
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.CardContainer {
+.TabbedPane[data-tab-placement="line-start"]>:last-child,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>:last-child,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>:last-child {
     grid-row: 1 / -1 !important;
     grid-column: 2 !important;
 }
@@ -845,46 +849,47 @@ body {
     grid-template-columns: minmax(0, 1fr) auto !important;
 }
 
-.TabbedPane[data-tab-placement="line-end"]>.ButtonContainer,
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.ButtonContainer,
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.ButtonContainer {
+.TabbedPane[data-tab-placement="line-end"]>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>:not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>:not(:first-child):not(:last-child) {
     grid-row: 1 !important;
     grid-column: 2 !important;
 }
 
-.TabbedPane[data-tab-placement="line-end"]>.TabContainer,
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+.TabbedPane[data-tab-placement="line-end"]>:first-child,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>:first-child,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>:first-child {
     grid-row: 2 !important;
     grid-column: 2 !important;
 }
 
-.TabbedPane[data-tab-placement="line-end"]>.CardContainer,
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.CardContainer,
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.CardContainer {
+.TabbedPane[data-tab-placement="line-end"]>:last-child,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>:last-child,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>:last-child {
     grid-row: 1 / -1 !important;
     grid-column: 1 !important;
 }
 
-.TabContainer {
-    gap: 1px;
-    background-color: whitesmoke;
-}
+/**
+ * TabLayout
+ */
 
-.TabbedPane>.TabContainer,
-.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.TabContainer,
-.TabbedPane[data-tab-placement="page-start"]>.TabContainer,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer {
+.TabbedPane>.TabLayout,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.TabLayout,
+.TabbedPane[data-tab-placement="page-start"]>.TabLayout,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabLayout {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: wrap !important;
     align-content: end !important;
     justify-content: start !important;
     align-items: end !important;
+    gap: 1px;
+    background-color: whitesmoke;
 }
 
-.TabbedPane[data-tab-placement="page-end"]>.TabContainer,
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer {
+.TabbedPane[data-tab-placement="page-end"]>.TabLayout,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabLayout {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: wrap-reverse !important;
@@ -893,8 +898,8 @@ body {
     align-items: start !important;
 }
 
-.TabbedPane[data-tab-placement="line-start"]>.TabContainer,
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer {
+.TabbedPane[data-tab-placement="line-start"]>.TabLayout,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabLayout {
     display: flex !important;
     flex-direction: column !important;
     flex-wrap: wrap !important;
@@ -903,8 +908,8 @@ body {
     justify-items: end !important;
 }
 
-.TabbedPane[data-tab-placement="line-end"]>.TabContainer,
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer {
+.TabbedPane[data-tab-placement="line-end"]>.TabLayout,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabLayout {
     display: flex !important;
     flex-direction: column !important;
     flex-wrap: wrap-reverse !important;
@@ -913,92 +918,109 @@ body {
     justify-items: start !important;
 }
 
-.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.TabContainer,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.TabLayout,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabLayout {
     display: grid !important;
     justify-content: start !important;
     align-items: end !important;
 }
 
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabLayout {
     display: grid !important;
     justify-content: start !important;
     align-items: start !important;
 }
 
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabLayout {
     display: grid !important;
     align-content: start !important;
     justify-items: end !important;
 }
 
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer {
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabLayout {
     display: grid !important;
     align-content: start !important;
     justify-items: start !important;
 }
 
-.TabComponent {
+/**
+ * Tab component
+ */
+
+.TabbedPane>.TabLayout>button,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.TabLayout>button,
+.TabbedPane[data-tab-placement="page-start"]>.TabLayout>button,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabLayout>button,
+.TabbedPane[data-tab-placement="page-end"]>.TabLayout>button,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabLayout>button,
+.TabbedPane[data-tab-placement="line-start"]>.TabLayout>button,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabLayout>button,
+.TabbedPane[data-tab-placement="line-end"]>.TabLayout>button,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabLayout>button {
+    flex-shrink: 0 !important;
     user-select: none !important;
-    cursor: pointer;
     background-color: rgba(128, 128, 128, .25);
+    /* Resetting all button styles */
+    /* background: none; */
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    line-height: inherit;
+    padding: 0;
+    margin: 0;
+    outline: none;
 }
 
-.TabComponent[data-selected] {
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.TabLayout>button,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabLayout>button {
+    grid-row: 1 !important;
+    grid-column: auto !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabLayout>button {
+    grid-row: 1 !important;
+    grid-column: auto !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabLayout>button {
+    grid-row: auto !important;
+    grid-column: 1 !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabLayout>button {
+    grid-row: auto !important;
+    grid-column: 1 !important;
+}
+
+.TabbedPane>.TabLayout>button[tabindex="-1"] {
     background-color: white;
 }
 
-.TabbedPane>.TabContainer>.TabComponent,
-.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]>.TabContainer>.TabComponent,
-.TabbedPane[data-tab-placement="page-start"]>.TabContainer>.TabComponent,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer>.TabComponent,
-.TabbedPane[data-tab-placement="page-end"]>.TabContainer>.TabComponent,
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer>.TabComponent,
-.TabbedPane[data-tab-placement="line-start"]>.TabContainer>.TabComponent,
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer>.TabComponent,
-.TabbedPane[data-tab-placement="line-end"]>.TabContainer>.TabComponent,
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabContainer>.TabComponent {
-    flex-shrink: 0 !important;
+.TabbedPane>.TabLayout>button * {
+    pointer-events: none;
 }
 
-.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]>.TabContainer>.TabComponent,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer>.TabComponent {
-    grid-row: 1 !important;
-    grid-column: auto !important;
+/**
+ * Tab component layout
+ */
+
+.TabbedPane>.TabLayout>button {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: .5em;
+    align-items: center;
 }
 
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer>.TabComponent {
-    grid-row: 1 !important;
-    grid-column: auto !important;
-}
-
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer>.TabComponent {
-    grid-row: auto !important;
-    grid-column: 1 !important;
-}
-
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]>.TabContainer>.TabComponent {
-    grid-row: auto !important;
-    grid-column: 1 !important;
+.TabbedPane>.TabLayout>button>:first-child,
+.TabbedPane>.TabLayout>button>:last-child {
+    width: 1em;
+    font-size: 1em;
 }
 
 .ButtonContainer button {
     border: none;
     background: none;
-}
-
-.CardContainer {
-    display: grid !important;
-    grid-template-rows: minmax(0, auto) !important;
-    grid-template-columns: minmax(0, auto) !important;
-    align-items: stretch !important;
-    justify-items: stretch !important;
-}
-
-.CardContainer>* {
-    grid-row: 1 !important;
-    grid-column: 1 !important;
-    visibility: hidden;
 }
 
 /**
