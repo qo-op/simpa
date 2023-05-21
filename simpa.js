@@ -8,41 +8,58 @@
  * @author Yassuo Toda
  */
 /**
- * DialogTitlePane
+ * Dialog
  *
  * @author Yassuo Toda
  */
-var DialogTitlePane = /** @class */ (function () {
-    function DialogTitlePane() {
+var Dialog = /** @class */ (function () {
+    function Dialog() {
     }
-    DialogTitlePane.pointerdown = function (ev) {
-        var dialogTitle = ev.detail.event.currentTarget;
-        var dialog = dialogTitle.closest(".Dialog");
-        var rect = dialog.getBoundingClientRect();
-        var x = ev.detail.event.clientX - rect.left;
-        var y = ev.detail.event.clientY - rect.top;
-        var dragLayer = document.createElement("div");
-        document.body.appendChild(dragLayer);
-        dragLayer.classList.add("DragLayer");
-        var dragLayerEventListener = {
-            pointermove: function (ev) {
-                dialog.style.left = ev.clientX - x + "px";
-                dialog.style.top = ev.clientY - y + "px";
-            },
-            pointerup: function (ev) {
-                dragLayer.remove();
-            },
-            pointerleave: function (ev) {
-                dragLayer.remove();
-            },
-        };
-        dragLayer.addEventListener("pointermove", dragLayerEventListener.pointermove);
-        dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
-        dragLayer.addEventListener("pointerleave", dragLayerEventListener.pointerleave);
+    Dialog.preventTouchMove = function (ev) {
+        ev.preventDefault();
     };
-    return DialogTitlePane;
+    Dialog.dragStart = false;
+    Dialog.pointerdown = function (ev) {
+        var target = ev.target;
+        if (!target.classList.contains("DialogTitle")) {
+            return;
+        }
+        Dialog.dragStart = true;
+        var dialogTitle = target;
+        Dialog.dialog = dialogTitle.closest(".Dialog");
+        Dialog.dialog.style.position = "absolute";
+        var rect = Dialog.dialog.getBoundingClientRect();
+        Dialog.x = ev.clientX - rect.left;
+        Dialog.y = ev.clientY - rect.top;
+        document.addEventListener("touchmove", Dialog.preventTouchMove, { passive: false });
+        document.addEventListener("pointermove", Dialog.pointermove);
+        document.addEventListener("pointerup", Dialog.pointerup);
+        document.addEventListener("pointerenter", Dialog.pointerenter);
+    };
+    Dialog.pointermove = function (ev) {
+        if (!Dialog.dragStart) {
+            return;
+        }
+        Dialog.dialog.style.left = (ev.clientX - Dialog.x) + "px";
+        Dialog.dialog.style.top = (ev.clientY - Dialog.y) + "px";
+    };
+    Dialog.pointerup = function (ev) {
+        Dialog.dragStart = false;
+        document.removeEventListener("touchmove", Dialog.preventTouchMove);
+        document.removeEventListener("pointermove", Dialog.pointermove);
+        document.removeEventListener("pointerup", Dialog.pointerup);
+        document.removeEventListener("pointerenter", Dialog.pointerenter);
+    };
+    Dialog.pointerenter = function (ev) {
+        Dialog.dragStart = false;
+        document.removeEventListener("touchmove", Dialog.preventTouchMove);
+        document.removeEventListener("pointermove", Dialog.pointermove);
+        document.removeEventListener("pointerup", Dialog.pointerup);
+        document.removeEventListener("pointerenter", Dialog.pointerenter);
+    };
+    return Dialog;
 }());
-document.addEventListener("dialogtitlepanepointerdown", DialogTitlePane.pointerdown);
+document.addEventListener("pointerdown", Dialog.pointerdown);
 /**
  * MenuBar
  *
@@ -267,7 +284,6 @@ var SplitPane = /** @class */ (function () {
             return;
         }
         SplitPane.dragStart = true;
-        document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
         var splitPaneDivider = target;
         var splitPane = splitPaneDivider.closest(".SplitPane");
         SplitPane.leftComponent = splitPane.children[0];
@@ -318,6 +334,7 @@ var SplitPane = /** @class */ (function () {
         else {
             document.body.style.cursor = "ew-resize";
         }
+        document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
         document.addEventListener("pointermove", SplitPane.pointermove);
         document.addEventListener("pointerup", SplitPane.pointerup);
         document.addEventListener("pointerenter", SplitPane.pointerenter);

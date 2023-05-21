@@ -269,32 +269,16 @@ body {
  */
 
 .Dialog {
-    position: fixed !important;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.25);
-    background-color: whitesmoke;
-    align-self: center;
-    justify-self: center;
+    background-color: WhiteSmoke;
+    box-shadow: 0 .5em 1em 0 rgba(0, 0, 0, 0.25);
 }
 
-.Dialog>:first-child {
-    padding: 5px;
-    gap: 5px;
-    background-color: LightGray;
+.Dialog .DialogTitle {
     user-select: none;
 }
 
-.Dialog>:first-child>.material-icons.close::after {
-    content: "close";
-    color: gray;
-}
-
-.Dialog>:first-child>.material-icons.close:hover::after {
-    color: red;
-}
-
-.Dialog>:last-child {
-    padding: 5px;
-    gap: 5px;
+.Dialog .DialogTitle * {
+    pointer-events: none;
 }
 
 .ModalLayer {
@@ -308,6 +292,8 @@ body {
     display: grid;
     grid-template-rows: minmax(0, auto);
     grid-template-columns: minmax(0, auto);
+    align-items: center;
+    justify-content: center;
 }
 
 .ModalLayer>* {

@@ -11,16 +11,12 @@ class SplitPane {
 
   static dragStart: boolean = false;
 
+  static leftComponent: HTMLElement;
+  static rightComponent: HTMLElement;
   static verticalSplit: boolean = false;
   static endAnchor: boolean;
   static offset: number;
   static maximumDividerLocation: number;
-  static leftComponent: HTMLElement;
-  static rightComponent: HTMLElement;
-
-  static preventTouchMove(ev: TouchEvent){
-    ev.preventDefault();
-  }
 
   static pointerdown = (ev: PointerEvent) => {
     const target: HTMLElement = ev.target as HTMLElement;
@@ -28,8 +24,7 @@ class SplitPane {
       return;
     }
     SplitPane.dragStart = true;
-    document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
-    let splitPaneDivider: HTMLElement = target;
+    const splitPaneDivider: HTMLElement = target;
     const splitPane: HTMLElement = splitPaneDivider.closest(".SplitPane");
     SplitPane.leftComponent = splitPane.children[0] as HTMLElement;
     SplitPane.rightComponent = splitPane.children[2] as HTMLElement;
@@ -77,9 +72,14 @@ class SplitPane {
     } else {
       document.body.style.cursor = "ew-resize";
     }
+    document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
     document.addEventListener("pointermove", SplitPane.pointermove);
     document.addEventListener("pointerup", SplitPane.pointerup);
     document.addEventListener("pointerenter", SplitPane.pointerenter);
+  }
+
+  static preventTouchMove(ev: TouchEvent) {
+    ev.preventDefault();
   }
 
   static pointermove = (ev: PointerEvent) => {

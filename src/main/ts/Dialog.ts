@@ -9,43 +9,63 @@
  */
 
 /**
- * DialogTitlePane
+ * Dialog
  * 
  * @author Yassuo Toda
  */
-class DialogTitlePane {
+class Dialog {
 
-	static pointerdown = (ev: CustomEvent) => {
-		const dialogTitle: HTMLElement = ev.detail.event.currentTarget;
-		const dialog: HTMLElement = dialogTitle.closest(".Dialog");
-		var rect = dialog.getBoundingClientRect();
-		let x = ev.detail.event.clientX - rect.left;
-		let y = ev.detail.event.clientY - rect.top;
-		const dragLayer = document.createElement("div");
-		document.body.appendChild(dragLayer);
-		dragLayer.classList.add("DragLayer");
-		const dragLayerEventListener = {
-			pointermove(ev: MouseEvent) {
-				dialog.style.left = ev.clientX - x + "px";
-				dialog.style.top = ev.clientY - y + "px";
-			},
-			pointerup(ev: MouseEvent) {
-				dragLayer.remove();
-			},
-			pointerleave(ev: MouseEvent) {
-				dragLayer.remove();
-			},
-		};
-		dragLayer.addEventListener(
-			"pointermove",
-			dragLayerEventListener.pointermove
-		);
-		dragLayer.addEventListener("pointerup", dragLayerEventListener.pointerup);
-		dragLayer.addEventListener(
-			"pointerleave",
-			dragLayerEventListener.pointerleave
-		);
+	static dragStart: boolean = false;
+
+	static dialog: HTMLElement;
+	static x: number;
+	static y: number;
+
+	static pointerdown = (ev: PointerEvent) => {
+		const target: HTMLElement = ev.target as HTMLElement;
+		if (!target.classList.contains("DialogTitle")) {
+			return;
+		}
+		Dialog.dragStart = true;
+		const dialogTitle: HTMLElement = target;
+		Dialog.dialog = dialogTitle.closest(".Dialog");
+		Dialog.dialog.style.position = "absolute";
+		var rect = Dialog.dialog.getBoundingClientRect();
+		Dialog.x = ev.clientX - rect.left;
+		Dialog.y = ev.clientY - rect.top;
+		document.addEventListener("touchmove", Dialog.preventTouchMove, { passive: false });
+		document.addEventListener("pointermove", Dialog.pointermove);
+		document.addEventListener("pointerup", Dialog.pointerup);
+		document.addEventListener("pointerenter", Dialog.pointerenter);
+	}
+
+	static preventTouchMove(ev: TouchEvent) {
+		ev.preventDefault();
+	}
+
+	static pointermove = (ev: PointerEvent) => {
+		if (!Dialog.dragStart) {
+			return;
+		}
+		Dialog.dialog.style.left = (ev.clientX - Dialog.x) + "px";
+		Dialog.dialog.style.top = (ev.clientY - Dialog.y) + "px";
+	}
+
+	static pointerup = (ev: PointerEvent) => {
+		Dialog.dragStart = false;
+		document.removeEventListener("touchmove", Dialog.preventTouchMove);
+		document.removeEventListener("pointermove", Dialog.pointermove);
+		document.removeEventListener("pointerup", Dialog.pointerup);
+		document.removeEventListener("pointerenter", Dialog.pointerenter);
+	}
+
+	static pointerenter = (ev: PointerEvent) => {
+		Dialog.dragStart = false;
+		document.removeEventListener("touchmove", Dialog.preventTouchMove);
+		document.removeEventListener("pointermove", Dialog.pointermove);
+		document.removeEventListener("pointerup", Dialog.pointerup);
+		document.removeEventListener("pointerenter", Dialog.pointerenter);
 	}
 }
 
-document.addEventListener("dialogtitlepanepointerdown", DialogTitlePane.pointerdown);
+document.addEventListener("pointerdown", Dialog.pointerdown);
