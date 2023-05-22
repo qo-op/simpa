@@ -53,11 +53,7 @@ var Dialog = /** @class */ (function () {
         document.removeEventListener("pointerenter", Dialog.pointerenter);
     };
     Dialog.pointerenter = function (ev) {
-        Dialog.dragStart = false;
-        document.removeEventListener("touchmove", Dialog.preventTouchMove);
-        document.removeEventListener("pointermove", Dialog.pointermove);
-        document.removeEventListener("pointerup", Dialog.pointerup);
-        document.removeEventListener("pointerenter", Dialog.pointerenter);
+        Dialog.pointerup(ev);
     };
     return Dialog;
 }());
@@ -287,22 +283,26 @@ var SplitPane = /** @class */ (function () {
         }
         SplitPane.dragStart = true;
         var splitPaneDivider = target;
-        var splitPane = splitPaneDivider.closest(".SplitPane");
-        SplitPane.leftComponent = splitPane.children[0];
-        SplitPane.rightComponent = splitPane.children[2];
+        SplitPane.splitPane = splitPaneDivider.closest(".SplitPane");
+        SplitPane.leftComponent = SplitPane.splitPane.children[0];
+        SplitPane.rightComponent = SplitPane.splitPane.children[2];
         var leftComponentRect = SplitPane.leftComponent.getBoundingClientRect();
         var rightComponentRect = SplitPane.rightComponent.getBoundingClientRect();
         var leftComponentComputedStyle = getComputedStyle(SplitPane.leftComponent);
         var rightComponentComputedStyle = getComputedStyle(SplitPane.rightComponent);
         SplitPane.verticalSplit =
-            splitPane.dataset.orientation === "vertical-split";
+            SplitPane.splitPane.dataset.orientation === "vertical-split";
         SplitPane.endAnchor =
-            splitPane.dataset.dividerAnchor === "end";
+            SplitPane.splitPane.dataset.dividerAnchor === "end";
         if (SplitPane.verticalSplit) {
             if (SplitPane.endAnchor) {
+                SplitPane.rightComponent.style.height = rightComponentRect.height + "px";
+                SplitPane.splitPane.style.gridTemplateRows = "minmax(0, 1fr) auto auto";
                 SplitPane.offset = ev.clientY + rightComponentRect.height;
             }
             else {
+                SplitPane.leftComponent.style.height = leftComponentRect.height + "px";
+                SplitPane.splitPane.style.gridTemplateRows = "auto auto minmax(0, 1fr)";
                 SplitPane.offset = ev.clientY - leftComponentRect.height;
             }
             SplitPane.maximumDividerLocation =
@@ -316,9 +316,13 @@ var SplitPane = /** @class */ (function () {
         }
         else {
             if (SplitPane.endAnchor) {
+                SplitPane.rightComponent.style.width = rightComponentRect.width + "px";
+                SplitPane.splitPane.style.gridTemplateColumns = "minmax(0, 1fr) auto auto";
                 SplitPane.offset = ev.clientX + rightComponentRect.width;
             }
             else {
+                SplitPane.leftComponent.style.width = leftComponentRect.width + "px";
+                SplitPane.splitPane.style.gridTemplateColumns = "auto auto minmax(0, 1fr)";
                 SplitPane.offset = ev.clientX - leftComponentRect.width;
             }
             SplitPane.maximumDividerLocation =
@@ -373,14 +377,38 @@ var SplitPane = /** @class */ (function () {
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("pointerenter", SplitPane.pointerenter);
         document.body.style.cursor = "";
+        var dividerLocation;
+        if (SplitPane.verticalSplit) {
+            if (SplitPane.endAnchor) {
+                dividerLocation = +SplitPane.rightComponent.style.height.replace("px", "");
+                var percentage = dividerLocation / SplitPane.maximumDividerLocation;
+                SplitPane.splitPane.style.gridTemplateRows = (1 - percentage) + "fr auto " + percentage + "fr";
+                SplitPane.rightComponent.style.height = "";
+            }
+            else {
+                dividerLocation = +SplitPane.leftComponent.style.height.replace("px", "");
+                var percentage = dividerLocation / SplitPane.maximumDividerLocation;
+                SplitPane.splitPane.style.gridTemplateRows = percentage + "fr auto " + (1 - percentage) + "fr";
+                SplitPane.leftComponent.style.height = "";
+            }
+        }
+        else {
+            if (SplitPane.endAnchor) {
+                dividerLocation = +SplitPane.rightComponent.style.width.replace("px", "");
+                var percentage = dividerLocation / SplitPane.maximumDividerLocation;
+                SplitPane.splitPane.style.gridTemplateColumns = (1 - percentage) + "fr auto " + percentage + "fr";
+                SplitPane.rightComponent.style.width = "";
+            }
+            else {
+                dividerLocation = +SplitPane.leftComponent.style.width.replace("px", "");
+                var percentage = dividerLocation / SplitPane.maximumDividerLocation;
+                SplitPane.splitPane.style.gridTemplateColumns = percentage + "fr auto " + (1 - percentage) + "fr";
+                SplitPane.leftComponent.style.width = "";
+            }
+        }
     };
     SplitPane.pointerenter = function (ev) {
-        SplitPane.dragStart = false;
-        document.removeEventListener("touchmove", SplitPane.preventTouchMove);
-        document.removeEventListener("pointermove", SplitPane.pointermove);
-        document.removeEventListener("pointerup", SplitPane.pointerup);
-        document.removeEventListener("pointerenter", SplitPane.pointerenter);
-        document.body.style.cursor = "";
+        SplitPane.pointerup(ev);
     };
     return SplitPane;
 }());

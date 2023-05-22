@@ -11,6 +11,7 @@ class SplitPane {
 
   static dragStart: boolean = false;
 
+  static splitPane: HTMLElement;
   static leftComponent: HTMLElement;
   static rightComponent: HTMLElement;
   static verticalSplit: boolean = false;
@@ -25,9 +26,9 @@ class SplitPane {
     }
     SplitPane.dragStart = true;
     const splitPaneDivider: HTMLElement = target;
-    const splitPane: HTMLElement = splitPaneDivider.closest(".SplitPane");
-    SplitPane.leftComponent = splitPane.children[0] as HTMLElement;
-    SplitPane.rightComponent = splitPane.children[2] as HTMLElement;
+    SplitPane.splitPane = splitPaneDivider.closest(".SplitPane");
+    SplitPane.leftComponent = SplitPane.splitPane.children[0] as HTMLElement;
+    SplitPane.rightComponent = SplitPane.splitPane.children[2] as HTMLElement;
     const leftComponentRect: DOMRect = SplitPane.leftComponent.getBoundingClientRect();
     const rightComponentRect: DOMRect = SplitPane.rightComponent.getBoundingClientRect();
     const leftComponentComputedStyle: CSSStyleDeclaration =
@@ -35,13 +36,17 @@ class SplitPane {
     const rightComponentComputedStyle: CSSStyleDeclaration =
       getComputedStyle(SplitPane.rightComponent);
     SplitPane.verticalSplit =
-      splitPane.dataset.orientation === "vertical-split";
+      SplitPane.splitPane.dataset.orientation === "vertical-split";
     SplitPane.endAnchor =
-      splitPane.dataset.dividerAnchor === "end";
+      SplitPane.splitPane.dataset.dividerAnchor === "end";
     if (SplitPane.verticalSplit) {
       if (SplitPane.endAnchor) {
+        SplitPane.rightComponent.style.height = rightComponentRect.height + "px";
+        SplitPane.splitPane.style.gridTemplateRows = "minmax(0, 1fr) auto auto";
         SplitPane.offset = ev.clientY + rightComponentRect.height;
       } else {
+        SplitPane.leftComponent.style.height = leftComponentRect.height + "px";
+        SplitPane.splitPane.style.gridTemplateRows = "auto auto minmax(0, 1fr)";
         SplitPane.offset = ev.clientY - leftComponentRect.height;
       }
       SplitPane.maximumDividerLocation =
@@ -54,8 +59,12 @@ class SplitPane {
         +rightComponentComputedStyle.borderBottomWidth.replace("px", "");
     } else {
       if (SplitPane.endAnchor) {
+        SplitPane.rightComponent.style.width = rightComponentRect.width + "px";
+        SplitPane.splitPane.style.gridTemplateColumns = "minmax(0, 1fr) auto auto";
         SplitPane.offset = ev.clientX + rightComponentRect.width;
       } else {
+        SplitPane.leftComponent.style.width = leftComponentRect.width + "px";
+        SplitPane.splitPane.style.gridTemplateColumns = "auto auto minmax(0, 1fr)";
         SplitPane.offset = ev.clientX - leftComponentRect.width;
       }
       SplitPane.maximumDividerLocation =
@@ -124,15 +133,36 @@ class SplitPane {
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
     document.body.style.cursor = ""
+    let dividerLocation: number;
+    if (SplitPane.verticalSplit) {
+      if (SplitPane.endAnchor) {
+        dividerLocation = +SplitPane.rightComponent.style.height.replace("px", "");
+        const percentage: number = dividerLocation / SplitPane.maximumDividerLocation;
+        SplitPane.splitPane.style.gridTemplateRows = (1 - percentage) + "fr auto " + percentage + "fr";
+        SplitPane.rightComponent.style.height = "";
+      } else {
+        dividerLocation = +SplitPane.leftComponent.style.height.replace("px", "");
+        const percentage: number = dividerLocation / SplitPane.maximumDividerLocation;
+        SplitPane.splitPane.style.gridTemplateRows = percentage + "fr auto " + (1 - percentage) + "fr";
+        SplitPane.leftComponent.style.height = "";
+      }
+    } else {
+      if (SplitPane.endAnchor) {
+        dividerLocation = +SplitPane.rightComponent.style.width.replace("px", "");
+        const percentage: number = dividerLocation / SplitPane.maximumDividerLocation;
+        SplitPane.splitPane.style.gridTemplateColumns = (1 - percentage) + "fr auto " + percentage + "fr";
+        SplitPane.rightComponent.style.width = "";
+      } else {
+        dividerLocation = +SplitPane.leftComponent.style.width.replace("px", "");
+        const percentage: number = dividerLocation / SplitPane.maximumDividerLocation;
+        SplitPane.splitPane.style.gridTemplateColumns = percentage + "fr auto " + (1 - percentage) + "fr";
+        SplitPane.leftComponent.style.width = "";
+      }
+    }
   }
 
   static pointerenter = (ev: PointerEvent) => {
-    SplitPane.dragStart = false;
-    document.removeEventListener("touchmove", SplitPane.preventTouchMove);
-    document.removeEventListener("pointermove", SplitPane.pointermove);
-    document.removeEventListener("pointerup", SplitPane.pointerup);
-    document.removeEventListener("pointerenter", SplitPane.pointerenter);
-    document.body.style.cursor = ""
+    SplitPane.pointerup(ev);
   }
 }
 

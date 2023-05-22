@@ -630,34 +630,26 @@ body {
 .SplitPane[data-orientation="horizontal-split"][data-divider-anchor="start"] {
     display: grid !important;
     grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: auto auto minmax(0, 1fr) !important;
-    align-items: stretch !important;
-    justify-items: stretch !important;
+    grid-template-columns: auto auto 1fr;
 }
 
 .SplitPane[data-orientation="horizontal-split"][data-divider-anchor="end"] {
     display: grid !important;
     grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) auto auto !important;
-    align-items: stretch !important;
-    justify-items: stretch !important;
+    grid-template-columns: 1fr auto auto;
 }
 
 .SplitPane[data-orientation="vertical-split"],
 .SplitPane[data-orientation="vertical-split"][data-divider-anchor="start"] {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: auto auto minmax(0, 1fr) !important;
-    align-items: stretch !important;
-    justify-items: stretch !important;
+    grid-template-rows: auto auto 1fr;
 }
 
 .SplitPane[data-orientation="vertical-split"][data-divider-anchor="end"] {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: minmax(0, 1fr) auto auto !important;
-    align-items: stretch !important;
-    justify-items: stretch !important;
+    grid-template-rows: 1fr auto auto;
 }
 
 .SplitPane>* {
@@ -946,14 +938,12 @@ body {
     flex-shrink: 0 !important;
     user-select: none !important;
     background-color: rgba(128, 128, 128, .25);
-    /* Resetting all button styles */
-    /* background: none; */
     border: none;
     color: inherit;
     cursor: pointer;
     font: inherit;
     line-height: inherit;
-    padding: 0;
+    padding: 0 .5em;
     margin: 0;
     outline: none;
     -webkit-tap-highlight-color: transparent;

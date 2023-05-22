@@ -62,11 +62,7 @@ class Dialog {
 	}
 
 	static pointerenter = (ev: PointerEvent) => {
-		Dialog.dragStart = false;
-		document.removeEventListener("touchmove", Dialog.preventTouchMove);
-		document.removeEventListener("pointermove", Dialog.pointermove);
-		document.removeEventListener("pointerup", Dialog.pointerup);
-		document.removeEventListener("pointerenter", Dialog.pointerenter);
+		Dialog.pointerup(ev);
 	}
 }
 

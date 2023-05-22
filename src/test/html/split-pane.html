@@ -12,22 +12,20 @@
 </head>
 
 <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
-    <div class="CenterLayout">
-        <!-- split pane -->
-        <div class="SplitPane" style="width: 200px; height: 100px; border: 1px solid gray" id="split-pane">
-            <!-- scroll pane -->
-            <div class="ScrollPane">
-                <button>left</button>
-            </div>
-            <!-- split pane divider border -->
-            <div class="SplitPaneDividerBorder">
-                <!-- split pane divider-->
-                <div class="SplitPaneDivider"></div>
-            </div>
-            <!-- scroll pane -->
-            <div class="ScrollPane">
-                <button>right</button>
-            </div>
+    <!-- split pane -->
+    <div class="SplitPane" style="grid-template-columns: 1fr auto 1fr; height: 400px; border: 1px solid gray">
+        <!-- scroll pane -->
+        <div class="ScrollPane">
+            <button>left</button>
+        </div>
+        <!-- split pane divider border -->
+        <div class="SplitPaneDividerBorder">
+            <!-- split pane divider-->
+            <div class="SplitPaneDivider"></div>
+        </div>
+        <!-- scroll pane -->
+        <div class="ScrollPane">
+            <button>Very very very very large button</button>
         </div>
     </div>
 </body>
