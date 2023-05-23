@@ -398,13 +398,13 @@ var SplitPane = /** @class */ (function () {
                 dividerLocation = +SplitPane.rightComponent.style.height.replace("px", "");
                 var percentage = dividerLocation / SplitPane.maximumDividerLocation;
                 SplitPane.splitPane.style.gridTemplateRows = "minmax(0, " + (1 - percentage) + "fr) auto minmax(0, " + percentage + "fr)";
-                SplitPane.rightComponent.style.height = "";
+                // SplitPane.rightComponent.style.height = "";
             }
             else {
                 dividerLocation = +SplitPane.leftComponent.style.height.replace("px", "");
                 var percentage = dividerLocation / SplitPane.maximumDividerLocation;
                 SplitPane.splitPane.style.gridTemplateRows = "minmax(0, " + percentage + "fr) auto minmax(0, " + (1 - percentage) + "fr)";
-                SplitPane.leftComponent.style.height = "";
+                // SplitPane.leftComponent.style.height = "";
             }
         }
         else {
@@ -412,13 +412,13 @@ var SplitPane = /** @class */ (function () {
                 dividerLocation = +SplitPane.rightComponent.style.width.replace("px", "");
                 var percentage = dividerLocation / SplitPane.maximumDividerLocation;
                 SplitPane.splitPane.style.gridTemplateColumns = "minmax(0, " + (1 - percentage) + "fr) auto minmax(0, " + percentage + "fr)";
-                SplitPane.rightComponent.style.width = "";
+                // SplitPane.rightComponent.style.width = "";
             }
             else {
                 dividerLocation = +SplitPane.leftComponent.style.width.replace("px", "");
                 var percentage = dividerLocation / SplitPane.maximumDividerLocation;
                 SplitPane.splitPane.style.gridTemplateColumns = "minmax(0, " + percentage + "fr) auto minmax(0, " + (1 - percentage) + "fr)";
-                SplitPane.leftComponent.style.width = "";
+                // SplitPane.leftComponent.style.width = "";
             }
         }
     };
