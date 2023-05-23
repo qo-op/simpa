@@ -382,13 +382,13 @@ var SplitPane = /** @class */ (function () {
             if (SplitPane.endAnchor) {
                 dividerLocation = +SplitPane.rightComponent.style.height.replace("px", "");
                 var percentage = dividerLocation / SplitPane.maximumDividerLocation;
-                SplitPane.splitPane.style.gridTemplateRows = (1 - percentage) + "fr auto " + percentage + "fr";
+                SplitPane.splitPane.style.gridTemplateRows = "minmax(0, " + (1 - percentage) + "fr) auto minmax(0, " + percentage + "fr)";
                 SplitPane.rightComponent.style.height = "";
             }
             else {
                 dividerLocation = +SplitPane.leftComponent.style.height.replace("px", "");
                 var percentage = dividerLocation / SplitPane.maximumDividerLocation;
-                SplitPane.splitPane.style.gridTemplateRows = percentage + "fr auto " + (1 - percentage) + "fr";
+                SplitPane.splitPane.style.gridTemplateRows = "minmax(0, " + percentage + "fr) auto minmax(0, " + (1 - percentage) + "fr)";
                 SplitPane.leftComponent.style.height = "";
             }
         }
@@ -396,13 +396,13 @@ var SplitPane = /** @class */ (function () {
             if (SplitPane.endAnchor) {
                 dividerLocation = +SplitPane.rightComponent.style.width.replace("px", "");
                 var percentage = dividerLocation / SplitPane.maximumDividerLocation;
-                SplitPane.splitPane.style.gridTemplateColumns = (1 - percentage) + "fr auto " + percentage + "fr";
+                SplitPane.splitPane.style.gridTemplateColumns = "minmax(0, " + (1 - percentage) + "fr) auto minmax(0, " + percentage + "fr)";
                 SplitPane.rightComponent.style.width = "";
             }
             else {
                 dividerLocation = +SplitPane.leftComponent.style.width.replace("px", "");
                 var percentage = dividerLocation / SplitPane.maximumDividerLocation;
-                SplitPane.splitPane.style.gridTemplateColumns = percentage + "fr auto " + (1 - percentage) + "fr";
+                SplitPane.splitPane.style.gridTemplateColumns = "minmax(0, " + percentage + "fr) auto minmax(0, " + (1 - percentage) + "fr)";
                 SplitPane.leftComponent.style.width = "";
             }
         }
