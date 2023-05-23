@@ -625,7 +625,7 @@ body {
  * SplitPane
  */
 
-.SplitPane,
+.SplitPane:not([data-orientation="vertical-split"]),
 .SplitPane[data-orientation="horizontal-split"],
 .SplitPane[data-orientation="horizontal-split"][data-divider-anchor="start"] {
     display: grid !important;
