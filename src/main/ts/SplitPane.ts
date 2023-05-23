@@ -11,6 +11,7 @@ class SplitPane {
 
   static dragStart: boolean = false;
 
+  static splitPaneDivider: HTMLElement;
   static splitPane: HTMLElement;
   static leftComponent: HTMLElement;
   static rightComponent: HTMLElement;
@@ -25,8 +26,8 @@ class SplitPane {
       return;
     }
     SplitPane.dragStart = true;
-    const splitPaneDivider: HTMLElement = target;
-    SplitPane.splitPane = splitPaneDivider.closest(".SplitPane");
+    SplitPane.splitPaneDivider = target;
+    SplitPane.splitPane = SplitPane.splitPaneDivider.closest(".SplitPane");
     SplitPane.leftComponent = SplitPane.splitPane.children[0] as HTMLElement;
     SplitPane.rightComponent = SplitPane.splitPane.children[2] as HTMLElement;
     const leftComponentRect: DOMRect = SplitPane.leftComponent.getBoundingClientRect();
@@ -85,11 +86,7 @@ class SplitPane {
     document.addEventListener("pointermove", SplitPane.pointermove);
     document.addEventListener("pointerup", SplitPane.pointerup);
     document.addEventListener("pointerenter", SplitPane.pointerenter);
-
     document.addEventListener("dragstart", SplitPane.dragstart);
-    document.addEventListener("dragenter", SplitPane.dragenter);
-    document.addEventListener("dragover", SplitPane.dragover);
-    document.addEventListener("dragend", SplitPane.dragend);
   }
 
   static preventTouchMove(ev: TouchEvent) {
@@ -137,11 +134,7 @@ class SplitPane {
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
-
     document.removeEventListener("dragstart", SplitPane.dragstart);
-    document.removeEventListener("dragenter", SplitPane.dragenter);
-    document.removeEventListener("dragover", SplitPane.dragover);
-    document.removeEventListener("dragend", SplitPane.dragend);
 
     document.body.style.cursor = ""
     let dividerLocation: number;
@@ -177,23 +170,9 @@ class SplitPane {
   }
 
   static dragstart = (ev: PointerEvent) => {
-    console.log("dragstart");
-    console.log(ev.currentTarget);
-  }
-
-  static dragenter = (ev: PointerEvent) => {
-    console.log("dragenter");
-    console.log(ev.currentTarget);
-  }
-
-  static dragover = (ev: PointerEvent) => {
-    console.log("dragover");
-    console.log(ev.currentTarget);
-  }
-
-  static dragend = (ev: PointerEvent) => {
-    console.log("dragend");
-    console.log(ev.currentTarget);
+    if (ev.target === SplitPane.splitPaneDivider) {
+      SplitPane.pointerup(ev);
+    }
   }
 }
 

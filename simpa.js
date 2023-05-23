@@ -282,8 +282,8 @@ var SplitPane = /** @class */ (function () {
             return;
         }
         SplitPane.dragStart = true;
-        var splitPaneDivider = target;
-        SplitPane.splitPane = splitPaneDivider.closest(".SplitPane");
+        SplitPane.splitPaneDivider = target;
+        SplitPane.splitPane = SplitPane.splitPaneDivider.closest(".SplitPane");
         SplitPane.leftComponent = SplitPane.splitPane.children[0];
         SplitPane.rightComponent = SplitPane.splitPane.children[2];
         var leftComponentRect = SplitPane.leftComponent.getBoundingClientRect();
@@ -345,9 +345,6 @@ var SplitPane = /** @class */ (function () {
         document.addEventListener("pointerup", SplitPane.pointerup);
         document.addEventListener("pointerenter", SplitPane.pointerenter);
         document.addEventListener("dragstart", SplitPane.dragstart);
-        document.addEventListener("dragenter", SplitPane.dragenter);
-        document.addEventListener("dragover", SplitPane.dragover);
-        document.addEventListener("dragend", SplitPane.dragend);
     };
     SplitPane.pointermove = function (ev) {
         if (!SplitPane.dragStart) {
@@ -381,9 +378,6 @@ var SplitPane = /** @class */ (function () {
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("pointerenter", SplitPane.pointerenter);
         document.removeEventListener("dragstart", SplitPane.dragstart);
-        document.removeEventListener("dragenter", SplitPane.dragenter);
-        document.removeEventListener("dragover", SplitPane.dragover);
-        document.removeEventListener("dragend", SplitPane.dragend);
         document.body.style.cursor = "";
         var dividerLocation;
         if (SplitPane.verticalSplit) {
@@ -419,20 +413,9 @@ var SplitPane = /** @class */ (function () {
         SplitPane.pointerup(ev);
     };
     SplitPane.dragstart = function (ev) {
-        console.log("dragstart");
-        console.log(ev.currentTarget);
-    };
-    SplitPane.dragenter = function (ev) {
-        console.log("dragenter");
-        console.log(ev.currentTarget);
-    };
-    SplitPane.dragover = function (ev) {
-        console.log("dragover");
-        console.log(ev.currentTarget);
-    };
-    SplitPane.dragend = function (ev) {
-        console.log("dragend");
-        console.log(ev.currentTarget);
+        if (ev.target === SplitPane.splitPaneDivider) {
+            SplitPane.pointerup(ev);
+        }
     };
     return SplitPane;
 }());
