@@ -862,8 +862,6 @@ body {
     align-content: end !important;
     justify-content: start !important;
     align-items: end !important;
-    gap: 1px;
-    background-color: whitesmoke;
 }
 
 .TabbedPane[data-tab-placement="page-end"]>.TabLayout,
@@ -937,7 +935,6 @@ body {
 .TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]>.TabLayout>button {
     flex-shrink: 0 !important;
     user-select: none !important;
-    background-color: rgba(128, 128, 128, .25);
     border: none;
     color: inherit;
     cursor: pointer;
@@ -970,10 +967,6 @@ body {
     grid-column: 1 !important;
 }
 
-.TabbedPane>.TabLayout>button[tabindex="-1"] {
-    background-color: white;
-}
-
 .TabbedPane>.TabLayout>button * {
     pointer-events: none;
 }
@@ -983,21 +976,40 @@ body {
  */
 
 .TabbedPane>.TabLayout>button {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: grid !important;
+    align-content: stretch !important;
+    justify-content: start !important;
+    align-items: center !important;
     gap: .5em;
-    align-items: center;
 }
+
+.TabbedPane>.TabLayout>button>* {
+    grid-row: 1 !important;
+    grid-column: unset !important;
+}
+
 
 .TabbedPane>.TabLayout>button>:first-child,
 .TabbedPane>.TabLayout>button>:last-child {
-    width: 1em;
+    min-width: 1em;
     font-size: 1em;
 }
 
-.ButtonContainer button {
-    border: none;
-    background: none;
+/**
+ * TabbedPane default background colors
+ */
+
+.TabbedPane>.TabLayout {
+    background-color: whitesmoke;
+    gap: 1px;
+}
+
+.TabbedPane>.TabLayout>button {
+    background-color: rgba(128, 128, 128, .25);
+}
+
+.TabbedPane>.TabLayout>button[tabindex="-1"] {
+    background-color: white;
 }
 
 /**
