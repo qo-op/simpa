@@ -178,22 +178,22 @@ class SplitPane {
 
   static dragstart = (ev: PointerEvent) => {
     console.log("dragstart");
-    console.log(ev.target);
+    console.log(ev.currentTarget);
   }
 
   static dragenter = (ev: PointerEvent) => {
     console.log("dragenter");
-    console.log(ev.target);
+    console.log(ev.currentTarget);
   }
 
   static dragover = (ev: PointerEvent) => {
     console.log("dragover");
-    console.log(ev.target);
+    console.log(ev.currentTarget);
   }
 
   static dragend = (ev: PointerEvent) => {
     console.log("dragend");
-    console.log(ev.target);
+    console.log(ev.currentTarget);
   }
 }
 

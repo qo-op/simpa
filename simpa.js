@@ -420,19 +420,19 @@ var SplitPane = /** @class */ (function () {
     };
     SplitPane.dragstart = function (ev) {
         console.log("dragstart");
-        console.log(ev.target);
+        console.log(ev.currentTarget);
     };
     SplitPane.dragenter = function (ev) {
         console.log("dragenter");
-        console.log(ev.target);
+        console.log(ev.currentTarget);
     };
     SplitPane.dragover = function (ev) {
         console.log("dragover");
-        console.log(ev.target);
+        console.log(ev.currentTarget);
     };
     SplitPane.dragend = function (ev) {
         console.log("dragend");
-        console.log(ev.target);
+        console.log(ev.currentTarget);
     };
     return SplitPane;
 }());
