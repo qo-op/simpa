@@ -140,7 +140,6 @@ class SplitPane {
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
     document.removeEventListener("dragstart", SplitPane.dragstart);
-
     document.body.style.cursor = ""
     let dividerLocation: number;
     if (SplitPane.verticalSplit) {
@@ -177,6 +176,7 @@ class SplitPane {
   static dragstart = (ev: PointerEvent) => {
     if (ev.target === SplitPane.splitPaneDivider) {
       SplitPane.pointerup(ev);
+      ev.preventDefault();
     }
   }
 }

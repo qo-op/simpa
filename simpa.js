@@ -424,6 +424,7 @@ var SplitPane = /** @class */ (function () {
     SplitPane.dragstart = function (ev) {
         if (ev.target === SplitPane.splitPaneDivider) {
             SplitPane.pointerup(ev);
+            ev.preventDefault();
         }
     };
     return SplitPane;
