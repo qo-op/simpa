@@ -344,6 +344,10 @@ var SplitPane = /** @class */ (function () {
         document.addEventListener("pointermove", SplitPane.pointermove);
         document.addEventListener("pointerup", SplitPane.pointerup);
         document.addEventListener("pointerenter", SplitPane.pointerenter);
+        document.addEventListener("dragstart", SplitPane.dragstart);
+        document.addEventListener("dragenter", SplitPane.dragenter);
+        document.addEventListener("dragover", SplitPane.dragover);
+        document.addEventListener("dragend", SplitPane.dragend);
     };
     SplitPane.pointermove = function (ev) {
         if (!SplitPane.dragStart) {
@@ -376,6 +380,10 @@ var SplitPane = /** @class */ (function () {
         document.removeEventListener("pointermove", SplitPane.pointermove);
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("pointerenter", SplitPane.pointerenter);
+        document.removeEventListener("dragstart", SplitPane.dragstart);
+        document.removeEventListener("dragenter", SplitPane.dragenter);
+        document.removeEventListener("dragover", SplitPane.dragover);
+        document.removeEventListener("dragend", SplitPane.dragend);
         document.body.style.cursor = "";
         var dividerLocation;
         if (SplitPane.verticalSplit) {
@@ -409,6 +417,18 @@ var SplitPane = /** @class */ (function () {
     };
     SplitPane.pointerenter = function (ev) {
         SplitPane.pointerup(ev);
+    };
+    SplitPane.dragstart = function (ev) {
+        console.log("dragstart");
+    };
+    SplitPane.dragenter = function (ev) {
+        console.log("dragenter");
+    };
+    SplitPane.dragover = function (ev) {
+        console.log("dragover");
+    };
+    SplitPane.dragend = function (ev) {
+        console.log("dragend");
     };
     return SplitPane;
 }());

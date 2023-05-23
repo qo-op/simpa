@@ -85,6 +85,11 @@ class SplitPane {
     document.addEventListener("pointermove", SplitPane.pointermove);
     document.addEventListener("pointerup", SplitPane.pointerup);
     document.addEventListener("pointerenter", SplitPane.pointerenter);
+
+    document.addEventListener("dragstart", SplitPane.dragstart);
+    document.addEventListener("dragenter", SplitPane.dragenter);
+    document.addEventListener("dragover", SplitPane.dragover);
+    document.addEventListener("dragend", SplitPane.dragend);
   }
 
   static preventTouchMove(ev: TouchEvent) {
@@ -132,6 +137,12 @@ class SplitPane {
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
+
+    document.removeEventListener("dragstart", SplitPane.dragstart);
+    document.removeEventListener("dragenter", SplitPane.dragenter);
+    document.removeEventListener("dragover", SplitPane.dragover);
+    document.removeEventListener("dragend", SplitPane.dragend);
+
     document.body.style.cursor = ""
     let dividerLocation: number;
     if (SplitPane.verticalSplit) {
@@ -163,6 +174,22 @@ class SplitPane {
 
   static pointerenter = (ev: PointerEvent) => {
     SplitPane.pointerup(ev);
+  }
+
+  static dragstart = (ev: PointerEvent) => {
+    console.log("dragstart");
+  }
+
+  static dragenter = (ev: PointerEvent) => {
+    console.log("dragenter");
+  }
+
+  static dragover = (ev: PointerEvent) => {
+    console.log("dragover");
+  }
+
+  static dragend = (ev: PointerEvent) => {
+    console.log("dragend");
   }
 }
 
