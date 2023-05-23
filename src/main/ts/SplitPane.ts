@@ -7,6 +7,11 @@
  *
  * @author Yassuo Toda
  */
+
+if (window["SplitPane"]) {
+  document.removeEventListener("pointerdown", window["SplitPane"].pointerdown);
+}
+
 class SplitPane {
 
   static dragStart: boolean = false;

@@ -8,6 +8,10 @@
  * @author Yassuo Toda
  */
 
+if (window["Dialog"]) {
+	document.removeEventListener("pointerdown", window["Dialog"].pointerdown);
+}
+
 /**
  * Dialog
  * 

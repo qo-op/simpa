@@ -7,6 +7,9 @@
  *
  * @author Yassuo Toda
  */
+if (window["Dialog"]) {
+    document.removeEventListener("pointerdown", window["Dialog"].pointerdown);
+}
 /**
  * Dialog
  *
@@ -67,6 +70,9 @@ document.addEventListener("pointerdown", Dialog.pointerdown);
  *
  * @author Yassuo Toda
  */
+if (window["MenuBar"]) {
+    document.removeEventListener("pointerdown", window["MenuBar"].pointerdown);
+}
 var MenuBar = /** @class */ (function () {
     function MenuBar() {
     }
@@ -268,6 +274,9 @@ document.addEventListener("pointerdown", MenuBar.pointerdown);
  *
  * @author Yassuo Toda
  */
+if (window["SplitPane"]) {
+    document.removeEventListener("pointerdown", window["SplitPane"].pointerdown);
+}
 var SplitPane = /** @class */ (function () {
     function SplitPane() {
     }
@@ -431,6 +440,9 @@ document.addEventListener("pointerdown", SplitPane.pointerdown);
  *
  * @author Yassuo Toda
  */
+if (window["TabComponent"]) {
+    document.removeEventListener("pointerdown", window["TabComponent"].pointerdown);
+}
 /**
  * TabContainer
  *

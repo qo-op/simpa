@@ -10,6 +10,10 @@
  * @author Yassuo Toda
  */
 
+if (window["TabComponent"]) {
+	document.removeEventListener("pointerdown", window["TabComponent"].pointerdown);
+}
+
 /**
  * TabContainer
  * 

@@ -7,6 +7,11 @@
  * 
  * @author Yassuo Toda
  */
+
+if (window["MenuBar"]) {
+	document.removeEventListener("pointerdown", window["MenuBar"].pointerdown);
+}
+
 class MenuBar {
 
 	static open = (menuBar: HTMLElement) => {
