@@ -190,6 +190,7 @@ class CardContainer {
 			const cardComponent: HTMLElement = cardContainer.children[i] as HTMLElement;
 			if (i === selectedIndex) {
 				cardComponent.style.visibility = "visible";
+				cardComponent.focus();
 			} else {
 				cardComponent.style.visibility = "hidden";
 			}
