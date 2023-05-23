@@ -167,8 +167,8 @@ body {
 
 .CardLayout {
     display: grid !important;
-    grid-template-rows: minmax(0, auto) !important;
-    grid-template-columns: minmax(0, auto) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
 }
 
 .CardLayout>* {
@@ -290,8 +290,8 @@ body {
     z-index: 200 !important;
     background-color: rgba(0, 0, 0, 0.25);
     display: grid;
-    grid-template-rows: minmax(0, auto);
-    grid-template-columns: minmax(0, auto);
+    grid-template-rows: minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     align-items: center;
     justify-content: center;
 }
@@ -320,8 +320,8 @@ body {
 
 .LayeredPane {
     display: grid !important;
-    grid-template-rows: minmax(0, auto) !important;
-    grid-template-columns: minmax(0, auto) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
 }
 
 .LayeredPane>* {
@@ -514,8 +514,8 @@ body {
 
 .ScrollTable {
     display: grid !important;
-    grid-template-rows: minmax(0, auto) !important;
-    grid-template-columns: minmax(0, auto) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     overflow: auto;
     overscroll-behavior: none;
 }
