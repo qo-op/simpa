@@ -350,7 +350,9 @@ var SplitPane = /** @class */ (function () {
             document.body.style.cursor = "ew-resize";
         }
         SplitPane.leftComponent.style.pointerEvents = "none";
+        SplitPane.leftComponent.style.userSelect = "none";
         SplitPane.rightComponent.style.pointerEvents = "none";
+        SplitPane.rightComponent.style.userSelect = "none";
         document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
         document.addEventListener("pointermove", SplitPane.pointermove);
         document.addEventListener("pointerup", SplitPane.pointerup);
@@ -390,7 +392,9 @@ var SplitPane = /** @class */ (function () {
         document.removeEventListener("pointerenter", SplitPane.pointerenter);
         document.removeEventListener("dragstart", SplitPane.dragstart);
         SplitPane.leftComponent.style.pointerEvents = "";
+        SplitPane.leftComponent.style.userSelect = "";
         SplitPane.rightComponent.style.pointerEvents = "";
+        SplitPane.rightComponent.style.userSelect = "";
         document.body.style.cursor = "";
         var dividerLocation;
         if (SplitPane.verticalSplit) {
