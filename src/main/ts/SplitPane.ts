@@ -46,8 +46,9 @@ class SplitPane {
       SplitPane.offset = ev.clientY - leftComponentRect.height;
     } else {
       SplitPane.maximumDividerLocation = leftComponentRect.width + rightComponentRect.width;
-      SplitPane.leftComponent.style.width = 100 * leftComponentRect.width / SplitPane.maximumDividerLocation + "%";
-      SplitPane.rightComponent.style.width = "";
+      const percentage = 100 * leftComponentRect.width / SplitPane.maximumDividerLocation;
+      SplitPane.leftComponent.style.width = percentage + "%";
+      SplitPane.rightComponent.style.width = (100 - percentage) + "%";
       SplitPane.offset = ev.clientX - leftComponentRect.width;
     }
     if (SplitPane.verticalSplit) {
@@ -62,8 +63,7 @@ class SplitPane {
     document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
     document.addEventListener("pointermove", SplitPane.pointermove);
     document.addEventListener("pointerup", SplitPane.pointerup);
-    document.addEventListener("pointerenter", SplitPane.pointerenter);
-    document.addEventListener("dragstart", SplitPane.dragstart);
+    // document.addEventListener("dragstart", SplitPane.dragstart);
   }
 
   static preventTouchMove(ev: TouchEvent) {
@@ -87,8 +87,9 @@ class SplitPane {
         Math.max(ev.clientX - SplitPane.offset, 0),
         SplitPane.maximumDividerLocation
       );
-      SplitPane.leftComponent.style.width = 100 * dividerLocation / SplitPane.maximumDividerLocation + "%";
-      SplitPane.rightComponent.style.width = "";
+      const percentage = 100 * dividerLocation / SplitPane.maximumDividerLocation;
+      SplitPane.leftComponent.style.width = percentage + "%";
+      SplitPane.rightComponent.style.width = (100 - percentage) + "%";
     }
   }
 
@@ -97,17 +98,12 @@ class SplitPane {
     document.removeEventListener("touchmove", SplitPane.preventTouchMove);
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
-    document.removeEventListener("pointerenter", SplitPane.pointerenter);
-    document.removeEventListener("dragstart", SplitPane.dragstart);
+    // document.removeEventListener("dragstart", SplitPane.dragstart);
     SplitPane.leftComponent.style.pointerEvents = "";
     SplitPane.rightComponent.style.pointerEvents = "";
     SplitPane.leftComponent.style.userSelect = "";
     SplitPane.rightComponent.style.userSelect = "";
     document.body.style.cursor = ""
-  }
-
-  static pointerenter = (ev: PointerEvent) => {
-    SplitPane.pointerup(ev);
   }
 
   static dragstart = (ev: PointerEvent) => {

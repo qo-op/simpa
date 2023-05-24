@@ -704,6 +704,7 @@ body {
     .SplitPane .SplitPaneDivider,
     .SplitPane[data-orientation="horizontal-split"] .SplitPaneDivider {
         position: absolute;
+        inset-block-start: 0;
         inset-inline-start: -24px;
         width: 48px;
         height: 100%;
@@ -712,6 +713,7 @@ body {
     .SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
         position: absolute;
         inset-block-start: -24px;
+        inset-inline-start: 0;
         height: 48px;
         width: 100%;
     }
@@ -722,6 +724,7 @@ body {
     .SplitPane .SplitPaneDivider,
     .SplitPane[data-orientation="horizontal-split"] .SplitPaneDivider {
         position: absolute;
+        inset-block-start: 0;
         inset-inline-start: -4px;
         width: 8px;
         height: 100%;
@@ -730,6 +733,7 @@ body {
     .SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
         position: absolute;
         inset-block-start: -4px;
+        inset-inline-start: 0;
         height: 8px;
         width: 100%;
     }
