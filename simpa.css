@@ -638,6 +638,7 @@ body {
  * SplitPane
  */
 
+ /*
 .SplitPane:not([data-orientation="vertical-split"]),
 .SplitPane[data-orientation="horizontal-split"],
 .SplitPane[data-orientation="horizontal-split"][data-divider-anchor="start"] {
@@ -664,32 +665,38 @@ body {
     grid-template-columns: 1fr !important;
     grid-template-rows: 1fr auto auto;
 }
+*/
 
-.SplitPane>:not(:nth-child(2)) {
+.SplitPane>* {
     box-sizing: border-box !important;
-    border: 0 !important;
     padding: 0 !important;
-    overflow: hidden;
 }
 
-.SplitPane>:nth-child(2),
-.SplitPane[data-orientation="horizontal-split"]>:nth-child(2) {
+.SplitPane>:not(:nth-child(2)) {
+    overflow: hidden !important;
+}
+
+.SplitPane:not([data-orientation="vertical-split"])>:first-child {
+    height: 100% !important;
+    float: left !important;
+}
+
+.SplitPane:not([data-orientation="vertical-split"])>:last-child {
+    height: 100% !important;
+}
+
+.SplitPane:not([data-orientation="vertical-split"])>:nth-child(2) {
+    float: left !important;
+    width: 0 !important;
+    height: 100% !important;
+    position: relative !important;
     cursor: ew-resize;
 }
 
 .SplitPane[data-orientation="vertical-split"]>:nth-child(2) {
+    height: 0 !important;
+    position: relative !important;
     cursor: ns-resize;
-}
-
-.SplitPane .SplitPaneDividerBorder,
-.SplitPane[data-orientation="horizontal-split"] .SplitPaneDividerBorder {
-    position: relative;
-    border-inline-start: 1px solid gray;
-}
-
-.SplitPane[data-orientation="vertical-split"] .SplitPaneDividerBorder {
-    position: relative;
-    border-block-start: 1px solid gray;
 }
 
 @media (pointer: coarse) {
@@ -697,15 +704,15 @@ body {
     .SplitPane .SplitPaneDivider,
     .SplitPane[data-orientation="horizontal-split"] .SplitPaneDivider {
         position: absolute;
-        inset-inline-start: -25px;
-        width: 49px;
+        inset-inline-start: -24px;
+        width: 48px;
         height: 100%;
     }
 
     .SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
         position: absolute;
-        inset-block-start: -25px;
-        height: 49px;
+        inset-block-start: -24px;
+        height: 48px;
         width: 100%;
     }
 }
@@ -715,21 +722,21 @@ body {
     .SplitPane .SplitPaneDivider,
     .SplitPane[data-orientation="horizontal-split"] .SplitPaneDivider {
         position: absolute;
-        inset-inline-start: -5px;
-        width: 9px;
+        inset-inline-start: -4px;
+        width: 8px;
         height: 100%;
     }
 
     .SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
         position: absolute;
-        inset-block-start: -5px;
-        height: 9px;
+        inset-block-start: -4px;
+        height: 8px;
         width: 100%;
     }
 }
 
-.SplitPane .SplitPaneDivider:focus {
-    outline: none !important;
+.SplitPane .SplitPaneDivider:hover {
+    background-color: rgba(128, 128, 128, 0.5);
 }
 
 .SplitPane .SplitPaneDivider * {
