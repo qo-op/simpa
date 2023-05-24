@@ -20,38 +20,57 @@ body {
 
 .BorderLayout {
     display: grid !important;
-    grid-template-rows: auto minmax(0, 1fr) auto !important;
-    grid-template-columns: auto minmax(0, 1fr) auto !important;
+    grid-template-rows: auto 1fr auto !important;
+    grid-template-columns: auto 1fr auto !important;
 }
 
-.BorderLayout>* {
+.BorderLayout>:not(.PageStart):not(.PageEnd):not(.LineStart):not(.LineEnd):not(.Center) {
     grid-row: 2 !important;
     grid-column: 2 !important;
+    overflow: hidden;
 }
 
 .BorderLayout>.PageStart {
     grid-row: 1 !important;
     grid-column: 1 / -1 !important;
+    display: grid !important;
 }
 
 .BorderLayout>.PageEnd {
     grid-row: 3 !important;
     grid-column: 1 / -1 !important;
+    display: grid !important;
 }
 
 .BorderLayout>.LineStart {
     grid-row: 2 !important;
     grid-column: 1 !important;
+    display: grid !important;
 }
 
 .BorderLayout>.LineEnd {
     grid-row: 2 !important;
     grid-column: 3 !important;
+    display: grid !important;
 }
 
 .BorderLayout>.Center {
     grid-row: 2 !important;
     grid-column: 2 !important;
+    display: grid !important;
+}
+
+.BorderLayout>.PageStart>*,
+.BorderLayout>.PageEnd>*,
+.BorderLayout>.LineStart>*,
+.BorderLayout>.LineEnd>*,
+.BorderLayout>.Center>* {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
+}
+
+.BorderLayout>.Center>* {
+    overflow: hidden;
 }
 
 .BorderLayout>.PageStart,
@@ -174,6 +193,7 @@ body {
 .CardLayout>* {
     grid-row: 1 !important;
     grid-column: 1 !important;
+    overflow: hidden;
 }
 
 /**
@@ -327,6 +347,7 @@ body {
 .LayeredPane>* {
     grid-row: 1 !important;
     grid-column: 1 !important;
+    overflow: hidden;
 }
 
 /**
@@ -441,57 +462,53 @@ body {
  */
 
 .ScrollPane {
-    overflow: auto;
+    overflow: auto !important;
 }
 
 .ScrollPane[data-policy="scrollbar-as-needed"],
 .ScrollPane[data-vertical-policy="scrollbar-as-needed"] {
-    overflow-y: auto;
+    overflow-y: auto !important;
 }
 
 .ScrollPane[data-policy="scrollbar-never"],
 .ScrollPane[data-vertical-policy="scrollbar-never"] {
-    overflow-y: hidden;
+    overflow-y: hidden !important;
 }
 
 .ScrollPane[data-policy="scrollbar-always"],
 .ScrollPane[data-vertical-policy="scrollbar-always"] {
-    overflow-y: scroll;
+    overflow-y: scroll !important;
 }
 
 .ScrollPane[data-policy="scrollbar-as-needed"],
 .ScrollPane[data-horizontal-policy="scrollbar-as-needed"] {
-    overflow-x: auto;
+    overflow-x: auto !important;
 }
 
 .ScrollPane[data-policy="scrollbar-never"],
 .ScrollPane[data-horizontal-policy="scrollbar-never"] {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 
 .ScrollPane[data-policy="scrollbar-always"],
 .ScrollPane[data-horizontal-policy="scrollbar-always"] {
-    overflow-x: scroll;
+    overflow-x: scroll !important;
 }
 
 @supports (overflow: overlay) {
 
     .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]) {
-        overflow: overlay;
+        overflow: overlay !important;
     }
 
-    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-as-needed"],
-    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-always"],
-    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-as-needed"],
-    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-always"] {
-        overflow-y: overlay;
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-never"],
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-never"] {
+        overflow-y: hidden !important;
     }
 
-    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-as-needed"],
-    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-always"],
-    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-as-needed"],
-    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-always"] {
-        overflow-x: overlay;
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-never"],
+    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-never"] {
+        overflow-x: hidden !important;
     }
 
     .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])::-webkit-scrollbar {
@@ -516,58 +533,54 @@ body {
     display: grid !important;
     grid-template-rows: minmax(0, 1fr) !important;
     grid-template-columns: minmax(0, 1fr) !important;
-    overflow: auto;
+    overflow: auto !important;
     overscroll-behavior: none;
 }
 
 .ScrollTable[data-policy="scrollbar-as-needed"],
 .ScrollTable[data-vertical-policy="scrollbar-as-needed"] {
-    overflow-y: auto;
+    overflow-y: auto !important;
 }
 
 .ScrollTable[data-policy="scrollbar-never"],
 .ScrollTable[data-vertical-policy="scrollbar-never"] {
-    overflow-y: hidden;
+    overflow-y: hidden !important;
 }
 
 .ScrollTable[data-policy="scrollbar-always"],
 .ScrollTable[data-vertical-policy="scrollbar-always"] {
-    overflow-y: scroll;
+    overflow-y: scroll !important;
 }
 
 .ScrollTable[data-policy="scrollbar-as-needed"],
 .ScrollTable[data-horizontal-policy="scrollbar-as-needed"] {
-    overflow-x: auto;
+    overflow-x: auto !important;
 }
 
 .ScrollTable[data-policy="scrollbar-never"],
 .ScrollTable[data-horizontal-policy="scrollbar-never"] {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 
 .ScrollTable[data-policy="scrollbar-always"],
 .ScrollTable[data-horizontal-policy="scrollbar-always"] {
-    overflow-x: scroll;
+    overflow-x: scroll !important;
 }
 
 @supports (overflow: overlay) {
 
     .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]) {
-        overflow: overlay;
+        overflow: overlay !important;
     }
 
-    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-as-needed"],
-    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-always"],
-    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-as-needed"],
-    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-always"] {
-        overflow-y: overlay;
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-never"],
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-vertical-policy="scrollbar-never"] {
+        overflow-y: hidden !important;
     }
 
-    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-as-needed"],
-    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-always"],
-    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-as-needed"],
-    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-always"] {
-        overflow-x: overlay;
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-policy="scrollbar-never"],
+    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])[data-horizontal-policy="scrollbar-never"] {
+        overflow-x: hidden !important;
     }
 
     .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"])::-webkit-scrollbar {
@@ -654,6 +667,10 @@ body {
 
 .SplitPane>* {
     padding: 0 !important;
+}
+
+.SplitPane>:not(:nth-child(2)) {
+    overflow: hidden;
 }
 
 .SplitPane>:nth-child(2),
@@ -862,6 +879,7 @@ body {
     align-content: end !important;
     justify-content: start !important;
     align-items: end !important;
+    overflow: hidden;
 }
 
 .TabbedPane[data-tab-placement="page-end"]>.TabLayout,
