@@ -73,10 +73,8 @@ class SplitPane {
     SplitPane.splitPaneDivider.focus();
     SplitPane.leftComponent.style.pointerEvents = "none";
     SplitPane.rightComponent.style.pointerEvents = "none";
-    /*
     SplitPane.leftComponent.style.userSelect = "none";
     SplitPane.rightComponent.style.userSelect = "none";
-    */
     document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
     document.addEventListener("pointermove", SplitPane.pointermove);
     document.addEventListener("pointerup", SplitPane.pointerup);
@@ -132,10 +130,8 @@ class SplitPane {
     document.removeEventListener("dragstart", SplitPane.dragstart);
     SplitPane.leftComponent.style.pointerEvents = "";
     SplitPane.rightComponent.style.pointerEvents = "";
-    /*
     SplitPane.leftComponent.style.userSelect = "";
     SplitPane.rightComponent.style.userSelect = "";
-    */
     document.body.style.cursor = ""
     let dividerLocation: number;
     if (SplitPane.verticalSplit) {
