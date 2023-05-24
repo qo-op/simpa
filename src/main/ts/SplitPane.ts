@@ -47,6 +47,7 @@ class SplitPane {
     } else {
       SplitPane.maximumDividerLocation = leftComponentRect.width + rightComponentRect.width;
       SplitPane.leftComponent.style.width = 100 * leftComponentRect.width / SplitPane.maximumDividerLocation + "%";
+      SplitPane.rightComponent.style.width = "";
       SplitPane.offset = ev.clientX - leftComponentRect.width;
     }
     if (SplitPane.verticalSplit) {
@@ -87,6 +88,7 @@ class SplitPane {
         SplitPane.maximumDividerLocation
       );
       SplitPane.leftComponent.style.width = 100 * dividerLocation / SplitPane.maximumDividerLocation + "%";
+      SplitPane.rightComponent.style.width = "";
     }
   }
 
