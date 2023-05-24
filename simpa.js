@@ -314,14 +314,7 @@ var SplitPane = /** @class */ (function () {
                 SplitPane.splitPane.style.gridTemplateRows = "auto auto minmax(0, 1fr)";
                 SplitPane.offset = ev.clientY - leftComponentRect.height;
             }
-            SplitPane.maximumDividerLocation =
-                leftComponentRect.height -
-                    +leftComponentComputedStyle.borderTopWidth.replace("px", "") -
-                    +leftComponentComputedStyle.borderBottomWidth.replace("px", "");
-            SplitPane.maximumDividerLocation +=
-                rightComponentRect.height -
-                    +rightComponentComputedStyle.borderTopWidth.replace("px", "") -
-                    +rightComponentComputedStyle.borderBottomWidth.replace("px", "");
+            SplitPane.maximumDividerLocation = leftComponentRect.height + rightComponentRect.height;
         }
         else {
             if (SplitPane.endAnchor) {
@@ -334,14 +327,7 @@ var SplitPane = /** @class */ (function () {
                 SplitPane.splitPane.style.gridTemplateColumns = "auto auto minmax(0, 1fr)";
                 SplitPane.offset = ev.clientX - leftComponentRect.width;
             }
-            SplitPane.maximumDividerLocation =
-                leftComponentRect.width -
-                    +leftComponentComputedStyle.borderLeftWidth.replace("px", "") -
-                    +leftComponentComputedStyle.borderRightWidth.replace("px", "");
-            SplitPane.maximumDividerLocation +=
-                rightComponentRect.width -
-                    +rightComponentComputedStyle.borderLeftWidth.replace("px", "") -
-                    +rightComponentComputedStyle.borderRightWidth.replace("px", "");
+            SplitPane.maximumDividerLocation = leftComponentRect.width + rightComponentRect.width;
         }
         if (SplitPane.verticalSplit) {
             document.body.style.cursor = "ns-resize";

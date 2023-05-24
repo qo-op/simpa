@@ -666,7 +666,7 @@ body {
 }
 
 .SplitPane>* {
-    padding: 0 !important;
+    box-sizing: border-box !important;
 }
 
 .SplitPane>:not(:nth-child(2)) {
