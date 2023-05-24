@@ -12,7 +12,7 @@
             for (let i = 0; i < cards.length; i++) {
                 const card = container.children[i];
                 if (card.getAttribute("name") === name) {
-                    card.style.visibility = "visible";
+                    card.style.visibility = "inherit";
                 } else {
                     card.style.visibility = "hidden";
                 }
@@ -38,7 +38,7 @@
              id="container"
              style="padding: 10px">
             <button name="Card 1"
-                    style="visibility: visible;">
+                    style="visibility: inherit;">
                 <u>First</u> Button
             </button>
             <button name="Card 2"

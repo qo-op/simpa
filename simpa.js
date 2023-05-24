@@ -607,7 +607,7 @@ var CardContainer = /** @class */ (function () {
     CardContainer.getSelectedIndex = function (cardContainer) {
         for (var i = 0; i < cardContainer.children.length; i++) {
             var cardComponent = cardContainer.children[i];
-            if (cardComponent.style.visibility === "visible") {
+            if (cardComponent.style.visibility === "inherit") {
                 return i;
             }
         }
@@ -617,7 +617,7 @@ var CardContainer = /** @class */ (function () {
         for (var i = 0; i < cardContainer.children.length; i++) {
             var cardComponent = cardContainer.children[i];
             if (i === selectedIndex) {
-                cardComponent.style.visibility = "visible";
+                cardComponent.style.visibility = "inherit";
                 cardComponent.focus();
             }
             else {

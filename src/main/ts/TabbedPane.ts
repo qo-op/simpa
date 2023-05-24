@@ -178,7 +178,7 @@ class CardContainer {
 	static getSelectedIndex = (cardContainer: HTMLElement) => {
 		for (let i: number = 0; i < cardContainer.children.length; i++) {
 			const cardComponent: HTMLElement = cardContainer.children[i] as HTMLElement;
-			if (cardComponent.style.visibility === "visible") {
+			if (cardComponent.style.visibility === "inherit") {
 				return i;
 			}
 		}
@@ -189,7 +189,7 @@ class CardContainer {
 		for (let i: number = 0; i < cardContainer.children.length; i++) {
 			const cardComponent: HTMLElement = cardContainer.children[i] as HTMLElement;
 			if (i === selectedIndex) {
-				cardComponent.style.visibility = "visible";
+				cardComponent.style.visibility = "inherit";
 				cardComponent.focus();
 			} else {
 				cardComponent.style.visibility = "hidden";
