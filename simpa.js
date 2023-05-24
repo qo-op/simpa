@@ -349,8 +349,8 @@ var SplitPane = /** @class */ (function () {
         else {
             document.body.style.cursor = "ew-resize";
         }
-        SplitPane.leftComponent.style.userSelect = "none";
-        SplitPane.rightComponent.style.userSelect = "none";
+        SplitPane.leftComponent.style.pointerEvents = "none";
+        SplitPane.rightComponent.style.pointerEvents = "none";
         document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
         document.addEventListener("pointermove", SplitPane.pointermove);
         document.addEventListener("pointerup", SplitPane.pointerup);
@@ -389,8 +389,8 @@ var SplitPane = /** @class */ (function () {
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("pointerenter", SplitPane.pointerenter);
         document.removeEventListener("dragstart", SplitPane.dragstart);
-        SplitPane.leftComponent.style.userSelect = "";
-        SplitPane.rightComponent.style.userSelect = "";
+        SplitPane.leftComponent.style.pointerEvents = "";
+        SplitPane.rightComponent.style.pointerEvents = "";
         document.body.style.cursor = "";
         var dividerLocation;
         if (SplitPane.verticalSplit) {
