@@ -665,11 +665,10 @@ body {
     grid-template-rows: minmax(0, 1fr) auto auto;
 }
 
-.SplitPane>* {
-    box-sizing: border-box !important;
-}
-
 .SplitPane>:not(:nth-child(2)) {
+    box-sizing: border-box !important;
+    border: 0 !important;
+    padding: 0 !important;
     overflow: hidden;
 }
 

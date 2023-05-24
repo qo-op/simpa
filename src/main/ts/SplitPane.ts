@@ -37,10 +37,6 @@ class SplitPane {
     SplitPane.rightComponent = SplitPane.splitPane.children[2] as HTMLElement;
     const leftComponentRect: DOMRect = SplitPane.leftComponent.getBoundingClientRect();
     const rightComponentRect: DOMRect = SplitPane.rightComponent.getBoundingClientRect();
-    const leftComponentComputedStyle: CSSStyleDeclaration =
-      getComputedStyle(SplitPane.leftComponent);
-    const rightComponentComputedStyle: CSSStyleDeclaration =
-      getComputedStyle(SplitPane.rightComponent);
     SplitPane.verticalSplit =
       SplitPane.splitPane.dataset.orientation === "vertical-split";
     SplitPane.endAnchor =
@@ -73,10 +69,14 @@ class SplitPane {
     } else {
       document.body.style.cursor = "ew-resize";
     }
+    SplitPane.splitPaneDivider.tabIndex = -1;
+    SplitPane.splitPaneDivider.focus();
+    /*
     SplitPane.leftComponent.style.pointerEvents = "none";
     SplitPane.leftComponent.style.userSelect = "none";
     SplitPane.rightComponent.style.pointerEvents = "none";
     SplitPane.rightComponent.style.userSelect = "none";
+    */
     document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
     document.addEventListener("pointermove", SplitPane.pointermove);
     document.addEventListener("pointerup", SplitPane.pointerup);
@@ -130,10 +130,12 @@ class SplitPane {
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
     document.removeEventListener("dragstart", SplitPane.dragstart);
+    /*
     SplitPane.leftComponent.style.pointerEvents = "";
     SplitPane.leftComponent.style.userSelect = "";
     SplitPane.rightComponent.style.pointerEvents = "";
     SplitPane.rightComponent.style.userSelect = "";
+    */
     document.body.style.cursor = ""
     let dividerLocation: number;
     if (SplitPane.verticalSplit) {
