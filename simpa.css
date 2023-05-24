@@ -642,27 +642,27 @@ body {
 .SplitPane[data-orientation="horizontal-split"],
 .SplitPane[data-orientation="horizontal-split"][data-divider-anchor="start"] {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: auto auto minmax(0, 1fr);
+    grid-template-rows: 1fr !important;
+    grid-template-columns: auto auto 1fr;
 }
 
 .SplitPane[data-orientation="horizontal-split"][data-divider-anchor="end"] {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-rows: 1fr !important;
+    grid-template-columns: 1fr auto auto;
 }
 
 .SplitPane[data-orientation="vertical-split"],
 .SplitPane[data-orientation="vertical-split"][data-divider-anchor="start"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: auto auto minmax(0, 1fr);
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto 1fr;
 }
 
 .SplitPane[data-orientation="vertical-split"][data-divider-anchor="end"] {
     display: grid !important;
-    grid-template-columns: minmax(0, 1fr) !important;
-    grid-template-rows: minmax(0, 1fr) auto auto;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr auto auto;
 }
 
 .SplitPane>:not(:nth-child(2)) {
@@ -726,6 +726,10 @@ body {
         height: 9px;
         width: 100%;
     }
+}
+
+.SplitPane .SplitPaneDivider:focus {
+    outline: none !important;
 }
 
 .SplitPane .SplitPaneDivider * {

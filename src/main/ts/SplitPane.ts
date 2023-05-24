@@ -44,22 +44,22 @@ class SplitPane {
     if (SplitPane.verticalSplit) {
       if (SplitPane.endAnchor) {
         SplitPane.rightComponent.style.height = rightComponentRect.height + "px";
-        SplitPane.splitPane.style.gridTemplateRows = "minmax(0, 1fr) auto auto";
+        SplitPane.splitPane.style.gridTemplateRows = "1fr auto auto";
         SplitPane.offset = ev.clientY + rightComponentRect.height;
       } else {
         SplitPane.leftComponent.style.height = leftComponentRect.height + "px";
-        SplitPane.splitPane.style.gridTemplateRows = "auto auto minmax(0, 1fr)";
+        SplitPane.splitPane.style.gridTemplateRows = "auto auto 1fr";
         SplitPane.offset = ev.clientY - leftComponentRect.height;
       }
       SplitPane.maximumDividerLocation = leftComponentRect.height + rightComponentRect.height;
     } else {
       if (SplitPane.endAnchor) {
         SplitPane.rightComponent.style.width = rightComponentRect.width + "px";
-        SplitPane.splitPane.style.gridTemplateColumns = "minmax(0, 1fr) auto auto";
+        SplitPane.splitPane.style.gridTemplateColumns = "1fr auto auto";
         SplitPane.offset = ev.clientX + rightComponentRect.width;
       } else {
         SplitPane.leftComponent.style.width = leftComponentRect.width + "px";
-        SplitPane.splitPane.style.gridTemplateColumns = "auto auto minmax(0, 1fr)";
+        SplitPane.splitPane.style.gridTemplateColumns = "auto auto 1fr";
         SplitPane.offset = ev.clientX - leftComponentRect.width;
       }
       SplitPane.maximumDividerLocation = leftComponentRect.width + rightComponentRect.width;
@@ -71,10 +71,10 @@ class SplitPane {
     }
     SplitPane.splitPaneDivider.tabIndex = -1;
     SplitPane.splitPaneDivider.focus();
-    /*
     SplitPane.leftComponent.style.pointerEvents = "none";
-    SplitPane.leftComponent.style.userSelect = "none";
     SplitPane.rightComponent.style.pointerEvents = "none";
+    /*
+    SplitPane.leftComponent.style.userSelect = "none";
     SplitPane.rightComponent.style.userSelect = "none";
     */
     document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
@@ -130,10 +130,10 @@ class SplitPane {
     document.removeEventListener("pointerup", SplitPane.pointerup);
     document.removeEventListener("pointerenter", SplitPane.pointerenter);
     document.removeEventListener("dragstart", SplitPane.dragstart);
-    /*
     SplitPane.leftComponent.style.pointerEvents = "";
-    SplitPane.leftComponent.style.userSelect = "";
     SplitPane.rightComponent.style.pointerEvents = "";
+    /*
+    SplitPane.leftComponent.style.userSelect = "";
     SplitPane.rightComponent.style.userSelect = "";
     */
     document.body.style.cursor = ""
