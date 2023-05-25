@@ -63,7 +63,7 @@ class SplitPane {
     document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
     document.addEventListener("pointermove", SplitPane.pointermove);
     document.addEventListener("pointerup", SplitPane.pointerup);
-    // document.addEventListener("dragstart", SplitPane.dragstart);
+    document.addEventListener("dragstart", SplitPane.dragstart);
   }
 
   static preventTouchMove(ev: TouchEvent) {
@@ -98,7 +98,7 @@ class SplitPane {
     document.removeEventListener("touchmove", SplitPane.preventTouchMove);
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
-    // document.removeEventListener("dragstart", SplitPane.dragstart);
+    document.removeEventListener("dragstart", SplitPane.dragstart);
     SplitPane.leftComponent.style.pointerEvents = "";
     SplitPane.rightComponent.style.pointerEvents = "";
     SplitPane.leftComponent.style.userSelect = "";

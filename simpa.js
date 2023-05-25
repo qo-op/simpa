@@ -326,7 +326,7 @@ var SplitPane = /** @class */ (function () {
         document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
         document.addEventListener("pointermove", SplitPane.pointermove);
         document.addEventListener("pointerup", SplitPane.pointerup);
-        // document.addEventListener("dragstart", SplitPane.dragstart);
+        document.addEventListener("dragstart", SplitPane.dragstart);
     };
     SplitPane.pointermove = function (ev) {
         if (!SplitPane.dragStart) {
@@ -350,7 +350,7 @@ var SplitPane = /** @class */ (function () {
         document.removeEventListener("touchmove", SplitPane.preventTouchMove);
         document.removeEventListener("pointermove", SplitPane.pointermove);
         document.removeEventListener("pointerup", SplitPane.pointerup);
-        // document.removeEventListener("dragstart", SplitPane.dragstart);
+        document.removeEventListener("dragstart", SplitPane.dragstart);
         SplitPane.leftComponent.style.pointerEvents = "";
         SplitPane.rightComponent.style.pointerEvents = "";
         SplitPane.leftComponent.style.userSelect = "";
