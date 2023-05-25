@@ -320,6 +320,10 @@ var SplitPane = /** @class */ (function () {
         else {
             document.body.style.cursor = "ew-resize";
         }
+        document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
+        document.addEventListener("pointermove", SplitPane.pointermove);
+        document.addEventListener("pointerup", SplitPane.pointerup);
+        document.addEventListener("dragstart", SplitPane.dragstart);
         SplitPane.dragLayer = document.body.querySelector(":scope>.DragLayer");
         if (SplitPane.dragLayer === null) {
             SplitPane.dragLayer = document.createElement("div");
@@ -327,16 +331,7 @@ var SplitPane = /** @class */ (function () {
             document.body.appendChild(SplitPane.dragLayer);
         }
         SplitPane.dragLayer.style.visibility = "inherit";
-        /*
-        SplitPane.leftComponent.style.pointerEvents = "none";
-        SplitPane.rightComponent.style.pointerEvents = "none";
-        SplitPane.leftComponent.style.userSelect = "none";
-        SplitPane.rightComponent.style.userSelect = "none";
-        */
-        document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
-        document.addEventListener("pointermove", SplitPane.pointermove);
-        document.addEventListener("pointerup", SplitPane.pointerup);
-        document.addEventListener("dragstart", SplitPane.dragstart);
+        ev.preventDefault();
     };
     SplitPane.pointermove = function (ev) {
         if (!SplitPane.dragStart) {
@@ -359,17 +354,11 @@ var SplitPane = /** @class */ (function () {
     SplitPane.pointerup = function (ev) {
         console.log("pointerup");
         SplitPane.dragStart = false;
+        document.body.style.cursor = "";
         document.removeEventListener("touchmove", SplitPane.preventTouchMove);
         document.removeEventListener("pointermove", SplitPane.pointermove);
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("dragstart", SplitPane.dragstart);
-        /*
-        SplitPane.leftComponent.style.pointerEvents = "";
-        SplitPane.rightComponent.style.pointerEvents = "";
-        SplitPane.leftComponent.style.userSelect = "";
-        SplitPane.rightComponent.style.userSelect = "";
-        */
-        document.body.style.cursor = "";
         if (SplitPane.dragLayer !== null) {
             SplitPane.dragLayer.style.visibility = "hidden";
         }
