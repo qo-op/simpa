@@ -290,6 +290,7 @@ var SplitPane = /** @class */ (function () {
         if (!target.classList.contains("SplitPaneDivider")) {
             return;
         }
+        console.log("pointerdown");
         SplitPane.dragStart = true;
         SplitPane.splitPaneDivider = target;
         SplitPane.splitPane = SplitPane.splitPaneDivider.closest(".SplitPane");
@@ -319,10 +320,19 @@ var SplitPane = /** @class */ (function () {
         else {
             document.body.style.cursor = "ew-resize";
         }
+        SplitPane.dragLayer = document.body.querySelector(":scope>.DragLayer");
+        if (SplitPane.dragLayer === null) {
+            SplitPane.dragLayer = document.createElement("div");
+            SplitPane.dragLayer.classList.add("DragLayer");
+            document.body.appendChild(SplitPane.dragLayer);
+        }
+        SplitPane.dragLayer.style.visibility = "inherit";
+        /*
         SplitPane.leftComponent.style.pointerEvents = "none";
         SplitPane.rightComponent.style.pointerEvents = "none";
         SplitPane.leftComponent.style.userSelect = "none";
         SplitPane.rightComponent.style.userSelect = "none";
+        */
         document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
         document.addEventListener("pointermove", SplitPane.pointermove);
         document.addEventListener("pointerup", SplitPane.pointerup);
@@ -344,20 +354,28 @@ var SplitPane = /** @class */ (function () {
             SplitPane.leftComponent.style.width = percentage + "%";
             SplitPane.rightComponent.style.width = (100 - percentage) + "%";
         }
+        ev.preventDefault();
     };
     SplitPane.pointerup = function (ev) {
+        console.log("pointerup");
         SplitPane.dragStart = false;
         document.removeEventListener("touchmove", SplitPane.preventTouchMove);
         document.removeEventListener("pointermove", SplitPane.pointermove);
         document.removeEventListener("pointerup", SplitPane.pointerup);
         document.removeEventListener("dragstart", SplitPane.dragstart);
+        /*
         SplitPane.leftComponent.style.pointerEvents = "";
         SplitPane.rightComponent.style.pointerEvents = "";
         SplitPane.leftComponent.style.userSelect = "";
         SplitPane.rightComponent.style.userSelect = "";
+        */
         document.body.style.cursor = "";
+        if (SplitPane.dragLayer !== null) {
+            SplitPane.dragLayer.style.visibility = "hidden";
+        }
     };
     SplitPane.dragstart = function (ev) {
+        console.log("dragstart: " + ev.target);
         if (ev.target === SplitPane.splitPaneDivider) {
             SplitPane.pointerup(ev);
             ev.preventDefault();
