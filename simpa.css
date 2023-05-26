@@ -610,7 +610,6 @@ body {
     position: sticky !important;
     inset-block-start: 0 !important;
     background-color: WhiteSmoke;
-    z-index: 1;
 }
 
 .ScrollTable:not([data-show-grid="false"]) {
