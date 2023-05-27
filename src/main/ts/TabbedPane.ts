@@ -190,10 +190,8 @@ class CardContainer {
 			const cardComponent: HTMLElement = cardContainer.children[i] as HTMLElement;
 			if (i === selectedIndex) {
 				cardComponent.style.visibility = "";
-				/*
 				cardComponent.tabIndex = -1;
 				cardComponent.focus();
-				*/
 			} else {
 				cardComponent.style.visibility = "hidden";
 				cardComponent.removeAttribute("tabindex");
