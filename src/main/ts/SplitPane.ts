@@ -68,7 +68,7 @@ class SplitPane {
       SplitPane.dragLayer.classList.add("DragLayer");
       document.body.appendChild(SplitPane.dragLayer);
     }
-    SplitPane.dragLayer.style.visibility = "inherit";
+    SplitPane.dragLayer.style.visibility = "";
     ev.preventDefault();
   }
 

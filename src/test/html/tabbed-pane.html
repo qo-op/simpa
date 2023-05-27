@@ -65,7 +65,7 @@
             <!-- tabbed pane -->
             <div class="TabbedPane">
                 <!-- tab container -->
-                <div class="TabContainer">
+                <div class="TabLayout">
                     <!-- tab1 -->
                     <div class="TabComponent BoxLayout" onpointerdown="pointerdown(event);"
                         style="gap: 5px; padding-inline: 5px;" name="first" data-selected>
@@ -99,21 +99,21 @@
                     </div>
                 </div>
                 <!-- card container -->
-                <div class="CardContainer">
+                <div class="CardLayout">
                     <!-- card1 -->
-                    <div class="CardComponent CenterLayout" name="first" style="visibility: inherit;">
+                    <div class="CardComponent CenterLayout" name="first">
                         <span>Panel #1</span>
                     </div>
                     <!-- card2 -->
-                    <div class="CardComponent CenterLayout" name="second">
+                    <div class="CardComponent CenterLayout" name="second" style="visibility: hidden;">
                         <span>Panel #2</span>
                     </div>
                     <!-- card3 -->
-                    <div class="CardComponent CenterLayout" name="third">
+                    <div class="CardComponent CenterLayout" name="third" style="visibility: hidden;">
                         <span>Panel #3</span>
                     </div>
                     <!-- card4 -->
-                    <div class="CardComponent CenterLayout" name="fourth">
+                    <div class="CardComponent CenterLayout" name="fourth" style="visibility: hidden;">
                         <span>Panel #4</span>
                     </div>
                 </div>

@@ -330,7 +330,7 @@ var SplitPane = /** @class */ (function () {
             SplitPane.dragLayer.classList.add("DragLayer");
             document.body.appendChild(SplitPane.dragLayer);
         }
-        SplitPane.dragLayer.style.visibility = "inherit";
+        SplitPane.dragLayer.style.visibility = "";
         ev.preventDefault();
     };
     SplitPane.pointermove = function (ev) {
@@ -546,7 +546,7 @@ var CardContainer = /** @class */ (function () {
     CardContainer.getSelectedIndex = function (cardContainer) {
         for (var i = 0; i < cardContainer.children.length; i++) {
             var cardComponent = cardContainer.children[i];
-            if (cardComponent.style.visibility === "inherit") {
+            if (cardComponent.style.visibility !== "hidden") {
                 return i;
             }
         }
@@ -556,7 +556,7 @@ var CardContainer = /** @class */ (function () {
         for (var i = 0; i < cardContainer.children.length; i++) {
             var cardComponent = cardContainer.children[i];
             if (i === selectedIndex) {
-                cardComponent.style.visibility = "inherit";
+                cardComponent.style.visibility = "";
                 cardComponent.focus();
             }
             else {
