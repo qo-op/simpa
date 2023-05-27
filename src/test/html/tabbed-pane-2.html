@@ -11,6 +11,11 @@
 
     <link rel="stylesheet" href="../../../simpa.css">
     <script src="../../../simpa.js"></script>
+    <script>
+        function focusGained(ev) {
+            console.log("focus");
+        }
+    </script>
 </head>
 
 <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
@@ -38,11 +43,11 @@
             <!-- card layout -->
             <div class="CardLayout">
                 <!-- card component -->
-                <div class="CenterLayout" data-name="Card 1" style="visibility: hidden;">
+                <div class="CenterLayout" data-name="Card 1" style="visibility: hidden;" onfocus="focusGained(event);">
                     <span>Panel #1</span>
                 </div>
                 <!-- card component selected -->
-                <div class="CenterLayout" data-name="Card 2">
+                <div class="CenterLayout" data-name="Card 2" onfocus="focusGained(event);">
                     <span>Panel #2</span>
                 </div>
             </div>
