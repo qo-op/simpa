@@ -186,8 +186,8 @@ body {
 
 .CardLayout {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 1fr !important;
+    grid-template-columns: 1fr !important;
 }
 
 .CardLayout>* {
@@ -310,8 +310,8 @@ body {
     z-index: 200 !important;
     background-color: rgba(0, 0, 0, 0.25);
     display: grid;
-    grid-template-rows: minmax(0, 1fr);
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
     align-items: center;
     justify-content: center;
 }
@@ -340,8 +340,8 @@ body {
 
 .LayeredPane {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 1fr !important;
+    grid-template-columns: 1fr !important;
 }
 
 .LayeredPane>* {
@@ -531,8 +531,8 @@ body {
 
 .ScrollTable {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 1fr !important;
+    grid-template-columns: 1fr !important;
     overflow: auto !important;
     overscroll-behavior: none;
 }
@@ -757,8 +757,8 @@ body {
 .TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"],
 .TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"] {
     display: grid !important;
-    grid-template-rows: auto minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto 1fr !important;
+    grid-template-columns: 1fr auto !important;
 }
 
 .TabbedPane>:first-child,
@@ -795,8 +795,8 @@ body {
 .TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"],
 .TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"] {
     display: grid !important;
-    grid-template-rows: minmax(0, 1fr) auto !important;
-    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: 1fr auto !important;
+    grid-template-columns: 1fr auto !important;
 }
 
 .TabbedPane[data-tab-placement="page-end"]>:first-child,
@@ -824,8 +824,8 @@ body {
 .TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"],
 .TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"] {
     display: grid !important;
-    grid-template-rows: auto minmax(0, 1fr) !important;
-    grid-template-columns: auto minmax(0, 1fr) !important;
+    grid-template-rows: auto 1fr !important;
+    grid-template-columns: auto 1fr !important;
 }
 
 .TabbedPane[data-tab-placement="line-start"]>:not(:first-child):not(:last-child),
@@ -853,8 +853,8 @@ body {
 .TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"],
 .TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"] {
     display: grid !important;
-    grid-template-rows: auto minmax(0, 1fr) !important;
-    grid-template-columns: minmax(0, 1fr) auto !important;
+    grid-template-rows: auto 1fr !important;
+    grid-template-columns: 1fr auto !important;
 }
 
 .TabbedPane[data-tab-placement="line-end"]>:not(:first-child):not(:last-child),
