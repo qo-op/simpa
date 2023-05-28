@@ -211,6 +211,9 @@ class TabComponent {
 		if (!tabContainer) {
 			return;
 		}
+		if (!tabContainer.classList.contains("TabLayout")) {
+			return;
+		}
 		const tabbedPane: HTMLElement = tabContainer.parentElement;
 		if (!tabbedPane) {
 			return;

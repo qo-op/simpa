@@ -580,6 +580,9 @@ var TabComponent = /** @class */ (function () {
         if (!tabContainer) {
             return;
         }
+        if (!tabContainer.classList.contains("TabLayout")) {
+            return;
+        }
         var tabbedPane = tabContainer.parentElement;
         if (!tabbedPane) {
             return;
