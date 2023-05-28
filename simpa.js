@@ -557,14 +557,10 @@ var CardContainer = /** @class */ (function () {
             var cardComponent = cardContainer.children[i];
             if (i === selectedIndex) {
                 cardComponent.style.visibility = "";
-                cardComponent.tabIndex = -1;
-                if (cardComponent.onfocus) {
-                    cardComponent.focus();
-                }
+                cardComponent.focus();
             }
             else {
                 cardComponent.style.visibility = "hidden";
-                cardComponent.removeAttribute("tabindex");
             }
         }
     };
