@@ -191,7 +191,9 @@ class CardContainer {
 			if (i === selectedIndex) {
 				cardComponent.style.visibility = "";
 				cardComponent.tabIndex = -1;
-				cardComponent.focus();
+				if (cardComponent.onfocus) {
+					cardComponent.focus();
+				}
 			} else {
 				cardComponent.style.visibility = "hidden";
 				cardComponent.removeAttribute("tabindex");

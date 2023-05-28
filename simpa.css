@@ -615,6 +615,7 @@ body {
     position: sticky !important;
     inset-block-start: 0 !important;
     background-color: WhiteSmoke;
+    /* -webkit-transform: translate3d(0,0,0); */
 }
 
 .ScrollTable:not([data-show-grid="false"]) {
