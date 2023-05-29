@@ -201,26 +201,22 @@ body {
  */
 
 .FlowLayout {
-    display: grid !important;
-}
-
-.FlowLayout>* {
     display: flex !important;
     flex-wrap: wrap !important;
     align-content: start !important;
     align-items: center;
 }
 
-.FlowLayout>*,
-.FlowLayout[data-alignment="center"]>* {
+.FlowLayout,
+.FlowLayout[data-alignment="center"] {
     justify-content: center !important;
 }
 
-.FlowLayout[data-alignment="leading"]>* {
+.FlowLayout[data-alignment="leading"] {
     justify-content: start !important;
 }
 
-.FlowLayout[data-alignment="trailing"]>* {
+.FlowLayout[data-alignment="trailing"] {
     justify-content: end !important;
 }
 
