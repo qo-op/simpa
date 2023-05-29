@@ -580,9 +580,6 @@ var TabComponent = /** @class */ (function () {
         if (!tabContainer) {
             return;
         }
-        if (!tabContainer.classList.contains("TabLayout")) {
-            return;
-        }
         var tabbedPane = tabContainer.parentElement;
         if (!tabbedPane) {
             return;
@@ -592,6 +589,9 @@ var TabComponent = /** @class */ (function () {
         }
         var cardContainer = tabbedPane.children[tabbedPane.childElementCount - 1];
         if (cardContainer === null) {
+            return;
+        }
+        if (cardContainer === tabContainer) {
             return;
         }
         TabContainer.setSelectedTabComponent(tabContainer, cardContainer, tabComponent);

@@ -211,9 +211,6 @@ class TabComponent {
 		if (!tabContainer) {
 			return;
 		}
-		if (!tabContainer.classList.contains("TabLayout")) {
-			return;
-		}
 		const tabbedPane: HTMLElement = tabContainer.parentElement;
 		if (!tabbedPane) {
 			return;
@@ -223,6 +220,9 @@ class TabComponent {
 		}
 		const cardContainer: HTMLElement = tabbedPane.children[tabbedPane.childElementCount - 1] as HTMLElement;
 		if (cardContainer === null) {
+			return;
+		}
+		if (cardContainer === tabContainer) {
 			return;
 		}
 		TabContainer.setSelectedTabComponent(tabContainer, cardContainer, tabComponent);
