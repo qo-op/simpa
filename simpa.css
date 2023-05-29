@@ -1008,7 +1008,7 @@ body {
  * Tab component layout
  */
 
-.TabbedPane>.TabLayout>button {
+.TabbedPane>.TabLayout>button>:first-child {
     display: grid !important;
     align-content: stretch !important;
     justify-content: start !important;
@@ -1016,14 +1016,14 @@ body {
     gap: .5em;
 }
 
-.TabbedPane>.TabLayout>button>* {
+.TabbedPane>.TabLayout>button>:first-child>* {
     grid-row: 1 !important;
     grid-column: unset !important;
 }
 
 
-.TabbedPane>.TabLayout>button>:first-child,
-.TabbedPane>.TabLayout>button>:last-child {
+.TabbedPane>.TabLayout>button>:first-child>:first-child,
+.TabbedPane>.TabLayout>button>:first-child>:last-child {
     min-width: 1em;
     font-size: 1em;
 }
