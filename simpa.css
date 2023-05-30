@@ -309,18 +309,8 @@ body {
     background-color: White;
 }
 
-.TitleBorder>h1,
-.TitleBorder>h2,
-.TitleBorder>h3,
-.TitleBorder>h4,
-.TitleBorder>h5,
-.TitleBorder>h6,
-.TitleBorder[data-title-justification="leading"]>h1,
-.TitleBorder[data-title-justification="leading"]>h2,
-.TitleBorder[data-title-justification="leading"]>h3,
-.TitleBorder[data-title-justification="leading"]>h4,
-.TitleBorder[data-title-justification="leading"]>h5,
-.TitleBorder[data-title-justification="leading"]>h6 {
+.TitleBorder>:first-child,
+.TitleBorder[data-title-justification="leading"]>:first-child {
     font-size: inherit !important;
     font-weight: inherit !important;
     margin: 0 !important;
@@ -333,21 +323,11 @@ body {
     justify-self: start !important;
 }
 
-.TitleBorder[data-title-justification="center"]>h1,
-.TitleBorder[data-title-justification="center"]>h2,
-.TitleBorder[data-title-justification="center"]>h3,
-.TitleBorder[data-title-justification="center"]>h4,
-.TitleBorder[data-title-justification="center"]>h5,
-.TitleBorder[data-title-justification="center"]>h6 {
+.TitleBorder[data-title-justification="center"]>:first-child {
     justify-self: center !important;
 }
 
-.TitleBorder[data-title-justification="trailing"]>h1,
-.TitleBorder[data-title-justification="trailing"]>h2,
-.TitleBorder[data-title-justification="trailing"]>h3,
-.TitleBorder[data-title-justification="trailing"]>h4,
-.TitleBorder[data-title-justification="trailing"]>h5,
-.TitleBorder[data-title-justification="trailing"]>h6 {
+.TitleBorder[data-title-justification="trailing"]>:first-child {
     justify-self: end !important;
 }
 
