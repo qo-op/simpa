@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .titled-border {
+      position: relative;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .titled-border::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      width: 80px;
+      height: 20px;
+      background-color: #fff;
+      transform: rotate(-5deg);
+      border: 1px solid #ccc;
+    }
+
+    .titled-border h2 {
+      position: relative;
+      display: inline-block;
+      background-color: #fff;
+      padding: 0 10px;
+    }
+
+    .titled-border p {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="titled-border">
+    <h2>Title</h2>
+    <p>Content goes here...</p>
+  </div>
+</body>
+</html>
