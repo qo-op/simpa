@@ -302,7 +302,7 @@ body {
 
 .TitleBorder {
     margin-top: .5em !important;
-    padding-top: .5em !important;
+    padding-top: .7em !important;
     display: grid !important;
     position: relative !important;
     border: 1px solid rgba(0, 0, 0, 0.5);
