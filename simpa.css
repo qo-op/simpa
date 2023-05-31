@@ -304,8 +304,8 @@ body {
 }
 
 .TitleBorder {
-    margin-top: .5em !important;
-    padding-top: .7em !important;
+    margin-top: .6em !important;
+    padding-top: .6em !important;
     display: grid !important;
     position: relative !important;
     overflow: visible !important;
@@ -321,7 +321,7 @@ body {
     padding: 0 !important;
     margin-inline: .5em !important;
     position: absolute !important;
-    top: -.5em !important;
+    top: calc(-.6em - .5px) !important;
     background-color: inherit !important;
     padding-inline: .5em !important;
     justify-self: start !important;
@@ -333,6 +333,17 @@ body {
 
 .TitleBorder[data-title-justification="trailing"]>:first-child {
     justify-self: end !important;
+}
+
+.CompoundBorder {
+    display: grid !important;
+    grid-template-rows: 1fr !important;
+    grid-template-columns: 1fr !important;
+}
+
+.CompoundBorder>* {
+    grid-row: 1 !important;
+    grid-column: 1 !important;
 }
 
 /**
@@ -359,19 +370,23 @@ body {
     width: 100% !important;
     height: 100% !important;
     z-index: 200 !important;
+    /*
     background-color: rgba(0, 0, 0, 0.25);
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
     align-items: center;
     justify-content: center;
+    */
 }
 
+/*
 .ModalLayer>* {
     grid-row: 1 !important;
     grid-column: 1 !important;
     overflow: hidden;
 }
+*/
 
 /**
  * Drag layer
