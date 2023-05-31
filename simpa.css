@@ -284,10 +284,12 @@ body {
     justify-items: stretch !important;
 }
 
+/*
 .GridBagConstraints>* {
     grid-row: 1 !important;
     grid-column: 1 !important;
 }
+*/
 
 /**
  * Borders
@@ -362,7 +364,7 @@ body {
     user-select: none;
 }
 
-.Dialog .DialogTitleBar * {
+.Dialog .DialogTitleBar :not(button) {
     pointer-events: none;
 }
 
