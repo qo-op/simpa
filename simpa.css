@@ -304,6 +304,7 @@ body {
 }
 
 .TitleBorder {
+    line-height: 1.0 !important;
     margin-top: .6em !important;
     padding-top: .6em !important;
     display: grid !important;
@@ -321,7 +322,7 @@ body {
     padding: 0 !important;
     margin-inline: .5em !important;
     position: absolute !important;
-    top: calc(-.6em - .5px) !important;
+    top: calc(-.5em - .5px) !important;
     background-color: inherit !important;
     padding-inline: .5em !important;
     justify-self: start !important;
