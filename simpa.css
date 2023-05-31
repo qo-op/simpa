@@ -24,55 +24,50 @@ body {
     grid-template-columns: auto 1fr auto !important;
 }
 
-.BorderLayout>:not(.PageStart):not(.PageEnd):not(.LineStart):not(.LineEnd):not(.Center) {
+.BorderLayout>* {
     grid-row: 2 !important;
     grid-column: 2 !important;
     overflow: hidden;
 }
 
+.BorderLayout>.North,
 .BorderLayout>.PageStart {
     grid-row: 1 !important;
     grid-column: 1 / -1 !important;
-    display: grid !important;
+    overflow: unset;
 }
 
+.BorderLayout>.South,
 .BorderLayout>.PageEnd {
     grid-row: 3 !important;
     grid-column: 1 / -1 !important;
-    display: grid !important;
+    overflow: unset;
 }
 
+.BorderLayout>.West,
 .BorderLayout>.LineStart {
     grid-row: 2 !important;
     grid-column: 1 !important;
-    display: grid !important;
+    overflow: unset;
 }
 
+.BorderLayout>.East,
 .BorderLayout>.LineEnd {
     grid-row: 2 !important;
     grid-column: 3 !important;
-    display: grid !important;
+    overflow: unset;
 }
 
 .BorderLayout>.Center {
     grid-row: 2 !important;
     grid-column: 2 !important;
-    display: grid !important;
+    overflow: unset;
 }
 
-.BorderLayout>.PageStart>*,
-.BorderLayout>.PageEnd>*,
-.BorderLayout>.LineStart>*,
-.BorderLayout>.LineEnd>*,
-.BorderLayout>.Center>* {
-    grid-row: 1 !important;
-    grid-column: 1 !important;
-}
-
-.BorderLayout>.Center>* {
-    overflow: hidden;
-}
-
+.BorderLayout>.North,
+.BorderLayout>.South,
+.BorderLayout>.West,
+.BorderLayout>.East,
 .BorderLayout>.PageStart,
 .BorderLayout>.PageEnd,
 .BorderLayout>.LineStart,
@@ -81,6 +76,10 @@ body {
     display: grid !important;
 }
 
+.BorderLayout>.North>*,
+.BorderLayout>.South>*,
+.BorderLayout>.West>*,
+.BorderLayout>.East>*,
 .BorderLayout>.PageStart>*,
 .BorderLayout>.PageEnd>*,
 .BorderLayout>.LineStart>*,
@@ -88,6 +87,10 @@ body {
 .BorderLayout>.Center>* {
     grid-row: 1 !important;
     grid-column: 1 !important;
+}
+
+.BorderLayout>.Center>* {
+    overflow: hidden;
 }
 
 /**
