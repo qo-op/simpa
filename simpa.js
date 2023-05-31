@@ -23,13 +23,19 @@ var Dialog = /** @class */ (function () {
     };
     Dialog.dragStart = false;
     Dialog.pointerdown = function (ev) {
+        var dialogTitleBar;
         var target = ev.target;
-        if (!target.classList.contains("DialogTitleBar")) {
-            return;
+        if (target.classList.contains("DialogTitleBar")) {
+            dialogTitleBar = target;
+        }
+        else {
+            dialogTitleBar = target.closest(".DialogTitleBar");
+            if (dialogTitleBar === null) {
+                return;
+            }
         }
         Dialog.dragStart = true;
-        var dialogTitle = target;
-        Dialog.dialog = dialogTitle.closest(".Dialog");
+        Dialog.dialog = dialogTitleBar.closest(".Dialog");
         var rect = Dialog.dialog.getBoundingClientRect();
         Dialog.x = ev.clientX - rect.left;
         Dialog.y = ev.clientY - rect.top;

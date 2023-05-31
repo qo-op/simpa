@@ -26,13 +26,18 @@ class Dialog {
 	static y: number;
 
 	static pointerdown = (ev: PointerEvent) => {
+		let dialogTitleBar: HTMLElement;
 		const target: HTMLElement = ev.target as HTMLElement;
-		if (!target.classList.contains("DialogTitleBar")) {
-			return;
+		if (target.classList.contains("DialogTitleBar")) {
+			dialogTitleBar = target;
+		} else {
+			dialogTitleBar = target.closest(".DialogTitleBar");
+			if (dialogTitleBar === null) {
+				return;
+			}
 		}
 		Dialog.dragStart = true;
-		const dialogTitle: HTMLElement = target;
-		Dialog.dialog = dialogTitle.closest(".Dialog");
+		Dialog.dialog = dialogTitleBar.closest(".Dialog");
 		var rect = Dialog.dialog.getBoundingClientRect();
 		Dialog.x = ev.clientX - rect.left;
 		Dialog.y = ev.clientY - rect.top;

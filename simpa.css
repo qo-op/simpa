@@ -364,9 +364,11 @@ body {
     user-select: none;
 }
 
-.Dialog .DialogTitleBar :not(button) {
+/*
+.Dialog .DialogTitleBar * {
     pointer-events: none;
 }
+*/
 
 .ModalLayer {
     position: fixed !important;
