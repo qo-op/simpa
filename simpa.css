@@ -73,9 +73,10 @@ body {
 .BorderLayout>.LineStart,
 .BorderLayout>.LineEnd,
 .BorderLayout>.Center {
-    display: grid !important;
+    display: grid;
 }
 
+/*
 .BorderLayout>.North>*,
 .BorderLayout>.South>*,
 .BorderLayout>.West>*,
@@ -88,6 +89,7 @@ body {
     grid-row: 1 !important;
     grid-column: 1 !important;
 }
+*/
 
 .BorderLayout>.Center>* {
     overflow: hidden;
