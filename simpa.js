@@ -39,6 +39,8 @@ var Dialog = /** @class */ (function () {
         var rect = Dialog.dialog.getBoundingClientRect();
         Dialog.x = ev.clientX - rect.left;
         Dialog.y = ev.clientY - rect.top;
+        Dialog.width = rect.width;
+        Dialog.height = rect.height;
         Dialog.dialog.style.position = "absolute";
         Dialog.dialog.style.top = rect.top + "px";
         Dialog.dialog.style.left = rect.left + "px";
@@ -51,8 +53,8 @@ var Dialog = /** @class */ (function () {
         if (!Dialog.dragStart) {
             return;
         }
-        Dialog.dialog.style.top = (ev.clientY - Dialog.y) + "px";
-        Dialog.dialog.style.left = (ev.clientX - Dialog.x) + "px";
+        Dialog.dialog.style.top = Math.min(Math.max(ev.clientY - Dialog.y, 0), window.innerHeight - Dialog.height) + "px";
+        Dialog.dialog.style.left = Math.min(Math.max(ev.clientX - Dialog.x, 0), window.innerWidth - Dialog.width) + "px";
     };
     Dialog.pointerup = function (ev) {
         Dialog.dragStart = false;
