@@ -460,8 +460,10 @@ body {
 }
 
 .ModalLayer>* {
+    /*
     grid-row: 1;
     grid-column: 1;
+    */
     overflow: hidden;
 }
 
