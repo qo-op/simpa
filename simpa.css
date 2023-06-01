@@ -394,37 +394,37 @@ body {
 
 .LoweredEtchedBorder {
     position: relative !important;
-    margin: 2px;
-    border: 2px solid;
+    margin: 1px;
+    border: 1px solid;
     border-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5);
 }
 
 .LoweredEtchedBorder::before {
     content: "" !important;
     position: absolute !important;
-    top: -4px;
-    left: -4px;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    border: 2px solid;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    border: 1px solid;
     border-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5);
 }
 
 .RaisedEtchedBorder {
     position: relative !important;
-    margin: 2px;
-    border: 2px solid;
+    margin: 1px;
+    border: 1px solid;
     border-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5);
 }
 
 .RaisedEtchedBorder::before {
     content: "" !important;
     position: absolute !important;
-    top: -4px;
-    left: -4px;
-    width: calc(100% + 4px);
-    height: calc(100% + 4px);
-    border: 2px solid;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 2px);
+    height: calc(100% + 2px);
+    border: 1px solid;
     border-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5);
 }
 
