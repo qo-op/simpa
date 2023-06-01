@@ -1,41 +1,56 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <style>
-    .titled-border {
-      position: relative;
-      padding: 20px;
-      border: 1px solid #ccc;
-    }
-
-    .titled-border::after {
-      content: "";
-      position: absolute;
-      top: -10px;
-      left: 20px;
-      width: 80px;
-      height: 20px;
-      background-color: #fff;
-      transform: rotate(-5deg);
-      border: 1px solid #ccc;
-    }
-
-    .titled-border h2 {
-      position: relative;
-      display: inline-block;
-      background-color: #fff;
-      padding: 0 10px;
-    }
-
-    .titled-border p {
-      margin-top: 20px;
-    }
-  </style>
+    <link rel="stylesheet" href="../../../simpa.css">
 </head>
-<body>
-  <div class="titled-border">
-    <h2>Title</h2>
-    <p>Content goes here...</p>
-  </div>
+
+<body class="CenterLayout">
+    <!--
+    <div style="margin-top: .5em;
+                border: 1px solid Gray;
+                background-color: White;
+                padding-top: .5em;
+                display: grid;
+                position: relative;">
+        <h1 style="font-size: inherit;
+                   font-weight: inherit;
+                   margin: 0;
+                   padding: 0;
+                   margin-inline-start: .5em;
+                   position: absolute;
+                   top: -.5em;
+                   background-color: inherit;
+                   padding-inline: .5em;
+                   justify-self: start;">title</h1>
+            Hello, World!
+    </div>
+    -->
+    <div class="BoxLayout" style="gap: .5em;">
+        <div class="TitleBorder"
+             data-title-justification="trailing">
+            <h6>title</h6>
+            Hello, World!
+        </div>
+        <div class="TitledBorder"
+             data-title-justification="center">
+            <h6>title</h6>
+            Hello, World!
+        </div>
+        <div class="TitledBorder">
+            <span>title</span>
+            Hello, World!
+        </div>
+        <div class="TitledBorder"
+             data-title-justification="trailing">
+            <span>title</span>
+            Hello, World!
+        </div>
+        <div class="LoweredBevelBorder">
+            Hello, World!
+        </div>
+        <div class="RaisedBevelBorder">
+            Hello, World!
+        </div>
+    </div>
 </body>
-</html>

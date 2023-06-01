@@ -307,6 +307,53 @@ body {
     border-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5);
 }
 
+.TitledBorder {
+    margin-top: .6em !important;
+    padding-top: .6em !important;
+    position: relative !important;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    background-color: White;
+}
+
+.TitledBorder>:first-child,
+.TitledBorder[data-title-justification="leading"]>:first-child {
+    position: absolute !important;
+    top: calc(-.5em - .5px) !important;
+    left: .5em !important;
+    margin: 0 !important;
+    background-color: inherit !important;
+    padding: 0 .5em !important;
+    line-height: 1.0 !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+}
+
+.TitledBorder[data-title-justification="center"]>:first-child {
+    position: absolute !important;
+    top: calc(-.5em - .5px) !important;
+    left: 50% !important;
+    transform: translate(-50%, 0) !important;
+    margin: 0 !important;
+    background-color: inherit !important;
+    padding: 0 .5em !important;
+    line-height: 1.0 !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+}
+
+.TitledBorder[data-title-justification="trailing"]>:first-child {
+    position: absolute !important;
+    top: calc(-.5em - .5px) !important;
+    left: calc(100% - .5em) !important;
+    transform: translate(-100%, 0) !important;
+    margin: 0 !important;
+    background-color: inherit !important;
+    padding: 0 .5em !important;
+    line-height: 1.0 !important;
+    font-size: inherit !important;
+    font-weight: inherit !important;
+}
+
 .TitleBorder {
     line-height: 1.0 !important;
     margin-top: .6em !important;
@@ -363,12 +410,6 @@ body {
 .Dialog .DialogTitleBar {
     user-select: none;
 }
-
-/*
-.Dialog .DialogTitleBar * {
-    pointer-events: none;
-}
-*/
 
 .ModalLayer {
     position: fixed !important;
