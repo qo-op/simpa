@@ -10,11 +10,6 @@
 if (window["Dialog"]) {
     document.removeEventListener("pointerdown", window["Dialog"].pointerdown);
 }
-/**
- * Dialog
- *
- * @author Yassuo Toda
- */
 var Dialog = /** @class */ (function () {
     function Dialog() {
     }
@@ -273,6 +268,207 @@ var MenuBar = /** @class */ (function () {
     return MenuBar;
 }());
 document.addEventListener("pointerdown", MenuBar.pointerdown);
+/**
+ * OptionPane
+ *
+ * Based on the javax.swing.JOptionPane
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JOptionPane.html
+ *
+ * @author Yassuo Toda
+ */
+var OptionPane = /** @class */ (function () {
+    function OptionPane() {
+    }
+    OptionPane.createDialog = function (resolve, message, title, messageType, icon) {
+        var dialog = document.createElement("div");
+        dialog.classList.add("Dialog");
+        dialog.classList.add("BorderLayout");
+        var dialogTitleBar = OptionPane.createDialogTitleBar();
+        dialogTitleBar.classList.add("PageStart");
+        dialog.appendChild(dialogTitleBar);
+        dialogTitleBar.classList.add("BorderLayout");
+        var dialogTitleLabel = OptionPane.createDialogTitleLabel(title);
+        dialogTitleLabel.style.paddingInline = ".5em";
+        dialogTitleBar.appendChild(dialogTitleLabel);
+        var dialogContentPane = OptionPane.createDialogContentPane();
+        dialog.appendChild(dialogContentPane);
+        dialogContentPane.style.padding = ".5em";
+        dialogContentPane.classList.add("BorderLayout");
+        var dialogMainPane = OptionPane.createDialogMainPane();
+        dialogMainPane.style.marginBlockEnd = ".5em";
+        dialogContentPane.appendChild(dialogMainPane);
+        dialogMainPane.classList.add("BorderLayout");
+        var dialogIconPane = OptionPane.createDialogIconPane();
+        dialogIconPane.classList.add("LineStart");
+        dialogMainPane.appendChild(dialogIconPane);
+        dialogIconPane.classList.add("CenterLayout");
+        if (icon) {
+            var dialogIcon = OptionPane.createCustomIcon(icon);
+            dialogIconPane.appendChild(dialogIcon);
+            dialogIconPane.style.marginInlineEnd = ".5em";
+        }
+        else {
+            var dialogIcon = OptionPane.createDialogIcon(messageType);
+            if (dialogIcon !== null) {
+                dialogIconPane.appendChild(dialogIcon);
+                dialogIconPane.style.marginInlineEnd = ".5em";
+            }
+        }
+        var dialogMessageInputPane = OptionPane.createDialogMessageInputPane();
+        dialogMainPane.appendChild(dialogMessageInputPane);
+        dialogMessageInputPane.classList.add("BorderLayout");
+        var dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
+        dialogMessageInputPane.appendChild(dialogMessageLabel);
+        var dialogButtonPane = OptionPane.createDialogButtonPane();
+        dialogButtonPane.classList.add("PageEnd");
+        dialogContentPane.appendChild(dialogButtonPane);
+        dialogButtonPane.classList.add("FlowLayout");
+        dialogButtonPane.style.gap = ".5em";
+        var dialogOkButton = OptionPane.createDialogOkButton();
+        dialogButtonPane.appendChild(dialogOkButton);
+        dialogOkButton.onclick = function (ev) {
+            var button = ev.currentTarget;
+            resolve(button.textContent);
+            var dialog = button.closest(".Dialog");
+            dialog.remove();
+            var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+            if (modalLayer !== null) {
+                modalLayer.style.visibility = "hidden";
+            }
+        };
+        return dialog;
+    };
+    OptionPane.createDialogTitleBar = function () {
+        var dialogTitleBar = document.createElement("div");
+        dialogTitleBar.classList.add("DialogTitleBar");
+        return dialogTitleBar;
+    };
+    OptionPane.createDialogTitleLabel = function (title) {
+        var dialogTitleLabel = document.createElement("span");
+        dialogTitleLabel.textContent = title;
+        return dialogTitleLabel;
+    };
+    OptionPane.createDialogContentPane = function () {
+        var dialogContentPane = document.createElement("div");
+        return dialogContentPane;
+    };
+    OptionPane.createDialogMainPane = function () {
+        var dialogMainPane = document.createElement("div");
+        return dialogMainPane;
+    };
+    OptionPane.createDialogIconPane = function () {
+        var dialogIconPane = document.createElement("div");
+        return dialogIconPane;
+    };
+    OptionPane.createCustomIcon = function (icon) {
+        var customIcon = document.createElement("img");
+        customIcon.src = icon;
+        customIcon.alt = "Custom icon";
+        return customIcon;
+    };
+    OptionPane.createDialogIcon = function (messageType) {
+        switch (messageType) {
+            case "error":
+                var errorIcon = OptionPane.createErrorIcon();
+                errorIcon.style.fill = "Red";
+                errorIcon.style.width = "24px";
+                return errorIcon;
+            case "information":
+                var informationIcon = OptionPane.createInformationIcon();
+                informationIcon.style.fill = "Blue";
+                informationIcon.style.width = "24px";
+                return informationIcon;
+            case "warning":
+                var warningIcon = OptionPane.createWarningIcon();
+                warningIcon.style.fill = "GoldenRod";
+                warningIcon.style.width = "24px";
+                return warningIcon;
+            case "question":
+                var questionIcon = OptionPane.createQuestionIcon();
+                questionIcon.style.fill = "Green";
+                questionIcon.style.width = "24px";
+                return questionIcon;
+            case "plain":
+                return null;
+        }
+    };
+    OptionPane.createDialogMessageInputPane = function () {
+        var dialogMessageInputPane = document.createElement("div");
+        return dialogMessageInputPane;
+    };
+    OptionPane.createDialogMessageLabel = function (message) {
+        var dialogMessageLabel = document.createElement("div");
+        dialogMessageLabel.classList.add("CenterLayout");
+        dialogMessageLabel.textContent = message;
+        return dialogMessageLabel;
+    };
+    OptionPane.createDialogButtonPane = function () {
+        var dialogButtonPane = document.createElement("div");
+        return dialogButtonPane;
+    };
+    OptionPane.createDialogOkButton = function () {
+        var dialogOkButton = document.createElement("button");
+        dialogOkButton.classList.add("DialogOkButton");
+        return dialogOkButton;
+    };
+    /*
+     * Icons designed by Google.
+     * Icons sourced from Material-UI (mui.com) Material Icons collection.
+     * You can find the original icons and more at: https://mui.com/material-ui/material-icons/
+     */
+    OptionPane.createErrorIcon = function () {
+        var errorIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        errorIcon.setAttribute("viewBox", "0 0 24 24");
+        var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z");
+        errorIcon.appendChild(path);
+        return errorIcon;
+    };
+    OptionPane.createInformationIcon = function () {
+        var informationIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        informationIcon.setAttribute("viewBox", "0 0 24 24");
+        var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z");
+        informationIcon.appendChild(path);
+        return informationIcon;
+    };
+    OptionPane.createWarningIcon = function () {
+        var warningIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        warningIcon.setAttribute("viewBox", "0 0 24 24");
+        var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z");
+        warningIcon.appendChild(path);
+        return warningIcon;
+    };
+    OptionPane.createQuestionIcon = function () {
+        var questionIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        questionIcon.setAttribute("viewBox", "0 0 24 24");
+        var path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("d", "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z");
+        questionIcon.appendChild(path);
+        return questionIcon;
+    };
+    OptionPane.showMessageDialog = function (message, title, messageType, icon) {
+        if (message === void 0) { message = ""; }
+        if (title === void 0) { title = "Message"; }
+        if (messageType === void 0) { messageType = "information"; }
+        return new Promise(function (resolve, reject) {
+            var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+            if (modalLayer === null) {
+                modalLayer = document.createElement("div");
+                modalLayer.classList.add("ModalLayer");
+                modalLayer.classList.add("CenterLayout");
+                modalLayer.style.visibility = "inherit";
+                document.body.appendChild(modalLayer);
+            }
+            var dialog = OptionPane.createDialog(resolve, message, title, messageType, icon);
+            modalLayer.appendChild(dialog);
+            modalLayer.style.visibility = "inherit";
+        });
+    };
+    return OptionPane;
+}());
 /**
  * SplitPane
  *

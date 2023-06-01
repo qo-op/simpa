@@ -444,7 +444,12 @@ body {
 }
 
 .Dialog .DialogTitleBar {
+    background-color: LightGray;
     user-select: none;
+}
+
+.Dialog .DialogOkButton::after {
+    content: "OK";
 }
 
 .ModalLayer {
@@ -454,9 +459,11 @@ body {
     width: 100% !important;
     height: 100% !important;
     z-index: 200 !important;
+    /*
     display: grid;
     align-items: center;
     justify-items: center;
+    */
 }
 
 .ModalLayer>* {

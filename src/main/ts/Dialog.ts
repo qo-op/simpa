@@ -12,11 +12,6 @@ if (window["Dialog"]) {
 	document.removeEventListener("pointerdown", window["Dialog"].pointerdown);
 }
 
-/**
- * Dialog
- * 
- * @author Yassuo Toda
- */
 class Dialog {
 
 	static dragStart: boolean = false;
