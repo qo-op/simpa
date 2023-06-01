@@ -180,10 +180,12 @@ body {
     justify-items: center !important;
 }
 
+/*
 .CenterLayout>* {
     grid-row: 1 !important;
     grid-column: 1 !important;
 }
+*/
 
 /**
  * CardLayout
@@ -391,11 +393,6 @@ body {
     display: grid !important;
     grid-template-rows: 1fr !important;
     grid-template-columns: 1fr !important;
-}
-
-.CompoundBorder>* {
-    grid-row: 1 !important;
-    grid-column: 1 !important;
 }
 
 /**
