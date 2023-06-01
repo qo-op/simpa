@@ -356,6 +356,7 @@ body {
     font-weight: inherit !important;
 }
 
+/*
 .TitleBorder {
     line-height: 1.0 !important;
     margin-top: .6em !important;
@@ -387,6 +388,43 @@ body {
 
 .TitleBorder[data-title-justification="trailing"]>:first-child {
     justify-self: end !important;
+}
+*/
+
+.LoweredEtchedBorder {
+    position: relative !important;
+    margin: 2px;
+    border: 2px solid;
+    border-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5);
+}
+
+.LoweredEtchedBorder::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -4px;
+    left: -4px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border: 2px solid;
+    border-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5);
+}
+
+.RaisedEtchedBorder {
+    position: relative !important;
+    margin: 2px;
+    border: 2px solid;
+    border-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5);
+}
+
+.RaisedEtchedBorder::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -4px;
+    left: -4px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    border: 2px solid;
+    border-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5) rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5);
 }
 
 .CompoundBorder {
