@@ -7,10 +7,17 @@
     <script src="../../../simpa.js"></script>
     <script>
         function handleButtonClick() {
-            OptionPane.showMessageDialog(
-                "Eggs aren't supposed to be green.",
-                "Message",
-                "question");
+            OptionPane
+                .showConfirmDialog(
+                    "Would you like green eggs and ham?",
+                    "An Inane Question",
+                    "yes-no")
+                .then(input => {
+                    console.log(input);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
     </script>
 </head>

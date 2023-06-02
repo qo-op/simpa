@@ -448,10 +448,6 @@ body {
     user-select: none;
 }
 
-.Dialog .DialogOkButton::after {
-    content: "OK";
-}
-
 .ModalLayer {
     position: fixed !important;
     left: 0 !important;
