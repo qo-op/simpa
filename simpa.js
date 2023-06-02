@@ -298,7 +298,7 @@ var OptionPane = /** @class */ (function () {
             modalLayer.style.visibility = "inherit";
         });
     };
-    OptionPane.createDialog = function (resolve, reject, message, title, optionType, messageType, icon) {
+    OptionPane.createDialog = function (resolve, reject, message, title, optionType, messageType, icon, options, initialValue) {
         try {
             var dialog = document.createElement("div");
             dialog.classList.add("Dialog");
@@ -339,12 +339,12 @@ var OptionPane = /** @class */ (function () {
             dialogMessageInputPane.classList.add("BorderLayout");
             var dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
             dialogMessageInputPane.appendChild(dialogMessageLabel);
-            var dialogButtonPane = OptionPane.createDialogButtonPane();
-            dialogButtonPane.classList.add("PageEnd");
-            dialogContentPane.appendChild(dialogButtonPane);
-            dialogButtonPane.classList.add("FlowLayout");
-            dialogButtonPane.style.gap = ".5em";
-            var handleClick = function (ev) {
+            var dialogButtonPane_1 = OptionPane.createDialogButtonPane();
+            dialogButtonPane_1.classList.add("PageEnd");
+            dialogContentPane.appendChild(dialogButtonPane_1);
+            dialogButtonPane_1.classList.add("FlowLayout");
+            dialogButtonPane_1.style.gap = ".5em";
+            var handleClick_1 = function (ev) {
                 try {
                     var button = ev.currentTarget;
                     resolve(button.textContent);
@@ -359,25 +359,34 @@ var OptionPane = /** @class */ (function () {
                     reject(e);
                 }
             };
-            if (optionType === "default" || optionType === "ok-cancel") {
-                var dialogOkButton = OptionPane.createDialogOkButton("OK");
-                dialogButtonPane.appendChild(dialogOkButton);
-                dialogOkButton.onclick = handleClick;
+            if (options) {
+                options.forEach(function (option) {
+                    var dialogButton = OptionPane.createDialogButton(option);
+                    dialogButtonPane_1.appendChild(dialogButton);
+                    dialogButton.onclick = handleClick_1;
+                });
             }
-            if (optionType === "yes-no" || optionType === "yes-no-cancel") {
-                var dialogYesButton = OptionPane.createDialogYesButton("Yes");
-                dialogButtonPane.appendChild(dialogYesButton);
-                dialogYesButton.onclick = handleClick;
-            }
-            if (optionType === "yes-no" || optionType === "yes-no-cancel") {
-                var dialogNoButton = OptionPane.createDialogNoButton("No");
-                dialogButtonPane.appendChild(dialogNoButton);
-                dialogNoButton.onclick = handleClick;
-            }
-            if (optionType === "yes-no-cancel" || optionType === "ok-cancel") {
-                var dialogCancelButton = OptionPane.createDialogCancelButton("Cancel");
-                dialogButtonPane.appendChild(dialogCancelButton);
-                dialogCancelButton.onclick = handleClick;
+            else {
+                if (optionType === "default" || optionType === "ok-cancel") {
+                    var dialogOkButton = OptionPane.createDialogButton("OK");
+                    dialogButtonPane_1.appendChild(dialogOkButton);
+                    dialogOkButton.onclick = handleClick_1;
+                }
+                if (optionType === "yes-no" || optionType === "yes-no-cancel") {
+                    var dialogYesButton = OptionPane.createDialogButton("Yes");
+                    dialogButtonPane_1.appendChild(dialogYesButton);
+                    dialogYesButton.onclick = handleClick_1;
+                }
+                if (optionType === "yes-no" || optionType === "yes-no-cancel") {
+                    var dialogNoButton = OptionPane.createDialogButton("No");
+                    dialogButtonPane_1.appendChild(dialogNoButton);
+                    dialogNoButton.onclick = handleClick_1;
+                }
+                if (optionType === "yes-no-cancel" || optionType === "ok-cancel") {
+                    var dialogCancelButton = OptionPane.createDialogButton("Cancel");
+                    dialogButtonPane_1.appendChild(dialogCancelButton);
+                    dialogCancelButton.onclick = handleClick_1;
+                }
             }
             return dialog;
         }
@@ -453,25 +462,10 @@ var OptionPane = /** @class */ (function () {
         var dialogButtonPane = document.createElement("div");
         return dialogButtonPane;
     };
-    OptionPane.createDialogOkButton = function (text) {
-        var dialogOkButton = document.createElement("button");
-        dialogOkButton.textContent = text;
-        return dialogOkButton;
-    };
-    OptionPane.createDialogYesButton = function (text) {
-        var dialogYesButton = document.createElement("button");
-        dialogYesButton.textContent = text;
-        return dialogYesButton;
-    };
-    OptionPane.createDialogNoButton = function (text) {
-        var dialogNoButton = document.createElement("button");
-        dialogNoButton.textContent = text;
-        return dialogNoButton;
-    };
-    OptionPane.createDialogCancelButton = function (text) {
-        var dialogCancelButton = document.createElement("button");
-        dialogCancelButton.textContent = text;
-        return dialogCancelButton;
+    OptionPane.createDialogButton = function (text) {
+        var dialogButton = document.createElement("button");
+        dialogButton.textContent = text;
+        return dialogButton;
     };
     /*
      * Icons designed by Google.
@@ -510,7 +504,7 @@ var OptionPane = /** @class */ (function () {
         questionIcon.appendChild(path);
         return questionIcon;
     };
-    OptionPane.showMessageDialog = function (message, title, messageType, icon) {
+    OptionPane.showMessageDialog = function (message, title, messageType, icon, options, initialValue) {
         if (message === void 0) { message = ""; }
         if (title === void 0) { title = "Message"; }
         if (messageType === void 0) { messageType = "information"; }
@@ -523,7 +517,7 @@ var OptionPane = /** @class */ (function () {
                 modalLayer.style.visibility = "inherit";
                 document.body.appendChild(modalLayer);
             }
-            var dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, icon);
+            var dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, icon, options, initialValue);
             modalLayer.appendChild(dialog);
             modalLayer.style.visibility = "inherit";
         });
