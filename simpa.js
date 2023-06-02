@@ -298,6 +298,25 @@ var OptionPane = /** @class */ (function () {
             modalLayer.style.visibility = "inherit";
         });
     };
+    OptionPane.showOptionDialog = function (message, title, optionType, messageType, icon, options, initialValue) {
+        if (message === void 0) { message = ""; }
+        if (title === void 0) { title = "Message"; }
+        if (optionType === void 0) { optionType = "yes-no-cancel"; }
+        if (messageType === void 0) { messageType = "information"; }
+        return new Promise(function (resolve, reject) {
+            var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+            if (modalLayer === null) {
+                modalLayer = document.createElement("div");
+                modalLayer.classList.add("ModalLayer");
+                modalLayer.classList.add("CenterLayout");
+                modalLayer.style.visibility = "inherit";
+                document.body.appendChild(modalLayer);
+            }
+            var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), icon, options, initialValue);
+            modalLayer.appendChild(dialog);
+            modalLayer.style.visibility = "inherit";
+        });
+    };
     OptionPane.createDialog = function (resolve, reject, message, title, optionType, messageType, icon, options, initialValue) {
         try {
             var dialog = document.createElement("div");
@@ -504,7 +523,7 @@ var OptionPane = /** @class */ (function () {
         questionIcon.appendChild(path);
         return questionIcon;
     };
-    OptionPane.showMessageDialog = function (message, title, messageType, icon, options, initialValue) {
+    OptionPane.showMessageDialog = function (message, title, messageType, icon) {
         if (message === void 0) { message = ""; }
         if (title === void 0) { title = "Message"; }
         if (messageType === void 0) { messageType = "information"; }
@@ -517,7 +536,7 @@ var OptionPane = /** @class */ (function () {
                 modalLayer.style.visibility = "inherit";
                 document.body.appendChild(modalLayer);
             }
-            var dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, icon, options, initialValue);
+            var dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, icon);
             modalLayer.appendChild(dialog);
             modalLayer.style.visibility = "inherit";
         });

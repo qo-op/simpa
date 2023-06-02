@@ -10,7 +10,7 @@
 
 class OptionPane {
 
-    static showMessageDialog = (message: string = "", title: string = "Message", messageType: string = "information", icon?: string, options?: string[], initialValue?: string) => {
+    static showMessageDialog = (message: string = "", title: string = "Message", messageType: string = "information", icon?: string) => {
         return new Promise((resolve, reject) => {
             let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
             if (modalLayer === null) {
@@ -20,7 +20,7 @@ class OptionPane {
                 modalLayer.style.visibility = "inherit";
                 document.body.appendChild(modalLayer);
             }
-            const dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, icon, options, initialValue);
+            const dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, icon);
             modalLayer.appendChild(dialog);
             modalLayer.style.visibility = "inherit";
         });
@@ -37,6 +37,22 @@ class OptionPane {
                 document.body.appendChild(modalLayer);
             }
             const dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), icon);
+            modalLayer.appendChild(dialog);
+            modalLayer.style.visibility = "inherit";
+        });
+    }
+
+    static showOptionDialog(message: string = "", title: string = "Message", optionType: string = "yes-no-cancel", messageType: string = "information", icon: string, options: string[], initialValue: string) {
+        return new Promise((resolve, reject) => {
+            let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
+            if (modalLayer === null) {
+                modalLayer = document.createElement("div");
+                modalLayer.classList.add("ModalLayer");
+                modalLayer.classList.add("CenterLayout");
+                modalLayer.style.visibility = "inherit";
+                document.body.appendChild(modalLayer);
+            }
+            const dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), icon, options, initialValue);
             modalLayer.appendChild(dialog);
             modalLayer.style.visibility = "inherit";
         });
