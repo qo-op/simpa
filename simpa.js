@@ -359,9 +359,11 @@ var OptionPane = /** @class */ (function () {
                     reject(e);
                 }
             };
-            var dialogOkButton = OptionPane.createDialogOkButton("OK");
-            dialogButtonPane.appendChild(dialogOkButton);
-            dialogOkButton.onclick = handleClick;
+            if (optionType === "default" || optionType === "ok-cancel") {
+                var dialogOkButton = OptionPane.createDialogOkButton("OK");
+                dialogButtonPane.appendChild(dialogOkButton);
+                dialogOkButton.onclick = handleClick;
+            }
             if (optionType === "yes-no" || optionType === "yes-no-cancel") {
                 var dialogYesButton = OptionPane.createDialogYesButton("Yes");
                 dialogButtonPane.appendChild(dialogYesButton);

@@ -11,26 +11,31 @@
         href="https://fonts.googleapis.com/icon?family=Material+Icons">
   
   
+  <link rel="preload" href="/middle.gif" as="image">
 <style>/* DialogDemo.css */
 </style><script>/* DialogDemo.js */
 function showSimpleDialog(event) {
-  const optionPane = document.getElementById("option-pane");
-  const title = document.getElementById("option-pane-title");
-  const icon = document.getElementById("option-pane-icon");0
-  const message = document.getElementById("option-pane-message");
   const form = document.getElementById("simple-dialog-form");
   const radios = form.elements["option"];
   for (let i = 0; i < radios.length; i++) {
-    icon.textContent = "";
     if (radios[i].checked) {
       const value = radios[i].value; 
       switch (value) {
         case "default":
-          message.textContent = "Eggs aren't supposed to be green.";
+          OptionPane.showMessageDialog(
+            "Eggs aren't supposed to be green.");
           break;
         case "yes-no":
-          message.title = "An Inane Question";
-          message.textContent = "Would you like green eggs and ham?";
+          OptionPane
+            .showConfirmDialog(
+              "Would you like green eggs and ham?",
+              "An Inane Question",
+              "yes-no")
+            .then(input => {
+              if (input === "yes") {
+                
+              }
+            });
           break;
         case "yes-no-cancel":
             message.title = "A Silly Question";
@@ -95,15 +100,6 @@ function showIconDialog(event) {
     }
   }
 };
-window.addEventListener("load", function() {
-  var urls = [
-    "/middle.gif"
-  ];
-  urls.forEach(function(url) {
-    var image = new Image();
-    image.src = url;
-  });
-});
 </script></head>
 <body class="ScrollPane"
       data-scrollbar-overlay
@@ -111,152 +107,158 @@ window.addEventListener("load", function() {
   <div class="GridBagConstraints"
        data-anchor="page-start"
        style="padding: .25em;">
-    <div class=TabbedPane
-         style="border: 1px solid Gray;">
-      <div class="TabLayout">
-        <button value="Simple Dialogs"
-                tabindex=-1>
-          <span>
-            <span>Simple Dialogs</span>
-          </span>
-        </button>
-        <button value="More Dialogs">
-          <span>
-            <span>More Dialogs</span>
-          </span>
-        </button>
-        <button value="Dialog Icons">
-          <span>
-            <span>Dialog Icons</span>
-          </span>
-        </button>
-      </div>
-      <div class="CardLayout">
-        <div data-name="Simple Dialogs"
-             class="BorderLayout"
-             style="visibility: inherit;
-                    padding: .5em;">
-          <div style="margin-block-end: .5em;
-                      line-height: 1.5;">
-            Some simple message dialogs:<br>
-            <form id="simple-dialog-form">
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="default"
-                       checked>
+    <div class="BorderLayout">
+      <div class=TabbedPane
+           style="border: 1px solid Gray;">
+        <div class="TabLayout">
+          <button value="Simple Dialogs"
+                  tabindex=-1>
+            <span>
+              <span>Simple Dialogs</span>
+            </span>
+          </button>
+          <button value="More Dialogs">
+            <span>
+              <span>More Dialogs</span>
+            </span>
+          </button>
+          <button value="Dialog Icons">
+            <span>
+              <span>Dialog Icons</span>
+            </span>
+          </button>
+        </div>
+        <div class="CardLayout">
+          <div data-name="Simple Dialogs"
+               class="BorderLayout"
+               style="visibility: inherit;
+                      padding: .5em;">
+            <div style="margin-block-end: .5em;
+                        line-height: 1.5;">
+              Some simple message dialogs:<br>
+              <form id="simple-dialog-form">
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="default"
+                         checked>
                   OK
-              </label><br>
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="yes-no">
+                </label><br>
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="yes-no">
                   Yes/No
-              </label><br>
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="yes-no-cancel">
+                </label><br>
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="yes-no-cancel">
                   Yes/No/Cancel
-              </label>
-            </form>
+                </label>
+              </form>
+            </div>
+            <div class="PageEnd">
+              <button onclick="showSimpleDialog(event);">
+                Show it!
+              </button>
+            </div>
           </div>
-          <div class="PageEnd">
-            <button onclick="showSimpleDialog(event);">
-              Show it!
-            </button>
-          </div>
-        </div>
-        <div data-name="More Dialogs"
-             class="BorderLayout"
-             style="visibility: hidden;
-                    padding: .5em;">
-          <div style="margin-block-end: .5em;
-                      line-height: 1.5;">
-            Some more dialogs:<br>
-            <form id="feature-dialog-form">
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="pickone"
-                       checked>
+          <div data-name="More Dialogs"
+              class="BorderLayout"
+              style="visibility: hidden;
+                     padding: .5em;">
+            <div style="margin-block-end: .5em;
+                        line-height: 1.5;">
+              Some more dialogs:<br>
+              <form id="feature-dialog-form">
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="pickone"
+                         checked>
                   Pick one of several choices
-              </label><br>
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="textfield">
+                </label><br>
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="textfield">
                   Enter some text
-              </label><br>
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="nomodal">
+                </label><br>
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="nomodal">
                   Non-modal dialog
-              </label>
-            </form>
+                </label>
+              </form>
+            </div>
+            <div class="PageEnd">
+              <button onclick="showFeatureDialog(event);">
+                Show it!
+              </button>
+            </div>
           </div>
-          <div class="PageEnd">
-            <button onclick="showFeatureDialog(event);">
-              Show it!
-            </button>
-          </div>
-        </div>
-        <div data-name="Dialog Icons"
-             class="BorderLayout"
-             style="visibility: hidden;
-                    padding: .5em;">
-          <div style="margin-block-end: .5em;
-                      line-height: 1.5;">
-            Some choice of icons:<br>
-            <form style="display: grid;
-                         grid-template-columns: 1fr 1fr;"
-                  id="icon-dialog-form">
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="plain"
-                       checked>
+          <div data-name="Dialog Icons"
+              class="BorderLayout"
+              style="visibility: hidden;
+                     padding: .5em;">
+            <div style="margin-block-end: .5em;
+                        line-height: 1.5;">
+              Some choice of icons:<br>
+              <form style="display: grid;
+                           grid-template-columns: 1fr 1fr;"
+                    id="icon-dialog-form">
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="plain"
+                        checked>
                   Plain (no icon)
-              </label>
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="error">
+                </label>
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="error">
                   Error icon
-              </label>
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="information">
+                </label>
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="information">
                   Information icon
-              </label>
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="warning">
+                </label>
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="warning">
                   Warning icon
-              </label>
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="question">
+                </label>
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="question">
                   Question icon
-              </label>
-              <label>
-                <input type="radio"
-                       name="option"
-                       value="custom">
+                </label>
+                <label>
+                  <input type="radio"
+                         name="option"
+                         value="custom">
                   Custom icon
-              </label>
-            </form>
-          </div>
-          <div class="PageEnd">
-            <button onclick="showIconDialog(event);">
-              Show it!
-            </button>
+                </label>
+              </form>
+            </div>
+            <div class="PageEnd">
+              <button onclick="showIconDialog(event);">
+                Show it!
+              </button>
+            </div>
           </div>
         </div>
+      </div>
+      <div class="PageEnd">
+        <span id="label">
+        </span>
       </div>
     </div>
   </div>

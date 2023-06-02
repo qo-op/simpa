@@ -118,10 +118,13 @@ class OptionPane {
                 }
             }
 
-            const dialogOkButton = OptionPane.createDialogOkButton("OK");
-            dialogButtonPane.appendChild(dialogOkButton);
+            if (optionType === "default" || optionType === "ok-cancel") {
 
-            dialogOkButton.onclick = handleClick;
+                const dialogOkButton = OptionPane.createDialogOkButton("OK");
+                dialogButtonPane.appendChild(dialogOkButton);
+
+                dialogOkButton.onclick = handleClick;
+            }
 
             if (optionType === "yes-no" || optionType === "yes-no-cancel") {
 
