@@ -455,7 +455,7 @@ var OptionPane = /** @class */ (function () {
                 return informationIcon;
             case "warning":
                 var warningIcon = OptionPane.createWarningIcon();
-                warningIcon.style.fill = "GoldenRod";
+                warningIcon.style.fill = "Golden";
                 warningIcon.style.width = "24px";
                 return warningIcon;
             case "question":
