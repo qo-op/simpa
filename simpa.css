@@ -358,41 +358,6 @@ body {
     font-weight: inherit !important;
 }
 
-/*
-.TitleBorder {
-    line-height: 1.0 !important;
-    margin-top: .6em !important;
-    padding-top: .6em !important;
-    display: grid !important;
-    position: relative !important;
-    overflow: visible !important;
-    border: 1px solid rgba(128, 128, 128, 0.5);
-    background-color: White;
-}
-
-.TitleBorder>:first-child,
-.TitleBorder[data-title-justification="leading"]>:first-child {
-    font-size: inherit !important;
-    font-weight: inherit !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    margin-inline: .5em !important;
-    position: absolute !important;
-    top: calc(-.5em - .5px) !important;
-    background-color: inherit !important;
-    padding-inline: .5em !important;
-    justify-self: start !important;
-}
-
-.TitleBorder[data-title-justification="center"]>:first-child {
-    justify-self: center !important;
-}
-
-.TitleBorder[data-title-justification="trailing"]>:first-child {
-    justify-self: end !important;
-}
-*/
-
 .LoweredEtchedBorder {
     position: relative !important;
     margin: 1px;
@@ -433,6 +398,15 @@ body {
     display: grid !important;
     grid-template-rows: 1fr !important;
     grid-template-columns: 1fr !important;
+}
+
+/**
+ * Button
+ */
+
+button[disabled] img {
+    filter: grayscale(100%);
+    opacity: 0.2;
 }
 
 /**
