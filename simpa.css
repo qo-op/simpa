@@ -1220,7 +1220,7 @@ button[disabled] img {
  * TabbedPane default background colors
  */
 
-.TabbedPane > .TabLayout {
+.TabbedPane > :first-child {
   background-color: whitesmoke;
   gap: 1px;
 }
