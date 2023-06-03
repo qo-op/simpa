@@ -1039,107 +1039,10 @@ button[disabled] img {
 }
 
 /**
- * TabLayout
- */
-
-.TabbedPane > .TabLayout,
-.TabbedPane[data-tab-layout-policy="wrap-tab-layout"] > .TabLayout,
-.TabbedPane[data-tab-placement="page-start"] > .TabLayout,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]
-  > .TabLayout {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
-  align-content: end !important;
-  justify-content: start !important;
-  align-items: end !important;
-}
-
-.TabbedPane[data-tab-placement="page-end"] > .TabLayout,
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]
-  > .TabLayout {
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap-reverse !important;
-  align-content: start !important;
-  justify-content: start !important;
-  align-items: start !important;
-}
-
-.TabbedPane[data-tab-placement="line-start"] > .TabLayout,
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]
-  > .TabLayout {
-  display: flex !important;
-  flex-direction: column !important;
-  flex-wrap: wrap !important;
-  align-content: start !important;
-  justify-content: end !important;
-  justify-items: end !important;
-}
-
-.TabbedPane[data-tab-placement="line-end"] > .TabLayout,
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]
-  > .TabLayout {
-  display: flex !important;
-  flex-direction: column !important;
-  flex-wrap: wrap-reverse !important;
-  align-content: start !important;
-  justify-content: start !important;
-  justify-items: start !important;
-}
-
-.TabbedPane[data-tab-layout-policy="scroll-tab-layout"] > .TabLayout,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]
-  > .TabLayout {
-  display: grid !important;
-  justify-content: start !important;
-  align-items: end !important;
-}
-
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]
-  > .TabLayout {
-  display: grid !important;
-  justify-content: start !important;
-  align-items: start !important;
-}
-
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]
-  > .TabLayout {
-  display: grid !important;
-  align-content: start !important;
-  justify-items: end !important;
-}
-
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]
-  > .TabLayout {
-  display: grid !important;
-  align-content: start !important;
-  justify-items: start !important;
-}
-
-/**
  * Tab component
  */
 
-.TabbedPane > :first-child > button,
-.TabbedPane[data-tab-layout-policy="wrap-tab-layout"] > :first-child > button,
-.TabbedPane[data-tab-placement="page-start"] > :first-child > button,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]
-  > :first-child
-  > button,
-.TabbedPane[data-tab-placement="page-end"] > :first-child > button,
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]
-  > :first-child
-  > button,
-.TabbedPane[data-tab-placement="line-start"] > :first-child > button,
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]
-  > :first-child
-  > button,
-.TabbedPane[data-tab-placement="line-end"] > :first-child > button,
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]
-  > :first-child
-  > button {
-  flex-shrink: 0 !important;
+.TabbedPane > :first-child > button {
   user-select: none !important;
   border: none;
   color: inherit;
@@ -1150,35 +1053,7 @@ button[disabled] img {
   margin: 0;
   outline: none;
   -webkit-tap-highlight-color: transparent;
-}
-
-.TabbedPane[data-tab-layout-policy="scroll-tab-layout"] > :first-child > button,
-.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]
-  > :first-child
-  > button {
-  grid-row: 1 !important;
-  grid-column: auto !important;
-}
-
-.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]
-  > :first-child
-  > button {
-  grid-row: 1 !important;
-  grid-column: auto !important;
-}
-
-.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]
-  > :first-child
-  > button {
-  grid-row: auto !important;
-  grid-column: 1 !important;
-}
-
-.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]
-  > :first-child
-  > button {
-  grid-row: auto !important;
-  grid-column: 1 !important;
+  float: left;
 }
 
 .TabbedPane > :first-child > button * {
