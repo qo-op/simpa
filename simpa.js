@@ -39,7 +39,9 @@ var Dialog = /** @class */ (function () {
         Dialog.dialog.style.position = "absolute";
         Dialog.dialog.style.top = rect.top + "px";
         Dialog.dialog.style.left = rect.left + "px";
-        document.addEventListener("touchmove", Dialog.preventTouchMove, { passive: false });
+        document.addEventListener("touchmove", Dialog.preventTouchMove, {
+            passive: false,
+        });
         document.addEventListener("pointermove", Dialog.pointermove);
         document.addEventListener("pointerup", Dialog.pointerup);
         document.addEventListener("pointerenter", Dialog.pointerenter);
@@ -48,8 +50,10 @@ var Dialog = /** @class */ (function () {
         if (!Dialog.dragStart) {
             return;
         }
-        Dialog.dialog.style.top = Math.min(Math.max(ev.clientY - Dialog.y, 0), window.innerHeight - Dialog.height) + "px";
-        Dialog.dialog.style.left = Math.min(Math.max(ev.clientX - Dialog.x, 0), window.innerWidth - Dialog.width) + "px";
+        Dialog.dialog.style.top =
+            Math.min(Math.max(ev.clientY - Dialog.y, 0), window.innerHeight - Dialog.height) + "px";
+        Dialog.dialog.style.left =
+            Math.min(Math.max(ev.clientX - Dialog.x, 0), window.innerWidth - Dialog.width) + "px";
     };
     Dialog.pointerup = function (ev) {
         Dialog.dragStart = false;
@@ -102,7 +106,9 @@ var MenuBar = /** @class */ (function () {
             if (li !== null && li.dataset.selected !== undefined) {
                 return;
             }
-            menuBar.querySelectorAll(":scope li[data-selected]").forEach(function (selected) {
+            menuBar
+                .querySelectorAll(":scope li[data-selected]")
+                .forEach(function (selected) {
                 selected.removeAttribute("data-selected");
             });
             if (li !== null) {
@@ -258,7 +264,9 @@ var MenuBar = /** @class */ (function () {
     MenuBar.mouseleave = function (ev) {
         var menuBar = ev.currentTarget;
         MenuBar.clearTimeout(menuBar);
-        menuBar.querySelectorAll(":scope li[data-selected]").forEach(function (selected) {
+        menuBar
+            .querySelectorAll(":scope li[data-selected]")
+            .forEach(function (selected) {
             var ul = selected.querySelector(":scope>ul");
             if (ul === null) {
                 selected.removeAttribute("data-selected");
@@ -299,7 +307,8 @@ var OptionPane = /** @class */ (function () {
                         modalLayer.style.visibility = "inherit";
                         document.body.appendChild(modalLayer);
                     }
-                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), img);
+                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType ||
+                        (optionType !== "default" ? "question" : "information"), img);
                     modalLayer.appendChild(dialog);
                     modalLayer.style.visibility = "inherit";
                 };
@@ -336,19 +345,17 @@ var OptionPane = /** @class */ (function () {
                 img.onload = function () {
                     img.style.width = img.naturalWidth + "px";
                     img.style.height = img.naturalHeight + "px";
-                    return new Promise(function (resolve, reject) {
-                        var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                        if (modalLayer === null) {
-                            modalLayer = document.createElement("div");
-                            modalLayer.classList.add("ModalLayer");
-                            modalLayer.classList.add("CenterLayout");
-                            modalLayer.style.visibility = "inherit";
-                            document.body.appendChild(modalLayer);
-                        }
-                        var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, "ok-cancel", messageType, img);
-                        modalLayer.appendChild(dialog);
+                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                    if (modalLayer === null) {
+                        modalLayer = document.createElement("div");
+                        modalLayer.classList.add("ModalLayer");
+                        modalLayer.classList.add("CenterLayout");
                         modalLayer.style.visibility = "inherit";
-                    });
+                        document.body.appendChild(modalLayer);
+                    }
+                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, "ok-cancel", messageType, img);
+                    modalLayer.appendChild(dialog);
+                    modalLayer.style.visibility = "inherit";
                 };
                 img.onerror = function () {
                     reject(new Error("Failed to load image '".concat(icon, "'")));
@@ -392,7 +399,8 @@ var OptionPane = /** @class */ (function () {
                         modalLayer.style.visibility = "inherit";
                         document.body.appendChild(modalLayer);
                     }
-                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), img, options, initialValue);
+                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType ||
+                        (optionType !== "default" ? "question" : "information"), img, options, initialValue);
                     modalLayer.appendChild(dialog);
                     modalLayer.style.visibility = "inherit";
                 };
@@ -412,7 +420,8 @@ var OptionPane = /** @class */ (function () {
                     modalLayer.style.visibility = "inherit";
                     document.body.appendChild(modalLayer);
                 }
-                var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), undefined, options, initialValue);
+                var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType ||
+                    (optionType !== "default" ? "question" : "information"), undefined, options, initialValue);
                 modalLayer.appendChild(dialog);
                 modalLayer.style.visibility = "inherit";
             });
@@ -711,17 +720,19 @@ var SplitPane = /** @class */ (function () {
         SplitPane.verticalSplit =
             SplitPane.splitPane.dataset.orientation === "vertical-split";
         if (SplitPane.verticalSplit) {
-            SplitPane.maximumDividerLocation = leftComponentRect.height + rightComponentRect.height;
-            var percentage = 100 * leftComponentRect.height / SplitPane.maximumDividerLocation;
+            SplitPane.maximumDividerLocation =
+                leftComponentRect.height + rightComponentRect.height;
+            var percentage = (100 * leftComponentRect.height) / SplitPane.maximumDividerLocation;
             SplitPane.leftComponent.style.height = percentage + "%";
-            SplitPane.rightComponent.style.height = (100 - percentage) + "%";
+            SplitPane.rightComponent.style.height = 100 - percentage + "%";
             SplitPane.offset = ev.clientY - leftComponentRect.height;
         }
         else {
-            SplitPane.maximumDividerLocation = leftComponentRect.width + rightComponentRect.width;
-            var percentage = 100 * leftComponentRect.width / SplitPane.maximumDividerLocation;
+            SplitPane.maximumDividerLocation =
+                leftComponentRect.width + rightComponentRect.width;
+            var percentage = (100 * leftComponentRect.width) / SplitPane.maximumDividerLocation;
             SplitPane.leftComponent.style.width = percentage + "%";
-            SplitPane.rightComponent.style.width = (100 - percentage) + "%";
+            SplitPane.rightComponent.style.width = 100 - percentage + "%";
             SplitPane.offset = ev.clientX - leftComponentRect.width;
         }
         if (SplitPane.verticalSplit) {
@@ -730,7 +741,9 @@ var SplitPane = /** @class */ (function () {
         else {
             document.body.style.cursor = "ew-resize";
         }
-        document.addEventListener("touchmove", SplitPane.preventTouchMove, { passive: false });
+        document.addEventListener("touchmove", SplitPane.preventTouchMove, {
+            passive: false,
+        });
         document.addEventListener("pointermove", SplitPane.pointermove);
         document.addEventListener("pointerup", SplitPane.pointerup);
         document.addEventListener("dragstart", SplitPane.dragstart);
@@ -749,15 +762,15 @@ var SplitPane = /** @class */ (function () {
         }
         if (SplitPane.verticalSplit) {
             var dividerLocation = Math.min(Math.max(ev.clientY - SplitPane.offset, 0), SplitPane.maximumDividerLocation);
-            var percentage = 100 * dividerLocation / SplitPane.maximumDividerLocation;
+            var percentage = (100 * dividerLocation) / SplitPane.maximumDividerLocation;
             SplitPane.leftComponent.style.height = percentage + "%";
-            SplitPane.rightComponent.style.height = (100 - percentage) + "%";
+            SplitPane.rightComponent.style.height = 100 - percentage + "%";
         }
         else {
             var dividerLocation = Math.min(Math.max(ev.clientX - SplitPane.offset, 0), SplitPane.maximumDividerLocation);
-            var percentage = 100 * dividerLocation / SplitPane.maximumDividerLocation;
+            var percentage = (100 * dividerLocation) / SplitPane.maximumDividerLocation;
             SplitPane.leftComponent.style.width = percentage + "%";
-            SplitPane.rightComponent.style.width = (100 - percentage) + "%";
+            SplitPane.rightComponent.style.width = 100 - percentage + "%";
         }
         ev.preventDefault();
     };
@@ -833,7 +846,9 @@ var TabContainer = /** @class */ (function () {
             selectedTabIndex = tabContainer.children.length - 1;
         }
         else {
-            selectedTabIndex = (selectedTabIndex + tabContainer.children.length - 1) % tabContainer.children.length;
+            selectedTabIndex =
+                (selectedTabIndex + tabContainer.children.length - 1) %
+                    tabContainer.children.length;
         }
         TabContainer.setSelectedTabIndex(tabContainer, cardContainer, selectedTabIndex);
     };
@@ -934,7 +949,9 @@ var CardContainer = /** @class */ (function () {
             selectedIndex = cardContainer.children.length - 1;
         }
         else {
-            selectedIndex = (selectedIndex + cardContainer.children.length - 1) % cardContainer.children.length;
+            selectedIndex =
+                (selectedIndex + cardContainer.children.length - 1) %
+                    cardContainer.children.length;
         }
         CardContainer.setSelectedIndex(cardContainer, selectedIndex);
     };
