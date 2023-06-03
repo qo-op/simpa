@@ -11,54 +11,132 @@
 class OptionPane {
 
     static showMessageDialog = (message: string = "", title: string = "Message", messageType: string = "information", icon?: string) => {
-        return new Promise((resolve, reject) => {
-            let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
-            if (modalLayer === null) {
-                modalLayer = document.createElement("div");
-                modalLayer.classList.add("ModalLayer");
-                modalLayer.classList.add("CenterLayout");
+        if (icon) {
+            return new Promise((resolve, reject) => {
+                const img = document.createElement("img");
+                img.alt = "Custom icon";
+                img.onload = function() {
+                    img.style.width = img.naturalWidth + "px";
+                    img.style.height = img.naturalHeight + "px";
+                    let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
+                    if (modalLayer === null) {
+                        modalLayer = document.createElement("div");
+                        modalLayer.classList.add("ModalLayer");
+                        modalLayer.classList.add("CenterLayout");
+                        modalLayer.style.visibility = "inherit";
+                        document.body.appendChild(modalLayer);
+                    }
+                    const dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, img);
+                    modalLayer.appendChild(dialog);
+                    modalLayer.style.visibility = "inherit";
+                }
+                img.onerror = function() {
+                    reject(new Error(`Failed to load image '${icon}'`));
+                }
+                img.src = icon;
+            });
+        } else {
+            return new Promise((resolve, reject) => {
+                let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer === null) {
+                    modalLayer = document.createElement("div");
+                    modalLayer.classList.add("ModalLayer");
+                    modalLayer.classList.add("CenterLayout");
+                    modalLayer.style.visibility = "inherit";
+                    document.body.appendChild(modalLayer);
+                }
+                const dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType);
+                modalLayer.appendChild(dialog);
                 modalLayer.style.visibility = "inherit";
-                document.body.appendChild(modalLayer);
-            }
-            const dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, icon);
-            modalLayer.appendChild(dialog);
-            modalLayer.style.visibility = "inherit";
-        });
+            });
+        }
     }
 
     static showConfirmDialog(message: string = "", title: string = "Message", optionType: string = "yes-no-cancel", messageType?: string, icon?: string) {
-        return new Promise((resolve, reject) => {
-            let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
-            if (modalLayer === null) {
-                modalLayer = document.createElement("div");
-                modalLayer.classList.add("ModalLayer");
-                modalLayer.classList.add("CenterLayout");
+        if (icon) {
+            return new Promise((resolve, reject) => {
+                const img = document.createElement("img");
+                img.alt = "Custom icon";
+                img.onload = function() {
+                    img.style.width = img.naturalWidth + "px";
+                    img.style.height = img.naturalHeight + "px";
+                    let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
+                    if (modalLayer === null) {
+                        modalLayer = document.createElement("div");
+                        modalLayer.classList.add("ModalLayer");
+                        modalLayer.classList.add("CenterLayout");
+                        modalLayer.style.visibility = "inherit";
+                        document.body.appendChild(modalLayer);
+                    }
+                    const dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), img);
+                    modalLayer.appendChild(dialog);
+                    modalLayer.style.visibility = "inherit";
+                }
+                img.onerror = function() {
+                    reject(new Error(`Failed to load image '${icon}'`));
+                }
+                img.src = icon;
+            });
+        } else {
+            return new Promise((resolve, reject) => {
+                let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer === null) {
+                    modalLayer = document.createElement("div");
+                    modalLayer.classList.add("ModalLayer");
+                    modalLayer.classList.add("CenterLayout");
+                    modalLayer.style.visibility = "inherit";
+                    document.body.appendChild(modalLayer);
+                }
+                const dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"));
+                modalLayer.appendChild(dialog);
                 modalLayer.style.visibility = "inherit";
-                document.body.appendChild(modalLayer);
-            }
-            const dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), icon);
-            modalLayer.appendChild(dialog);
-            modalLayer.style.visibility = "inherit";
-        });
+            });
+        }
     }
 
     static showOptionDialog(message: string = "", title: string = "Message", optionType: string = "yes-no-cancel", messageType: string = "information", icon: string, options: string[], initialValue: string) {
-        return new Promise((resolve, reject) => {
-            let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
-            if (modalLayer === null) {
-                modalLayer = document.createElement("div");
-                modalLayer.classList.add("ModalLayer");
-                modalLayer.classList.add("CenterLayout");
+        if (icon) {
+            return new Promise((resolve, reject) => {
+                const img = document.createElement("img");
+                img.alt = "Custom icon";
+                img.onload = function() {
+                    img.style.width = img.naturalWidth + "px";
+                    img.style.height = img.naturalHeight + "px";
+                    let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
+                    if (modalLayer === null) {
+                        modalLayer = document.createElement("div");
+                        modalLayer.classList.add("ModalLayer");
+                        modalLayer.classList.add("CenterLayout");
+                        modalLayer.style.visibility = "inherit";
+                        document.body.appendChild(modalLayer);
+                    }
+                    const dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), img, options, initialValue);
+                    modalLayer.appendChild(dialog);
+                    modalLayer.style.visibility = "inherit";
+                }
+                img.onerror = function() {
+                    reject(new Error(`Failed to load image '${icon}'`));
+                }
+                img.src = icon;
+            });
+        } else {
+            return new Promise((resolve, reject) => {
+                let modalLayer: HTMLElement = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer === null) {
+                    modalLayer = document.createElement("div");
+                    modalLayer.classList.add("ModalLayer");
+                    modalLayer.classList.add("CenterLayout");
+                    modalLayer.style.visibility = "inherit";
+                    document.body.appendChild(modalLayer);
+                }
+                const dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), undefined, options, initialValue);
+                modalLayer.appendChild(dialog);
                 modalLayer.style.visibility = "inherit";
-                document.body.appendChild(modalLayer);
-            }
-            const dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), icon, options, initialValue);
-            modalLayer.appendChild(dialog);
-            modalLayer.style.visibility = "inherit";
-        });
+            });
+        }
     }
 
-    static createDialog(resolve: (input: string) => void, reject: (error: Error) => void, message: string, title: string, optionType: string, messageType: string, icon?: string, options?: string[], initialValue?: string) {
+    static createDialog(resolve: (input: string) => void, reject: (error: Error) => void, message: string, title: string, optionType: string, messageType: string, img?: HTMLImageElement, options?: string[], initialValue?: string) {
         try {
             const dialog = document.createElement("div");
             dialog.classList.add("Dialog");
@@ -92,9 +170,8 @@ class OptionPane {
 
             dialogIconPane.classList.add("CenterLayout");
 
-            if (icon) {
-                const dialogIcon = OptionPane.createCustomIcon(icon);
-                dialogIconPane.appendChild(dialogIcon);
+            if (img) {
+                dialogIconPane.appendChild(img);
                 dialogIconPane.style.marginInlineEnd = ".5em";
             } else {
                 const dialogIcon = OptionPane.createDialogIcon(messageType);
@@ -136,7 +213,7 @@ class OptionPane {
 
             if (options) {
 
-                options.forEach(function(option) {
+                options.forEach(function (option) {
 
                     const dialogButton = OptionPane.createDialogButton(option);
                     dialogButtonPane.appendChild(dialogButton);
@@ -210,13 +287,6 @@ class OptionPane {
     static createDialogIconPane() {
         const dialogIconPane = document.createElement("div");
         return dialogIconPane;
-    }
-
-    static createCustomIcon(icon: string) {
-        const customIcon = document.createElement("img");
-        customIcon.src = icon;
-        customIcon.alt = "Custom icon";
-        return customIcon;
     }
 
     static createDialogIcon(messageType: string) {

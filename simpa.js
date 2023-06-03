@@ -284,40 +284,94 @@ var OptionPane = /** @class */ (function () {
         if (message === void 0) { message = ""; }
         if (title === void 0) { title = "Message"; }
         if (optionType === void 0) { optionType = "yes-no-cancel"; }
-        return new Promise(function (resolve, reject) {
-            var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-            if (modalLayer === null) {
-                modalLayer = document.createElement("div");
-                modalLayer.classList.add("ModalLayer");
-                modalLayer.classList.add("CenterLayout");
+        if (icon) {
+            return new Promise(function (resolve, reject) {
+                var img = document.createElement("img");
+                img.alt = "Custom icon";
+                img.onload = function () {
+                    img.style.width = img.naturalWidth + "px";
+                    img.style.height = img.naturalHeight + "px";
+                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                    if (modalLayer === null) {
+                        modalLayer = document.createElement("div");
+                        modalLayer.classList.add("ModalLayer");
+                        modalLayer.classList.add("CenterLayout");
+                        modalLayer.style.visibility = "inherit";
+                        document.body.appendChild(modalLayer);
+                    }
+                    var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), img);
+                    modalLayer.appendChild(dialog);
+                    modalLayer.style.visibility = "inherit";
+                };
+                img.onerror = function () {
+                    reject(new Error("Failed to load image '".concat(icon, "'")));
+                };
+                img.src = icon;
+            });
+        }
+        else {
+            return new Promise(function (resolve, reject) {
+                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer === null) {
+                    modalLayer = document.createElement("div");
+                    modalLayer.classList.add("ModalLayer");
+                    modalLayer.classList.add("CenterLayout");
+                    modalLayer.style.visibility = "inherit";
+                    document.body.appendChild(modalLayer);
+                }
+                var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"));
+                modalLayer.appendChild(dialog);
                 modalLayer.style.visibility = "inherit";
-                document.body.appendChild(modalLayer);
-            }
-            var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), icon);
-            modalLayer.appendChild(dialog);
-            modalLayer.style.visibility = "inherit";
-        });
+            });
+        }
     };
     OptionPane.showOptionDialog = function (message, title, optionType, messageType, icon, options, initialValue) {
         if (message === void 0) { message = ""; }
         if (title === void 0) { title = "Message"; }
         if (optionType === void 0) { optionType = "yes-no-cancel"; }
         if (messageType === void 0) { messageType = "information"; }
-        return new Promise(function (resolve, reject) {
-            var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-            if (modalLayer === null) {
-                modalLayer = document.createElement("div");
-                modalLayer.classList.add("ModalLayer");
-                modalLayer.classList.add("CenterLayout");
+        if (icon) {
+            return new Promise(function (resolve, reject) {
+                var img = document.createElement("img");
+                img.alt = "Custom icon";
+                img.onload = function () {
+                    img.style.width = img.naturalWidth + "px";
+                    img.style.height = img.naturalHeight + "px";
+                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                    if (modalLayer === null) {
+                        modalLayer = document.createElement("div");
+                        modalLayer.classList.add("ModalLayer");
+                        modalLayer.classList.add("CenterLayout");
+                        modalLayer.style.visibility = "inherit";
+                        document.body.appendChild(modalLayer);
+                    }
+                    var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), img, options, initialValue);
+                    modalLayer.appendChild(dialog);
+                    modalLayer.style.visibility = "inherit";
+                };
+                img.onerror = function () {
+                    reject(new Error("Failed to load image '".concat(icon, "'")));
+                };
+                img.src = icon;
+            });
+        }
+        else {
+            return new Promise(function (resolve, reject) {
+                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer === null) {
+                    modalLayer = document.createElement("div");
+                    modalLayer.classList.add("ModalLayer");
+                    modalLayer.classList.add("CenterLayout");
+                    modalLayer.style.visibility = "inherit";
+                    document.body.appendChild(modalLayer);
+                }
+                var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), undefined, options, initialValue);
+                modalLayer.appendChild(dialog);
                 modalLayer.style.visibility = "inherit";
-                document.body.appendChild(modalLayer);
-            }
-            var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), icon, options, initialValue);
-            modalLayer.appendChild(dialog);
-            modalLayer.style.visibility = "inherit";
-        });
+            });
+        }
     };
-    OptionPane.createDialog = function (resolve, reject, message, title, optionType, messageType, icon, options, initialValue) {
+    OptionPane.createDialog = function (resolve, reject, message, title, optionType, messageType, img, options, initialValue) {
         try {
             var dialog = document.createElement("div");
             dialog.classList.add("Dialog");
@@ -341,9 +395,8 @@ var OptionPane = /** @class */ (function () {
             dialogIconPane.classList.add("LineStart");
             dialogMainPane.appendChild(dialogIconPane);
             dialogIconPane.classList.add("CenterLayout");
-            if (icon) {
-                var dialogIcon = OptionPane.createCustomIcon(icon);
-                dialogIconPane.appendChild(dialogIcon);
+            if (img) {
+                dialogIconPane.appendChild(img);
                 dialogIconPane.style.marginInlineEnd = ".5em";
             }
             else {
@@ -435,12 +488,6 @@ var OptionPane = /** @class */ (function () {
         var dialogIconPane = document.createElement("div");
         return dialogIconPane;
     };
-    OptionPane.createCustomIcon = function (icon) {
-        var customIcon = document.createElement("img");
-        customIcon.src = icon;
-        customIcon.alt = "Custom icon";
-        return customIcon;
-    };
     OptionPane.createDialogIcon = function (messageType) {
         switch (messageType) {
             case "error":
@@ -527,19 +574,46 @@ var OptionPane = /** @class */ (function () {
         if (message === void 0) { message = ""; }
         if (title === void 0) { title = "Message"; }
         if (messageType === void 0) { messageType = "information"; }
-        return new Promise(function (resolve, reject) {
-            var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-            if (modalLayer === null) {
-                modalLayer = document.createElement("div");
-                modalLayer.classList.add("ModalLayer");
-                modalLayer.classList.add("CenterLayout");
+        if (icon) {
+            return new Promise(function (resolve, reject) {
+                var img = document.createElement("img");
+                img.alt = "Custom icon";
+                img.onload = function () {
+                    img.style.width = img.naturalWidth + "px";
+                    img.style.height = img.naturalHeight + "px";
+                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                    if (modalLayer === null) {
+                        modalLayer = document.createElement("div");
+                        modalLayer.classList.add("ModalLayer");
+                        modalLayer.classList.add("CenterLayout");
+                        modalLayer.style.visibility = "inherit";
+                        document.body.appendChild(modalLayer);
+                    }
+                    var dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, img);
+                    modalLayer.appendChild(dialog);
+                    modalLayer.style.visibility = "inherit";
+                };
+                img.onerror = function () {
+                    reject(new Error("Failed to load image '".concat(icon, "'")));
+                };
+                img.src = icon;
+            });
+        }
+        else {
+            return new Promise(function (resolve, reject) {
+                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer === null) {
+                    modalLayer = document.createElement("div");
+                    modalLayer.classList.add("ModalLayer");
+                    modalLayer.classList.add("CenterLayout");
+                    modalLayer.style.visibility = "inherit";
+                    document.body.appendChild(modalLayer);
+                }
+                var dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType);
+                modalLayer.appendChild(dialog);
                 modalLayer.style.visibility = "inherit";
-                document.body.appendChild(modalLayer);
-            }
-            var dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, icon);
-            modalLayer.appendChild(dialog);
-            modalLayer.style.visibility = "inherit";
-        });
+            });
+        }
     };
     return OptionPane;
 }());
