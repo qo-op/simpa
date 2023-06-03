@@ -29,7 +29,6 @@ class SplitPane {
     if (!target.classList.contains("SplitPaneDivider")) {
       return;
     }
-    console.log("pointerdown");
     SplitPane.dragStart = true;
     SplitPane.splitPaneDivider = target;
     SplitPane.splitPane = SplitPane.splitPaneDivider.closest(".SplitPane");
@@ -110,7 +109,6 @@ class SplitPane {
   };
 
   static pointerup = (ev: PointerEvent) => {
-    console.log("pointerup");
     SplitPane.dragStart = false;
     document.body.style.cursor = "";
     document.removeEventListener("touchmove", SplitPane.preventTouchMove);
@@ -123,7 +121,6 @@ class SplitPane {
   };
 
   static dragstart = (ev: PointerEvent) => {
-    console.log("dragstart: " + ev.target);
     if (ev.target === SplitPane.splitPaneDivider) {
       SplitPane.pointerup(ev);
       ev.preventDefault();

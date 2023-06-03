@@ -163,6 +163,7 @@ class OptionPane {
       if (initialSelectionValue) {
         comboBox.value = initialSelectionValue;
       }
+      input = comboBox;
     } else {
       const textField = document.createElement("input") as HTMLInputElement;
       textField.type = "text";
