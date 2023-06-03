@@ -15,6 +15,7 @@
 <style>/* DialogDemo.css */
 </style><script>/* DialogDemo.js */
 function showSimpleDialog(event) {
+  const label = document.getElementById("label");
   const form = document.getElementById("simple-dialog-form");
   const radios = form.elements["option"];
   for (let i = 0; i < radios.length; i++) {
@@ -32,22 +33,37 @@ function showSimpleDialog(event) {
               "An Inane Question",
               "yes-no")
             .then(input => {
-              if (input === "yes") {
-                
+              if (input === "Yes") {
+                label.textContent = "Ewww!";
+              } else if (input === "No") {
+                label.textContent = "Me neither!";
               }
             });
           break;
         case "yes-no-cancel":
+          OptionPane
+            .showOptionDialog(
+              "Would you like some green eggs to go with that ham?",
+              "A Silly Question",
+              "yes-no-cancel",
+              "question",
+              null,
+              [ "Yes, please", "No, thanks", "No eggs, no ham!" ],
+              "No eggs, no ham!")
+            .then(input => {
+              if (input === "Yes, please") {
+                label.textContent = "Here you go: green eggs and ham!";
+              } else if (input === "No, thanks") {
+                label.textContent = "OK, just the ham, then.";
+              } else if (input === "No eggs, no ham!") {
+                label.textContent = "Well, I'm certainly not going to eat them!";
+              }
+            })
           break;
       }
-      optionPane.dataset.optionType = value;
       break;
     }
   }
-  optionPane.style.top = null;
-  optionPane.style.left = null;
-  const modal = document.getElementById("modal-layer");
-  modal.style.display = "grid";
 };
 function showIconDialog(event) {
   const form = document.getElementById("icon-dialog-form");
@@ -98,12 +114,47 @@ function showIconDialog(event) {
     }
   }
 };
+function showFeatureDialog(event) {
+  const label = document.getElementById("label");
+  const form = document.getElementById("simple-dialog-form");
+  const radios = form.elements["option"];
+  for (let i = 0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      const value = radios[i].value; 
+      switch (value) {
+        case "select":
+          OptionPane
+            .showInputDialog(
+              "Complete the sentence: Green eggs and...",
+              "Customized Dialog",
+              "plain",
+              "/middle.gif",
+              [ "ham", "spam", "yam" ],
+              "ham")
+            .then(input => {
+              if (input === "Yes") {
+                label.textContent = "Ewww!";
+              } else if (input === "No") {
+                label.textContent = "Me neither!";
+              }
+            });
+          break;
+        case "textfield":
+          break;
+        case "nonmodal":
+          break;
+      }
+      break;
+    }
+  }
+}
 </script></head>
 <body class="ScrollPane"
       data-scrollbar-overlay
       id="dialog-demo">
   <div class="GridBagConstraints"
        data-anchor="page-start"
+       data-fill="horizontal"
        style="padding: .25em;">
     <div class="BorderLayout">
       <div class=TabbedPane
@@ -131,8 +182,7 @@ function showIconDialog(event) {
                class="BorderLayout"
                style="visibility: inherit;
                       padding: .5em;">
-            <div style="margin-block-end: .5em;
-                        line-height: 1.5;">
+            <div style="margin-block-end: .5em;">
               Some simple message dialogs:<br>
               <form id="simple-dialog-form">
                 <label>
@@ -166,14 +216,13 @@ function showIconDialog(event) {
               class="BorderLayout"
               style="visibility: hidden;
                      padding: .5em;">
-            <div style="margin-block-end: .5em;
-                        line-height: 1.5;">
+            <div style="margin-block-end: .5em;">
               Some more dialogs:<br>
               <form id="feature-dialog-form">
                 <label>
                   <input type="radio"
                          name="option"
-                         value="pickone"
+                         value="select"
                          checked>
                   Pick one of several choices
                 </label><br>
@@ -186,7 +235,7 @@ function showIconDialog(event) {
                 <label>
                   <input type="radio"
                          name="option"
-                         value="nomodal">
+                         value="nonmodal">
                   Non-modal dialog
                 </label>
               </form>
@@ -201,8 +250,7 @@ function showIconDialog(event) {
               class="BorderLayout"
               style="visibility: hidden;
                      padding: .5em;">
-            <div style="margin-block-end: .5em;
-                        line-height: 1.5;">
+            <div style="margin-block-end: .5em;">
               Some choice of icons:<br>
               <form style="display: grid;
                            grid-template-columns: 1fr 1fr;"
@@ -254,8 +302,12 @@ function showIconDialog(event) {
           </div>
         </div>
       </div>
-      <div class="PageEnd">
+      <div class="PageEnd"
+           style="border: 1px solid Gray;
+                  border-block-start: none;
+                  padding: .5em;">
         <span id="label">
+          Click the "Show it!" button to bring up the selected dialog.
         </span>
       </div>
     </div>

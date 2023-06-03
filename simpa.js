@@ -299,7 +299,7 @@ var OptionPane = /** @class */ (function () {
                         modalLayer.style.visibility = "inherit";
                         document.body.appendChild(modalLayer);
                     }
-                    var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), img);
+                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), img);
                     modalLayer.appendChild(dialog);
                     modalLayer.style.visibility = "inherit";
                 };
@@ -319,7 +319,54 @@ var OptionPane = /** @class */ (function () {
                     modalLayer.style.visibility = "inherit";
                     document.body.appendChild(modalLayer);
                 }
-                var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"));
+                var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"));
+                modalLayer.appendChild(dialog);
+                modalLayer.style.visibility = "inherit";
+            });
+        }
+    };
+    OptionPane.showInputDialog = function (message, title, messageType, icon, selectionValues, initialSelectionValue) {
+        if (message === void 0) { message = ""; }
+        if (title === void 0) { title = "Message"; }
+        if (messageType === void 0) { messageType = "information"; }
+        if (icon) {
+            return new Promise(function (resolve, reject) {
+                var img = document.createElement("img");
+                img.alt = "Custom icon";
+                img.onload = function () {
+                    img.style.width = img.naturalWidth + "px";
+                    img.style.height = img.naturalHeight + "px";
+                    return new Promise(function (resolve, reject) {
+                        var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                        if (modalLayer === null) {
+                            modalLayer = document.createElement("div");
+                            modalLayer.classList.add("ModalLayer");
+                            modalLayer.classList.add("CenterLayout");
+                            modalLayer.style.visibility = "inherit";
+                            document.body.appendChild(modalLayer);
+                        }
+                        var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, "ok-cancel", messageType, img);
+                        modalLayer.appendChild(dialog);
+                        modalLayer.style.visibility = "inherit";
+                    });
+                };
+                img.onerror = function () {
+                    reject(new Error("Failed to load image '".concat(icon, "'")));
+                };
+                img.src = icon;
+            });
+        }
+        else {
+            return new Promise(function (resolve, reject) {
+                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer === null) {
+                    modalLayer = document.createElement("div");
+                    modalLayer.classList.add("ModalLayer");
+                    modalLayer.classList.add("CenterLayout");
+                    modalLayer.style.visibility = "inherit";
+                    document.body.appendChild(modalLayer);
+                }
+                var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, "ok-cancel", messageType);
                 modalLayer.appendChild(dialog);
                 modalLayer.style.visibility = "inherit";
             });
@@ -345,7 +392,7 @@ var OptionPane = /** @class */ (function () {
                         modalLayer.style.visibility = "inherit";
                         document.body.appendChild(modalLayer);
                     }
-                    var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), img, options, initialValue);
+                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), img, options, initialValue);
                     modalLayer.appendChild(dialog);
                     modalLayer.style.visibility = "inherit";
                 };
@@ -365,13 +412,13 @@ var OptionPane = /** @class */ (function () {
                     modalLayer.style.visibility = "inherit";
                     document.body.appendChild(modalLayer);
                 }
-                var dialog = OptionPane.createDialog(resolve, reject, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), undefined, options, initialValue);
+                var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"), undefined, options, initialValue);
                 modalLayer.appendChild(dialog);
                 modalLayer.style.visibility = "inherit";
             });
         }
     };
-    OptionPane.createDialog = function (resolve, reject, message, title, optionType, messageType, img, options, initialValue) {
+    OptionPane.createDialog = function (resolve, reject, input, message, title, optionType, messageType, img, options, initialValue) {
         try {
             var dialog = document.createElement("div");
             dialog.classList.add("Dialog");
@@ -411,6 +458,13 @@ var OptionPane = /** @class */ (function () {
             dialogMessageInputPane.classList.add("BorderLayout");
             var dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
             dialogMessageInputPane.appendChild(dialogMessageLabel);
+            if (input) {
+                var dialogInputPane = OptionPane.createDialogInputPane();
+                dialogInputPane.classList.add("PageEnd");
+                dialogMessageInputPane.appendChild(dialogInputPane);
+                dialogInputPane.classList.add("BorderLayout");
+                dialogInputPane.appendChild(input);
+            }
             var dialogButtonPane_1 = OptionPane.createDialogButtonPane();
             dialogButtonPane_1.classList.add("PageEnd");
             dialogContentPane.appendChild(dialogButtonPane_1);
@@ -524,6 +578,10 @@ var OptionPane = /** @class */ (function () {
         dialogMessageLabel.textContent = message;
         return dialogMessageLabel;
     };
+    OptionPane.createDialogInputPane = function () {
+        var dialogInputPane = document.createElement("div");
+        return dialogInputPane;
+    };
     OptionPane.createDialogButtonPane = function () {
         var dialogButtonPane = document.createElement("div");
         return dialogButtonPane;
@@ -589,7 +647,7 @@ var OptionPane = /** @class */ (function () {
                         modalLayer.style.visibility = "inherit";
                         document.body.appendChild(modalLayer);
                     }
-                    var dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType, img);
+                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, "default", messageType, img);
                     modalLayer.appendChild(dialog);
                     modalLayer.style.visibility = "inherit";
                 };
@@ -609,7 +667,7 @@ var OptionPane = /** @class */ (function () {
                     modalLayer.style.visibility = "inherit";
                     document.body.appendChild(modalLayer);
                 }
-                var dialog = OptionPane.createDialog(resolve, reject, message, title, "default", messageType);
+                var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, "default", messageType);
                 modalLayer.appendChild(dialog);
                 modalLayer.style.visibility = "inherit";
             });
