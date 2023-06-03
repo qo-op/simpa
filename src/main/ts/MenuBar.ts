@@ -35,7 +35,7 @@ class MenuBar {
       }
       menuBar
         .querySelectorAll(":scope li[data-selected]")
-        .forEach(function (selected: Element) {
+        .forEach((selected: Element) => {
           selected.removeAttribute("data-selected");
         });
       if (li !== null) {
@@ -102,11 +102,9 @@ class MenuBar {
     if (currentTarget === document) {
       menuBar = target.closest(".MenuBar");
       if (!menuBar) {
-        document
-          .querySelectorAll(".MenuBar")
-          .forEach(function (menuBar: Element) {
-            MenuBar.close(menuBar as HTMLElement);
-          });
+        document.querySelectorAll(".MenuBar").forEach((menuBar: Element) => {
+          MenuBar.close(menuBar as HTMLElement);
+        });
         return;
       }
       if (!menuBar.onpointerdown) {
@@ -215,7 +213,7 @@ class MenuBar {
     MenuBar.clearTimeout(menuBar);
     menuBar
       .querySelectorAll(":scope li[data-selected]")
-      .forEach(function (selected: Element) {
+      .forEach((selected: Element) => {
         const ul: HTMLElement | null = selected.querySelector(":scope>ul");
         if (ul === null) {
           selected.removeAttribute("data-selected");

@@ -464,11 +464,11 @@ class OptionPane {
         this.handleInput(ev, resolve, reject, input);
     } else {
       if (options) {
-        options.forEach(function (option) {
+        options.forEach((option) => {
           const dialogButton = OptionPane.createDialogButton(option);
           this.dialogButtonPane.appendChild(dialogButton);
 
-          this.dialogButtons.push(this.dialogButton);
+          this.dialogButtons.push(dialogButton);
 
           dialogButton.onclick = (ev: MouseEvent) =>
             this.handleOption(ev, resolve, reject);

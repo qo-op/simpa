@@ -153,9 +153,7 @@ var MenuBar = /** @class */ (function () {
         if (currentTarget === document) {
             menuBar = target.closest(".MenuBar");
             if (!menuBar) {
-                document
-                    .querySelectorAll(".MenuBar")
-                    .forEach(function (menuBar) {
+                document.querySelectorAll(".MenuBar").forEach(function (menuBar) {
                     MenuBar.close(menuBar);
                 });
                 return;
@@ -407,10 +405,9 @@ var OptionPane = /** @class */ (function () {
         else {
             if (options) {
                 options.forEach(function (option) {
-                    var _this = this;
                     var dialogButton = OptionPane.createDialogButton(option);
-                    this.dialogButtonPane.appendChild(dialogButton);
-                    this.dialogButtons.push(this.dialogButton);
+                    _this.dialogButtonPane.appendChild(dialogButton);
+                    _this.dialogButtons.push(dialogButton);
                     dialogButton.onclick = function (ev) {
                         return _this.handleOption(ev, resolve, reject);
                     };
