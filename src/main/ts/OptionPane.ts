@@ -31,7 +31,7 @@ class OptionPane {
             modalLayer.style.visibility = "inherit";
             document.body.appendChild(modalLayer);
           }
-          const dialog = OptionPane.createDialog(
+          const optionPane = new OptionPane(
             resolve,
             reject,
             undefined,
@@ -41,8 +41,9 @@ class OptionPane {
             messageType,
             img
           );
-          modalLayer.appendChild(dialog);
+          modalLayer.appendChild(optionPane.dialog);
           modalLayer.style.visibility = "inherit";
+          optionPane.dialogOkButton.focus();
         };
         img.onerror = function () {
           reject(new Error(`Failed to load image '${icon}'`));
@@ -60,7 +61,7 @@ class OptionPane {
           modalLayer.style.visibility = "inherit";
           document.body.appendChild(modalLayer);
         }
-        const dialog = OptionPane.createDialog(
+        const optionPane = new OptionPane(
           resolve,
           reject,
           undefined,
@@ -69,19 +70,20 @@ class OptionPane {
           "default",
           messageType
         );
-        modalLayer.appendChild(dialog);
+        modalLayer.appendChild(optionPane.dialog);
         modalLayer.style.visibility = "inherit";
+        optionPane.dialogOkButton.focus();
       });
     }
   };
 
-  static showConfirmDialog(
+  static showConfirmDialog = (
     message: string = "",
     title: string = "Message",
     optionType: string = "yes-no-cancel",
     messageType?: string,
     icon?: string
-  ) {
+  ) => {
     if (icon) {
       return new Promise((resolve, reject) => {
         const img = document.createElement("img");
@@ -98,7 +100,7 @@ class OptionPane {
             modalLayer.style.visibility = "inherit";
             document.body.appendChild(modalLayer);
           }
-          const dialog = OptionPane.createDialog(
+          const optionPane = new OptionPane(
             resolve,
             reject,
             undefined,
@@ -109,8 +111,13 @@ class OptionPane {
               (optionType !== "default" ? "question" : "information"),
             img
           );
-          modalLayer.appendChild(dialog);
+          modalLayer.appendChild(optionPane.dialog);
           modalLayer.style.visibility = "inherit";
+          if (optionPane.dialogOkButton) {
+            optionPane.dialogOkButton.focus();
+          } else {
+            optionPane.dialogYesButton.focus();
+          }
         };
         img.onerror = function () {
           reject(new Error(`Failed to load image '${icon}'`));
@@ -128,7 +135,7 @@ class OptionPane {
           modalLayer.style.visibility = "inherit";
           document.body.appendChild(modalLayer);
         }
-        const dialog = OptionPane.createDialog(
+        const optionPane = new OptionPane(
           resolve,
           reject,
           undefined,
@@ -137,20 +144,25 @@ class OptionPane {
           optionType,
           messageType || (optionType !== "default" ? "question" : "information")
         );
-        modalLayer.appendChild(dialog);
+        modalLayer.appendChild(optionPane.dialog);
         modalLayer.style.visibility = "inherit";
+        if (optionPane.dialogOkButton) {
+          optionPane.dialogOkButton.focus();
+        } else {
+          optionPane.dialogYesButton.focus();
+        }
       });
     }
-  }
+  };
 
-  static showInputDialog(
+  static showInputDialog = (
     message: string = "",
     title: string = "Message",
     messageType: string = "question",
     icon?: string,
     selectionValues?: string[],
     initialSelectionValue?: string
-  ) {
+  ) => {
     let input: HTMLElement;
     if (selectionValues) {
       const comboBox = document.createElement("select") as HTMLSelectElement;
@@ -188,7 +200,7 @@ class OptionPane {
             modalLayer.style.visibility = "inherit";
             document.body.appendChild(modalLayer);
           }
-          const dialog = OptionPane.createDialog(
+          const optionPane = new OptionPane(
             resolve,
             reject,
             input,
@@ -198,8 +210,9 @@ class OptionPane {
             messageType,
             img
           );
-          modalLayer.appendChild(dialog);
+          modalLayer.appendChild(optionPane.dialog);
           modalLayer.style.visibility = "inherit";
+          input.focus();
         };
         img.onerror = function () {
           reject(new Error(`Failed to load image '${icon}'`));
@@ -217,7 +230,7 @@ class OptionPane {
           modalLayer.style.visibility = "inherit";
           document.body.appendChild(modalLayer);
         }
-        const dialog = OptionPane.createDialog(
+        const optionPane = new OptionPane(
           resolve,
           reject,
           input,
@@ -226,13 +239,14 @@ class OptionPane {
           "ok-cancel",
           messageType
         );
-        modalLayer.appendChild(dialog);
+        modalLayer.appendChild(optionPane.dialog);
         modalLayer.style.visibility = "inherit";
+        input.focus();
       });
     }
-  }
+  };
 
-  static showOptionDialog(
+  static showOptionDialog = (
     message: string = "",
     title: string = "Message",
     optionType: string = "yes-no-cancel",
@@ -240,7 +254,7 @@ class OptionPane {
     icon: string,
     options: string[],
     initialValue: string
-  ) {
+  ) => {
     if (icon) {
       return new Promise((resolve, reject) => {
         const img = document.createElement("img");
@@ -257,7 +271,7 @@ class OptionPane {
             modalLayer.style.visibility = "inherit";
             document.body.appendChild(modalLayer);
           }
-          const dialog = OptionPane.createDialog(
+          const optionPane = new OptionPane(
             resolve,
             reject,
             undefined,
@@ -270,8 +284,18 @@ class OptionPane {
             options,
             initialValue
           );
-          modalLayer.appendChild(dialog);
+          modalLayer.appendChild(optionPane.dialog);
           modalLayer.style.visibility = "inherit";
+          if (initialValue) {
+            const index = options.indexOf(initialValue);
+            optionPane.dialogButtons[index].focus();
+          } else {
+            if (optionPane.dialogOkButton) {
+              optionPane.dialogOkButton.focus();
+            } else {
+              optionPane.dialogYesButton.focus();
+            }
+          }
         };
         img.onerror = function () {
           reject(new Error(`Failed to load image '${icon}'`));
@@ -289,7 +313,7 @@ class OptionPane {
           modalLayer.style.visibility = "inherit";
           document.body.appendChild(modalLayer);
         }
-        const dialog = OptionPane.createDialog(
+        const optionPane = new OptionPane(
           resolve,
           reject,
           undefined,
@@ -302,13 +326,29 @@ class OptionPane {
           options,
           initialValue
         );
-        modalLayer.appendChild(dialog);
+        modalLayer.appendChild(optionPane.dialog);
         modalLayer.style.visibility = "inherit";
       });
     }
-  }
+  };
 
-  static createDialog(
+  dialog: HTMLElement;
+  dialogTitleBar: HTMLElement;
+  dialogTitleLabel: HTMLElement;
+  dialogContentPane: HTMLElement;
+  dialogMainPane: HTMLElement;
+  dialogIconPane: HTMLElement;
+  dialogMessagePane: HTMLElement;
+  dialogMessageLabel: HTMLElement;
+  dialogInputPane: HTMLElement;
+  dialogButtonPane: HTMLElement;
+  dialogOkButton: HTMLElement;
+  dialogCancelButton: HTMLElement;
+  dialogYesButton: HTMLElement;
+  dialogNoButton: HTMLElement;
+  dialogButtons: HTMLElement[];
+
+  constructor(
     resolve: (input: string) => void,
     reject: (error: Error) => void,
     input: HTMLElement,
@@ -320,174 +360,206 @@ class OptionPane {
     options?: string[],
     initialValue?: string
   ) {
+    this.dialog = document.createElement("div");
+    this.dialog.classList.add("Dialog");
+    this.dialog.classList.add("BorderLayout");
+
+    this.dialogTitleBar = OptionPane.createDialogTitleBar();
+    this.dialogTitleBar.classList.add("PageStart");
+    this.dialog.appendChild(this.dialogTitleBar);
+
+    this.dialogTitleBar.classList.add("BorderLayout");
+
+    this.dialogTitleLabel = OptionPane.createDialogTitleLabel(title);
+    this.dialogTitleLabel.style.paddingInline = ".5em";
+    this.dialogTitleBar.appendChild(this.dialogTitleLabel);
+
+    this.dialogContentPane = OptionPane.createDialogContentPane();
+    this.dialog.appendChild(this.dialogContentPane);
+
+    this.dialogContentPane.style.padding = ".5em";
+    this.dialogContentPane.classList.add("BorderLayout");
+
+    this.dialogMainPane = OptionPane.createDialogMainPane();
+    this.dialogMainPane.style.marginBlockEnd = ".5em";
+    this.dialogContentPane.appendChild(this.dialogMainPane);
+
+    this.dialogMainPane.style.display = "grid";
+    this.dialogMainPane.style.rowGap = ".5em";
+
+    this.dialogIconPane = OptionPane.createDialogIconPane();
+    this.dialogIconPane.style.gridRow = "1";
+    this.dialogIconPane.style.gridColumn = "1";
+    this.dialogMainPane.appendChild(this.dialogIconPane);
+
+    this.dialogIconPane.classList.add("CenterLayout");
+
+    if (img) {
+      this.dialogIconPane.style.marginInlineEnd = ".5em";
+      this.dialogIconPane.appendChild(img);
+    } else {
+      const dialogIcon = OptionPane.createDialogIcon(messageType);
+      if (dialogIcon !== null) {
+        this.dialogIconPane.style.marginInlineEnd = ".5em";
+        this.dialogIconPane.appendChild(dialogIcon);
+      }
+    }
+
+    this.dialogMessagePane = OptionPane.createDialogMessagePane();
+    this.dialogMessagePane.style.gridRow = "1";
+    this.dialogMessagePane.style.gridColumn = "2";
+    this.dialogMainPane.appendChild(this.dialogMessagePane);
+
+    this.dialogMessagePane.classList.add("GridBagConstraints");
+    this.dialogMessagePane.dataset.anchor = "center";
+    this.dialogMessagePane.dataset.fill = "horizontal";
+
+    this.dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
+    this.dialogMessagePane.appendChild(this.dialogMessageLabel);
+
+    if (input) {
+      this.dialogInputPane = OptionPane.createDialogInputPane();
+      this.dialogInputPane.style.gridRow = "2";
+      this.dialogInputPane.style.gridColumn = "2";
+      this.dialogMainPane.appendChild(this.dialogInputPane);
+
+      this.dialogInputPane.classList.add("BorderLayout");
+
+      this.dialogInputPane.appendChild(input);
+    }
+
+    this.dialogButtonPane = OptionPane.createDialogButtonPane();
+    this.dialogButtonPane.classList.add("PageEnd");
+    this.dialogContentPane.appendChild(this.dialogButtonPane);
+
+    this.dialogButtonPane.classList.add("FlowLayout");
+    this.dialogButtonPane.style.gap = ".5em";
+
+    this.dialogButtons = [];
+
+    if (input) {
+      this.dialogOkButton = OptionPane.createDialogButton("OK");
+      this.dialogButtonPane.appendChild(this.dialogOkButton);
+
+      this.dialogButtons.push(this.dialogOkButton);
+
+      this.dialogOkButton.onclick = (ev: MouseEvent) =>
+        this.handleInput(ev, resolve, reject, input);
+
+      if (input.tagName === "INPUT" && input.getAttribute("type") === "text") {
+        input.onkeydown = (ev: KeyboardEvent) => {
+          if (ev.key === "Enter") {
+            ev.preventDefault();
+            this.dialogOkButton.click();
+          }
+        };
+      }
+
+      this.dialogCancelButton = OptionPane.createDialogButton("Cancel");
+      this.dialogButtonPane.appendChild(this.dialogCancelButton);
+
+      this.dialogButtons.push(this.dialogCancelButton);
+
+      this.dialogCancelButton.onclick = (ev: MouseEvent) =>
+        this.handleInput(ev, resolve, reject, input);
+    } else {
+      if (options) {
+        options.forEach(function (option) {
+          const dialogButton = OptionPane.createDialogButton(option);
+          this.dialogButtonPane.appendChild(dialogButton);
+
+          this.dialogButtons.push(this.dialogButton);
+
+          dialogButton.onclick = (ev: MouseEvent) =>
+            this.handleOption(ev, resolve, reject);
+        });
+      } else {
+        if (optionType === "default" || optionType === "ok-cancel") {
+          this.dialogOkButton = OptionPane.createDialogButton("OK");
+          this.dialogButtonPane.appendChild(this.dialogOkButton);
+
+          this.dialogButtons.push(this.dialogOkButton);
+
+          this.dialogOkButton.onclick = (ev: MouseEvent) =>
+            this.handleOption(ev, resolve, reject);
+        }
+        if (optionType === "yes-no" || optionType === "yes-no-cancel") {
+          this.dialogYesButton = OptionPane.createDialogButton("Yes");
+          this.dialogButtonPane.appendChild(this.dialogYesButton);
+
+          this.dialogButtons.push(this.dialogYesButton);
+
+          this.dialogYesButton.onclick = (ev: MouseEvent) =>
+            this.handleOption(ev, resolve, reject);
+        }
+        if (optionType === "yes-no" || optionType === "yes-no-cancel") {
+          this.dialogNoButton = OptionPane.createDialogButton("No");
+          this.dialogButtonPane.appendChild(this.dialogNoButton);
+
+          this.dialogButtons.push(this.dialogNoButton);
+
+          this.dialogNoButton.onclick = (ev: MouseEvent) =>
+            this.handleOption(ev, resolve, reject);
+        }
+        if (optionType === "yes-no-cancel" || optionType === "ok-cancel") {
+          this.dialogCancelButton = OptionPane.createDialogButton("Cancel");
+          this.dialogButtonPane.appendChild(this.dialogCancelButton);
+
+          this.dialogButtons.push(this.dialogCancelButton);
+
+          this.dialogCancelButton.onclick = (ev: MouseEvent) =>
+            this.handleOption(ev, resolve, reject);
+        }
+      }
+    }
+  }
+
+  handleInput = (
+    ev: MouseEvent,
+    resolve: (input: string) => void,
+    reject: (error: Error) => void,
+    input: HTMLElement
+  ) => {
     try {
-      const dialog = document.createElement("div");
-      dialog.classList.add("Dialog");
-      dialog.classList.add("BorderLayout");
-
-      const dialogTitleBar = OptionPane.createDialogTitleBar();
-      dialogTitleBar.classList.add("PageStart");
-      dialog.appendChild(dialogTitleBar);
-
-      dialogTitleBar.classList.add("BorderLayout");
-
-      const dialogTitleLabel = OptionPane.createDialogTitleLabel(title);
-      dialogTitleLabel.style.paddingInline = ".5em";
-      dialogTitleBar.appendChild(dialogTitleLabel);
-
-      const dialogContentPane = OptionPane.createDialogContentPane();
-      dialog.appendChild(dialogContentPane);
-
-      dialogContentPane.style.padding = ".5em";
-      dialogContentPane.classList.add("BorderLayout");
-
-      const dialogMainPane = OptionPane.createDialogMainPane();
-      dialogMainPane.style.marginBlockEnd = ".5em";
-      dialogContentPane.appendChild(dialogMainPane);
-
-      dialogMainPane.style.display = "grid";
-      dialogMainPane.style.rowGap = ".5em";
-
-      const dialogIconPane = OptionPane.createDialogIconPane();
-      dialogIconPane.style.gridRow = "1";
-      dialogIconPane.style.gridColumn = "1";
-      dialogMainPane.appendChild(dialogIconPane);
-
-      dialogIconPane.classList.add("CenterLayout");
-
-      if (img) {
-        dialogIconPane.style.marginInlineEnd = ".5em";
-        dialogIconPane.appendChild(img);
-      } else {
-        const dialogIcon = OptionPane.createDialogIcon(messageType);
-        if (dialogIcon !== null) {
-          dialogIconPane.style.marginInlineEnd = ".5em";
-          dialogIconPane.appendChild(dialogIcon);
-        }
+      const modalLayer: HTMLElement =
+        document.body.querySelector(":scope>.ModalLayer");
+      if (modalLayer !== null) {
+        modalLayer.style.visibility = "hidden";
       }
-
-      const dialogMessagePanel = OptionPane.createDialogMessagePane();
-      dialogMessagePanel.style.gridRow = "1";
-      dialogMessagePanel.style.gridColumn = "2";
-      dialogMainPane.appendChild(dialogMessagePanel);
-
-      dialogMessagePanel.classList.add("GridBagConstraints");
-      dialogMessagePanel.dataset.anchor = "center";
-      dialogMessagePanel.dataset.fill = "horizontal";
-
-      const dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
-      dialogMessagePanel.appendChild(dialogMessageLabel);
-
-      if (input) {
-        const dialogInputPane = OptionPane.createDialogInputPane();
-        dialogInputPane.style.gridRow = "2";
-        dialogInputPane.style.gridColumn = "2";
-        dialogMainPane.appendChild(dialogInputPane);
-
-        dialogInputPane.classList.add("BorderLayout");
-
-        dialogInputPane.appendChild(input);
+      const button = ev.currentTarget as HTMLElement;
+      switch (button.textContent) {
+        case "OK":
+          resolve((input as HTMLSelectElement | HTMLInputElement).value);
+          break;
+        default:
+          resolve(null);
       }
-
-      const dialogButtonPane = OptionPane.createDialogButtonPane();
-      dialogButtonPane.classList.add("PageEnd");
-      dialogContentPane.appendChild(dialogButtonPane);
-
-      dialogButtonPane.classList.add("FlowLayout");
-      dialogButtonPane.style.gap = ".5em";
-
-      const handleInput = (ev: MouseEvent) => {
-        try {
-          const modalLayer: HTMLElement =
-            document.body.querySelector(":scope>.ModalLayer");
-          if (modalLayer !== null) {
-            modalLayer.style.visibility = "hidden";
-          }
-          const button = ev.currentTarget as HTMLElement;
-          switch (button.textContent) {
-            case "OK":
-              resolve((input as HTMLSelectElement | HTMLInputElement).value);
-              break;
-            default:
-              resolve(null);
-          }
-          const dialog = button.closest(".Dialog");
-          dialog.remove();
-        } catch (e) {
-          reject(e);
-        }
-      };
-
-      const handleOption = (ev: MouseEvent) => {
-        try {
-          const modalLayer: HTMLElement =
-            document.body.querySelector(":scope>.ModalLayer");
-          if (modalLayer !== null) {
-            modalLayer.style.visibility = "hidden";
-          }
-          const button = ev.currentTarget as HTMLElement;
-          resolve(button.textContent);
-          const dialog = button.closest(".Dialog");
-          dialog.remove();
-        } catch (e) {
-          reject(e);
-        }
-      };
-
-      if (input) {
-        const dialogOkButton = OptionPane.createDialogButton("OK");
-        dialogButtonPane.appendChild(dialogOkButton);
-
-        dialogOkButton.onclick = handleInput;
-
-        const dialogCancelButton = OptionPane.createDialogButton("Cancel");
-        dialogButtonPane.appendChild(dialogCancelButton);
-
-        dialogCancelButton.onclick = handleInput;
-      } else {
-        if (options) {
-          options.forEach(function (option) {
-            const dialogButton = OptionPane.createDialogButton(option);
-            dialogButtonPane.appendChild(dialogButton);
-
-            dialogButton.onclick = handleOption;
-          });
-        } else {
-          if (optionType === "default" || optionType === "ok-cancel") {
-            const dialogOkButton = OptionPane.createDialogButton("OK");
-            dialogButtonPane.appendChild(dialogOkButton);
-
-            dialogOkButton.onclick = handleOption;
-          }
-
-          if (optionType === "yes-no" || optionType === "yes-no-cancel") {
-            const dialogYesButton = OptionPane.createDialogButton("Yes");
-            dialogButtonPane.appendChild(dialogYesButton);
-
-            dialogYesButton.onclick = handleOption;
-          }
-
-          if (optionType === "yes-no" || optionType === "yes-no-cancel") {
-            const dialogNoButton = OptionPane.createDialogButton("No");
-            dialogButtonPane.appendChild(dialogNoButton);
-
-            dialogNoButton.onclick = handleOption;
-          }
-
-          if (optionType === "yes-no-cancel" || optionType === "ok-cancel") {
-            const dialogCancelButton = OptionPane.createDialogButton("Cancel");
-            dialogButtonPane.appendChild(dialogCancelButton);
-
-            dialogCancelButton.onclick = handleOption;
-          }
-        }
-      }
-
-      return dialog;
+      const dialog = button.closest(".Dialog");
+      dialog.remove();
     } catch (e) {
       reject(e);
     }
-  }
+  };
+
+  handleOption = (
+    ev: MouseEvent,
+    resolve: (input: string) => void,
+    reject: (error: Error) => void
+  ) => {
+    try {
+      const modalLayer: HTMLElement =
+        document.body.querySelector(":scope>.ModalLayer");
+      if (modalLayer !== null) {
+        modalLayer.style.visibility = "hidden";
+      }
+      const button = ev.currentTarget as HTMLElement;
+      resolve(button.textContent);
+      const dialog = button.closest(".Dialog");
+      dialog.remove();
+    } catch (e) {
+      reject(e);
+    }
+  };
 
   static createDialogTitleBar() {
     const dialogTitleBar = document.createElement("div");

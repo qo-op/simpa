@@ -286,308 +286,172 @@ document.addEventListener("pointerdown", MenuBar.pointerdown);
  * @author Yassuo Toda
  */
 var OptionPane = /** @class */ (function () {
-    function OptionPane() {
+    function OptionPane(resolve, reject, input, message, title, optionType, messageType, img, options, initialValue) {
+        var _this = this;
+        this.handleInput = function (ev, resolve, reject, input) {
+            try {
+                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer !== null) {
+                    modalLayer.style.visibility = "hidden";
+                }
+                var button = ev.currentTarget;
+                switch (button.textContent) {
+                    case "OK":
+                        resolve(input.value);
+                        break;
+                    default:
+                        resolve(null);
+                }
+                var dialog = button.closest(".Dialog");
+                dialog.remove();
+            }
+            catch (e) {
+                reject(e);
+            }
+        };
+        this.handleOption = function (ev, resolve, reject) {
+            try {
+                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer !== null) {
+                    modalLayer.style.visibility = "hidden";
+                }
+                var button = ev.currentTarget;
+                resolve(button.textContent);
+                var dialog = button.closest(".Dialog");
+                dialog.remove();
+            }
+            catch (e) {
+                reject(e);
+            }
+        };
+        this.dialog = document.createElement("div");
+        this.dialog.classList.add("Dialog");
+        this.dialog.classList.add("BorderLayout");
+        this.dialogTitleBar = OptionPane.createDialogTitleBar();
+        this.dialogTitleBar.classList.add("PageStart");
+        this.dialog.appendChild(this.dialogTitleBar);
+        this.dialogTitleBar.classList.add("BorderLayout");
+        this.dialogTitleLabel = OptionPane.createDialogTitleLabel(title);
+        this.dialogTitleLabel.style.paddingInline = ".5em";
+        this.dialogTitleBar.appendChild(this.dialogTitleLabel);
+        this.dialogContentPane = OptionPane.createDialogContentPane();
+        this.dialog.appendChild(this.dialogContentPane);
+        this.dialogContentPane.style.padding = ".5em";
+        this.dialogContentPane.classList.add("BorderLayout");
+        this.dialogMainPane = OptionPane.createDialogMainPane();
+        this.dialogMainPane.style.marginBlockEnd = ".5em";
+        this.dialogContentPane.appendChild(this.dialogMainPane);
+        this.dialogMainPane.style.display = "grid";
+        this.dialogMainPane.style.rowGap = ".5em";
+        this.dialogIconPane = OptionPane.createDialogIconPane();
+        this.dialogIconPane.style.gridRow = "1";
+        this.dialogIconPane.style.gridColumn = "1";
+        this.dialogMainPane.appendChild(this.dialogIconPane);
+        this.dialogIconPane.classList.add("CenterLayout");
+        if (img) {
+            this.dialogIconPane.style.marginInlineEnd = ".5em";
+            this.dialogIconPane.appendChild(img);
+        }
+        else {
+            var dialogIcon = OptionPane.createDialogIcon(messageType);
+            if (dialogIcon !== null) {
+                this.dialogIconPane.style.marginInlineEnd = ".5em";
+                this.dialogIconPane.appendChild(dialogIcon);
+            }
+        }
+        this.dialogMessagePane = OptionPane.createDialogMessagePane();
+        this.dialogMessagePane.style.gridRow = "1";
+        this.dialogMessagePane.style.gridColumn = "2";
+        this.dialogMainPane.appendChild(this.dialogMessagePane);
+        this.dialogMessagePane.classList.add("GridBagConstraints");
+        this.dialogMessagePane.dataset.anchor = "center";
+        this.dialogMessagePane.dataset.fill = "horizontal";
+        this.dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
+        this.dialogMessagePane.appendChild(this.dialogMessageLabel);
+        if (input) {
+            this.dialogInputPane = OptionPane.createDialogInputPane();
+            this.dialogInputPane.style.gridRow = "2";
+            this.dialogInputPane.style.gridColumn = "2";
+            this.dialogMainPane.appendChild(this.dialogInputPane);
+            this.dialogInputPane.classList.add("BorderLayout");
+            this.dialogInputPane.appendChild(input);
+        }
+        this.dialogButtonPane = OptionPane.createDialogButtonPane();
+        this.dialogButtonPane.classList.add("PageEnd");
+        this.dialogContentPane.appendChild(this.dialogButtonPane);
+        this.dialogButtonPane.classList.add("FlowLayout");
+        this.dialogButtonPane.style.gap = ".5em";
+        this.dialogButtons = [];
+        if (input) {
+            this.dialogOkButton = OptionPane.createDialogButton("OK");
+            this.dialogButtonPane.appendChild(this.dialogOkButton);
+            this.dialogButtons.push(this.dialogOkButton);
+            this.dialogOkButton.onclick = function (ev) {
+                return _this.handleInput(ev, resolve, reject, input);
+            };
+            if (input.tagName === "INPUT" && input.getAttribute("type") === "text") {
+                input.onkeydown = function (ev) {
+                    if (ev.key === "Enter") {
+                        ev.preventDefault();
+                        _this.dialogOkButton.click();
+                    }
+                };
+            }
+            this.dialogCancelButton = OptionPane.createDialogButton("Cancel");
+            this.dialogButtonPane.appendChild(this.dialogCancelButton);
+            this.dialogButtons.push(this.dialogCancelButton);
+            this.dialogCancelButton.onclick = function (ev) {
+                return _this.handleInput(ev, resolve, reject, input);
+            };
+        }
+        else {
+            if (options) {
+                options.forEach(function (option) {
+                    var _this = this;
+                    var dialogButton = OptionPane.createDialogButton(option);
+                    this.dialogButtonPane.appendChild(dialogButton);
+                    this.dialogButtons.push(this.dialogButton);
+                    dialogButton.onclick = function (ev) {
+                        return _this.handleOption(ev, resolve, reject);
+                    };
+                });
+            }
+            else {
+                if (optionType === "default" || optionType === "ok-cancel") {
+                    this.dialogOkButton = OptionPane.createDialogButton("OK");
+                    this.dialogButtonPane.appendChild(this.dialogOkButton);
+                    this.dialogButtons.push(this.dialogOkButton);
+                    this.dialogOkButton.onclick = function (ev) {
+                        return _this.handleOption(ev, resolve, reject);
+                    };
+                }
+                if (optionType === "yes-no" || optionType === "yes-no-cancel") {
+                    this.dialogYesButton = OptionPane.createDialogButton("Yes");
+                    this.dialogButtonPane.appendChild(this.dialogYesButton);
+                    this.dialogButtons.push(this.dialogYesButton);
+                    this.dialogYesButton.onclick = function (ev) {
+                        return _this.handleOption(ev, resolve, reject);
+                    };
+                }
+                if (optionType === "yes-no" || optionType === "yes-no-cancel") {
+                    this.dialogNoButton = OptionPane.createDialogButton("No");
+                    this.dialogButtonPane.appendChild(this.dialogNoButton);
+                    this.dialogButtons.push(this.dialogNoButton);
+                    this.dialogNoButton.onclick = function (ev) {
+                        return _this.handleOption(ev, resolve, reject);
+                    };
+                }
+                if (optionType === "yes-no-cancel" || optionType === "ok-cancel") {
+                    this.dialogCancelButton = OptionPane.createDialogButton("Cancel");
+                    this.dialogButtonPane.appendChild(this.dialogCancelButton);
+                    this.dialogButtons.push(this.dialogCancelButton);
+                    this.dialogCancelButton.onclick = function (ev) {
+                        return _this.handleOption(ev, resolve, reject);
+                    };
+                }
+            }
+        }
     }
-    OptionPane.showConfirmDialog = function (message, title, optionType, messageType, icon) {
-        if (message === void 0) { message = ""; }
-        if (title === void 0) { title = "Message"; }
-        if (optionType === void 0) { optionType = "yes-no-cancel"; }
-        if (icon) {
-            return new Promise(function (resolve, reject) {
-                var img = document.createElement("img");
-                img.alt = "Custom icon";
-                img.onload = function () {
-                    img.style.width = img.naturalWidth + "px";
-                    img.style.height = img.naturalHeight + "px";
-                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                    if (modalLayer === null) {
-                        modalLayer = document.createElement("div");
-                        modalLayer.classList.add("ModalLayer");
-                        modalLayer.classList.add("CenterLayout");
-                        modalLayer.style.visibility = "inherit";
-                        document.body.appendChild(modalLayer);
-                    }
-                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType ||
-                        (optionType !== "default" ? "question" : "information"), img);
-                    modalLayer.appendChild(dialog);
-                    modalLayer.style.visibility = "inherit";
-                };
-                img.onerror = function () {
-                    reject(new Error("Failed to load image '".concat(icon, "'")));
-                };
-                img.src = icon;
-            });
-        }
-        else {
-            return new Promise(function (resolve, reject) {
-                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                if (modalLayer === null) {
-                    modalLayer = document.createElement("div");
-                    modalLayer.classList.add("ModalLayer");
-                    modalLayer.classList.add("CenterLayout");
-                    modalLayer.style.visibility = "inherit";
-                    document.body.appendChild(modalLayer);
-                }
-                var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"));
-                modalLayer.appendChild(dialog);
-                modalLayer.style.visibility = "inherit";
-            });
-        }
-    };
-    OptionPane.showInputDialog = function (message, title, messageType, icon, selectionValues, initialSelectionValue) {
-        if (message === void 0) { message = ""; }
-        if (title === void 0) { title = "Message"; }
-        if (messageType === void 0) { messageType = "question"; }
-        var input;
-        if (selectionValues) {
-            var comboBox_1 = document.createElement("select");
-            selectionValues.forEach(function (selectionValue) {
-                var option = document.createElement("option");
-                option.value = selectionValue;
-                option.text = selectionValue;
-                comboBox_1.appendChild(option);
-            });
-            if (initialSelectionValue) {
-                comboBox_1.value = initialSelectionValue;
-            }
-            input = comboBox_1;
-        }
-        else {
-            var textField = document.createElement("input");
-            textField.type = "text";
-            if (initialSelectionValue) {
-                textField.value = initialSelectionValue;
-            }
-            input = textField;
-        }
-        if (icon) {
-            return new Promise(function (resolve, reject) {
-                var img = document.createElement("img");
-                img.alt = "Custom icon";
-                img.onload = function () {
-                    img.style.width = img.naturalWidth + "px";
-                    img.style.height = img.naturalHeight + "px";
-                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                    if (modalLayer === null) {
-                        modalLayer = document.createElement("div");
-                        modalLayer.classList.add("ModalLayer");
-                        modalLayer.classList.add("CenterLayout");
-                        modalLayer.style.visibility = "inherit";
-                        document.body.appendChild(modalLayer);
-                    }
-                    var dialog = OptionPane.createDialog(resolve, reject, input, message, title, "ok-cancel", messageType, img);
-                    modalLayer.appendChild(dialog);
-                    modalLayer.style.visibility = "inherit";
-                };
-                img.onerror = function () {
-                    reject(new Error("Failed to load image '".concat(icon, "'")));
-                };
-                img.src = icon;
-            });
-        }
-        else {
-            return new Promise(function (resolve, reject) {
-                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                if (modalLayer === null) {
-                    modalLayer = document.createElement("div");
-                    modalLayer.classList.add("ModalLayer");
-                    modalLayer.classList.add("CenterLayout");
-                    modalLayer.style.visibility = "inherit";
-                    document.body.appendChild(modalLayer);
-                }
-                var dialog = OptionPane.createDialog(resolve, reject, input, message, title, "ok-cancel", messageType);
-                modalLayer.appendChild(dialog);
-                modalLayer.style.visibility = "inherit";
-            });
-        }
-    };
-    OptionPane.showOptionDialog = function (message, title, optionType, messageType, icon, options, initialValue) {
-        if (message === void 0) { message = ""; }
-        if (title === void 0) { title = "Message"; }
-        if (optionType === void 0) { optionType = "yes-no-cancel"; }
-        if (icon) {
-            return new Promise(function (resolve, reject) {
-                var img = document.createElement("img");
-                img.alt = "Custom icon";
-                img.onload = function () {
-                    img.style.width = img.naturalWidth + "px";
-                    img.style.height = img.naturalHeight + "px";
-                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                    if (modalLayer === null) {
-                        modalLayer = document.createElement("div");
-                        modalLayer.classList.add("ModalLayer");
-                        modalLayer.classList.add("CenterLayout");
-                        modalLayer.style.visibility = "inherit";
-                        document.body.appendChild(modalLayer);
-                    }
-                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType ||
-                        (optionType !== "default" ? "question" : "information"), img, options, initialValue);
-                    modalLayer.appendChild(dialog);
-                    modalLayer.style.visibility = "inherit";
-                };
-                img.onerror = function () {
-                    reject(new Error("Failed to load image '".concat(icon, "'")));
-                };
-                img.src = icon;
-            });
-        }
-        else {
-            return new Promise(function (resolve, reject) {
-                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                if (modalLayer === null) {
-                    modalLayer = document.createElement("div");
-                    modalLayer.classList.add("ModalLayer");
-                    modalLayer.classList.add("CenterLayout");
-                    modalLayer.style.visibility = "inherit";
-                    document.body.appendChild(modalLayer);
-                }
-                var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, optionType, messageType ||
-                    (optionType !== "default" ? "question" : "information"), undefined, options, initialValue);
-                modalLayer.appendChild(dialog);
-                modalLayer.style.visibility = "inherit";
-            });
-        }
-    };
-    OptionPane.createDialog = function (resolve, reject, input, message, title, optionType, messageType, img, options, initialValue) {
-        try {
-            var dialog = document.createElement("div");
-            dialog.classList.add("Dialog");
-            dialog.classList.add("BorderLayout");
-            var dialogTitleBar = OptionPane.createDialogTitleBar();
-            dialogTitleBar.classList.add("PageStart");
-            dialog.appendChild(dialogTitleBar);
-            dialogTitleBar.classList.add("BorderLayout");
-            var dialogTitleLabel = OptionPane.createDialogTitleLabel(title);
-            dialogTitleLabel.style.paddingInline = ".5em";
-            dialogTitleBar.appendChild(dialogTitleLabel);
-            var dialogContentPane = OptionPane.createDialogContentPane();
-            dialog.appendChild(dialogContentPane);
-            dialogContentPane.style.padding = ".5em";
-            dialogContentPane.classList.add("BorderLayout");
-            var dialogMainPane = OptionPane.createDialogMainPane();
-            dialogMainPane.style.marginBlockEnd = ".5em";
-            dialogContentPane.appendChild(dialogMainPane);
-            dialogMainPane.style.display = "grid";
-            dialogMainPane.style.rowGap = ".5em";
-            var dialogIconPane = OptionPane.createDialogIconPane();
-            dialogIconPane.style.gridRow = "1";
-            dialogIconPane.style.gridColumn = "1";
-            dialogMainPane.appendChild(dialogIconPane);
-            dialogIconPane.classList.add("CenterLayout");
-            if (img) {
-                dialogIconPane.style.marginInlineEnd = ".5em";
-                dialogIconPane.appendChild(img);
-            }
-            else {
-                var dialogIcon = OptionPane.createDialogIcon(messageType);
-                if (dialogIcon !== null) {
-                    dialogIconPane.style.marginInlineEnd = ".5em";
-                    dialogIconPane.appendChild(dialogIcon);
-                }
-            }
-            var dialogMessagePanel = OptionPane.createDialogMessagePane();
-            dialogMessagePanel.style.gridRow = "1";
-            dialogMessagePanel.style.gridColumn = "2";
-            dialogMainPane.appendChild(dialogMessagePanel);
-            dialogMessagePanel.classList.add("GridBagConstraints");
-            dialogMessagePanel.dataset.anchor = "center";
-            dialogMessagePanel.dataset.fill = "horizontal";
-            var dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
-            dialogMessagePanel.appendChild(dialogMessageLabel);
-            if (input) {
-                var dialogInputPane = OptionPane.createDialogInputPane();
-                dialogInputPane.style.gridRow = "2";
-                dialogInputPane.style.gridColumn = "2";
-                dialogMainPane.appendChild(dialogInputPane);
-                dialogInputPane.classList.add("BorderLayout");
-                dialogInputPane.appendChild(input);
-            }
-            var dialogButtonPane_1 = OptionPane.createDialogButtonPane();
-            dialogButtonPane_1.classList.add("PageEnd");
-            dialogContentPane.appendChild(dialogButtonPane_1);
-            dialogButtonPane_1.classList.add("FlowLayout");
-            dialogButtonPane_1.style.gap = ".5em";
-            var handleInput = function (ev) {
-                try {
-                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                    if (modalLayer !== null) {
-                        modalLayer.style.visibility = "hidden";
-                    }
-                    var button = ev.currentTarget;
-                    switch (button.textContent) {
-                        case "OK":
-                            resolve(input.value);
-                            break;
-                        default:
-                            resolve(null);
-                    }
-                    var dialog_1 = button.closest(".Dialog");
-                    dialog_1.remove();
-                }
-                catch (e) {
-                    reject(e);
-                }
-            };
-            var handleOption_1 = function (ev) {
-                try {
-                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                    if (modalLayer !== null) {
-                        modalLayer.style.visibility = "hidden";
-                    }
-                    var button = ev.currentTarget;
-                    resolve(button.textContent);
-                    var dialog_2 = button.closest(".Dialog");
-                    dialog_2.remove();
-                }
-                catch (e) {
-                    reject(e);
-                }
-            };
-            if (input) {
-                var dialogOkButton = OptionPane.createDialogButton("OK");
-                dialogButtonPane_1.appendChild(dialogOkButton);
-                dialogOkButton.onclick = handleInput;
-                var dialogCancelButton = OptionPane.createDialogButton("Cancel");
-                dialogButtonPane_1.appendChild(dialogCancelButton);
-                dialogCancelButton.onclick = handleInput;
-            }
-            else {
-                if (options) {
-                    options.forEach(function (option) {
-                        var dialogButton = OptionPane.createDialogButton(option);
-                        dialogButtonPane_1.appendChild(dialogButton);
-                        dialogButton.onclick = handleOption_1;
-                    });
-                }
-                else {
-                    if (optionType === "default" || optionType === "ok-cancel") {
-                        var dialogOkButton = OptionPane.createDialogButton("OK");
-                        dialogButtonPane_1.appendChild(dialogOkButton);
-                        dialogOkButton.onclick = handleOption_1;
-                    }
-                    if (optionType === "yes-no" || optionType === "yes-no-cancel") {
-                        var dialogYesButton = OptionPane.createDialogButton("Yes");
-                        dialogButtonPane_1.appendChild(dialogYesButton);
-                        dialogYesButton.onclick = handleOption_1;
-                    }
-                    if (optionType === "yes-no" || optionType === "yes-no-cancel") {
-                        var dialogNoButton = OptionPane.createDialogButton("No");
-                        dialogButtonPane_1.appendChild(dialogNoButton);
-                        dialogNoButton.onclick = handleOption_1;
-                    }
-                    if (optionType === "yes-no-cancel" || optionType === "ok-cancel") {
-                        var dialogCancelButton = OptionPane.createDialogButton("Cancel");
-                        dialogButtonPane_1.appendChild(dialogCancelButton);
-                        dialogCancelButton.onclick = handleOption_1;
-                    }
-                }
-            }
-            return dialog;
-        }
-        catch (e) {
-            reject(e);
-        }
-    };
     OptionPane.createDialogTitleBar = function () {
         var dialogTitleBar = document.createElement("div");
         dialogTitleBar.classList.add("DialogTitleBar");
@@ -715,9 +579,10 @@ var OptionPane = /** @class */ (function () {
                         modalLayer.style.visibility = "inherit";
                         document.body.appendChild(modalLayer);
                     }
-                    var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, "default", messageType, img);
-                    modalLayer.appendChild(dialog);
+                    var optionPane = new OptionPane(resolve, reject, undefined, message, title, "default", messageType, img);
+                    modalLayer.appendChild(optionPane.dialog);
                     modalLayer.style.visibility = "inherit";
+                    optionPane.dialogOkButton.focus();
                 };
                 img.onerror = function () {
                     reject(new Error("Failed to load image '".concat(icon, "'")));
@@ -735,8 +600,195 @@ var OptionPane = /** @class */ (function () {
                     modalLayer.style.visibility = "inherit";
                     document.body.appendChild(modalLayer);
                 }
-                var dialog = OptionPane.createDialog(resolve, reject, undefined, message, title, "default", messageType);
-                modalLayer.appendChild(dialog);
+                var optionPane = new OptionPane(resolve, reject, undefined, message, title, "default", messageType);
+                modalLayer.appendChild(optionPane.dialog);
+                modalLayer.style.visibility = "inherit";
+                optionPane.dialogOkButton.focus();
+            });
+        }
+    };
+    OptionPane.showConfirmDialog = function (message, title, optionType, messageType, icon) {
+        if (message === void 0) { message = ""; }
+        if (title === void 0) { title = "Message"; }
+        if (optionType === void 0) { optionType = "yes-no-cancel"; }
+        if (icon) {
+            return new Promise(function (resolve, reject) {
+                var img = document.createElement("img");
+                img.alt = "Custom icon";
+                img.onload = function () {
+                    img.style.width = img.naturalWidth + "px";
+                    img.style.height = img.naturalHeight + "px";
+                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                    if (modalLayer === null) {
+                        modalLayer = document.createElement("div");
+                        modalLayer.classList.add("ModalLayer");
+                        modalLayer.classList.add("CenterLayout");
+                        modalLayer.style.visibility = "inherit";
+                        document.body.appendChild(modalLayer);
+                    }
+                    var optionPane = new OptionPane(resolve, reject, undefined, message, title, optionType, messageType ||
+                        (optionType !== "default" ? "question" : "information"), img);
+                    modalLayer.appendChild(optionPane.dialog);
+                    modalLayer.style.visibility = "inherit";
+                    if (optionPane.dialogOkButton) {
+                        optionPane.dialogOkButton.focus();
+                    }
+                    else {
+                        optionPane.dialogYesButton.focus();
+                    }
+                };
+                img.onerror = function () {
+                    reject(new Error("Failed to load image '".concat(icon, "'")));
+                };
+                img.src = icon;
+            });
+        }
+        else {
+            return new Promise(function (resolve, reject) {
+                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer === null) {
+                    modalLayer = document.createElement("div");
+                    modalLayer.classList.add("ModalLayer");
+                    modalLayer.classList.add("CenterLayout");
+                    modalLayer.style.visibility = "inherit";
+                    document.body.appendChild(modalLayer);
+                }
+                var optionPane = new OptionPane(resolve, reject, undefined, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"));
+                modalLayer.appendChild(optionPane.dialog);
+                modalLayer.style.visibility = "inherit";
+                if (optionPane.dialogOkButton) {
+                    optionPane.dialogOkButton.focus();
+                }
+                else {
+                    optionPane.dialogYesButton.focus();
+                }
+            });
+        }
+    };
+    OptionPane.showInputDialog = function (message, title, messageType, icon, selectionValues, initialSelectionValue) {
+        if (message === void 0) { message = ""; }
+        if (title === void 0) { title = "Message"; }
+        if (messageType === void 0) { messageType = "question"; }
+        var input;
+        if (selectionValues) {
+            var comboBox_1 = document.createElement("select");
+            selectionValues.forEach(function (selectionValue) {
+                var option = document.createElement("option");
+                option.value = selectionValue;
+                option.text = selectionValue;
+                comboBox_1.appendChild(option);
+            });
+            if (initialSelectionValue) {
+                comboBox_1.value = initialSelectionValue;
+            }
+            input = comboBox_1;
+        }
+        else {
+            var textField = document.createElement("input");
+            textField.type = "text";
+            if (initialSelectionValue) {
+                textField.value = initialSelectionValue;
+            }
+            input = textField;
+        }
+        if (icon) {
+            return new Promise(function (resolve, reject) {
+                var img = document.createElement("img");
+                img.alt = "Custom icon";
+                img.onload = function () {
+                    img.style.width = img.naturalWidth + "px";
+                    img.style.height = img.naturalHeight + "px";
+                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                    if (modalLayer === null) {
+                        modalLayer = document.createElement("div");
+                        modalLayer.classList.add("ModalLayer");
+                        modalLayer.classList.add("CenterLayout");
+                        modalLayer.style.visibility = "inherit";
+                        document.body.appendChild(modalLayer);
+                    }
+                    var optionPane = new OptionPane(resolve, reject, input, message, title, "ok-cancel", messageType, img);
+                    modalLayer.appendChild(optionPane.dialog);
+                    modalLayer.style.visibility = "inherit";
+                    input.focus();
+                };
+                img.onerror = function () {
+                    reject(new Error("Failed to load image '".concat(icon, "'")));
+                };
+                img.src = icon;
+            });
+        }
+        else {
+            return new Promise(function (resolve, reject) {
+                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer === null) {
+                    modalLayer = document.createElement("div");
+                    modalLayer.classList.add("ModalLayer");
+                    modalLayer.classList.add("CenterLayout");
+                    modalLayer.style.visibility = "inherit";
+                    document.body.appendChild(modalLayer);
+                }
+                var optionPane = new OptionPane(resolve, reject, input, message, title, "ok-cancel", messageType);
+                modalLayer.appendChild(optionPane.dialog);
+                modalLayer.style.visibility = "inherit";
+                input.focus();
+            });
+        }
+    };
+    OptionPane.showOptionDialog = function (message, title, optionType, messageType, icon, options, initialValue) {
+        if (message === void 0) { message = ""; }
+        if (title === void 0) { title = "Message"; }
+        if (optionType === void 0) { optionType = "yes-no-cancel"; }
+        if (icon) {
+            return new Promise(function (resolve, reject) {
+                var img = document.createElement("img");
+                img.alt = "Custom icon";
+                img.onload = function () {
+                    img.style.width = img.naturalWidth + "px";
+                    img.style.height = img.naturalHeight + "px";
+                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                    if (modalLayer === null) {
+                        modalLayer = document.createElement("div");
+                        modalLayer.classList.add("ModalLayer");
+                        modalLayer.classList.add("CenterLayout");
+                        modalLayer.style.visibility = "inherit";
+                        document.body.appendChild(modalLayer);
+                    }
+                    var optionPane = new OptionPane(resolve, reject, undefined, message, title, optionType, messageType ||
+                        (optionType !== "default" ? "question" : "information"), img, options, initialValue);
+                    modalLayer.appendChild(optionPane.dialog);
+                    modalLayer.style.visibility = "inherit";
+                    if (initialValue) {
+                        var index = options.indexOf(initialValue);
+                        optionPane.dialogButtons[index].focus();
+                    }
+                    else {
+                        if (optionPane.dialogOkButton) {
+                            optionPane.dialogOkButton.focus();
+                        }
+                        else {
+                            optionPane.dialogYesButton.focus();
+                        }
+                    }
+                };
+                img.onerror = function () {
+                    reject(new Error("Failed to load image '".concat(icon, "'")));
+                };
+                img.src = icon;
+            });
+        }
+        else {
+            return new Promise(function (resolve, reject) {
+                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
+                if (modalLayer === null) {
+                    modalLayer = document.createElement("div");
+                    modalLayer.classList.add("ModalLayer");
+                    modalLayer.classList.add("CenterLayout");
+                    modalLayer.style.visibility = "inherit";
+                    document.body.appendChild(modalLayer);
+                }
+                var optionPane = new OptionPane(resolve, reject, undefined, message, title, optionType, messageType ||
+                    (optionType !== "default" ? "question" : "information"), undefined, options, initialValue);
+                modalLayer.appendChild(optionPane.dialog);
                 modalLayer.style.visibility = "inherit";
             });
         }
