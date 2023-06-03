@@ -345,38 +345,44 @@ class OptionPane {
       dialogMainPane.style.marginBlockEnd = ".5em";
       dialogContentPane.appendChild(dialogMainPane);
 
-      dialogMainPane.classList.add("BorderLayout");
+      dialogMainPane.style.display = "grid";
+      dialogMainPane.style.rowGap = ".5em";
 
       const dialogIconPane = OptionPane.createDialogIconPane();
-      dialogIconPane.classList.add("LineStart");
+      dialogIconPane.style.gridRow = "1";
+      dialogIconPane.style.gridColumn = "1";
       dialogMainPane.appendChild(dialogIconPane);
 
       dialogIconPane.classList.add("CenterLayout");
 
       if (img) {
-        dialogIconPane.appendChild(img);
         dialogIconPane.style.marginInlineEnd = ".5em";
+        dialogIconPane.appendChild(img);
       } else {
         const dialogIcon = OptionPane.createDialogIcon(messageType);
         if (dialogIcon !== null) {
-          dialogIconPane.appendChild(dialogIcon);
           dialogIconPane.style.marginInlineEnd = ".5em";
+          dialogIconPane.appendChild(dialogIcon);
         }
       }
 
-      const dialogMessageInputPane = OptionPane.createDialogMessageInputPane();
-      dialogMainPane.appendChild(dialogMessageInputPane);
+      const dialogMessagePanel = OptionPane.createDialogMessagePane();
+      dialogMessagePanel.style.gridRow = "1";
+      dialogMessagePanel.style.gridColumn = "2";
+      dialogMainPane.appendChild(dialogMessagePanel);
 
-      dialogMessageInputPane.classList.add("BorderLayout");
+      dialogMessagePanel.classList.add("GridBagConstraints");
+      dialogMessagePanel.dataset.anchor = "center";
+      dialogMessagePanel.dataset.fill = "horizontal";
 
       const dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
-      dialogMessageInputPane.appendChild(dialogMessageLabel);
+      dialogMessagePanel.appendChild(dialogMessageLabel);
 
       if (input) {
         const dialogInputPane = OptionPane.createDialogInputPane();
-        dialogInputPane.style.marginBlockStart = ".5em";
-        dialogInputPane.classList.add("PageEnd");
-        dialogMessageInputPane.appendChild(dialogInputPane);
+        dialogInputPane.style.gridRow = "2";
+        dialogInputPane.style.gridColumn = "2";
+        dialogMainPane.appendChild(dialogInputPane);
 
         dialogInputPane.classList.add("BorderLayout");
 
@@ -537,9 +543,9 @@ class OptionPane {
     }
   }
 
-  static createDialogMessageInputPane() {
-    const dialogMessageInputPane = document.createElement("div");
-    return dialogMessageInputPane;
+  static createDialogMessagePane() {
+    const dialogMessagePane = document.createElement("div");
+    return dialogMessagePane;
   }
 
   static createDialogMessageLabel(message: string) {

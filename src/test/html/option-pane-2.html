@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Button Example</title>
-    <link rel="stylesheet" href="../../../simpa.css">
+    <link rel="stylesheet" href="../../../simpa.css" />
     <script src="../../../simpa.js"></script>
     <script>
-        function handleButtonClick() {
-            OptionPane
-                .showConfirmDialog(
-                    "Would you like green eggs and ham?",
-                    "An Inane Question",
-                    "yes-no")
-                .then(input => {
-                    console.log(input);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-        }
+      function handleButtonClick() {
+        /*
+        OptionPane.showConfirmDialog(
+          "Would you like green eggs and ham?",
+          "An Inane Question",
+          "yes-no"
+        )
+          .then((input) => {
+            console.log(input);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+        */
+        OptionPane.showInputDialog(
+          "Complete the sentence: Green eggs and...",
+          "Customized Dialog",
+          "question",
+          null,
+          null,
+          "ham"
+        ).then((input) => {
+          if (input) {
+            console.log("Green eggs and... " + input + "!");
+          } else {
+            console.log("Come on, finish the sentence!");
+          }
+        });
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <button onclick="handleButtonClick()">Click me!</button>
-</body>
-
+  </body>
 </html>

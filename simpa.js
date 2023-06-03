@@ -467,32 +467,38 @@ var OptionPane = /** @class */ (function () {
             var dialogMainPane = OptionPane.createDialogMainPane();
             dialogMainPane.style.marginBlockEnd = ".5em";
             dialogContentPane.appendChild(dialogMainPane);
-            dialogMainPane.classList.add("BorderLayout");
+            dialogMainPane.style.display = "grid";
+            dialogMainPane.style.rowGap = ".5em";
             var dialogIconPane = OptionPane.createDialogIconPane();
-            dialogIconPane.classList.add("LineStart");
+            dialogIconPane.style.gridRow = "1";
+            dialogIconPane.style.gridColumn = "1";
             dialogMainPane.appendChild(dialogIconPane);
             dialogIconPane.classList.add("CenterLayout");
             if (img) {
-                dialogIconPane.appendChild(img);
                 dialogIconPane.style.marginInlineEnd = ".5em";
+                dialogIconPane.appendChild(img);
             }
             else {
                 var dialogIcon = OptionPane.createDialogIcon(messageType);
                 if (dialogIcon !== null) {
-                    dialogIconPane.appendChild(dialogIcon);
                     dialogIconPane.style.marginInlineEnd = ".5em";
+                    dialogIconPane.appendChild(dialogIcon);
                 }
             }
-            var dialogMessageInputPane = OptionPane.createDialogMessageInputPane();
-            dialogMainPane.appendChild(dialogMessageInputPane);
-            dialogMessageInputPane.classList.add("BorderLayout");
+            var dialogMessagePanel = OptionPane.createDialogMessagePane();
+            dialogMessagePanel.style.gridRow = "1";
+            dialogMessagePanel.style.gridColumn = "2";
+            dialogMainPane.appendChild(dialogMessagePanel);
+            dialogMessagePanel.classList.add("GridBagConstraints");
+            dialogMessagePanel.dataset.anchor = "center";
+            dialogMessagePanel.dataset.fill = "horizontal";
             var dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
-            dialogMessageInputPane.appendChild(dialogMessageLabel);
+            dialogMessagePanel.appendChild(dialogMessageLabel);
             if (input) {
                 var dialogInputPane = OptionPane.createDialogInputPane();
-                dialogInputPane.style.marginBlockStart = ".5em";
-                dialogInputPane.classList.add("PageEnd");
-                dialogMessageInputPane.appendChild(dialogInputPane);
+                dialogInputPane.style.gridRow = "2";
+                dialogInputPane.style.gridColumn = "2";
+                dialogMainPane.appendChild(dialogInputPane);
                 dialogInputPane.classList.add("BorderLayout");
                 dialogInputPane.appendChild(input);
             }
@@ -630,9 +636,9 @@ var OptionPane = /** @class */ (function () {
                 return null;
         }
     };
-    OptionPane.createDialogMessageInputPane = function () {
-        var dialogMessageInputPane = document.createElement("div");
-        return dialogMessageInputPane;
+    OptionPane.createDialogMessagePane = function () {
+        var dialogMessagePane = document.createElement("div");
+        return dialogMessagePane;
     };
     OptionPane.createDialogMessageLabel = function (message) {
         var dialogMessageLabel = document.createElement("div");
