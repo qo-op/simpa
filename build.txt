@@ -1,1 +1,2 @@
 tsc.cmd
+npx webpack --config webpack.config.js

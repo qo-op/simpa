@@ -1,4 +1,305 @@
 /**
+ * Dialog
+ *
+ * Based on the javax.swing.JDialog
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JDialog.html
+ *
+ * @author Yassuo Toda
+ */
+
+export class Dialog {
+  static dragStart: boolean = false;
+
+  static dialog: HTMLElement;
+  static x: number;
+  static y: number;
+  static width: number;
+  static height: number;
+
+  static pointerdown = (ev: PointerEvent) => {
+    let dialogTitleBar: HTMLElement;
+    const target = ev.target as HTMLElement;
+    if (target.classList.contains("DialogTitleBar")) {
+      dialogTitleBar = target;
+    } else {
+      dialogTitleBar = target.closest(".DialogTitleBar") as HTMLElement;
+      if (dialogTitleBar === null) {
+        return;
+      }
+    }
+    Dialog.dragStart = true;
+    Dialog.dialog = dialogTitleBar.closest(".Dialog") as HTMLElement;
+    var rect = Dialog.dialog.getBoundingClientRect();
+    Dialog.x = ev.clientX - rect.left;
+    Dialog.y = ev.clientY - rect.top;
+    Dialog.width = rect.width;
+    Dialog.height = rect.height;
+    Dialog.dialog.style.position = "absolute";
+    Dialog.dialog.style.top = rect.top + "px";
+    Dialog.dialog.style.left = rect.left + "px";
+    document.addEventListener("touchmove", Dialog.preventTouchMove, {
+      passive: false,
+    });
+    document.addEventListener("pointermove", Dialog.pointermove);
+    document.addEventListener("pointerup", Dialog.pointerup);
+    document.addEventListener("pointerenter", Dialog.pointerenter);
+  };
+
+  static preventTouchMove(ev: TouchEvent) {
+    ev.preventDefault();
+  }
+
+  static pointermove = (ev: PointerEvent) => {
+    if (!Dialog.dragStart) {
+      return;
+    }
+    Dialog.dialog.style.top =
+      Math.min(
+        Math.max(ev.clientY - Dialog.y, 0),
+        window.innerHeight - Dialog.height
+      ) + "px";
+    Dialog.dialog.style.left =
+      Math.min(
+        Math.max(ev.clientX - Dialog.x, 0),
+        window.innerWidth - Dialog.width
+      ) + "px";
+  };
+
+  static pointerup = (ev: PointerEvent) => {
+    Dialog.dragStart = false;
+    document.removeEventListener("touchmove", Dialog.preventTouchMove);
+    document.removeEventListener("pointermove", Dialog.pointermove);
+    document.removeEventListener("pointerup", Dialog.pointerup);
+    document.removeEventListener("pointerenter", Dialog.pointerenter);
+  };
+
+  static pointerenter = (ev: PointerEvent) => {
+    Dialog.pointerup(ev);
+  };
+}
+
+/**
+ * MenuBar
+ *
+ * Based on the javax.swing.JMenu
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JMenuBar.html
+ *
+ * @author Yassuo Toda
+ */
+
+export class MenuBar {
+  static open = (menuBar: HTMLElement) => {
+    menuBar.dataset.open = "";
+  };
+
+  static close = (menuBar: HTMLElement) => {
+    menuBar.dataset.closed = "";
+    menuBar.removeAttribute("data-open");
+    MenuBar.select(menuBar, menuBar, null);
+  };
+
+  static select = (
+    menuBar: HTMLElement,
+    ul: HTMLElement,
+    li: HTMLElement | null
+  ) => {
+    MenuBar.clearTimeout(menuBar);
+    if (ul === menuBar) {
+      if (li !== null && li.dataset.selected !== undefined) {
+        return;
+      }
+      menuBar
+        .querySelectorAll(":scope li[data-selected]")
+        .forEach((selected: Element) => {
+          selected.removeAttribute("data-selected");
+        });
+      if (li !== null) {
+        li.dataset.selected = "";
+      }
+    } else {
+      if (li === null) {
+        MenuBar.setTimeout(
+          menuBar,
+          () => {
+            for (let i: number = 0; i < ul.children.length; i++) {
+              ul.children[i].removeAttribute("data-selected");
+            }
+          },
+          250
+        );
+      } else {
+        MenuBar.setTimeout(
+          menuBar,
+          () => {
+            for (let i: number = 0; i < ul.children.length; i++) {
+              const child = ul.children[i] as HTMLElement;
+              if (child === li) {
+                child.dataset.selected = "";
+              } else {
+                child.removeAttribute("data-selected");
+              }
+            }
+          },
+          250
+        );
+      }
+    }
+  };
+
+  static getSelected(menuBar: HTMLElement): HTMLElement | null {
+    for (let i: number = 0; i < menuBar.children.length; i++) {
+      const li: HTMLElement = <HTMLElement>menuBar.children[i];
+      if (li.dataset.selected !== undefined) {
+        return li;
+      }
+    }
+    return null;
+  }
+
+  static clearTimeout = (menuBar: HTMLElement) => {
+    if (menuBar.dataset.timeoutId !== undefined) {
+      clearTimeout(+menuBar.dataset.timeoutId);
+    }
+  };
+
+  static setTimeout = (
+    menuBar: HTMLElement,
+    handler: TimerHandler,
+    timeout: number
+  ) => {
+    menuBar.dataset.timeoutId = "" + setTimeout(handler, timeout);
+  };
+
+  static pointerdown = (ev: PointerEvent) => {
+    const currentTarget = ev.currentTarget;
+    const target = ev.target as HTMLElement;
+    let menuBar: HTMLElement;
+    if (currentTarget === document) {
+      menuBar = target.closest(".MenuBar") as HTMLElement;
+      if (!menuBar) {
+        document.querySelectorAll(".MenuBar").forEach((menuBar: Element) => {
+          MenuBar.close(menuBar as HTMLElement);
+        });
+        return;
+      }
+      if (!menuBar.onpointerdown) {
+        menuBar.onpointerdown = MenuBar.pointerdown;
+      }
+      if (!menuBar.onpointerup) {
+        menuBar.onpointerup = MenuBar.pointerup;
+      }
+      if (ev.pointerType === "mouse") {
+        if (!menuBar.onmouseover) {
+          menuBar.onmouseover = MenuBar.mouseover;
+        }
+        if (!menuBar.onmouseleave) {
+          menuBar.onmouseleave = MenuBar.mouseleave;
+        }
+      }
+    } else {
+      menuBar = currentTarget as HTMLElement;
+    }
+    try {
+      const li = target.closest("li");
+      if (li === null) {
+        return;
+      }
+      const ul = li.parentElement;
+      if (ul === null) {
+        return;
+      }
+      const selected = MenuBar.getSelected(menuBar);
+      if (selected === li) {
+        if (menuBar.dataset.open === undefined) {
+          menuBar.dataset.closed = "";
+          MenuBar.open(menuBar);
+        }
+      } else {
+        MenuBar.select(menuBar, ul, li);
+        menuBar.dataset.closed = "";
+        if (menuBar.dataset.open === undefined) {
+          MenuBar.open(menuBar);
+        }
+      }
+    } finally {
+      ev.stopPropagation();
+    }
+  };
+
+  static pointerup = (ev: PointerEvent) => {
+    const target = ev.target as HTMLElement;
+    const li = target.closest("li");
+    if (li === null) {
+      return;
+    }
+    const input: HTMLInputElement | null = li.querySelector(
+      ":scope>input, :scope>:not(ul) input"
+    );
+    if (input !== null) {
+      if (input.type === "radio") {
+        if (!input.checked) {
+          input.checked = true;
+        }
+      } else if (input.type === "checkbox") {
+        input.checked = !input.checked;
+      }
+    }
+    const menuBar = ev.currentTarget as HTMLElement;
+    if (li.parentElement === menuBar) {
+      // menu
+      if (menuBar.dataset.closed !== undefined) {
+        menuBar.removeAttribute("data-closed");
+      } else {
+        MenuBar.close(menuBar);
+      }
+      return;
+    }
+    const ul: HTMLElement | null = li.querySelector(":scope>ul");
+    if (ul !== null) {
+      // submenu
+      return;
+    }
+    const hr: HTMLElement | null = li.querySelector(":scope>hr");
+    if (hr !== null) {
+      return;
+    }
+    MenuBar.close(menuBar);
+  };
+
+  static mouseover = (ev: MouseEvent) => {
+    const menuBar = ev.currentTarget as HTMLElement;
+    if (menuBar.dataset.open === undefined) {
+      return;
+    }
+    const target = ev.target as HTMLElement;
+    const li = target.closest("li");
+    if (li === null) {
+      return;
+    }
+    const ul: HTMLElement | null = li.parentElement;
+    if (ul === null) {
+      return;
+    }
+    MenuBar.select(menuBar, ul, li);
+  };
+
+  static mouseleave = (ev: MouseEvent) => {
+    const menuBar = ev.currentTarget as HTMLElement;
+    MenuBar.clearTimeout(menuBar);
+    menuBar
+      .querySelectorAll(":scope li[data-selected]")
+      .forEach((selected: Element) => {
+        const ul: HTMLElement | null = selected.querySelector(":scope>ul");
+        if (ul === null) {
+          selected.removeAttribute("data-selected");
+        }
+      });
+  };
+}
+
+/**
  * OptionPane
  *
  * Based on the javax.swing.JOptionPane
@@ -8,7 +309,7 @@
  * @author Yassuo Toda
  */
 
-class OptionPane {
+export class OptionPane {
   static showMessageDialog = (
     message: string = "",
     title: string = "Message",
@@ -22,8 +323,9 @@ class OptionPane {
         img.onload = function () {
           img.style.width = img.naturalWidth + "px";
           img.style.height = img.naturalHeight + "px";
-          let modalLayer: HTMLElement =
-            document.body.querySelector(":scope>.ModalLayer");
+          let modalLayer = document.body.querySelector(
+            ":scope>.ModalLayer"
+          ) as HTMLElement;
           if (modalLayer === null) {
             modalLayer = document.createElement("div");
             modalLayer.classList.add("ModalLayer");
@@ -34,7 +336,7 @@ class OptionPane {
           const optionPane = new OptionPane(
             resolve,
             reject,
-            undefined,
+            null,
             message,
             title,
             "default",
@@ -43,7 +345,7 @@ class OptionPane {
           );
           modalLayer.appendChild(optionPane.dialog);
           modalLayer.style.visibility = "inherit";
-          optionPane.dialogOkButton.focus();
+          optionPane.dialogOkButton?.focus();
         };
         img.onerror = function () {
           reject(new Error(`Failed to load image '${icon}'`));
@@ -52,8 +354,9 @@ class OptionPane {
       });
     } else {
       return new Promise((resolve, reject) => {
-        let modalLayer: HTMLElement =
-          document.body.querySelector(":scope>.ModalLayer");
+        let modalLayer = document.body.querySelector(
+          ":scope>.ModalLayer"
+        ) as HTMLElement;
         if (modalLayer === null) {
           modalLayer = document.createElement("div");
           modalLayer.classList.add("ModalLayer");
@@ -64,7 +367,7 @@ class OptionPane {
         const optionPane = new OptionPane(
           resolve,
           reject,
-          undefined,
+          null,
           message,
           title,
           "default",
@@ -72,7 +375,7 @@ class OptionPane {
         );
         modalLayer.appendChild(optionPane.dialog);
         modalLayer.style.visibility = "inherit";
-        optionPane.dialogOkButton.focus();
+        optionPane.dialogOkButton?.focus();
       });
     }
   };
@@ -91,8 +394,9 @@ class OptionPane {
         img.onload = function () {
           img.style.width = img.naturalWidth + "px";
           img.style.height = img.naturalHeight + "px";
-          let modalLayer: HTMLElement =
-            document.body.querySelector(":scope>.ModalLayer");
+          let modalLayer = document.body.querySelector(
+            ":scope>.ModalLayer"
+          ) as HTMLElement;
           if (modalLayer === null) {
             modalLayer = document.createElement("div");
             modalLayer.classList.add("ModalLayer");
@@ -103,7 +407,7 @@ class OptionPane {
           const optionPane = new OptionPane(
             resolve,
             reject,
-            undefined,
+            null,
             message,
             title,
             optionType,
@@ -116,7 +420,7 @@ class OptionPane {
           if (optionPane.dialogOkButton) {
             optionPane.dialogOkButton.focus();
           } else {
-            optionPane.dialogYesButton.focus();
+            optionPane.dialogYesButton?.focus();
           }
         };
         img.onerror = function () {
@@ -126,8 +430,9 @@ class OptionPane {
       });
     } else {
       return new Promise((resolve, reject) => {
-        let modalLayer: HTMLElement =
-          document.body.querySelector(":scope>.ModalLayer");
+        let modalLayer = document.body.querySelector(
+          ":scope>.ModalLayer"
+        ) as HTMLElement;
         if (modalLayer === null) {
           modalLayer = document.createElement("div");
           modalLayer.classList.add("ModalLayer");
@@ -138,7 +443,7 @@ class OptionPane {
         const optionPane = new OptionPane(
           resolve,
           reject,
-          undefined,
+          null,
           message,
           title,
           optionType,
@@ -149,7 +454,7 @@ class OptionPane {
         if (optionPane.dialogOkButton) {
           optionPane.dialogOkButton.focus();
         } else {
-          optionPane.dialogYesButton.focus();
+          optionPane.dialogYesButton?.focus();
         }
       });
     }
@@ -191,8 +496,9 @@ class OptionPane {
         img.onload = function () {
           img.style.width = img.naturalWidth + "px";
           img.style.height = img.naturalHeight + "px";
-          let modalLayer: HTMLElement =
-            document.body.querySelector(":scope>.ModalLayer");
+          let modalLayer = document.body.querySelector(
+            ":scope>.ModalLayer"
+          ) as HTMLElement;
           if (modalLayer === null) {
             modalLayer = document.createElement("div");
             modalLayer.classList.add("ModalLayer");
@@ -221,8 +527,9 @@ class OptionPane {
       });
     } else {
       return new Promise((resolve, reject) => {
-        let modalLayer: HTMLElement =
-          document.body.querySelector(":scope>.ModalLayer");
+        let modalLayer = document.body.querySelector(
+          ":scope>.ModalLayer"
+        ) as HTMLElement;
         if (modalLayer === null) {
           modalLayer = document.createElement("div");
           modalLayer.classList.add("ModalLayer");
@@ -262,8 +569,9 @@ class OptionPane {
         img.onload = function () {
           img.style.width = img.naturalWidth + "px";
           img.style.height = img.naturalHeight + "px";
-          let modalLayer: HTMLElement =
-            document.body.querySelector(":scope>.ModalLayer");
+          let modalLayer = document.body.querySelector(
+            ":scope>.ModalLayer"
+          ) as HTMLElement;
           if (modalLayer === null) {
             modalLayer = document.createElement("div");
             modalLayer.classList.add("ModalLayer");
@@ -274,7 +582,7 @@ class OptionPane {
           const optionPane = new OptionPane(
             resolve,
             reject,
-            undefined,
+            null,
             message,
             title,
             optionType,
@@ -293,7 +601,7 @@ class OptionPane {
             if (optionPane.dialogOkButton) {
               optionPane.dialogOkButton.focus();
             } else {
-              optionPane.dialogYesButton.focus();
+              optionPane.dialogYesButton?.focus();
             }
           }
         };
@@ -304,8 +612,9 @@ class OptionPane {
       });
     } else {
       return new Promise((resolve, reject) => {
-        let modalLayer: HTMLElement =
-          document.body.querySelector(":scope>.ModalLayer");
+        let modalLayer = document.body.querySelector(
+          ":scope>.ModalLayer"
+        ) as HTMLElement;
         if (modalLayer === null) {
           modalLayer = document.createElement("div");
           modalLayer.classList.add("ModalLayer");
@@ -316,7 +625,7 @@ class OptionPane {
         const optionPane = new OptionPane(
           resolve,
           reject,
-          undefined,
+          null,
           message,
           title,
           optionType,
@@ -340,18 +649,18 @@ class OptionPane {
   dialogIconPane: HTMLElement;
   dialogMessagePane: HTMLElement;
   dialogMessageLabel: HTMLElement;
-  dialogInputPane: HTMLElement;
+  dialogInputPane: HTMLElement | undefined;
   dialogButtonPane: HTMLElement;
-  dialogOkButton: HTMLElement;
-  dialogCancelButton: HTMLElement;
-  dialogYesButton: HTMLElement;
-  dialogNoButton: HTMLElement;
+  dialogOkButton: HTMLElement | undefined;
+  dialogCancelButton: HTMLElement | undefined;
+  dialogYesButton: HTMLElement | undefined;
+  dialogNoButton: HTMLElement | undefined;
   dialogButtons: HTMLElement[];
 
   constructor(
     resolve: (input: string) => void,
     reject: (error: Error) => void,
-    input: HTMLElement,
+    input: HTMLElement | null,
     message: string,
     title: string,
     optionType: string,
@@ -399,7 +708,7 @@ class OptionPane {
       this.dialogIconPane.appendChild(img);
     } else {
       const dialogIcon = OptionPane.createDialogIcon(messageType);
-      if (dialogIcon !== null) {
+      if (dialogIcon) {
         this.dialogIconPane.style.marginInlineEnd = ".5em";
         this.dialogIconPane.appendChild(dialogIcon);
       }
@@ -450,7 +759,7 @@ class OptionPane {
         input.onkeydown = (ev: KeyboardEvent) => {
           if (ev.key === "Enter") {
             ev.preventDefault();
-            this.dialogOkButton.click();
+            this.dialogOkButton?.click();
           }
         };
       }
@@ -520,25 +829,22 @@ class OptionPane {
     reject: (error: Error) => void,
     input: HTMLElement
   ) => {
-    try {
-      const modalLayer: HTMLElement =
-        document.body.querySelector(":scope>.ModalLayer");
-      if (modalLayer !== null) {
-        modalLayer.style.visibility = "hidden";
-      }
-      const button = ev.currentTarget as HTMLElement;
-      switch (button.textContent) {
-        case "OK":
-          resolve((input as HTMLSelectElement | HTMLInputElement).value);
-          break;
-        default:
-          resolve(null);
-      }
-      const dialog = button.closest(".Dialog");
-      dialog.remove();
-    } catch (e) {
-      reject(e);
+    const modalLayer = document.body.querySelector(
+      ":scope>.ModalLayer"
+    ) as HTMLElement;
+    if (modalLayer !== null) {
+      modalLayer.style.visibility = "hidden";
     }
+    const button = ev.currentTarget as HTMLElement;
+    switch (button.textContent) {
+      case "OK":
+        resolve((input as HTMLSelectElement | HTMLInputElement).value);
+        break;
+      default:
+        resolve("");
+    }
+    const dialog = button.closest(".Dialog");
+    dialog?.remove();
   };
 
   handleOption = (
@@ -546,19 +852,16 @@ class OptionPane {
     resolve: (input: string) => void,
     reject: (error: Error) => void
   ) => {
-    try {
-      const modalLayer: HTMLElement =
-        document.body.querySelector(":scope>.ModalLayer");
-      if (modalLayer !== null) {
-        modalLayer.style.visibility = "hidden";
-      }
-      const button = ev.currentTarget as HTMLElement;
-      resolve(button.textContent);
-      const dialog = button.closest(".Dialog");
-      dialog.remove();
-    } catch (e) {
-      reject(e);
+    const modalLayer = document.body.querySelector(
+      ":scope>.ModalLayer"
+    ) as HTMLElement;
+    if (modalLayer !== null) {
+      modalLayer.style.visibility = "hidden";
     }
+    const button = ev.currentTarget as HTMLElement;
+    resolve(button.textContent || "");
+    const dialog = button.closest(".Dialog");
+    dialog?.remove();
   };
 
   static createDialogTitleBar() {
@@ -611,7 +914,7 @@ class OptionPane {
         questionIcon.style.width = "24px";
         return questionIcon;
       case "plain":
-        return null;
+        return;
     }
   }
 
@@ -708,4 +1011,256 @@ class OptionPane {
     questionIcon.appendChild(path);
     return questionIcon;
   }
+}
+
+/**
+ * SplitPane
+ *
+ * Based on the javax.swing.JSplitPane
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JSplitPane.html
+ *
+ * @author Yassuo Toda
+ */
+
+export class SplitPane {
+  static dragStart: boolean = false;
+  static dragLayer: HTMLElement;
+
+  static splitPaneDivider: HTMLElement;
+  static splitPane: HTMLElement;
+  static leftComponent: HTMLElement;
+  static rightComponent: HTMLElement;
+  static verticalSplit: boolean = false;
+  static offset: number;
+  static maximumDividerLocation: number;
+
+  static pointerdown = (ev: PointerEvent) => {
+    const target = ev.target as HTMLElement;
+    if (!target.classList.contains("SplitPaneDivider")) {
+      return;
+    }
+    SplitPane.dragStart = true;
+    SplitPane.splitPaneDivider = target;
+    SplitPane.splitPane = SplitPane.splitPaneDivider.closest(
+      ".SplitPane"
+    ) as HTMLElement;
+    SplitPane.leftComponent = SplitPane.splitPane.children[0] as HTMLElement;
+    SplitPane.rightComponent = SplitPane.splitPane.children[2] as HTMLElement;
+    const leftComponentRect: DOMRect =
+      SplitPane.leftComponent.getBoundingClientRect();
+    const rightComponentRect: DOMRect =
+      SplitPane.rightComponent.getBoundingClientRect();
+    SplitPane.verticalSplit =
+      SplitPane.splitPane.dataset.orientation === "vertical-split";
+    if (SplitPane.verticalSplit) {
+      SplitPane.maximumDividerLocation =
+        leftComponentRect.height + rightComponentRect.height;
+      const percentage =
+        (100 * leftComponentRect.height) / SplitPane.maximumDividerLocation;
+      SplitPane.leftComponent.style.height = percentage + "%";
+      SplitPane.rightComponent.style.height = 100 - percentage + "%";
+      SplitPane.offset = ev.clientY - leftComponentRect.height;
+    } else {
+      SplitPane.maximumDividerLocation =
+        leftComponentRect.width + rightComponentRect.width;
+      const percentage =
+        (100 * leftComponentRect.width) / SplitPane.maximumDividerLocation;
+      SplitPane.leftComponent.style.width = percentage + "%";
+      SplitPane.rightComponent.style.width = 100 - percentage + "%";
+      SplitPane.offset = ev.clientX - leftComponentRect.width;
+    }
+    if (SplitPane.verticalSplit) {
+      document.body.style.cursor = "ns-resize";
+    } else {
+      document.body.style.cursor = "ew-resize";
+    }
+    document.addEventListener("touchmove", SplitPane.preventTouchMove, {
+      passive: false,
+    });
+    document.addEventListener("pointermove", SplitPane.pointermove);
+    document.addEventListener("pointerup", SplitPane.pointerup);
+    // document.addEventListener("dragstart", SplitPane.dragstart);
+    SplitPane.dragLayer = document.body.querySelector(
+      ":scope>.DragLayer"
+    ) as HTMLElement;
+    if (SplitPane.dragLayer === null) {
+      SplitPane.dragLayer = document.createElement("div");
+      SplitPane.dragLayer.classList.add("DragLayer");
+      document.body.appendChild(SplitPane.dragLayer);
+    }
+    SplitPane.dragLayer.style.visibility = "";
+    ev.preventDefault();
+  };
+
+  static preventTouchMove(ev: TouchEvent) {
+    ev.preventDefault();
+  }
+
+  static pointermove = (ev: PointerEvent) => {
+    if (!SplitPane.dragStart) {
+      return;
+    }
+    if (SplitPane.verticalSplit) {
+      const dividerLocation = Math.min(
+        Math.max(ev.clientY - SplitPane.offset, 0),
+        SplitPane.maximumDividerLocation
+      );
+      const percentage =
+        (100 * dividerLocation) / SplitPane.maximumDividerLocation;
+      SplitPane.leftComponent.style.height = percentage + "%";
+      SplitPane.rightComponent.style.height = 100 - percentage + "%";
+    } else {
+      const dividerLocation = Math.min(
+        Math.max(ev.clientX - SplitPane.offset, 0),
+        SplitPane.maximumDividerLocation
+      );
+      const percentage =
+        (100 * dividerLocation) / SplitPane.maximumDividerLocation;
+      SplitPane.leftComponent.style.width = percentage + "%";
+      SplitPane.rightComponent.style.width = 100 - percentage + "%";
+    }
+    ev.preventDefault();
+  };
+
+  static pointerup = (ev: PointerEvent) => {
+    SplitPane.dragStart = false;
+    document.body.style.cursor = "";
+    document.removeEventListener("touchmove", SplitPane.preventTouchMove);
+    document.removeEventListener("pointermove", SplitPane.pointermove);
+    document.removeEventListener("pointerup", SplitPane.pointerup);
+    // document.removeEventListener("dragstart", SplitPane.dragstart);
+    if (SplitPane.dragLayer !== null) {
+      SplitPane.dragLayer.style.visibility = "hidden";
+    }
+  };
+
+  /*
+    static dragstart = (ev: PointerEvent) => {
+      if (ev.target === SplitPane.splitPaneDivider) {
+        SplitPane.pointerup(ev);
+        ev.preventDefault();
+      }
+    };
+    */
+}
+
+/**
+ * TabbedPane
+ *
+ * Based on the javax.swing.JTabbedPane and java.awt.CardLayout
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/tabbedpane.html
+ * https://docs.oracle.com/javase/7/docs/api/javax/swing/JTabbedPane.html
+ * https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html
+ * https://docs.oracle.com/javase/7/docs/api/java/awt/CardLayout.html
+ *
+ * @author Yassuo Toda
+ */
+
+/**
+ * TabContainer
+ *
+ * @author Yassuo Toda
+ */
+export class TabContainer {
+  static setSelectedTabComponent = (
+    tabContainer: HTMLElement,
+    cardContainer: HTMLElement,
+    selectedTabComponent: HTMLElement
+  ) => {
+    let selectedCardComponent: HTMLElement | null = null;
+    for (let i: number = 0; i < tabContainer.children.length; i++) {
+      const tabComponent = tabContainer.children[i] as HTMLElement;
+      if (tabComponent === selectedTabComponent) {
+        const value = tabComponent.getAttribute("value");
+        selectedCardComponent = CardContainer.show(cardContainer, value || "");
+      }
+    }
+    if (selectedCardComponent) {
+      for (let i: number = 0; i < tabContainer.children.length; i++) {
+        const tabComponent = tabContainer.children[i] as HTMLElement;
+        if (tabComponent === selectedTabComponent) {
+          tabComponent.tabIndex = -1;
+        } else {
+          tabComponent.tabIndex = 0;
+        }
+      }
+    }
+    return selectedCardComponent;
+  };
+}
+
+/**
+ * CardContainer
+ *
+ * @author Yassuo Toda
+ */
+export class CardContainer {
+  static show = (cardContainer: HTMLElement, name: string) => {
+    for (let i: number = 0; i < cardContainer.children.length; i++) {
+      const cardComponent: HTMLElement = cardContainer.children[
+        i
+      ] as HTMLElement;
+      if (cardComponent.dataset.name === name) {
+        return CardContainer.setSelectedIndex(cardContainer, i);
+      }
+    }
+    return null;
+  };
+
+  static setSelectedIndex = (
+    cardContainer: HTMLElement,
+    selectedIndex: number
+  ) => {
+    let selectedCardComponent: HTMLElement | null = null;
+    for (let i: number = 0; i < cardContainer.children.length; i++) {
+      const cardComponent: HTMLElement = cardContainer.children[
+        i
+      ] as HTMLElement;
+      if (i === selectedIndex) {
+        cardComponent.style.visibility = "";
+        cardComponent.focus();
+        selectedCardComponent = cardComponent;
+      } else {
+        cardComponent.style.visibility = "hidden";
+      }
+    }
+    return selectedCardComponent;
+  };
+}
+
+/**
+ * TabComponent
+ *
+ * @author Yassuo Toda
+ */
+export class TabComponent {
+  static pointerdown = (ev: PointerEvent) => {
+    const tabComponent = ev.target as HTMLElement;
+    const tabContainer = tabComponent.parentElement;
+    if (!tabContainer) {
+      return;
+    }
+    const tabbedPane = tabContainer.parentElement;
+    if (!tabbedPane) {
+      return;
+    }
+    if (!tabbedPane.classList.contains("TabbedPane")) {
+      return;
+    }
+    const cardContainer: HTMLElement = tabbedPane.children[
+      tabbedPane.childElementCount - 1
+    ] as HTMLElement;
+    if (cardContainer === null) {
+      return;
+    }
+    if (cardContainer === tabContainer) {
+      return;
+    }
+    TabContainer.setSelectedTabComponent(
+      tabContainer,
+      cardContainer,
+      tabComponent
+    );
+  };
 }
