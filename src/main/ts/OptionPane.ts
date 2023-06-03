@@ -146,11 +146,31 @@ class OptionPane {
   static showInputDialog(
     message: string = "",
     title: string = "Message",
-    messageType: string = "information",
+    messageType: string = "question",
     icon?: string,
     selectionValues?: string[],
     initialSelectionValue?: string
   ) {
+    let input: HTMLElement;
+    if (selectionValues) {
+      const comboBox = document.createElement("select") as HTMLSelectElement;
+      selectionValues.forEach((selectionValue: string) => {
+        const option = document.createElement("option");
+        option.value = selectionValue;
+        option.text = selectionValue;
+        comboBox.appendChild(option);
+      });
+      if (initialSelectionValue) {
+        comboBox.value = initialSelectionValue;
+      }
+    } else {
+      const textField = document.createElement("input") as HTMLInputElement;
+      textField.type = "text";
+      if (initialSelectionValue) {
+        textField.value = initialSelectionValue;
+      }
+      input = textField;
+    }
     if (icon) {
       return new Promise((resolve, reject) => {
         const img = document.createElement("img");
@@ -170,7 +190,7 @@ class OptionPane {
           const dialog = OptionPane.createDialog(
             resolve,
             reject,
-            undefined,
+            input,
             message,
             title,
             "ok-cancel",
@@ -199,7 +219,7 @@ class OptionPane {
         const dialog = OptionPane.createDialog(
           resolve,
           reject,
-          undefined,
+          input,
           message,
           title,
           "ok-cancel",
@@ -215,7 +235,7 @@ class OptionPane {
     message: string = "",
     title: string = "Message",
     optionType: string = "yes-no-cancel",
-    messageType: string = "information",
+    messageType: string,
     icon: string,
     options: string[],
     initialValue: string
@@ -368,56 +388,90 @@ class OptionPane {
       dialogButtonPane.classList.add("FlowLayout");
       dialogButtonPane.style.gap = ".5em";
 
-      const handleClick = (ev: MouseEvent) => {
+      const handleInput = (ev: MouseEvent) => {
         try {
-          const button = ev.currentTarget as HTMLElement;
-          resolve(button.textContent);
-          const dialog = button.closest(".Dialog");
-          dialog.remove();
           const modalLayer: HTMLElement =
             document.body.querySelector(":scope>.ModalLayer");
           if (modalLayer !== null) {
             modalLayer.style.visibility = "hidden";
           }
+          const button = ev.currentTarget as HTMLElement;
+          switch (button.textContent) {
+            case "OK":
+              resolve((input as HTMLSelectElement | HTMLInputElement).value);
+              break;
+            default:
+              resolve(null);
+          }
+          const dialog = button.closest(".Dialog");
+          dialog.remove();
         } catch (e) {
           reject(e);
         }
       };
 
-      if (options) {
-        options.forEach(function (option) {
-          const dialogButton = OptionPane.createDialogButton(option);
-          dialogButtonPane.appendChild(dialogButton);
+      const handleOption = (ev: MouseEvent) => {
+        try {
+          const modalLayer: HTMLElement =
+            document.body.querySelector(":scope>.ModalLayer");
+          if (modalLayer !== null) {
+            modalLayer.style.visibility = "hidden";
+          }
+          const button = ev.currentTarget as HTMLElement;
+          resolve(button.textContent);
+          const dialog = button.closest(".Dialog");
+          dialog.remove();
+        } catch (e) {
+          reject(e);
+        }
+      };
 
-          dialogButton.onclick = handleClick;
-        });
+      if (input) {
+        const dialogOkButton = OptionPane.createDialogButton("OK");
+        dialogButtonPane.appendChild(dialogOkButton);
+
+        dialogOkButton.onclick = handleInput;
+
+        const dialogCancelButton = OptionPane.createDialogButton("Cancel");
+        dialogButtonPane.appendChild(dialogCancelButton);
+
+        dialogCancelButton.onclick = handleInput;
       } else {
-        if (optionType === "default" || optionType === "ok-cancel") {
-          const dialogOkButton = OptionPane.createDialogButton("OK");
-          dialogButtonPane.appendChild(dialogOkButton);
+        if (options) {
+          options.forEach(function (option) {
+            const dialogButton = OptionPane.createDialogButton(option);
+            dialogButtonPane.appendChild(dialogButton);
 
-          dialogOkButton.onclick = handleClick;
-        }
+            dialogButton.onclick = handleOption;
+          });
+        } else {
+          if (optionType === "default" || optionType === "ok-cancel") {
+            const dialogOkButton = OptionPane.createDialogButton("OK");
+            dialogButtonPane.appendChild(dialogOkButton);
 
-        if (optionType === "yes-no" || optionType === "yes-no-cancel") {
-          const dialogYesButton = OptionPane.createDialogButton("Yes");
-          dialogButtonPane.appendChild(dialogYesButton);
+            dialogOkButton.onclick = handleOption;
+          }
 
-          dialogYesButton.onclick = handleClick;
-        }
+          if (optionType === "yes-no" || optionType === "yes-no-cancel") {
+            const dialogYesButton = OptionPane.createDialogButton("Yes");
+            dialogButtonPane.appendChild(dialogYesButton);
 
-        if (optionType === "yes-no" || optionType === "yes-no-cancel") {
-          const dialogNoButton = OptionPane.createDialogButton("No");
-          dialogButtonPane.appendChild(dialogNoButton);
+            dialogYesButton.onclick = handleOption;
+          }
 
-          dialogNoButton.onclick = handleClick;
-        }
+          if (optionType === "yes-no" || optionType === "yes-no-cancel") {
+            const dialogNoButton = OptionPane.createDialogButton("No");
+            dialogButtonPane.appendChild(dialogNoButton);
 
-        if (optionType === "yes-no-cancel" || optionType === "ok-cancel") {
-          const dialogCancelButton = OptionPane.createDialogButton("Cancel");
-          dialogButtonPane.appendChild(dialogCancelButton);
+            dialogNoButton.onclick = handleOption;
+          }
 
-          dialogCancelButton.onclick = handleClick;
+          if (optionType === "yes-no-cancel" || optionType === "ok-cancel") {
+            const dialogCancelButton = OptionPane.createDialogButton("Cancel");
+            dialogButtonPane.appendChild(dialogCancelButton);
+
+            dialogCancelButton.onclick = handleOption;
+          }
         }
       }
 
