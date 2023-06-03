@@ -374,6 +374,7 @@ class OptionPane {
 
       if (input) {
         const dialogInputPane = OptionPane.createDialogInputPane();
+        dialogInputPane.style.marginBlockStart = ".5em";
         dialogInputPane.classList.add("PageEnd");
         dialogMessageInputPane.appendChild(dialogInputPane);
 

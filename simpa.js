@@ -490,6 +490,7 @@ var OptionPane = /** @class */ (function () {
             dialogMessageInputPane.appendChild(dialogMessageLabel);
             if (input) {
                 var dialogInputPane = OptionPane.createDialogInputPane();
+                dialogInputPane.style.marginBlockStart = ".5em";
                 dialogInputPane.classList.add("PageEnd");
                 dialogMessageInputPane.appendChild(dialogInputPane);
                 dialogInputPane.classList.add("BorderLayout");
