@@ -23,7 +23,7 @@ class Dialog {
 
   static pointerdown = (ev: PointerEvent) => {
     let dialogTitleBar: HTMLElement;
-    const target: HTMLElement = ev.target as HTMLElement;
+    const target = ev.target as HTMLElement;
     if (target.classList.contains("DialogTitleBar")) {
       dialogTitleBar = target;
     } else {

@@ -25,7 +25,7 @@ class SplitPane {
   static maximumDividerLocation: number;
 
   static pointerdown = (ev: PointerEvent) => {
-    const target: HTMLElement = ev.target as HTMLElement;
+    const target = ev.target as HTMLElement;
     if (!target.classList.contains("SplitPaneDivider")) {
       return;
     }

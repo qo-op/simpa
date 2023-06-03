@@ -57,7 +57,7 @@ class MenuBar {
           menuBar,
           () => {
             for (let i: number = 0; i < ul.children.length; i++) {
-              const child: HTMLElement = ul.children[i] as HTMLElement;
+              const child = ul.children[i] as HTMLElement;
               if (child === li) {
                 child.dataset.selected = "";
               } else {
@@ -97,7 +97,7 @@ class MenuBar {
 
   static pointerdown = (ev: PointerEvent) => {
     const currentTarget: EventTarget = ev.currentTarget;
-    const target: HTMLElement = ev.target as HTMLElement;
+    const target = ev.target as HTMLElement;
     let menuBar: HTMLElement;
     if (currentTarget === document) {
       menuBar = target.closest(".MenuBar");
@@ -152,7 +152,7 @@ class MenuBar {
   };
 
   static pointerup = (ev: PointerEvent) => {
-    const target: HTMLElement = ev.target as HTMLElement;
+    const target = ev.target as HTMLElement;
     const li: HTMLElement = target.closest("li");
     if (li === null) {
       return;
@@ -169,7 +169,7 @@ class MenuBar {
         input.checked = !input.checked;
       }
     }
-    const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
+    const menuBar = ev.currentTarget as HTMLElement;
     if (li.parentElement === menuBar) {
       // menu
       if (menuBar.dataset.closed !== undefined) {
@@ -192,11 +192,11 @@ class MenuBar {
   };
 
   static mouseover = (ev: MouseEvent) => {
-    const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
+    const menuBar = ev.currentTarget as HTMLElement;
     if (menuBar.dataset.open === undefined) {
       return;
     }
-    const target: HTMLElement = ev.target as HTMLElement;
+    const target = ev.target as HTMLElement;
     const li: HTMLElement = target.closest("li");
     if (li === null) {
       return;
@@ -209,7 +209,7 @@ class MenuBar {
   };
 
   static mouseleave = (ev: MouseEvent) => {
-    const menuBar: HTMLElement = ev.currentTarget as HTMLElement;
+    const menuBar = ev.currentTarget as HTMLElement;
     MenuBar.clearTimeout(menuBar);
     menuBar
       .querySelectorAll(":scope li[data-selected]")

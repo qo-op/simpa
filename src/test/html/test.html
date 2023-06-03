@@ -3,43 +3,38 @@
   <head>
     <style>
       .container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 10px;
-        position: relative;
-        padding: 10px;
-        border: 1px solid #ccc;
+        overflow: hidden; /* Clear the float */
       }
 
-      .close-button {
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin-top: -10px;
-        margin-right: -10px;
-        padding: 5px;
-        background-color: red;
-        color: white;
-        border: none;
-        cursor: pointer;
-      }
-
-      button {
+      .button {
         padding: 10px;
         background-color: #ccc;
         border: none;
         cursor: pointer;
+        margin-bottom: 10px;
+      }
+
+      .button.left {
+        float: left;
+      }
+
+      .button.right {
+        float: right;
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <button class="close-button">Close</button>
-      <button>Button 1</button>
-      <button>Button 2</button>
-      <button>Button 3</button>
-      <button>Button 4</button>
-      <button>Button 5</button>
+      <button class="button right">Button 9</button>
+      <button class="button right">Button 10</button>
+      <button class="button left">Button 1</button>
+      <button class="button left">Button 2</button>
+      <button class="button left">Button 3</button>
+      <button class="button left">Button 4</button>
+      <button class="button left">Button 5</button>
+      <button class="button left">Button 6</button>
+      <button class="button left">Button 7</button>
+      <button class="button left">Button 8</button>
     </div>
   </body>
 </html>

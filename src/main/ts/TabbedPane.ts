@@ -23,128 +23,30 @@ if (window["TabComponent"]) {
  * @author Yassuo Toda
  */
 class TabContainer {
-  static first = (tabContainer: HTMLElement, cardContainer: HTMLElement) => {
-    if (tabContainer.children.length === 0) {
-      return;
-    }
-    TabContainer.setSelectedTabIndex(tabContainer, cardContainer, 0);
-  };
-
-  static next = (tabContainer: HTMLElement, cardContainer: HTMLElement) => {
-    if (tabContainer.children.length === 0) {
-      return;
-    }
-    let selectedTabIndex: number =
-      TabContainer.getSelectedTabIndex(tabContainer);
-    if (selectedTabIndex === -1) {
-      selectedTabIndex = 0;
-    } else {
-      selectedTabIndex = (selectedTabIndex + 1) % tabContainer.children.length;
-    }
-    TabContainer.setSelectedTabIndex(
-      tabContainer,
-      cardContainer,
-      selectedTabIndex
-    );
-  };
-
-  static previous = (tabContainer: HTMLElement, cardContainer: HTMLElement) => {
-    if (tabContainer.children.length === 0) {
-      return;
-    }
-    let selectedTabIndex: number =
-      TabContainer.getSelectedTabIndex(tabContainer);
-    if (selectedTabIndex === -1) {
-      selectedTabIndex = tabContainer.children.length - 1;
-    } else {
-      selectedTabIndex =
-        (selectedTabIndex + tabContainer.children.length - 1) %
-        tabContainer.children.length;
-    }
-    TabContainer.setSelectedTabIndex(
-      tabContainer,
-      cardContainer,
-      selectedTabIndex
-    );
-  };
-
-  static last = (tabContainer: HTMLElement, cardContainer: HTMLElement) => {
-    if (tabContainer.children.length === 0) {
-      return;
-    }
-    TabContainer.setSelectedTabIndex(
-      tabContainer,
-      cardContainer,
-      tabContainer.children.length - 1
-    );
-  };
-
-  static show = (
-    tabContainer: HTMLElement,
-    cardContainer: HTMLElement,
-    name: string
-  ) => {
-    for (let i: number = 0; i < tabContainer.children.length; i++) {
-      const tabComponent: HTMLElement = tabContainer.children[i] as HTMLElement;
-      if (tabComponent.getAttribute("name") === name) {
-        TabContainer.setSelectedTabIndex(tabContainer, cardContainer, i);
-        break;
-      }
-    }
-  };
-
-  static getSelectedTabIndex = (tabContainer: HTMLElement) => {
-    for (let i: number = 0; i < tabContainer.children.length; i++) {
-      const tabComponent: HTMLElement = tabContainer.children[i] as HTMLElement;
-      if (tabComponent.dataset.selected !== undefined) {
-        return i;
-      }
-    }
-    return -1;
-  };
-
-  static setSelectedTabIndex = (
-    tabContainer: HTMLElement,
-    cardContainer: HTMLElement,
-    selectedTabIndex: number
-  ) => {
-    for (let i: number = 0; i < tabContainer.children.length; i++) {
-      const tabComponent: HTMLElement = tabContainer.children[i] as HTMLElement;
-      if (i === selectedTabIndex) {
-        tabComponent.tabIndex = -1;
-        const value: string = tabComponent.getAttribute("value");
-        CardContainer.show(cardContainer, value);
-      } else {
-        tabComponent.tabIndex = 0;
-      }
-    }
-  };
-
-  static getSelectedTabComponent = (tabContainer: HTMLElement) => {
-    for (let i: number = 0; i < tabContainer.children.length; i++) {
-      const tabComponent: HTMLElement = tabContainer.children[i] as HTMLElement;
-      if (tabComponent.dataset.selected !== undefined) {
-        return tabComponent;
-      }
-    }
-    return null;
-  };
-
   static setSelectedTabComponent = (
     tabContainer: HTMLElement,
     cardContainer: HTMLElement,
     selectedTabComponent: HTMLElement
   ) => {
+    let selectedCardComponent: HTMLElement;
     for (let i: number = 0; i < tabContainer.children.length; i++) {
-      const tabComponent: HTMLElement = tabContainer.children[i] as HTMLElement;
+      const tabComponent = tabContainer.children[i] as HTMLElement;
       if (tabComponent === selectedTabComponent) {
-        tabComponent.tabIndex = -1;
         const value: string = tabComponent.getAttribute("value");
-        CardContainer.show(cardContainer, value);
-      } else {
-        tabComponent.tabIndex = 0;
+        selectedCardComponent = CardContainer.show(cardContainer, value);
       }
     }
+    if (selectedCardComponent) {
+      for (let i: number = 0; i < tabContainer.children.length; i++) {
+        const tabComponent = tabContainer.children[i] as HTMLElement;
+        if (tabComponent === selectedTabComponent) {
+          tabComponent.tabIndex = -1;
+        } else {
+          tabComponent.tabIndex = 0;
+        }
+      }
+    }
+    return selectedCardComponent;
   };
 }
 
@@ -154,79 +56,22 @@ class TabContainer {
  * @author Yassuo Toda
  */
 class CardContainer {
-  static first = (cardContainer: HTMLElement) => {
-    if (cardContainer.children.length === 0) {
-      return;
-    }
-    CardContainer.setSelectedIndex(cardContainer, 0);
-  };
-
-  static next = (cardContainer: HTMLElement) => {
-    if (cardContainer.children.length === 0) {
-      return;
-    }
-    let selectedIndex: number = CardContainer.getSelectedIndex(cardContainer);
-    if (selectedIndex === -1) {
-      selectedIndex = 0;
-    } else {
-      selectedIndex = (selectedIndex + 1) % cardContainer.children.length;
-    }
-    CardContainer.setSelectedIndex(cardContainer, selectedIndex);
-  };
-
-  static previous = (cardContainer: HTMLElement) => {
-    if (cardContainer.children.length === 0) {
-      return;
-    }
-    let selectedIndex: number = CardContainer.getSelectedIndex(cardContainer);
-    if (selectedIndex === -1) {
-      selectedIndex = cardContainer.children.length - 1;
-    } else {
-      selectedIndex =
-        (selectedIndex + cardContainer.children.length - 1) %
-        cardContainer.children.length;
-    }
-    CardContainer.setSelectedIndex(cardContainer, selectedIndex);
-  };
-
-  static last = (cardContainer: HTMLElement) => {
-    if (cardContainer.children.length === 0) {
-      return;
-    }
-    CardContainer.setSelectedIndex(
-      cardContainer,
-      cardContainer.children.length - 1
-    );
-  };
-
   static show = (cardContainer: HTMLElement, name: string) => {
     for (let i: number = 0; i < cardContainer.children.length; i++) {
       const cardComponent: HTMLElement = cardContainer.children[
         i
       ] as HTMLElement;
       if (cardComponent.dataset.name === name) {
-        CardContainer.setSelectedIndex(cardContainer, i);
-        break;
+        return CardContainer.setSelectedIndex(cardContainer, i);
       }
     }
-  };
-
-  static getSelectedIndex = (cardContainer: HTMLElement) => {
-    for (let i: number = 0; i < cardContainer.children.length; i++) {
-      const cardComponent: HTMLElement = cardContainer.children[
-        i
-      ] as HTMLElement;
-      if (cardComponent.style.visibility !== "hidden") {
-        return i;
-      }
-    }
-    return -1;
   };
 
   static setSelectedIndex = (
     cardContainer: HTMLElement,
     selectedIndex: number
   ) => {
+    let selectedCardComponent: HTMLElement;
     for (let i: number = 0; i < cardContainer.children.length; i++) {
       const cardComponent: HTMLElement = cardContainer.children[
         i
@@ -234,10 +79,12 @@ class CardContainer {
       if (i === selectedIndex) {
         cardComponent.style.visibility = "";
         cardComponent.focus();
+        selectedCardComponent = cardComponent;
       } else {
         cardComponent.style.visibility = "hidden";
       }
     }
+    return selectedCardComponent;
   };
 }
 
@@ -248,7 +95,7 @@ class CardContainer {
  */
 class TabComponent {
   static pointerdown = (ev: PointerEvent) => {
-    const tabComponent: HTMLElement = ev.target as HTMLElement;
+    const tabComponent = ev.target as HTMLElement;
     const tabContainer: HTMLElement = tabComponent.parentElement;
     if (!tabContainer) {
       return;

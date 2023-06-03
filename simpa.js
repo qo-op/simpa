@@ -923,98 +923,27 @@ if (window["TabComponent"]) {
 var TabContainer = /** @class */ (function () {
     function TabContainer() {
     }
-    TabContainer.first = function (tabContainer, cardContainer) {
-        if (tabContainer.children.length === 0) {
-            return;
-        }
-        TabContainer.setSelectedTabIndex(tabContainer, cardContainer, 0);
-    };
-    TabContainer.next = function (tabContainer, cardContainer) {
-        if (tabContainer.children.length === 0) {
-            return;
-        }
-        var selectedTabIndex = TabContainer.getSelectedTabIndex(tabContainer);
-        if (selectedTabIndex === -1) {
-            selectedTabIndex = 0;
-        }
-        else {
-            selectedTabIndex = (selectedTabIndex + 1) % tabContainer.children.length;
-        }
-        TabContainer.setSelectedTabIndex(tabContainer, cardContainer, selectedTabIndex);
-    };
-    TabContainer.previous = function (tabContainer, cardContainer) {
-        if (tabContainer.children.length === 0) {
-            return;
-        }
-        var selectedTabIndex = TabContainer.getSelectedTabIndex(tabContainer);
-        if (selectedTabIndex === -1) {
-            selectedTabIndex = tabContainer.children.length - 1;
-        }
-        else {
-            selectedTabIndex =
-                (selectedTabIndex + tabContainer.children.length - 1) %
-                    tabContainer.children.length;
-        }
-        TabContainer.setSelectedTabIndex(tabContainer, cardContainer, selectedTabIndex);
-    };
-    TabContainer.last = function (tabContainer, cardContainer) {
-        if (tabContainer.children.length === 0) {
-            return;
-        }
-        TabContainer.setSelectedTabIndex(tabContainer, cardContainer, tabContainer.children.length - 1);
-    };
-    TabContainer.show = function (tabContainer, cardContainer, name) {
-        for (var i = 0; i < tabContainer.children.length; i++) {
-            var tabComponent = tabContainer.children[i];
-            if (tabComponent.getAttribute("name") === name) {
-                TabContainer.setSelectedTabIndex(tabContainer, cardContainer, i);
-                break;
-            }
-        }
-    };
-    TabContainer.getSelectedTabIndex = function (tabContainer) {
-        for (var i = 0; i < tabContainer.children.length; i++) {
-            var tabComponent = tabContainer.children[i];
-            if (tabComponent.dataset.selected !== undefined) {
-                return i;
-            }
-        }
-        return -1;
-    };
-    TabContainer.setSelectedTabIndex = function (tabContainer, cardContainer, selectedTabIndex) {
-        for (var i = 0; i < tabContainer.children.length; i++) {
-            var tabComponent = tabContainer.children[i];
-            if (i === selectedTabIndex) {
-                tabComponent.tabIndex = -1;
-                var value = tabComponent.getAttribute("value");
-                CardContainer.show(cardContainer, value);
-            }
-            else {
-                tabComponent.tabIndex = 0;
-            }
-        }
-    };
-    TabContainer.getSelectedTabComponent = function (tabContainer) {
-        for (var i = 0; i < tabContainer.children.length; i++) {
-            var tabComponent = tabContainer.children[i];
-            if (tabComponent.dataset.selected !== undefined) {
-                return tabComponent;
-            }
-        }
-        return null;
-    };
     TabContainer.setSelectedTabComponent = function (tabContainer, cardContainer, selectedTabComponent) {
+        var selectedCardComponent;
         for (var i = 0; i < tabContainer.children.length; i++) {
             var tabComponent = tabContainer.children[i];
             if (tabComponent === selectedTabComponent) {
-                tabComponent.tabIndex = -1;
                 var value = tabComponent.getAttribute("value");
-                CardContainer.show(cardContainer, value);
-            }
-            else {
-                tabComponent.tabIndex = 0;
+                selectedCardComponent = CardContainer.show(cardContainer, value);
             }
         }
+        if (selectedCardComponent) {
+            for (var i = 0; i < tabContainer.children.length; i++) {
+                var tabComponent = tabContainer.children[i];
+                if (tabComponent === selectedTabComponent) {
+                    tabComponent.tabIndex = -1;
+                }
+                else {
+                    tabComponent.tabIndex = 0;
+                }
+            }
+        }
+        return selectedCardComponent;
     };
     return TabContainer;
 }());
@@ -1026,75 +955,28 @@ var TabContainer = /** @class */ (function () {
 var CardContainer = /** @class */ (function () {
     function CardContainer() {
     }
-    CardContainer.first = function (cardContainer) {
-        if (cardContainer.children.length === 0) {
-            return;
-        }
-        CardContainer.setSelectedIndex(cardContainer, 0);
-    };
-    CardContainer.next = function (cardContainer) {
-        if (cardContainer.children.length === 0) {
-            return;
-        }
-        var selectedIndex = CardContainer.getSelectedIndex(cardContainer);
-        if (selectedIndex === -1) {
-            selectedIndex = 0;
-        }
-        else {
-            selectedIndex = (selectedIndex + 1) % cardContainer.children.length;
-        }
-        CardContainer.setSelectedIndex(cardContainer, selectedIndex);
-    };
-    CardContainer.previous = function (cardContainer) {
-        if (cardContainer.children.length === 0) {
-            return;
-        }
-        var selectedIndex = CardContainer.getSelectedIndex(cardContainer);
-        if (selectedIndex === -1) {
-            selectedIndex = cardContainer.children.length - 1;
-        }
-        else {
-            selectedIndex =
-                (selectedIndex + cardContainer.children.length - 1) %
-                    cardContainer.children.length;
-        }
-        CardContainer.setSelectedIndex(cardContainer, selectedIndex);
-    };
-    CardContainer.last = function (cardContainer) {
-        if (cardContainer.children.length === 0) {
-            return;
-        }
-        CardContainer.setSelectedIndex(cardContainer, cardContainer.children.length - 1);
-    };
     CardContainer.show = function (cardContainer, name) {
         for (var i = 0; i < cardContainer.children.length; i++) {
             var cardComponent = cardContainer.children[i];
             if (cardComponent.dataset.name === name) {
-                CardContainer.setSelectedIndex(cardContainer, i);
-                break;
+                return CardContainer.setSelectedIndex(cardContainer, i);
             }
         }
-    };
-    CardContainer.getSelectedIndex = function (cardContainer) {
-        for (var i = 0; i < cardContainer.children.length; i++) {
-            var cardComponent = cardContainer.children[i];
-            if (cardComponent.style.visibility !== "hidden") {
-                return i;
-            }
-        }
-        return -1;
     };
     CardContainer.setSelectedIndex = function (cardContainer, selectedIndex) {
+        var selectedCardComponent;
         for (var i = 0; i < cardContainer.children.length; i++) {
             var cardComponent = cardContainer.children[i];
             if (i === selectedIndex) {
                 cardComponent.style.visibility = "";
                 cardComponent.focus();
+                selectedCardComponent = cardComponent;
             }
             else {
                 cardComponent.style.visibility = "hidden";
             }
         }
+        return selectedCardComponent;
     };
     return CardContainer;
 }());
