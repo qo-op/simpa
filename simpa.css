@@ -15,10 +15,6 @@ body {
   -webkit-text-size-adjust: none;
 }
 
-*:focus {
-  outline: none;
-}
-
 /**
  * BorderLayout
  */
