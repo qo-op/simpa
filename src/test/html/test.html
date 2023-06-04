@@ -1,40 +1,45 @@
+<!-- ComboBoxDemo.html -->
+<!-- An HTML version of Oracle's ComboBoxDemo example -->
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <link rel="preload" href="/Bird.gif" as="image" />
+    <link rel="preload" href="/Cat.gif" as="image" />
+    <link rel="preload" href="/Dog.gif" as="image" />
+    <link rel="preload" href="/Pig.gif" as="image" />
+    <link rel="preload" href="/Rabbit.gif" as="image" />
     <style>
-      .container {
-        overflow: hidden; /* Clear the float */
-      }
-
-      .button {
-        padding: 10px;
-        background-color: #ccc;
-        border: none;
-        cursor: pointer;
-        margin-bottom: 10px;
-      }
-
-      .button.left {
-        float: left;
-      }
-
-      .button.right {
-        float: right;
-      }
+      /* ComboBoxDemo.css */
     </style>
+    <script>
+      /* ComboBoxDemo.js */
+      function handleChange(event) {
+        const comboBox = event.currentTarget;
+        const value = comboBox.value;
+        const picture = document.getElementById("picture");
+        picture.src = "/" + value + ".gif";
+      }
+    </script>
   </head>
-  <body>
-    <div class="container">
-      <button class="button right">Button 9</button>
-      <button class="button right">Button 10</button>
-      <button class="button left">Button 1</button>
-      <button class="button left">Button 2</button>
-      <button class="button left">Button 3</button>
-      <button class="button left">Button 4</button>
-      <button class="button left">Button 5</button>
-      <button class="button left">Button 6</button>
-      <button class="button left">Button 7</button>
-      <button class="button left">Button 8</button>
+  <body class="ScrollPane" data-scrollbar-overlay id="combo-box-demo">
+    <div
+      class="GridBagConstraints"
+      data-anchor="page-start"
+      style="padding: 0.25em"
+    >
+      <div class="BoxLayout" data-axis="page-axis" style="gap: 0.5em">
+        <!-- combo box -->
+        <select onchange="handleChange(event);">
+          <option value="Bird">Bird</option>
+          <option value="Cat">Cat</option>
+          <option value="Dog">Dog</option>
+          <option value="Rabbit">Rabbit</option>
+          <option value="Pig" selected>Pig</option>
+        </select>
+        <!-- picture -->
+        <img src="/Pig.gif" alt="Pet image" id="picture" />
+      </div>
     </div>
   </body>
 </html>

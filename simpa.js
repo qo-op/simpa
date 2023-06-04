@@ -452,6 +452,22 @@ var OptionPane = /** @class */ (function () {
             }
         }
     }
+    Object.defineProperty(OptionPane, "optionPaneModalLayer", {
+        get: function () {
+            var modalLayer = document.body.querySelector(":scope>.OptionPane.ModalLayer");
+            if (modalLayer === null) {
+                modalLayer = document.createElement("div");
+                modalLayer.classList.add("OptionPane");
+                modalLayer.classList.add("ModalLayer");
+                modalLayer.classList.add("CenterLayout");
+                modalLayer.style.visibility = "inherit";
+                document.body.appendChild(modalLayer);
+            }
+            return modalLayer;
+        },
+        enumerable: false,
+        configurable: true
+    });
     OptionPane.createDialogTitleBar = function () {
         var dialogTitleBar = document.createElement("div");
         dialogTitleBar.classList.add("DialogTitleBar");
@@ -572,17 +588,9 @@ var OptionPane = /** @class */ (function () {
                     var _a;
                     img.style.width = img.naturalWidth + "px";
                     img.style.height = img.naturalHeight + "px";
-                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                    if (modalLayer === null) {
-                        modalLayer = document.createElement("div");
-                        modalLayer.classList.add("ModalLayer");
-                        modalLayer.classList.add("CenterLayout");
-                        modalLayer.style.visibility = "inherit";
-                        document.body.appendChild(modalLayer);
-                    }
                     var optionPane = new OptionPane(resolve, reject, null, message, title, "default", messageType, img);
-                    modalLayer.appendChild(optionPane.dialog);
-                    modalLayer.style.visibility = "inherit";
+                    OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+                    OptionPane.optionPaneModalLayer.style.visibility = "inherit";
                     (_a = optionPane.dialogOkButton) === null || _a === void 0 ? void 0 : _a.focus();
                 };
                 img.onerror = function () {
@@ -594,17 +602,9 @@ var OptionPane = /** @class */ (function () {
         else {
             return new Promise(function (resolve, reject) {
                 var _a;
-                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                if (modalLayer === null) {
-                    modalLayer = document.createElement("div");
-                    modalLayer.classList.add("ModalLayer");
-                    modalLayer.classList.add("CenterLayout");
-                    modalLayer.style.visibility = "inherit";
-                    document.body.appendChild(modalLayer);
-                }
                 var optionPane = new OptionPane(resolve, reject, null, message, title, "default", messageType);
-                modalLayer.appendChild(optionPane.dialog);
-                modalLayer.style.visibility = "inherit";
+                OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+                OptionPane.optionPaneModalLayer.style.visibility = "inherit";
                 (_a = optionPane.dialogOkButton) === null || _a === void 0 ? void 0 : _a.focus();
             });
         }
@@ -621,18 +621,10 @@ var OptionPane = /** @class */ (function () {
                     var _a;
                     img.style.width = img.naturalWidth + "px";
                     img.style.height = img.naturalHeight + "px";
-                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                    if (modalLayer === null) {
-                        modalLayer = document.createElement("div");
-                        modalLayer.classList.add("ModalLayer");
-                        modalLayer.classList.add("CenterLayout");
-                        modalLayer.style.visibility = "inherit";
-                        document.body.appendChild(modalLayer);
-                    }
                     var optionPane = new OptionPane(resolve, reject, null, message, title, optionType, messageType ||
                         (optionType !== "default" ? "question" : "information"), img);
-                    modalLayer.appendChild(optionPane.dialog);
-                    modalLayer.style.visibility = "inherit";
+                    OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+                    OptionPane.optionPaneModalLayer.style.visibility = "inherit";
                     if (optionPane.dialogOkButton) {
                         optionPane.dialogOkButton.focus();
                     }
@@ -649,17 +641,9 @@ var OptionPane = /** @class */ (function () {
         else {
             return new Promise(function (resolve, reject) {
                 var _a;
-                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                if (modalLayer === null) {
-                    modalLayer = document.createElement("div");
-                    modalLayer.classList.add("ModalLayer");
-                    modalLayer.classList.add("CenterLayout");
-                    modalLayer.style.visibility = "inherit";
-                    document.body.appendChild(modalLayer);
-                }
                 var optionPane = new OptionPane(resolve, reject, null, message, title, optionType, messageType || (optionType !== "default" ? "question" : "information"));
-                modalLayer.appendChild(optionPane.dialog);
-                modalLayer.style.visibility = "inherit";
+                OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+                OptionPane.optionPaneModalLayer.style.visibility = "inherit";
                 if (optionPane.dialogOkButton) {
                     optionPane.dialogOkButton.focus();
                 }
@@ -702,17 +686,9 @@ var OptionPane = /** @class */ (function () {
                 img.onload = function () {
                     img.style.width = img.naturalWidth + "px";
                     img.style.height = img.naturalHeight + "px";
-                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                    if (modalLayer === null) {
-                        modalLayer = document.createElement("div");
-                        modalLayer.classList.add("ModalLayer");
-                        modalLayer.classList.add("CenterLayout");
-                        modalLayer.style.visibility = "inherit";
-                        document.body.appendChild(modalLayer);
-                    }
                     var optionPane = new OptionPane(resolve, reject, input, message, title, "ok-cancel", messageType, img);
-                    modalLayer.appendChild(optionPane.dialog);
-                    modalLayer.style.visibility = "inherit";
+                    OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+                    OptionPane.optionPaneModalLayer.style.visibility = "inherit";
                     input.focus();
                 };
                 img.onerror = function () {
@@ -723,17 +699,9 @@ var OptionPane = /** @class */ (function () {
         }
         else {
             return new Promise(function (resolve, reject) {
-                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                if (modalLayer === null) {
-                    modalLayer = document.createElement("div");
-                    modalLayer.classList.add("ModalLayer");
-                    modalLayer.classList.add("CenterLayout");
-                    modalLayer.style.visibility = "inherit";
-                    document.body.appendChild(modalLayer);
-                }
                 var optionPane = new OptionPane(resolve, reject, input, message, title, "ok-cancel", messageType);
-                modalLayer.appendChild(optionPane.dialog);
-                modalLayer.style.visibility = "inherit";
+                OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+                OptionPane.optionPaneModalLayer.style.visibility = "inherit";
                 input.focus();
             });
         }
@@ -750,18 +718,10 @@ var OptionPane = /** @class */ (function () {
                     var _a;
                     img.style.width = img.naturalWidth + "px";
                     img.style.height = img.naturalHeight + "px";
-                    var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                    if (modalLayer === null) {
-                        modalLayer = document.createElement("div");
-                        modalLayer.classList.add("ModalLayer");
-                        modalLayer.classList.add("CenterLayout");
-                        modalLayer.style.visibility = "inherit";
-                        document.body.appendChild(modalLayer);
-                    }
                     var optionPane = new OptionPane(resolve, reject, null, message, title, optionType, messageType ||
                         (optionType !== "default" ? "question" : "information"), img, options, initialValue);
-                    modalLayer.appendChild(optionPane.dialog);
-                    modalLayer.style.visibility = "inherit";
+                    OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+                    OptionPane.optionPaneModalLayer.style.visibility = "inherit";
                     if (initialValue) {
                         var index = options.indexOf(initialValue);
                         optionPane.dialogButtons[index].focus();
@@ -783,18 +743,10 @@ var OptionPane = /** @class */ (function () {
         }
         else {
             return new Promise(function (resolve, reject) {
-                var modalLayer = document.body.querySelector(":scope>.ModalLayer");
-                if (modalLayer === null) {
-                    modalLayer = document.createElement("div");
-                    modalLayer.classList.add("ModalLayer");
-                    modalLayer.classList.add("CenterLayout");
-                    modalLayer.style.visibility = "inherit";
-                    document.body.appendChild(modalLayer);
-                }
                 var optionPane = new OptionPane(resolve, reject, null, message, title, optionType, messageType ||
                     (optionType !== "default" ? "question" : "information"), undefined, options, initialValue);
-                modalLayer.appendChild(optionPane.dialog);
-                modalLayer.style.visibility = "inherit";
+                OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+                OptionPane.optionPaneModalLayer.style.visibility = "inherit";
             });
         }
     };

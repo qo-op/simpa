@@ -360,16 +360,6 @@ class OptionPane {
         img.onload = function () {
           img.style.width = img.naturalWidth + "px";
           img.style.height = img.naturalHeight + "px";
-          let modalLayer = document.body.querySelector(
-            ":scope>.ModalLayer"
-          ) as HTMLElement;
-          if (modalLayer === null) {
-            modalLayer = document.createElement("div");
-            modalLayer.classList.add("ModalLayer");
-            modalLayer.classList.add("CenterLayout");
-            modalLayer.style.visibility = "inherit";
-            document.body.appendChild(modalLayer);
-          }
           const optionPane = new OptionPane(
             resolve,
             reject,
@@ -380,8 +370,8 @@ class OptionPane {
             messageType,
             img
           );
-          modalLayer.appendChild(optionPane.dialog);
-          modalLayer.style.visibility = "inherit";
+          OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+          OptionPane.optionPaneModalLayer.style.visibility = "inherit";
           optionPane.dialogOkButton?.focus();
         };
         img.onerror = function () {
@@ -391,16 +381,6 @@ class OptionPane {
       });
     } else {
       return new Promise((resolve, reject) => {
-        let modalLayer = document.body.querySelector(
-          ":scope>.ModalLayer"
-        ) as HTMLElement;
-        if (modalLayer === null) {
-          modalLayer = document.createElement("div");
-          modalLayer.classList.add("ModalLayer");
-          modalLayer.classList.add("CenterLayout");
-          modalLayer.style.visibility = "inherit";
-          document.body.appendChild(modalLayer);
-        }
         const optionPane = new OptionPane(
           resolve,
           reject,
@@ -410,8 +390,8 @@ class OptionPane {
           "default",
           messageType
         );
-        modalLayer.appendChild(optionPane.dialog);
-        modalLayer.style.visibility = "inherit";
+        OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+        OptionPane.optionPaneModalLayer.style.visibility = "inherit";
         optionPane.dialogOkButton?.focus();
       });
     }
@@ -431,16 +411,6 @@ class OptionPane {
         img.onload = function () {
           img.style.width = img.naturalWidth + "px";
           img.style.height = img.naturalHeight + "px";
-          let modalLayer = document.body.querySelector(
-            ":scope>.ModalLayer"
-          ) as HTMLElement;
-          if (modalLayer === null) {
-            modalLayer = document.createElement("div");
-            modalLayer.classList.add("ModalLayer");
-            modalLayer.classList.add("CenterLayout");
-            modalLayer.style.visibility = "inherit";
-            document.body.appendChild(modalLayer);
-          }
           const optionPane = new OptionPane(
             resolve,
             reject,
@@ -452,8 +422,8 @@ class OptionPane {
               (optionType !== "default" ? "question" : "information"),
             img
           );
-          modalLayer.appendChild(optionPane.dialog);
-          modalLayer.style.visibility = "inherit";
+          OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+          OptionPane.optionPaneModalLayer.style.visibility = "inherit";
           if (optionPane.dialogOkButton) {
             optionPane.dialogOkButton.focus();
           } else {
@@ -467,16 +437,6 @@ class OptionPane {
       });
     } else {
       return new Promise((resolve, reject) => {
-        let modalLayer = document.body.querySelector(
-          ":scope>.ModalLayer"
-        ) as HTMLElement;
-        if (modalLayer === null) {
-          modalLayer = document.createElement("div");
-          modalLayer.classList.add("ModalLayer");
-          modalLayer.classList.add("CenterLayout");
-          modalLayer.style.visibility = "inherit";
-          document.body.appendChild(modalLayer);
-        }
         const optionPane = new OptionPane(
           resolve,
           reject,
@@ -486,8 +446,8 @@ class OptionPane {
           optionType,
           messageType || (optionType !== "default" ? "question" : "information")
         );
-        modalLayer.appendChild(optionPane.dialog);
-        modalLayer.style.visibility = "inherit";
+        OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+        OptionPane.optionPaneModalLayer.style.visibility = "inherit";
         if (optionPane.dialogOkButton) {
           optionPane.dialogOkButton.focus();
         } else {
@@ -533,16 +493,6 @@ class OptionPane {
         img.onload = function () {
           img.style.width = img.naturalWidth + "px";
           img.style.height = img.naturalHeight + "px";
-          let modalLayer = document.body.querySelector(
-            ":scope>.ModalLayer"
-          ) as HTMLElement;
-          if (modalLayer === null) {
-            modalLayer = document.createElement("div");
-            modalLayer.classList.add("ModalLayer");
-            modalLayer.classList.add("CenterLayout");
-            modalLayer.style.visibility = "inherit";
-            document.body.appendChild(modalLayer);
-          }
           const optionPane = new OptionPane(
             resolve,
             reject,
@@ -553,8 +503,8 @@ class OptionPane {
             messageType,
             img
           );
-          modalLayer.appendChild(optionPane.dialog);
-          modalLayer.style.visibility = "inherit";
+          OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+          OptionPane.optionPaneModalLayer.style.visibility = "inherit";
           input.focus();
         };
         img.onerror = function () {
@@ -564,16 +514,6 @@ class OptionPane {
       });
     } else {
       return new Promise((resolve, reject) => {
-        let modalLayer = document.body.querySelector(
-          ":scope>.ModalLayer"
-        ) as HTMLElement;
-        if (modalLayer === null) {
-          modalLayer = document.createElement("div");
-          modalLayer.classList.add("ModalLayer");
-          modalLayer.classList.add("CenterLayout");
-          modalLayer.style.visibility = "inherit";
-          document.body.appendChild(modalLayer);
-        }
         const optionPane = new OptionPane(
           resolve,
           reject,
@@ -583,8 +523,8 @@ class OptionPane {
           "ok-cancel",
           messageType
         );
-        modalLayer.appendChild(optionPane.dialog);
-        modalLayer.style.visibility = "inherit";
+        OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+        OptionPane.optionPaneModalLayer.style.visibility = "inherit";
         input.focus();
       });
     }
@@ -606,16 +546,6 @@ class OptionPane {
         img.onload = function () {
           img.style.width = img.naturalWidth + "px";
           img.style.height = img.naturalHeight + "px";
-          let modalLayer = document.body.querySelector(
-            ":scope>.ModalLayer"
-          ) as HTMLElement;
-          if (modalLayer === null) {
-            modalLayer = document.createElement("div");
-            modalLayer.classList.add("ModalLayer");
-            modalLayer.classList.add("CenterLayout");
-            modalLayer.style.visibility = "inherit";
-            document.body.appendChild(modalLayer);
-          }
           const optionPane = new OptionPane(
             resolve,
             reject,
@@ -629,8 +559,8 @@ class OptionPane {
             options,
             initialValue
           );
-          modalLayer.appendChild(optionPane.dialog);
-          modalLayer.style.visibility = "inherit";
+          OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+          OptionPane.optionPaneModalLayer.style.visibility = "inherit";
           if (initialValue) {
             const index = options.indexOf(initialValue);
             optionPane.dialogButtons[index].focus();
@@ -649,16 +579,6 @@ class OptionPane {
       });
     } else {
       return new Promise((resolve, reject) => {
-        let modalLayer = document.body.querySelector(
-          ":scope>.ModalLayer"
-        ) as HTMLElement;
-        if (modalLayer === null) {
-          modalLayer = document.createElement("div");
-          modalLayer.classList.add("ModalLayer");
-          modalLayer.classList.add("CenterLayout");
-          modalLayer.style.visibility = "inherit";
-          document.body.appendChild(modalLayer);
-        }
         const optionPane = new OptionPane(
           resolve,
           reject,
@@ -672,11 +592,26 @@ class OptionPane {
           options,
           initialValue
         );
-        modalLayer.appendChild(optionPane.dialog);
-        modalLayer.style.visibility = "inherit";
+        OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
+        OptionPane.optionPaneModalLayer.style.visibility = "inherit";
       });
     }
   };
+
+  static get optionPaneModalLayer() {
+    let modalLayer = document.body.querySelector(
+      ":scope>.OptionPane.ModalLayer"
+    ) as HTMLElement;
+    if (modalLayer === null) {
+      modalLayer = document.createElement("div");
+      modalLayer.classList.add("OptionPane");
+      modalLayer.classList.add("ModalLayer");
+      modalLayer.classList.add("CenterLayout");
+      modalLayer.style.visibility = "inherit";
+      document.body.appendChild(modalLayer);
+    }
+    return modalLayer;
+  }
 
   dialog: HTMLElement;
   dialogTitleBar: HTMLElement;
