@@ -704,7 +704,8 @@ class OptionPane {
       this.dialogInputPane.style.gridColumn = "2";
       this.dialogMainPane.appendChild(this.dialogInputPane);
 
-      this.dialogInputPane.classList.add("BorderLayout");
+      this.dialogInputPane.classList.add("GridBagConstraints");
+      this.dialogInputPane.dataset.fill = "both";
 
       this.dialogInputPane.appendChild(input);
     }
