@@ -1,34 +1,37 @@
 /**
- *  Simpa.ts
+ * Simpa.ts
+ *
+ *  If you are using TypeScript, you can use OptionPane by following this syntax:
+ * (window as any).OptionPane.showMessageDialog("Hello, World!");
  *
  * @author Yassuo Toda
  */
 
-if ((window as any)["Dialog"]) {
+if ((window as any).Dialog) {
   document.removeEventListener(
     "pointerdown",
-    (window as any)["Dialog"].pointerdown
+    (window as any).Dialog.pointerdown
   );
 }
 
-if ((window as any)["MenuBar"]) {
+if ((window as any).MenuBar) {
   document.removeEventListener(
     "pointerdown",
-    (window as any)["MenuBar"].pointerdown
+    (window as any).MenuBar.pointerdown
   );
 }
 
-if ((window as any)["SplitPane"]) {
+if ((window as any).SplitPane) {
   document.removeEventListener(
     "pointerdown",
-    (window as any)["SplitPane"].pointerdown
+    (window as any).SplitPane.pointerdown
   );
 }
 
-if ((window as any)["TabComponent"]) {
+if ((window as any).TabComponent) {
   document.removeEventListener(
     "pointerdown",
-    (window as any)["TabComponent"].pointerdown
+    (window as any).TabComponent.pointerdown
   );
 }
 
@@ -42,7 +45,7 @@ if ((window as any)["TabComponent"]) {
  * @author Yassuo Toda
  */
 
-export class Dialog {
+class Dialog {
   static dragStart: boolean = false;
 
   static dialog: HTMLElement;
@@ -123,7 +126,7 @@ export class Dialog {
  * @author Yassuo Toda
  */
 
-export class MenuBar {
+class MenuBar {
   static open = (menuBar: HTMLElement) => {
     menuBar.dataset.open = "";
   };
@@ -343,7 +346,7 @@ export class MenuBar {
  * @author Yassuo Toda
  */
 
-export class OptionPane {
+class OptionPane {
   static showMessageDialog = (
     message: string = "",
     title: string = "Message",
@@ -1057,7 +1060,7 @@ export class OptionPane {
  * @author Yassuo Toda
  */
 
-export class SplitPane {
+class SplitPane {
   static dragStart: boolean = false;
   static dragLayer: HTMLElement;
 
@@ -1196,7 +1199,7 @@ export class SplitPane {
  *
  * @author Yassuo Toda
  */
-export class TabContainer {
+class TabContainer {
   static setSelectedTabComponent = (
     tabContainer: HTMLElement,
     cardContainer: HTMLElement,
@@ -1229,7 +1232,7 @@ export class TabContainer {
  *
  * @author Yassuo Toda
  */
-export class CardContainer {
+class CardContainer {
   static show = (cardContainer: HTMLElement, name: string) => {
     for (let i: number = 0; i < cardContainer.children.length; i++) {
       const cardComponent: HTMLElement = cardContainer.children[
@@ -1268,7 +1271,7 @@ export class CardContainer {
  *
  * @author Yassuo Toda
  */
-export class TabComponent {
+class TabComponent {
   static pointerdown = (ev: PointerEvent) => {
     const tabComponent = ev.target as HTMLElement;
     const tabContainer = tabComponent.parentElement;
@@ -1306,3 +1309,15 @@ document.addEventListener("pointerdown", MenuBar.pointerdown);
 document.addEventListener("pointerdown", SplitPane.pointerdown);
 
 document.addEventListener("pointerdown", TabComponent.pointerdown);
+
+/*
+module.exports = {
+  Dialog,
+  MenuBar,
+  OptionPane,
+  SplitPane,
+  TabContainer,
+  CardContainer,
+  TabComponent,
+};
+*/
