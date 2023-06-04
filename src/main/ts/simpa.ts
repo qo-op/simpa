@@ -655,13 +655,12 @@ class OptionPane {
     this.dialogContentPane = OptionPane.createDialogContentPane();
     this.dialog.appendChild(this.dialogContentPane);
 
-    this.dialogContentPane.style.padding = ".5em";
     this.dialogContentPane.classList.add("BorderLayout");
 
     this.dialogMainPane = OptionPane.createDialogMainPane();
     this.dialogContentPane.appendChild(this.dialogMainPane);
 
-    this.dialogMainPane.style.paddingBlockEnd = ".5em";
+    this.dialogMainPane.style.padding = ".5em";
     this.dialogMainPane.style.display = "grid";
     this.dialogMainPane.style.gap = ".5em";
 
@@ -712,6 +711,7 @@ class OptionPane {
     this.dialogButtonPane.classList.add("PageEnd");
     this.dialogContentPane.appendChild(this.dialogButtonPane);
 
+    this.dialogButtonPane.style.padding = "0 .5em .5em .5em";
     this.dialogButtonPane.classList.add("FlowLayout");
     this.dialogButtonPane.style.gap = ".5em";
 
@@ -843,22 +843,26 @@ class OptionPane {
 
   static createDialogTitleTextPane(title: string) {
     const dialogTitleTextPane = document.createElement("div");
+    dialogTitleTextPane.classList.add("DialogTitleTextPane");
     dialogTitleTextPane.innerHTML = title.replace(/\n/g, "<br>");
     return dialogTitleTextPane;
   }
 
   static createDialogContentPane() {
     const dialogContentPane = document.createElement("div");
+    dialogContentPane.classList.add("DialogContentPane");
     return dialogContentPane;
   }
 
   static createDialogMainPane() {
     const dialogMainPane = document.createElement("div");
+    dialogMainPane.classList.add("DialogMainPane");
     return dialogMainPane;
   }
 
   static createDialogIconPane() {
     const dialogIconPane = document.createElement("div");
+    dialogIconPane.classList.add("DialogIconPane");
     return dialogIconPane;
   }
 
@@ -891,27 +895,32 @@ class OptionPane {
 
   static createDialogMessagePane() {
     const dialogMessagePane = document.createElement("div");
+    dialogMessagePane.classList.add("DialogMessagePane");
     return dialogMessagePane;
   }
 
   static createDialogMessageTextPane(message: string) {
     const dialogMessageTextPane = document.createElement("div");
+    dialogMessageTextPane.classList.add("DialogMessageTextPane");
     dialogMessageTextPane.innerHTML = message.replace(/\n/g, "<br>");
     return dialogMessageTextPane;
   }
 
   static createDialogInputPane() {
     const dialogInputPane = document.createElement("div");
+    dialogInputPane.classList.add("DialogInputPane");
     return dialogInputPane;
   }
 
   static createDialogButtonPane() {
     const dialogButtonPane = document.createElement("div");
+    dialogButtonPane.classList.add("DialogButtonPane");
     return dialogButtonPane;
   }
 
   static createDialogButton(text: string) {
     const dialogButton = document.createElement("button");
+    dialogButton.classList.add("DialogButton");
     dialogButton.textContent = text;
     return dialogButton;
   }

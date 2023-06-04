@@ -336,11 +336,10 @@ var OptionPane = /** @class */ (function () {
         this.dialogTitleBar.appendChild(this.dialogTitleTextPane);
         this.dialogContentPane = OptionPane.createDialogContentPane();
         this.dialog.appendChild(this.dialogContentPane);
-        this.dialogContentPane.style.padding = ".5em";
         this.dialogContentPane.classList.add("BorderLayout");
         this.dialogMainPane = OptionPane.createDialogMainPane();
         this.dialogContentPane.appendChild(this.dialogMainPane);
-        this.dialogMainPane.style.paddingBlockEnd = ".5em";
+        this.dialogMainPane.style.padding = ".5em";
         this.dialogMainPane.style.display = "grid";
         this.dialogMainPane.style.gap = ".5em";
         this.dialogIconPane = OptionPane.createDialogIconPane();
@@ -381,6 +380,7 @@ var OptionPane = /** @class */ (function () {
         this.dialogButtonPane = OptionPane.createDialogButtonPane();
         this.dialogButtonPane.classList.add("PageEnd");
         this.dialogContentPane.appendChild(this.dialogButtonPane);
+        this.dialogButtonPane.style.padding = "0 .5em .5em .5em";
         this.dialogButtonPane.classList.add("FlowLayout");
         this.dialogButtonPane.style.gap = ".5em";
         this.dialogButtons = [];
@@ -477,19 +477,23 @@ var OptionPane = /** @class */ (function () {
     };
     OptionPane.createDialogTitleTextPane = function (title) {
         var dialogTitleTextPane = document.createElement("div");
+        dialogTitleTextPane.classList.add("DialogTitleTextPane");
         dialogTitleTextPane.innerHTML = title.replace(/\n/g, "<br>");
         return dialogTitleTextPane;
     };
     OptionPane.createDialogContentPane = function () {
         var dialogContentPane = document.createElement("div");
+        dialogContentPane.classList.add("DialogContentPane");
         return dialogContentPane;
     };
     OptionPane.createDialogMainPane = function () {
         var dialogMainPane = document.createElement("div");
+        dialogMainPane.classList.add("DialogMainPane");
         return dialogMainPane;
     };
     OptionPane.createDialogIconPane = function () {
         var dialogIconPane = document.createElement("div");
+        dialogIconPane.classList.add("DialogIconPane");
         return dialogIconPane;
     };
     OptionPane.createDialogIcon = function (messageType) {
@@ -520,23 +524,28 @@ var OptionPane = /** @class */ (function () {
     };
     OptionPane.createDialogMessagePane = function () {
         var dialogMessagePane = document.createElement("div");
+        dialogMessagePane.classList.add("DialogMessagePane");
         return dialogMessagePane;
     };
     OptionPane.createDialogMessageTextPane = function (message) {
         var dialogMessageTextPane = document.createElement("div");
+        dialogMessageTextPane.classList.add("DialogMessageTextPane");
         dialogMessageTextPane.innerHTML = message.replace(/\n/g, "<br>");
         return dialogMessageTextPane;
     };
     OptionPane.createDialogInputPane = function () {
         var dialogInputPane = document.createElement("div");
+        dialogInputPane.classList.add("DialogInputPane");
         return dialogInputPane;
     };
     OptionPane.createDialogButtonPane = function () {
         var dialogButtonPane = document.createElement("div");
+        dialogButtonPane.classList.add("DialogButtonPane");
         return dialogButtonPane;
     };
     OptionPane.createDialogButton = function (text) {
         var dialogButton = document.createElement("button");
+        dialogButton.classList.add("DialogButton");
         dialogButton.textContent = text;
         return dialogButton;
     };
