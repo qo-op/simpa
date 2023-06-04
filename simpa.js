@@ -296,7 +296,7 @@ var MenuBar = /** @class */ (function () {
  * @author Yassuo Toda
  */
 var OptionPane = /** @class */ (function () {
-    function OptionPane(resolve, reject, input, message, title, optionType, messageType, img, options, initialValue) {
+    function OptionPane(resolve, reject, input, message, title, optionType, messageType, img, options) {
         var _this = this;
         this.handleInput = function (ev, resolve, reject, input) {
             var modalLayer = document.body.querySelector(":scope>.ModalLayer");
@@ -331,32 +331,37 @@ var OptionPane = /** @class */ (function () {
         this.dialogTitleBar.classList.add("PageStart");
         this.dialog.appendChild(this.dialogTitleBar);
         this.dialogTitleBar.classList.add("BorderLayout");
+        this.dialogTitlePane = OptionPane.createDialogTitlePane();
+        this.dialogTitlePane.classList.add("Center");
+        this.dialogTitleBar.appendChild(this.dialogTitlePane);
         this.dialogTitleLabel = OptionPane.createDialogTitleLabel(title);
         this.dialogTitleLabel.style.paddingInline = ".5em";
-        this.dialogTitleBar.appendChild(this.dialogTitleLabel);
+        this.dialogTitlePane.appendChild(this.dialogTitleLabel);
         this.dialogContentPane = OptionPane.createDialogContentPane();
+        this.dialogContentPane.classList.add("Center");
         this.dialog.appendChild(this.dialogContentPane);
         this.dialogContentPane.style.padding = ".5em";
         this.dialogContentPane.classList.add("BorderLayout");
         this.dialogMainPane = OptionPane.createDialogMainPane();
-        this.dialogMainPane.style.marginBlockEnd = ".5em";
+        this.dialogMainPane.classList.add("Center");
         this.dialogContentPane.appendChild(this.dialogMainPane);
+        this.dialogMainPane.style.paddingBlockEnd = ".5em";
         this.dialogMainPane.style.display = "grid";
         this.dialogMainPane.style.rowGap = ".5em";
         this.dialogIconPane = OptionPane.createDialogIconPane();
         this.dialogIconPane.style.gridRow = "1";
         this.dialogIconPane.style.gridColumn = "1";
-        this.dialogMainPane.appendChild(this.dialogIconPane);
-        this.dialogIconPane.classList.add("CenterLayout");
+        this.dialogIconPane.classList.add("GridBagConstraints");
+        this.dialogIconPane.dataset.anchor = "center";
         if (img) {
-            this.dialogIconPane.style.marginInlineEnd = ".5em";
             this.dialogIconPane.appendChild(img);
+            this.dialogMainPane.appendChild(this.dialogIconPane);
         }
         else {
             var dialogIcon = OptionPane.createDialogIcon(messageType);
             if (dialogIcon) {
-                this.dialogIconPane.style.marginInlineEnd = ".5em";
                 this.dialogIconPane.appendChild(dialogIcon);
+                this.dialogMainPane.appendChild(this.dialogIconPane);
             }
         }
         this.dialogMessagePane = OptionPane.createDialogMessagePane();
@@ -375,7 +380,6 @@ var OptionPane = /** @class */ (function () {
             this.dialogMainPane.appendChild(this.dialogInputPane);
             this.dialogInputPane.classList.add("GridBagConstraints");
             this.dialogInputPane.dataset.fill = "both";
-            this.dialogInputPane.style.padding = ".25em";
             this.dialogInputPane.appendChild(input);
         }
         this.dialogButtonPane = OptionPane.createDialogButtonPane();
@@ -474,6 +478,10 @@ var OptionPane = /** @class */ (function () {
         var dialogTitleBar = document.createElement("div");
         dialogTitleBar.classList.add("DialogTitleBar");
         return dialogTitleBar;
+    };
+    OptionPane.createDialogTitlePane = function () {
+        var dialogTitlePane = document.createElement("div");
+        return dialogTitlePane;
     };
     OptionPane.createDialogTitleLabel = function (title) {
         var dialogTitleLabel = document.createElement("span");
@@ -721,7 +729,7 @@ var OptionPane = /** @class */ (function () {
                     img.style.width = img.naturalWidth + "px";
                     img.style.height = img.naturalHeight + "px";
                     var optionPane = new OptionPane(resolve, reject, null, message, title, optionType, messageType ||
-                        (optionType !== "default" ? "question" : "information"), img, options, initialValue);
+                        (optionType !== "default" ? "question" : "information"), img, options);
                     OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
                     OptionPane.optionPaneModalLayer.style.visibility = "inherit";
                     if (initialValue) {
@@ -746,7 +754,7 @@ var OptionPane = /** @class */ (function () {
         else {
             return new Promise(function (resolve, reject) {
                 var optionPane = new OptionPane(resolve, reject, null, message, title, optionType, messageType ||
-                    (optionType !== "default" ? "question" : "information"), undefined, options, initialValue);
+                    (optionType !== "default" ? "question" : "information"), undefined, options);
                 OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
                 OptionPane.optionPaneModalLayer.style.visibility = "inherit";
             });

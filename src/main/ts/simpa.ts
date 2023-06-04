@@ -556,8 +556,7 @@ class OptionPane {
             messageType ||
               (optionType !== "default" ? "question" : "information"),
             img,
-            options,
-            initialValue
+            options
           );
           OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
           OptionPane.optionPaneModalLayer.style.visibility = "inherit";
@@ -589,8 +588,7 @@ class OptionPane {
           messageType ||
             (optionType !== "default" ? "question" : "information"),
           undefined,
-          options,
-          initialValue
+          options
         );
         OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
         OptionPane.optionPaneModalLayer.style.visibility = "inherit";
@@ -615,6 +613,7 @@ class OptionPane {
 
   dialog: HTMLElement;
   dialogTitleBar: HTMLElement;
+  dialogTitlePane: HTMLElement;
   dialogTitleLabel: HTMLElement;
   dialogContentPane: HTMLElement;
   dialogMainPane: HTMLElement;
@@ -638,8 +637,7 @@ class OptionPane {
     optionType: string,
     messageType: string,
     img?: HTMLImageElement,
-    options?: string[],
-    initialValue?: string
+    options?: string[]
   ) {
     this.dialog = document.createElement("div");
     this.dialog.classList.add("Dialog");
@@ -651,38 +649,44 @@ class OptionPane {
 
     this.dialogTitleBar.classList.add("BorderLayout");
 
+    this.dialogTitlePane = OptionPane.createDialogTitlePane();
+    this.dialogTitlePane.classList.add("Center");
+    this.dialogTitleBar.appendChild(this.dialogTitlePane);
+
     this.dialogTitleLabel = OptionPane.createDialogTitleLabel(title);
     this.dialogTitleLabel.style.paddingInline = ".5em";
-    this.dialogTitleBar.appendChild(this.dialogTitleLabel);
+    this.dialogTitlePane.appendChild(this.dialogTitleLabel);
 
     this.dialogContentPane = OptionPane.createDialogContentPane();
+    this.dialogContentPane.classList.add("Center");
     this.dialog.appendChild(this.dialogContentPane);
 
     this.dialogContentPane.style.padding = ".5em";
     this.dialogContentPane.classList.add("BorderLayout");
 
     this.dialogMainPane = OptionPane.createDialogMainPane();
-    this.dialogMainPane.style.marginBlockEnd = ".5em";
+    this.dialogMainPane.classList.add("Center");
     this.dialogContentPane.appendChild(this.dialogMainPane);
 
+    this.dialogMainPane.style.paddingBlockEnd = ".5em";
     this.dialogMainPane.style.display = "grid";
     this.dialogMainPane.style.rowGap = ".5em";
 
     this.dialogIconPane = OptionPane.createDialogIconPane();
     this.dialogIconPane.style.gridRow = "1";
     this.dialogIconPane.style.gridColumn = "1";
-    this.dialogMainPane.appendChild(this.dialogIconPane);
 
-    this.dialogIconPane.classList.add("CenterLayout");
+    this.dialogIconPane.classList.add("GridBagConstraints");
+    this.dialogIconPane.dataset.anchor = "center";
 
     if (img) {
-      this.dialogIconPane.style.marginInlineEnd = ".5em";
       this.dialogIconPane.appendChild(img);
+      this.dialogMainPane.appendChild(this.dialogIconPane);
     } else {
       const dialogIcon = OptionPane.createDialogIcon(messageType);
       if (dialogIcon) {
-        this.dialogIconPane.style.marginInlineEnd = ".5em";
         this.dialogIconPane.appendChild(dialogIcon);
+        this.dialogMainPane.appendChild(this.dialogIconPane);
       }
     }
 
@@ -706,7 +710,6 @@ class OptionPane {
 
       this.dialogInputPane.classList.add("GridBagConstraints");
       this.dialogInputPane.dataset.fill = "both";
-      this.dialogInputPane.style.padding = ".25em";
 
       this.dialogInputPane.appendChild(input);
     }
@@ -842,6 +845,11 @@ class OptionPane {
     const dialogTitleBar = document.createElement("div");
     dialogTitleBar.classList.add("DialogTitleBar");
     return dialogTitleBar;
+  }
+
+  static createDialogTitlePane() {
+    const dialogTitlePane = document.createElement("div");
+    return dialogTitlePane;
   }
 
   static createDialogTitleLabel(title: string) {
