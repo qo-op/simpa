@@ -16,6 +16,14 @@ body {
 }
 
 /**
+ * No FOUC (Flash Of Unstyled Content)
+ * To prevent FOUC, it is necessary to include simpa.js as well.
+ */
+.NoFouc {
+  visibility: hidden;
+}
+
+/**
  * BorderLayout
  */
 

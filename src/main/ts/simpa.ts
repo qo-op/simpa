@@ -1243,6 +1243,15 @@ document.addEventListener("pointerdown", SplitPane.pointerdown);
 
 document.addEventListener("pointerdown", TabComponent.pointerdown);
 
+/**
+ *  No FOUC (Flash Of Unstyled Content)
+ */
+
+document.documentElement.classList.add("NoFouc");
+window.addEventListener("load", function () {
+  document.documentElement.classList.remove("NoFouc");
+});
+
 /*
 module.exports = {
   Dialog,
