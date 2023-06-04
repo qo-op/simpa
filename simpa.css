@@ -62,7 +62,7 @@ body {
 .BorderLayout > .Center {
   grid-row: 2 !important;
   grid-column: 2 !important;
-  overflow: unset;
+  overflow: hidden;
 }
 
 .BorderLayout > .North,
