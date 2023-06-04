@@ -1247,10 +1247,15 @@ document.addEventListener("pointerdown", TabComponent.pointerdown);
  *  No FOUC (Flash Of Unstyled Content)
  */
 
-document.documentElement.classList.add("NoFouc");
-window.addEventListener("load", function () {
+function noFoucHandler() {
   document.documentElement.classList.remove("NoFouc");
-});
+  this.removeEventListener("load", noFoucHandler);
+}
+
+if (document.readyState !== "complete") {
+  document.documentElement.classList.add("NoFouc");
+  window.addEventListener("load", noFoucHandler);
+}
 
 /*
 module.exports = {
