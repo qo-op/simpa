@@ -7,12 +7,21 @@
  * @author Yassuo Toda
  */
 
-html,
 body {
-  margin: 0;
-  height: 100%;
-  overflow: hidden;
   -webkit-text-size-adjust: none;
+}
+
+/**
+ * Frame
+ */
+
+.Frame {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
 }
 
 /**
@@ -27,18 +36,22 @@ body {
  * BorderLayout
  */
 
+.Frame,
 .BorderLayout {
   display: grid !important;
   grid-template-rows: auto 1fr auto !important;
   grid-template-columns: auto 1fr auto !important;
 }
 
+.Frame > *,
 .BorderLayout > * {
   grid-row: 2 !important;
   grid-column: 2 !important;
   overflow: hidden;
 }
 
+.Frame > .North,
+.Frame > .PageStart,
 .BorderLayout > .North,
 .BorderLayout > .PageStart {
   grid-row: 1 !important;
@@ -46,6 +59,8 @@ body {
   overflow: unset;
 }
 
+.Frame > .South,
+.Frame > .PageEnd,
 .BorderLayout > .South,
 .BorderLayout > .PageEnd {
   grid-row: 3 !important;
@@ -53,6 +68,8 @@ body {
   overflow: unset;
 }
 
+.Frame > .West,
+.Frame > .LineStart,
 .BorderLayout > .West,
 .BorderLayout > .LineStart {
   grid-row: 2 !important;
@@ -60,6 +77,8 @@ body {
   overflow: unset;
 }
 
+.Frame > .East,
+.Frame > .LineEnd,
 .BorderLayout > .East,
 .BorderLayout > .LineEnd {
   grid-row: 2 !important;
@@ -67,12 +86,22 @@ body {
   overflow: unset;
 }
 
+.Frame > .Center,
 .BorderLayout > .Center {
   grid-row: 2 !important;
   grid-column: 2 !important;
   overflow: hidden;
 }
 
+.Frame > .North,
+.Frame > .South,
+.Frame > .West,
+.Frame > .East,
+.Frame > .PageStart,
+.Frame > .PageEnd,
+.Frame > .LineStart,
+.Frame > .LineEnd,
+.Frame > .Center,
 .BorderLayout > .North,
 .BorderLayout > .South,
 .BorderLayout > .West,
@@ -85,21 +114,7 @@ body {
   display: grid;
 }
 
-/*
-.BorderLayout>.North>*,
-.BorderLayout>.South>*,
-.BorderLayout>.West>*,
-.BorderLayout>.East>*,
-.BorderLayout>.PageStart>*,
-.BorderLayout>.PageEnd>*,
-.BorderLayout>.LineStart>*,
-.BorderLayout>.LineEnd>*,
-.BorderLayout>.Center>* {
-    grid-row: 1 !important;
-    grid-column: 1 !important;
-}
-*/
-
+.Frame > .Center > *,
 .BorderLayout > .Center > * {
   overflow: hidden;
 }
