@@ -670,7 +670,7 @@ class OptionPane {
 
     this.dialogMainPane.style.paddingBlockEnd = ".5em";
     this.dialogMainPane.style.display = "grid";
-    this.dialogMainPane.style.rowGap = ".5em";
+    this.dialogMainPane.style.gap = ".5em";
 
     this.dialogIconPane = OptionPane.createDialogIconPane();
     this.dialogIconPane.style.gridRow = "1";
