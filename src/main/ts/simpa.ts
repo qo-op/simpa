@@ -619,7 +619,7 @@ class OptionPane {
   dialogMainPane: HTMLElement;
   dialogIconPane: HTMLElement;
   dialogMessagePane: HTMLElement;
-  dialogMessageLabel: HTMLElement;
+  dialogMessageTextPane: HTMLElement;
   dialogInputPane: HTMLElement | undefined;
   dialogButtonPane: HTMLElement;
   dialogOkButton: HTMLElement | undefined;
@@ -699,8 +699,9 @@ class OptionPane {
     this.dialogMessagePane.dataset.anchor = "center";
     this.dialogMessagePane.dataset.fill = "horizontal";
 
-    this.dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
-    this.dialogMessagePane.appendChild(this.dialogMessageLabel);
+    this.dialogMessageTextPane =
+      OptionPane.createDialogMessageTextPane(message);
+    this.dialogMessagePane.appendChild(this.dialogMessageTextPane);
 
     if (input) {
       this.dialogInputPane = OptionPane.createDialogInputPane();
@@ -905,11 +906,10 @@ class OptionPane {
     return dialogMessagePane;
   }
 
-  static createDialogMessageLabel(message: string) {
-    const dialogMessageLabel = document.createElement("div");
-    dialogMessageLabel.classList.add("CenterLayout");
-    dialogMessageLabel.textContent = message;
-    return dialogMessageLabel;
+  static createDialogMessageTextPane(message: string) {
+    const dialogMessageTextPane = document.createElement("div");
+    dialogMessageTextPane.innerHTML = message.replace(/\n/g, "<br>");
+    return dialogMessageTextPane;
   }
 
   static createDialogInputPane() {

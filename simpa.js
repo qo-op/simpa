@@ -371,8 +371,9 @@ var OptionPane = /** @class */ (function () {
         this.dialogMessagePane.classList.add("GridBagConstraints");
         this.dialogMessagePane.dataset.anchor = "center";
         this.dialogMessagePane.dataset.fill = "horizontal";
-        this.dialogMessageLabel = OptionPane.createDialogMessageLabel(message);
-        this.dialogMessagePane.appendChild(this.dialogMessageLabel);
+        this.dialogMessageTextPane =
+            OptionPane.createDialogMessageTextPane(message);
+        this.dialogMessagePane.appendChild(this.dialogMessageTextPane);
         if (input) {
             this.dialogInputPane = OptionPane.createDialogInputPane();
             this.dialogInputPane.style.gridRow = "2";
@@ -530,11 +531,10 @@ var OptionPane = /** @class */ (function () {
         var dialogMessagePane = document.createElement("div");
         return dialogMessagePane;
     };
-    OptionPane.createDialogMessageLabel = function (message) {
-        var dialogMessageLabel = document.createElement("div");
-        dialogMessageLabel.classList.add("CenterLayout");
-        dialogMessageLabel.textContent = message;
-        return dialogMessageLabel;
+    OptionPane.createDialogMessageTextPane = function (message) {
+        var dialogMessageTextPane = document.createElement("div");
+        dialogMessageTextPane.innerHTML = message.replace(/\n/g, "<br>");
+        return dialogMessageTextPane;
     };
     OptionPane.createDialogInputPane = function () {
         var dialogInputPane = document.createElement("div");

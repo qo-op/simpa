@@ -1,45 +1,16 @@
-<!-- ComboBoxDemo.html -->
-<!-- An HTML version of Oracle's ComboBoxDemo example -->
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
-    <link rel="preload" href="/Bird.gif" as="image" />
-    <link rel="preload" href="/Cat.gif" as="image" />
-    <link rel="preload" href="/Dog.gif" as="image" />
-    <link rel="preload" href="/Pig.gif" as="image" />
-    <link rel="preload" href="/Rabbit.gif" as="image" />
-    <style>
-      /* ComboBoxDemo.css */
-    </style>
+    <title>Set Text Content Example</title>
     <script>
-      /* ComboBoxDemo.js */
-      function handleChange(event) {
-        const comboBox = event.currentTarget;
-        const value = comboBox.value;
-        const picture = document.getElementById("picture");
-        picture.src = "/" + value + ".gif";
-      }
+      window.addEventListener("DOMContentLoaded", (event) => {
+        const myDiv = document.getElementById("myDiv");
+        const text = "This is a multi-line<br>example text.";
+        myDiv.innerHTML = text;
+      });
     </script>
   </head>
-  <body class="ScrollPane" data-scrollbar-overlay id="combo-box-demo">
-    <div
-      class="GridBagConstraints"
-      data-anchor="page-start"
-      style="padding: 0.25em"
-    >
-      <div class="BoxLayout" data-axis="page-axis" style="gap: 0.5em">
-        <!-- combo box -->
-        <select onchange="handleChange(event);">
-          <option value="Bird">Bird</option>
-          <option value="Cat">Cat</option>
-          <option value="Dog">Dog</option>
-          <option value="Rabbit">Rabbit</option>
-          <option value="Pig" selected>Pig</option>
-        </select>
-        <!-- picture -->
-        <img src="/Pig.gif" alt="Pet image" id="picture" />
-      </div>
-    </div>
+  <body>
+    <div id="myDiv"></div>
   </body>
 </html>
