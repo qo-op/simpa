@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   mode: "production",
-  entry: "./src/main/ts/index.ts",
+  entry: "./src/main/ts/simpa.ts",
   output: {
     path: path.resolve(__dirname, "."),
     filename: "simpa.js",
