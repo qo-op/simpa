@@ -373,6 +373,9 @@ var OptionPane = /** @class */ (function () {
             this.dialogInputPane.style.gridRow = "2";
             this.dialogInputPane.style.gridColumn = "2";
             this.dialogMainPane.appendChild(this.dialogInputPane);
+            this.dialogInputPane.classList.add("GridBagConstraints");
+            this.dialogInputPane.dataset.fill = "both";
+            this.dialogInputPane.style.padding = ".25em";
             this.dialogInputPane.appendChild(input);
         }
         this.dialogButtonPane = OptionPane.createDialogButtonPane();
