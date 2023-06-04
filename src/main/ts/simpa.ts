@@ -613,8 +613,7 @@ class OptionPane {
 
   dialog: HTMLElement;
   dialogTitleBar: HTMLElement;
-  dialogTitlePane: HTMLElement;
-  dialogTitleLabel: HTMLElement;
+  dialogTitleTextPane: HTMLElement;
   dialogContentPane: HTMLElement;
   dialogMainPane: HTMLElement;
   dialogIconPane: HTMLElement;
@@ -649,23 +648,17 @@ class OptionPane {
 
     this.dialogTitleBar.classList.add("BorderLayout");
 
-    this.dialogTitlePane = OptionPane.createDialogTitlePane();
-    this.dialogTitlePane.classList.add("Center");
-    this.dialogTitleBar.appendChild(this.dialogTitlePane);
-
-    this.dialogTitleLabel = OptionPane.createDialogTitleLabel(title);
-    this.dialogTitleLabel.style.paddingInline = ".5em";
-    this.dialogTitlePane.appendChild(this.dialogTitleLabel);
+    this.dialogTitleTextPane = OptionPane.createDialogTitleTextPane(title);
+    this.dialogTitleTextPane.style.paddingInline = ".5em";
+    this.dialogTitleBar.appendChild(this.dialogTitleTextPane);
 
     this.dialogContentPane = OptionPane.createDialogContentPane();
-    this.dialogContentPane.classList.add("Center");
     this.dialog.appendChild(this.dialogContentPane);
 
     this.dialogContentPane.style.padding = ".5em";
     this.dialogContentPane.classList.add("BorderLayout");
 
     this.dialogMainPane = OptionPane.createDialogMainPane();
-    this.dialogMainPane.classList.add("Center");
     this.dialogContentPane.appendChild(this.dialogMainPane);
 
     this.dialogMainPane.style.paddingBlockEnd = ".5em";
@@ -848,15 +841,10 @@ class OptionPane {
     return dialogTitleBar;
   }
 
-  static createDialogTitlePane() {
-    const dialogTitlePane = document.createElement("div");
-    return dialogTitlePane;
-  }
-
-  static createDialogTitleLabel(title: string) {
-    const dialogTitleLabel = document.createElement("span");
-    dialogTitleLabel.textContent = title;
-    return dialogTitleLabel;
+  static createDialogTitleTextPane(title: string) {
+    const dialogTitleTextPane = document.createElement("div");
+    dialogTitleTextPane.innerHTML = title.replace(/\n/g, "<br>");
+    return dialogTitleTextPane;
   }
 
   static createDialogContentPane() {

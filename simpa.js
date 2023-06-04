@@ -331,19 +331,14 @@ var OptionPane = /** @class */ (function () {
         this.dialogTitleBar.classList.add("PageStart");
         this.dialog.appendChild(this.dialogTitleBar);
         this.dialogTitleBar.classList.add("BorderLayout");
-        this.dialogTitlePane = OptionPane.createDialogTitlePane();
-        this.dialogTitlePane.classList.add("Center");
-        this.dialogTitleBar.appendChild(this.dialogTitlePane);
-        this.dialogTitleLabel = OptionPane.createDialogTitleLabel(title);
-        this.dialogTitleLabel.style.paddingInline = ".5em";
-        this.dialogTitlePane.appendChild(this.dialogTitleLabel);
+        this.dialogTitleTextPane = OptionPane.createDialogTitleTextPane(title);
+        this.dialogTitleTextPane.style.paddingInline = ".5em";
+        this.dialogTitleBar.appendChild(this.dialogTitleTextPane);
         this.dialogContentPane = OptionPane.createDialogContentPane();
-        this.dialogContentPane.classList.add("Center");
         this.dialog.appendChild(this.dialogContentPane);
         this.dialogContentPane.style.padding = ".5em";
         this.dialogContentPane.classList.add("BorderLayout");
         this.dialogMainPane = OptionPane.createDialogMainPane();
-        this.dialogMainPane.classList.add("Center");
         this.dialogContentPane.appendChild(this.dialogMainPane);
         this.dialogMainPane.style.paddingBlockEnd = ".5em";
         this.dialogMainPane.style.display = "grid";
@@ -480,14 +475,10 @@ var OptionPane = /** @class */ (function () {
         dialogTitleBar.classList.add("DialogTitleBar");
         return dialogTitleBar;
     };
-    OptionPane.createDialogTitlePane = function () {
-        var dialogTitlePane = document.createElement("div");
-        return dialogTitlePane;
-    };
-    OptionPane.createDialogTitleLabel = function (title) {
-        var dialogTitleLabel = document.createElement("span");
-        dialogTitleLabel.textContent = title;
-        return dialogTitleLabel;
+    OptionPane.createDialogTitleTextPane = function (title) {
+        var dialogTitleTextPane = document.createElement("div");
+        dialogTitleTextPane.innerHTML = title.replace(/\n/g, "<br>");
+        return dialogTitleTextPane;
     };
     OptionPane.createDialogContentPane = function () {
         var dialogContentPane = document.createElement("div");
