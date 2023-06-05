@@ -353,6 +353,7 @@ class OptionPane {
     messageType: string = "information",
     icon?: string
   ) => {
+    OptionPane.optionPaneModalLayer.style.visibility = "inherit";
     if (icon) {
       return new Promise((resolve, reject) => {
         const img = document.createElement("img");
@@ -371,7 +372,6 @@ class OptionPane {
             img
           );
           OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
-          OptionPane.optionPaneModalLayer.style.visibility = "inherit";
           optionPane.dialogOkButton?.focus();
         };
         img.onerror = function () {
@@ -391,7 +391,6 @@ class OptionPane {
           messageType
         );
         OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
-        OptionPane.optionPaneModalLayer.style.visibility = "inherit";
         optionPane.dialogOkButton?.focus();
       });
     }
@@ -404,6 +403,7 @@ class OptionPane {
     messageType?: string,
     icon?: string
   ) => {
+    OptionPane.optionPaneModalLayer.style.visibility = "inherit";
     if (icon) {
       return new Promise((resolve, reject) => {
         const img = document.createElement("img");
@@ -423,7 +423,6 @@ class OptionPane {
             img
           );
           OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
-          OptionPane.optionPaneModalLayer.style.visibility = "inherit";
           if (optionPane.dialogOkButton) {
             optionPane.dialogOkButton.focus();
           } else {
@@ -447,7 +446,6 @@ class OptionPane {
           messageType || (optionType !== "default" ? "question" : "information")
         );
         OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
-        OptionPane.optionPaneModalLayer.style.visibility = "inherit";
         if (optionPane.dialogOkButton) {
           optionPane.dialogOkButton.focus();
         } else {
@@ -465,6 +463,7 @@ class OptionPane {
     selectionValues?: string[],
     initialSelectionValue?: string
   ) => {
+    OptionPane.optionPaneModalLayer.style.visibility = "inherit";
     let input: HTMLElement;
     if (selectionValues) {
       const comboBox = document.createElement("select") as HTMLSelectElement;
@@ -504,7 +503,6 @@ class OptionPane {
             img
           );
           OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
-          OptionPane.optionPaneModalLayer.style.visibility = "inherit";
           input.focus();
         };
         img.onerror = function () {
@@ -524,7 +522,6 @@ class OptionPane {
           messageType
         );
         OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
-        OptionPane.optionPaneModalLayer.style.visibility = "inherit";
         input.focus();
       });
     }
@@ -539,6 +536,7 @@ class OptionPane {
     options: string[],
     initialValue: string
   ) => {
+    OptionPane.optionPaneModalLayer.style.visibility = "inherit";
     if (icon) {
       return new Promise((resolve, reject) => {
         const img = document.createElement("img");
@@ -559,7 +557,6 @@ class OptionPane {
             options
           );
           OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
-          OptionPane.optionPaneModalLayer.style.visibility = "inherit";
           if (initialValue) {
             const index = options.indexOf(initialValue);
             optionPane.dialogButtons[index].focus();
@@ -591,24 +588,28 @@ class OptionPane {
           options
         );
         OptionPane.optionPaneModalLayer.appendChild(optionPane.dialog);
-        OptionPane.optionPaneModalLayer.style.visibility = "inherit";
       });
     }
   };
 
+  static _optionPaneModalLayer: HTMLElement;
+
   static get optionPaneModalLayer() {
-    let modalLayer = document.body.querySelector(
-      ":scope>.OptionPane.ModalLayer"
-    ) as HTMLElement;
-    if (modalLayer === null) {
-      modalLayer = document.createElement("div");
-      modalLayer.classList.add("OptionPane");
-      modalLayer.classList.add("ModalLayer");
-      modalLayer.classList.add("CenterLayout");
-      modalLayer.style.visibility = "inherit";
-      document.body.appendChild(modalLayer);
+    if (!OptionPane._optionPaneModalLayer) {
+      let modalLayer = document.body.querySelector(
+        ":scope>.OptionPane.ModalLayer"
+      ) as HTMLElement;
+      if (modalLayer === null) {
+        modalLayer = document.createElement("div");
+        modalLayer.classList.add("OptionPane");
+        modalLayer.classList.add("ModalLayer");
+        modalLayer.classList.add("CenterLayout");
+        modalLayer.style.visibility = "inherit";
+        document.body.appendChild(modalLayer);
+      }
+      OptionPane._optionPaneModalLayer = modalLayer;
     }
-    return modalLayer;
+    return OptionPane._optionPaneModalLayer;
   }
 
   dialog: HTMLElement;
