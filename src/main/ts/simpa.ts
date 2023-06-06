@@ -1254,22 +1254,17 @@ document.addEventListener("pointerdown", SplitPane.pointerdown);
 document.addEventListener("pointerdown", TabComponent.pointerdown);
 
 /**
- *  Frames
+ *  No FOUC (Flash Of Unstyled Content)
  */
 
-function setFramesVisible() {
-  const frames = document.getElementsByClassName("Frame");
-  for (let i = 0; i < frames.length; i++) {
-    const frame = frames[i] as HTMLElement;
-    frame.style.visibility = "visible";
-  }
-  this.removeEventListener("load", setFramesVisible);
+function noFoucHandler() {
+  document.documentElement.classList.remove("NoFouc");
+  this.removeEventListener("load", noFoucHandler);
 }
 
 if (document.readyState !== "complete") {
-  window.addEventListener("load", setFramesVisible);
-} else {
-  setFramesVisible();
+  document.documentElement.classList.add("NoFouc");
+  window.addEventListener("load", noFoucHandler);
 }
 
 /*
