@@ -33,7 +33,7 @@ body {
 }
 
 /**
- * BorderLayout
+ * Border Layout
  */
 
 .Frame,
@@ -125,7 +125,7 @@ body {
 }
 
 /**
- * BoxLayout
+ * Box Layout
  */
 
 .BoxLayout,
@@ -200,7 +200,7 @@ body {
 }
 
 /**
- * CenterLayout
+ * Center Layout
  */
 
 .CenterLayout {
@@ -209,15 +209,8 @@ body {
   justify-items: center !important;
 }
 
-/*
-.CenterLayout>* {
-    grid-row: 1 !important;
-    grid-column: 1 !important;
-}
-*/
-
 /**
- * CardLayout
+ * Card Layout
  */
 
 .CardLayout {
@@ -234,7 +227,7 @@ body {
 }
 
 /**
- * FlowLayout
+ * Flow Layout
  */
 
 .FlowLayout {
@@ -258,7 +251,7 @@ body {
 }
 
 /**
- * GridBagConstraints
+ * Grid Bag Constraints
  */
 
 .GridBagConstraints {
@@ -315,13 +308,6 @@ body {
   align-items: stretch !important;
   justify-items: stretch !important;
 }
-
-/*
-.GridBagConstraints>* {
-    grid-row: 1 !important;
-    grid-column: 1 !important;
-}
-*/
 
 /**
  * Borders
@@ -466,23 +452,14 @@ button[disabled] img {
   bottom: 0;
   left: 0;
   z-index: 200 !important;
-  /*
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    */
 }
 
 .ModalLayer > * {
-  /*
-    grid-row: 1;
-    grid-column: 1;
-    */
   overflow: hidden;
 }
 
 /**
- * Drag layer
+ * Drag Layer
  */
 
 .DragLayer {
@@ -499,13 +476,34 @@ button[disabled] img {
 }
 
 /**
- * LayeredPane
+ * File Chooser
+ */
+
+.FileChooser {
+  display: grid !important;
+  position: relative !important;
+}
+
+.FileChooser > * {
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+}
+
+.FileChooser > input {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  bottom: 50%;
+  left: 50%;
+  display: none;
+}
+
+/**
+ * Layered Pane
  */
 
 .LayeredPane {
   display: grid !important;
-  grid-template-rows: 1fr !important;
-  grid-template-columns: 1fr !important;
 }
 
 .LayeredPane > * {
@@ -514,7 +512,7 @@ button[disabled] img {
 }
 
 /**
- * Menu bar
+ * Menu Bar
  */
 
 .MenuBar {
@@ -571,7 +569,7 @@ button[disabled] img {
 }
 
 /**
- * MenuBar layout
+ * Menu Bar layout
  */
 .MenuBar {
   display: grid !important;
@@ -587,7 +585,7 @@ button[disabled] img {
 }
 
 /**
- * MenuItem layout
+ * Menu Item Layout
  */
 
 .MenuItem,
@@ -608,7 +606,7 @@ button[disabled] img {
 }
 
 /**
- * MenuItemShortcut layout
+ * Menu Item Shortcut Layout
  */
 .MenuItemShortcut {
   display: grid;
@@ -621,7 +619,7 @@ button[disabled] img {
 }
 
 /**
- * ScrollPane
+ * Scroll Pane
  */
 
 .ScrollPane {
@@ -702,7 +700,7 @@ button[disabled] img {
 }
 
 /**
- * ScrollTable
+ * Scroll Table
  */
 
 .ScrollTable {
@@ -824,7 +822,7 @@ button[disabled] img {
 }
 
 /**
- * SplitPane
+ * Split Pane
  */
 
 .SplitPane > * {
@@ -1090,7 +1088,7 @@ button[disabled] img {
 }
 
 /**
- * Tab component layout
+ * Tab component Layout
  */
 
 .TabbedPane > :first-child > button > :first-child {
@@ -1113,7 +1111,7 @@ button[disabled] img {
 }
 
 /**
- * TabbedPane CardLayout
+ * Tabbed Pane Card Layout
  */
 
 .TabbedPane .CardLayout {
@@ -1121,7 +1119,7 @@ button[disabled] img {
 }
 
 /**
- * TabbedPane default background colors
+ * Tabbed Pane default background colors
  */
 
 .TabbedPane > :first-child {
