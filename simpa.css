@@ -346,6 +346,10 @@ body {
   content: "";
 }
 
+.TitledBorder > * {
+  transform: translateZ(0);
+}
+
 .TitledBorder > :first-child,
 .TitledBorder[data-title-justification="leading"] > :first-child {
   margin-inline: 0.5em;
@@ -353,7 +357,6 @@ body {
   padding-inline: 0.5em;
   line-height: 1.2em;
   justify-self: left;
-  transform: translateZ(0);
 }
 
 .TitledBorder[data-title-justification="center"] > :first-child {
