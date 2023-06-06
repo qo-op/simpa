@@ -429,6 +429,7 @@ body {
     rgba(255, 255, 255, 0.5);
 }
 
+.EmptyBorder,
 .CompoundBorder {
   display: grid !important;
   grid-template-rows: 1fr !important;
