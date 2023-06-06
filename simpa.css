@@ -424,6 +424,29 @@ button[disabled] img {
 }
 
 /**
+ * Color Chooser
+ */
+
+.ColorChooser {
+  display: grid !important;
+  position: relative !important;
+}
+
+.ColorChooser > * {
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+}
+
+.ColorChooser > input {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  bottom: 50%;
+  left: 50%;
+  display: none;
+}
+
+/**
  * Dialog
  */
 
