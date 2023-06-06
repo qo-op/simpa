@@ -1,179 +1,180 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta name="description"
-        content="This example shows how to use a table using html, css and javascript. It is based on the example found at 'How to Use Tables' https://docs.oracle.com/javase/tutorial/uiswing/components/table.html">
-    <meta name="author" content="Yassuo Toda">
+  <head>
+    <meta
+      name="description"
+      content="This example shows how to use a table using html, css and javascript. It is based on the example found at 'How to Use Tables' https://docs.oracle.com/javase/tutorial/uiswing/components/table.html"
+    />
+    <meta name="author" content="Yassuo Toda" />
     <title>Table Example</title>
 
-    <link rel="stylesheet" href="../../../simpa.css">
+    <link rel="stylesheet" href="../../../simpa.css" />
     <script src="../../../simpa.js"></script>
+  </head>
 
-</head>
-
-<body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
+  <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden">
     <div class="CenterLayout">
-        <div class="ScrollTable"
-             data-row-header
-             style="max-width: 300px; height: 200px;">
-            <table>
-                <!-- table data -->
-                <tbody>
-                    <tr>
-                        <td>Ford F-Series</td>
-                        <td>Ford</td>
-                        <td>Pickup</td>
-                        <td>290 HP</td>
-                        <td>787,422</td>
-                    </tr>
-                    <tr>
-                        <td>Chevrolet Silverado</td>
-                        <td>General Motors</td>
-                        <td>Pickup</td>
-                        <td>310 HP</td>
-                        <td>594,094</td>
-                    </tr>
-                    <tr>
-                        <td>Ram Pickup</td>
-                        <td>Ram</td>
-                        <td>Pickup</td>
-                        <td>260 HP</td>
-                        <td>563,676</td>
-                    </tr>
-                    <tr>
-                        <td>Toyota RAV4</td>
-                        <td>Toyota</td>
-                        <td>SUV</td>
-                        <td>203 HP</td>
-                        <td>430,387</td>
-                    </tr>
-                    <tr>
-                        <td>Honda CR-V</td>
-                        <td>Honda</td>
-                        <td>SUV</td>
-                        <td>190 HP</td>
-                        <td>333,502</td>
-                    </tr>
-                    <tr>
-                        <td>Toyota Camry</td>
-                        <td>Toyota</td>
-                        <td>Sedan</td>
-                        <td>206 HP</td>
-                        <td>294,348</td>
-                    </tr>
-                    <tr>
-                        <td>Chevrolet Equinox</td>
-                        <td>General Motors</td>
-                        <td>SUV</td>
-                        <td>170 HP</td>
-                        <td>270,994</td>
-                    </tr>
-                    <tr>
-                        <td>Honda Civic</td>
-                        <td>Honda</td>
-                        <td>Sedan</td>
-                        <td>158 HP</td>
-                        <td>261,225</td>
-                    </tr>
-                    <tr>
-                        <td>Toyota Corolla</td>
-                        <td>Toyota</td>
-                        <td>Sedan</td>
-                        <td>139 HP</td>
-                        <td>237,178</td>
-                    </tr>
-                    <tr>
-                        <td>GMC Sierra</td>
-                        <td>General Motors</td>
-                        <td>Pickup</td>
-                        <td>277 HP</td>
-                        <td>236,745</td>
-                    </tr>
-                    <tr>
-                        <td>Chevrolet Malibu</td>
-                        <td>General Motors</td>
-                        <td>Sedan</td>
-                        <td>160 HP</td>
-                        <td>238,312</td>
-                    </tr>
-                    <tr>
-                        <td>Hyundai Elantra</td>
-                        <td>Hyundai</td>
-                        <td>Sedan</td>
-                        <td>147 HP</td>
-                        <td>200,415</td>
-                    </tr>
-                    <tr>
-                        <td>Ford Explorer</td>
-                        <td>Ford</td>
-                        <td>SUV</td>
-                        <td>300 HP</td>
-                        <td>226,217</td>
-                    </tr>
-                    <tr>
-                        <td>Jeep Grand Cherokee</td>
-                        <td>Jeep</td>
-                        <td>SUV</td>
-                        <td>295 HP</td>
-                        <td>209,786</td>
-                    </tr>
-                    <tr>
-                        <td>Nissan Rogue</td>
-                        <td>Nissan</td>
-                        <td>SUV</td>
-                        <td>170 HP</td>
-                        <td>227,935</td>
-                    </tr>
-                    <tr>
-                        <td>Ford Escape</td>
-                        <td>Ford</td>
-                        <td>SUV</td>
-                        <td>181 HP</td>
-                        <td>202,740</td>
-                    </tr>
-                    <tr>
-                        <td>Subaru Forester</td>
-                        <td>Subaru</td>
-                        <td>SUV</td>
-                        <td>182 HP</td>
-                        <td>176,996</td>
-                    </tr>
-                    <tr>
-                        <td>Subaru Outback</td>
-                        <td>Subaru</td>
-                        <td>Wagon</td>
-                        <td>182 HP</td>
-                        <td>153,294</td>
-                    </tr>
-                    <tr>
-                        <td>Toyota Highlander</td>
-                        <td>Toyota</td>
-                        <td>SUV</td>
-                        <td>295 HP</td>
-                        <td>141,677</td>
-                    </tr>
-                    <tr>
-                        <td>Jeep Wrangler</td>
-                        <td>Jeep</td>
-                        <td>SUV</td>
-                        <td>285 HP</td>
-                        <td>139,482</td>
-                    </tr>
-                </tbody>
-                <!-- column headers -->
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Constructor</th>
-                        <th>Type</th>
-                        <th>Horsepower</th>
-                        <th>2020</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
+      <div
+        class="ScrollTable"
+        data-row-header
+        style="max-width: 300px; height: 200px"
+      >
+        <table>
+          <!-- table data -->
+          <tbody>
+            <tr>
+              <td>Ford F-Series</td>
+              <td>Ford</td>
+              <td>Pickup</td>
+              <td>290 HP</td>
+              <td>787,422</td>
+            </tr>
+            <tr>
+              <td>Chevrolet Silverado</td>
+              <td>General Motors</td>
+              <td>Pickup</td>
+              <td>310 HP</td>
+              <td>594,094</td>
+            </tr>
+            <tr>
+              <td>Ram Pickup</td>
+              <td>Ram</td>
+              <td>Pickup</td>
+              <td>260 HP</td>
+              <td>563,676</td>
+            </tr>
+            <tr>
+              <td>Toyota RAV4</td>
+              <td>Toyota</td>
+              <td>SUV</td>
+              <td>203 HP</td>
+              <td>430,387</td>
+            </tr>
+            <tr>
+              <td>Honda CR-V</td>
+              <td>Honda</td>
+              <td>SUV</td>
+              <td>190 HP</td>
+              <td>333,502</td>
+            </tr>
+            <tr>
+              <td>Toyota Camry</td>
+              <td>Toyota</td>
+              <td>Sedan</td>
+              <td>206 HP</td>
+              <td>294,348</td>
+            </tr>
+            <tr>
+              <td>Chevrolet Equinox</td>
+              <td>General Motors</td>
+              <td>SUV</td>
+              <td>170 HP</td>
+              <td>270,994</td>
+            </tr>
+            <tr>
+              <td>Honda Civic</td>
+              <td>Honda</td>
+              <td>Sedan</td>
+              <td>158 HP</td>
+              <td>261,225</td>
+            </tr>
+            <tr>
+              <td>Toyota Corolla</td>
+              <td>Toyota</td>
+              <td>Sedan</td>
+              <td>139 HP</td>
+              <td>237,178</td>
+            </tr>
+            <tr>
+              <td>GMC Sierra</td>
+              <td>General Motors</td>
+              <td>Pickup</td>
+              <td>277 HP</td>
+              <td>236,745</td>
+            </tr>
+            <tr>
+              <td>Chevrolet Malibu</td>
+              <td>General Motors</td>
+              <td>Sedan</td>
+              <td>160 HP</td>
+              <td>238,312</td>
+            </tr>
+            <tr>
+              <td>Hyundai Elantra</td>
+              <td>Hyundai</td>
+              <td>Sedan</td>
+              <td>147 HP</td>
+              <td>200,415</td>
+            </tr>
+            <tr>
+              <td>Ford Explorer</td>
+              <td>Ford</td>
+              <td>SUV</td>
+              <td>300 HP</td>
+              <td>226,217</td>
+            </tr>
+            <tr>
+              <td>Jeep Grand Cherokee</td>
+              <td>Jeep</td>
+              <td>SUV</td>
+              <td>295 HP</td>
+              <td>209,786</td>
+            </tr>
+            <tr>
+              <td>Nissan Rogue</td>
+              <td>Nissan</td>
+              <td>SUV</td>
+              <td>170 HP</td>
+              <td>227,935</td>
+            </tr>
+            <tr>
+              <td>Ford Escape</td>
+              <td>Ford</td>
+              <td>SUV</td>
+              <td>181 HP</td>
+              <td>202,740</td>
+            </tr>
+            <tr>
+              <td>Subaru Forester</td>
+              <td>Subaru</td>
+              <td>SUV</td>
+              <td>182 HP</td>
+              <td>176,996</td>
+            </tr>
+            <tr>
+              <td>Subaru Outback</td>
+              <td>Subaru</td>
+              <td>Wagon</td>
+              <td>182 HP</td>
+              <td>153,294</td>
+            </tr>
+            <tr>
+              <td>Toyota Highlander</td>
+              <td>Toyota</td>
+              <td>SUV</td>
+              <td>295 HP</td>
+              <td>141,677</td>
+            </tr>
+            <tr>
+              <td>Jeep Wrangler</td>
+              <td>Jeep</td>
+              <td>SUV</td>
+              <td>285 HP</td>
+              <td>139,482</td>
+            </tr>
+          </tbody>
+          <!-- column headers -->
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Constructor</th>
+              <th>Type</th>
+              <th>Horsepower</th>
+              <th>2020</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

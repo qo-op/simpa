@@ -496,6 +496,7 @@ button[disabled] img {
 
 .LayeredPane {
   display: grid !important;
+  position: relative;
 }
 
 .LayeredPane > * {
