@@ -23,13 +23,6 @@ body {
   bottom: 0;
   left: 0;
   overflow: hidden;
-}
-
-/**
- * No FOUC (Flash Of Unstyled Content)
- */
-
-.NoFouc {
   visibility: hidden;
 }
 

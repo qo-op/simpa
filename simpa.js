@@ -974,17 +974,21 @@ document.addEventListener("pointerdown", MenuBar.pointerdown);
 document.addEventListener("pointerdown", SplitPane.pointerdown);
 document.addEventListener("pointerdown", TabComponent.pointerdown);
 /**
- *  No FOUC (Flash Of Unstyled Content)
+ *  Frames
  */
-function noFoucHandler() {
-    document.documentElement.classList.remove("NoFouc");
-    this.removeEventListener("load", noFoucHandler);
+function setFramesVisible() {
+    var frames = document.getElementsByClassName("Frame");
+    for (var i = 0; i < frames.length; i++) {
+        var frame = frames[i];
+        frame.style.visibility = "visible";
+    }
+    this.removeEventListener("load", setFramesVisible);
 }
 if (document.readyState !== "complete") {
-    window.addEventListener("load", noFoucHandler);
+    window.addEventListener("load", setFramesVisible);
 }
 else {
-    noFoucHandler();
+    setFramesVisible();
 }
 /*
 module.exports = {
