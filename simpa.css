@@ -340,8 +340,6 @@ body {
   left: 0;
   border: 1px solid rgba(128, 128, 128, 0.5);
   content: "";
-  z-index: -1;
-  transform: translateZ(0);
 }
 
 .TitledBorder > :first-child,
@@ -351,6 +349,7 @@ body {
   padding-inline: 0.5em;
   line-height: 1.2em;
   justify-self: left;
+  transform: translateZ(0);
 }
 
 .TitledBorder[data-title-justification="center"] > :first-child {
