@@ -981,9 +981,10 @@ function noFoucHandler() {
     this.removeEventListener("load", noFoucHandler);
 }
 if (document.readyState !== "complete") {
-    console.log("adding no fouc logic...");
-    document.documentElement.classList.add("NoFouc");
     window.addEventListener("load", noFoucHandler);
+}
+else {
+    noFoucHandler();
 }
 /*
 module.exports = {
