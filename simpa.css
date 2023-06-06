@@ -425,9 +425,15 @@ body {
 }
 
 .CompoundBorder {
-  display: grid !important;
-  grid-template-rows: 1fr !important;
-  grid-template-columns: 1fr !important;
+  position: relative;
+}
+
+.CompoundBorder > * {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 /**
