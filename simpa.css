@@ -329,7 +329,11 @@ body {
 }
 
 .TitledBorder {
-  position: relative;
+  position: relative !important;
+  display: grid !important;
+  grid-template-rows: auto 1fr !important;
+  grid-template-columns: 1fr !important;
+  grid-auto-rows: 1fr;
 }
 
 .TitledBorder::before {
