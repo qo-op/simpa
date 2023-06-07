@@ -266,57 +266,57 @@ body {
 
 .GridBagConstraints {
   display: grid !important;
-  align-items: center !important;
-  justify-items: center !important;
+  align-content: center !important;
+  justify-content: center !important;
 }
 
 .GridBagConstraints[data-anchor="page-start"] {
-  align-items: start !important;
+  align-content: start !important;
 }
 
 .GridBagConstraints[data-anchor="page-end"] {
-  align-items: end !important;
+  align-content: end !important;
 }
 
 .GridBagConstraints[data-anchor="line-start"] {
-  justify-items: start !important;
+  justify-content: start !important;
 }
 
 .GridBagConstraints[data-anchor="line-end"] {
-  justify-items: end !important;
+  justify-content: end !important;
 }
 
 .GridBagConstraints[data-anchor="first-line-start"] {
-  align-items: start !important;
-  justify-items: start !important;
+  align-content: start !important;
+  justify-content: start !important;
 }
 
 .GridBagConstraints[data-anchor="first-line-end"] {
-  align-items: start !important;
-  justify-items: end !important;
+  align-content: start !important;
+  justify-content: end !important;
 }
 
 .GridBagConstraints[data-anchor="last-line-start"] {
-  align-items: end !important;
-  justify-items: start !important;
+  align-content: end !important;
+  justify-content: start !important;
 }
 
 .GridBagConstraints[data-anchor="last-line-end"] {
-  align-items: end !important;
-  justify-items: end !important;
+  align-content: end !important;
+  justify-content: end !important;
 }
 
 .GridBagConstraints[data-fill="horizontal"] {
-  justify-items: stretch !important;
+  justify-content: stretch !important;
 }
 
 .GridBagConstraints[data-fill="vertical"] {
-  align-items: stretch !important;
+  align-content: stretch !important;
 }
 
 .GridBagConstraints[data-fill="both"] {
-  align-items: stretch !important;
-  justify-items: stretch !important;
+  align-content: stretch !important;
+  justify-content: stretch !important;
 }
 
 /**
