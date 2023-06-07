@@ -505,7 +505,7 @@ button[disabled] img {
   grid-column: 1 !important;
 }
 
-.FileChooser > input {
+.FileChooser input {
   position: absolute;
   top: 50%;
   right: 50%;
