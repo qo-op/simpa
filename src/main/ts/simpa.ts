@@ -1074,7 +1074,7 @@ class SplitPane {
   };
 
   static preventTouchMove(ev: TouchEvent) {
-    ev.preventDefault();
+    // ev.preventDefault();
   }
 
   static pointermove = (ev: PointerEvent) => {
