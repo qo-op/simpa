@@ -442,25 +442,11 @@ button[disabled] img {
   display: grid !important;
   align-items: center !important;
   justify-items: center !important;
-  position: relative;
 }
 
 .ColorChooser > * {
   grid-row: 1 !important;
   grid-column: 1 !important;
-}
-
-.ColorChooser .ColorChooserInput {
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  bottom: 50%;
-  left: 50%;
-  overflow: hidden !important;
-  display: grid !important;
-  align-items: center !important;
-  justify-items: center !important;
-  position: relative !important;
 }
 
 /**
