@@ -528,8 +528,10 @@ button[disabled] img {
  */
 
 .LayeredPane {
-  display: grid !important;
   position: relative;
+  display: grid !important;
+  grid-template-rows: 1fr !important;
+  grid-template-columns: 1fr !important;
 }
 
 .LayeredPane > * {
