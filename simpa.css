@@ -261,62 +261,72 @@ body {
 }
 
 /**
- * Grid Bag Constraints
+ * Grid Bag Layout
  */
 
-.GridBagConstraints {
+.GridBagLayout {
   display: grid !important;
   align-content: center !important;
   justify-content: center !important;
 }
 
+/**
+ * Grid Bag Constraints
+ */
+
+.GridBagConstraints {
+  display: grid !important;
+  align-items: center !important;
+  justify-items: center !important;
+}
+
 .GridBagConstraints[data-anchor="page-start"] {
-  align-content: start !important;
+  align-items: start !important;
 }
 
 .GridBagConstraints[data-anchor="page-end"] {
-  align-content: end !important;
+  align-items: end !important;
 }
 
 .GridBagConstraints[data-anchor="line-start"] {
-  justify-content: start !important;
+  justify-items: start !important;
 }
 
 .GridBagConstraints[data-anchor="line-end"] {
-  justify-content: end !important;
+  justify-items: end !important;
 }
 
 .GridBagConstraints[data-anchor="first-line-start"] {
-  align-content: start !important;
-  justify-content: start !important;
+  align-items: start !important;
+  justify-items: start !important;
 }
 
 .GridBagConstraints[data-anchor="first-line-end"] {
-  align-content: start !important;
-  justify-content: end !important;
+  align-items: start !important;
+  justify-items: end !important;
 }
 
 .GridBagConstraints[data-anchor="last-line-start"] {
-  align-content: end !important;
-  justify-content: start !important;
+  align-items: end !important;
+  justify-items: start !important;
 }
 
 .GridBagConstraints[data-anchor="last-line-end"] {
-  align-content: end !important;
-  justify-content: end !important;
+  align-items: end !important;
+  justify-items: end !important;
 }
 
 .GridBagConstraints[data-fill="horizontal"] {
-  justify-content: stretch !important;
+  justify-items: stretch !important;
 }
 
 .GridBagConstraints[data-fill="vertical"] {
-  align-content: stretch !important;
+  align-items: stretch !important;
 }
 
 .GridBagConstraints[data-fill="both"] {
-  align-content: stretch !important;
-  justify-content: stretch !important;
+  align-items: stretch !important;
+  justify-items: stretch !important;
 }
 
 /**
