@@ -1,0 +1,41 @@
+<!-- BorderLayoutDemo.html -->
+<!-- An HTML version of Oracle's BorderLayoutDemo example -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* BorderLayoutDemo.css */
+    </style>
+    <script>
+      /* BorderLayoutDemo.js */
+    </script>
+  </head>
+  <body class="Frame" id="border-layout-demo">
+    <div class="ScrollPane" data-scrollbar-overlay>
+      <div
+        class="GridBagConstraints"
+        data-anchor="page-start"
+        style="padding: 0.25em"
+      >
+        <!-- BorderLayout -->
+        <div class="BorderLayout" style="border: 1px solid Gray">
+          <div class="PageStart">
+            <button>Button 1 (PAGE_START)</button>
+          </div>
+          <button style="width: 200px; height: 100px">Button 2 (CENTER)</button>
+          <div class="LineStart">
+            <button>Button 3 (LINE_START)</button>
+          </div>
+          <div class="PageEnd">
+            <button>Long-Named Button 4 (PAGE_END)</button>
+          </div>
+          <div class="LineEnd">
+            <button>5 (LINE_END)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

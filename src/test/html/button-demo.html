@@ -1,0 +1,86 @@
+<!-- ButtonDemo.html -->
+<!-- An HTML version of Oracle's ButtonDemo example -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* ButtonDemo.css */
+    </style>
+    <script>
+      /* ButtonDemo.js */
+      function disable(event) {
+        const b1 = document.getElementById("b1");
+        const b2 = document.getElementById("b2");
+        const b3 = document.getElementById("b3");
+        b1.disabled = true;
+        b2.disabled = true;
+        b3.disabled = false;
+      }
+      function enable(event) {
+        const b1 = document.getElementById("b1");
+        const b2 = document.getElementById("b2");
+        const b3 = document.getElementById("b3");
+        b1.disabled = false;
+        b2.disabled = false;
+        b3.disabled = true;
+      }
+      function handleKeyDown(event) {
+        if (event.altKey) {
+          switch (event.key) {
+            case "d":
+              const b1 = document.getElementById("b1");
+              b1.click();
+              event.preventDefault();
+              break;
+            case "m":
+              const b2 = document.getElementById("b2");
+              b2.click();
+              event.preventDefault();
+              break;
+            case "e":
+              const b3 = document.getElementById("b3");
+              b3.click();
+              event.preventDefault();
+              break;
+          }
+        }
+      }
+      document.addEventListener("keydown", handleKeyDown);
+    </script>
+  </head>
+  <body class="Frame" id="button-demo">
+    <div class="ScrollPane" data-scrollbar-overlay>
+      <div
+        class="GridBagConstraints"
+        data-anchor="page-start"
+        style="padding: 0.25em"
+      >
+        <div class="BoxLayout" style="gap: 0.5em">
+          <!-- Disable middle button -->
+          <button onclick="disable(event);" id="b1">
+            <span class="BoxLayout">
+              <span><u>D</u>isable middle button</span>
+              <img src="../images/right.gif" />
+            </span>
+          </button>
+          <!-- Middle button -->
+          <button id="b2">
+            <span class="BoxLayout" data-axis="page-axis">
+              <span><u>M</u>iddle button</span>
+              <img src="../images/middle.gif" />
+            </span>
+          </button>
+          <!-- Enable middle button -->
+          <button onclick="enable(event);" id="b3" disabled>
+            <span class="BoxLayout">
+              <img src="../images/left.gif" />
+              <span><u>E</u>nable middle button</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
