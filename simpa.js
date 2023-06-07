@@ -774,7 +774,7 @@ var SplitPane = /** @class */ (function () {
     function SplitPane() {
     }
     SplitPane.preventTouchMove = function (ev) {
-        // ev.preventDefault();
+        ev.preventDefault();
     };
     SplitPane.dragStart = false;
     SplitPane.verticalSplit = false;
