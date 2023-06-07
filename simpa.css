@@ -126,6 +126,7 @@ body {
  */
 
 .BoxLayout,
+.BoxLayout[data-axis="x-axis"],
 .BoxLayout[data-axis="line-axis"] {
   display: grid !important;
   align-content: stretch !important;
@@ -133,6 +134,7 @@ body {
   align-items: center !important;
 }
 
+.BoxLayout[data-axis="y-axis"],
 .BoxLayout[data-axis="page-axis"] {
   display: grid !important;
   align-content: start !important;
@@ -140,57 +142,69 @@ body {
   justify-items: center !important;
 }
 
+.BoxLayout[data-axis="y-axis"][data-alignment-x="start"],
 .BoxLayout[data-axis="page-axis"][data-alignment-x="start"] {
   justify-items: start !important;
 }
 
 .BoxLayout[data-alignment-x="center"],
+.BoxLayout[data-axis="x-axis"][data-alignment-x="center"],
 .BoxLayout[data-axis="line-axis"][data-alignment-x="center"] {
   justify-content: center !important;
 }
 
 .BoxLayout[data-alignment-x="end"],
+.BoxLayout[data-axis="x-axis"][data-alignment-x="end"],
 .BoxLayout[data-axis="line-axis"][data-alignment-x="end"] {
   justify-content: end !important;
 }
 
+.BoxLayout[data-axis="y-axis"][data-alignment-x="end"],
 .BoxLayout[data-axis="page-axis"][data-alignment-x="end"] {
   justify-items: end !important;
 }
 
+.BoxLayout[data-axis="y-axis"][data-alignment-x="stretch"],
 .BoxLayout[data-axis="page-axis"][data-alignment-x="stretch"] {
   justify-items: stretch !important;
 }
 
 .BoxLayout[data-alignment-y="start"],
+.BoxLayout[data-axis="x-axis"][data-alignment-y="start"],
 .BoxLayout[data-axis="line-axis"][data-alignment-y="start"] {
   align-items: start !important;
 }
 
+.BoxLayout[data-axis="y-axis"][data-alignment-y="center"],
 .BoxLayout[data-axis="page-axis"][data-alignment-y="center"] {
   align-content: center !important;
 }
 
 .BoxLayout[data-alignment-y="end"],
+.BoxLayout[data-axis="x-axis"][data-alignment-y="end"],
 .BoxLayout[data-axis="line-axis"][data-alignment-y="end"] {
   align-items: end !important;
 }
 
+.BoxLayout[data-axis="y-axis"][data-alignment-y="end"],
 .BoxLayout[data-axis="page-axis"][data-alignment-y="end"] {
   align-content: end !important;
 }
 
 .BoxLayout[data-alignment-y="stretch"],
+.BoxLayout[data-axis="x-axis"][data-alignment-y="stretch"],
 .BoxLayout[data-axis="line-axis"][data-alignment-y="stretch"] {
   align-items: stretch !important;
 }
 
 .BoxLayout > *,
+.BoxLayout[data-axis="x-axis"] > *,
 .BoxLayout[data-axis="line-axis"] > * {
   grid-row: 1 !important;
   grid-column: unset !important;
 }
 
+.BoxLayout[data-axis="y-axis"] > *,
 .BoxLayout[data-axis="page-axis"] > * {
   grid-row: unset !important;
   grid-column: 1 !important;
@@ -202,8 +216,7 @@ body {
 
 .CenterLayout {
   display: grid !important;
-  align-items: center !important;
-  justify-items: center !important;
+  place-content: center !important;
 }
 
 /**
@@ -304,6 +317,14 @@ body {
 .GridBagConstraints[data-fill="both"] {
   align-items: stretch !important;
   justify-items: stretch !important;
+}
+
+/**
+ * Stretch Layout
+ */
+
+.StretchLayout {
+  display: grid !important;
 }
 
 /**

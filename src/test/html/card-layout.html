@@ -1,55 +1,51 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <link rel="stylesheet"
-          href="https://qo-op.github.io/simpa/simpa.css">
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
     <script>
-        function change(ev) {
-            const name = ev.target.value;
-            const container = document.getElementById("container");
-            const cards = container.children;
-            for (let i = 0; i < cards.length; i++) {
-                const card = container.children[i];
-                if (card.getAttribute("name") === name) {
-                    card.style.visibility = "";
-                } else {
-                    card.style.visibility = "hidden";
-                }
-            }
-        };
+      function handleChange(ev) {
+        const value = ev.currentTarget.value;
+        const container = document.getElementById("container");
+        const cards = container.children;
+        for (let i = 0; i < cards.length; i++) {
+          const card = container.children[i];
+          if (card.dataset.name === value) {
+            card.style.visibility = "inherit";
+          } else {
+            card.style.visibility = "hidden";
+          }
+        }
+      }
     </script>
-</head>
+  </head>
 
-<body class="CenterLayout"
-      style="margin: 0; height: 100vh;">
-    <div class="BorderLayout"
-         style="border: 1px solid gray; height: 100px; padding: 10px">
+  <body class="Frame">
+    <div class="CenterLayout">
+      <div
+        class="BorderLayout"
+        style="border: 1px solid Gray; height: 100px; padding: 10px"
+      >
         <div class="PageStart">
-            <select onchange="change(event);">
-                <option value="Card 1"
-                        selected>1st card</option>
-                <option value="Card 2">2nd card</option>
-                <option value="Card 3">3rd card</option>
-            </select>
+          <!-- combo box -->
+          <select onchange="handleChange(event);">
+            <option value="Card 1" selected>1st Card</option>
+            <option value="Card 2">2nd Card</option>
+            <option value="Card 3">3rd Card</option>
+          </select>
         </div>
-        <!-- card container -->
-        <div class="CardLayout"
-             id="container"
-             style="padding: 10px">
-            <button name="Card 1">
-                <u>First</u> Button
-            </button>
-            <button name="Card 2"
-                    style="visibility: hidden;">
-                <u>Second</u> Button
-            </button>
-            <button name="Card 3"
-                    style="visibility: hidden;">
-                <u>Third</u> Button
-            </button>
+        <!-- card layout -->
+        <div class="CardLayout" id="container" style="padding: 10px">
+          <button data-name="Card 1" style="visibility: inherit">
+            <u>First</u> Button
+          </button>
+          <button data-name="Card 2" style="visibility: hidden">
+            <u>Second</u> Button
+          </button>
+          <button data-name="Card 3" style="visibility: hidden">
+            <u>Third</u> Button
+          </button>
         </div>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>
