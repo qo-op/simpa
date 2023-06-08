@@ -72,7 +72,7 @@ class Dialog {
     Dialog.y = ev.clientY - rect.top;
     Dialog.width = rect.width;
     Dialog.height = rect.height;
-    Dialog.dialog.style.position = "absolute";
+    Dialog.dialog.style.position = "fixed";
     Dialog.dialog.style.top = rect.top + "px";
     Dialog.dialog.style.left = rect.left + "px";
     document.addEventListener("touchmove", Dialog.preventTouchMove, {
