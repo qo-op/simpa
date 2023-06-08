@@ -348,52 +348,42 @@ body {
 }
 
 .TitledBorder {
-  margin-top: 0.6em !important;
-  padding-top: 0.6em !important;
   position: relative !important;
-  overflow: visible !important;
+  display: grid !important;
+  grid-template-rows: auto 1fr !important;
+  grid-template-columns: 1fr !important;
+  grid-auto-rows: 1fr;
+}
+
+.TitledBorder::before {
+  position: absolute;
+  top: calc(0.6em + 0.5px);
+  right: 0;
+  bottom: 0;
+  left: 0;
   border: 1px solid rgba(128, 128, 128, 0.5);
-  background-color: White;
-  display: grid;
+  content: "";
+}
+
+.TitledBorder > * {
+  transform: translateZ(0);
 }
 
 .TitledBorder > :first-child,
 .TitledBorder[data-title-justification="leading"] > :first-child {
-  position: absolute !important;
-  top: calc(-0.5em - 0.5px) !important;
-  left: 0.5em !important;
-  margin: 0 !important;
-  background-color: inherit !important;
-  padding: 0 0.5em !important;
-  line-height: 1 !important;
-  font-size: inherit !important;
-  font-weight: inherit !important;
+  margin-inline: 0.5em;
+  background-color: White;
+  padding-inline: 0.5em;
+  line-height: 1.2em;
+  justify-self: left;
 }
 
 .TitledBorder[data-title-justification="center"] > :first-child {
-  position: absolute !important;
-  top: calc(-0.5em - 0.5px) !important;
-  left: 50% !important;
-  transform: translate(-50%, 0) !important;
-  margin: 0 !important;
-  background-color: inherit !important;
-  padding: 0 0.5em !important;
-  line-height: 1 !important;
-  font-size: inherit !important;
-  font-weight: inherit !important;
+  justify-self: center;
 }
 
 .TitledBorder[data-title-justification="trailing"] > :first-child {
-  position: absolute !important;
-  top: calc(-0.5em - 0.5px) !important;
-  left: calc(100% - 0.5em) !important;
-  transform: translate(-100%, 0) !important;
-  margin: 0 !important;
-  background-color: inherit !important;
-  padding: 0 0.5em !important;
-  line-height: 1 !important;
-  font-size: inherit !important;
-  font-weight: inherit !important;
+  justify-self: right;
 }
 
 .LoweredEtchedBorder {
