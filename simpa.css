@@ -680,7 +680,7 @@ button[disabled] img {
 }
 
 @supports (overflow: overlay) {
-  @media (pointer: fine) {
+  @media not (pointer: coarse) {
     .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]) {
       overflow: overlay !important;
     }
@@ -767,7 +767,7 @@ button[disabled] img {
 }
 
 @supports (overflow: overlay) {
-  @media (pointer: fine) {
+  @media not (pointer: coarse) {
     .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]) {
       overflow: overlay !important;
     }
