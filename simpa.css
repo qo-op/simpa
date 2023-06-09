@@ -853,8 +853,9 @@ button[disabled] img {
  */
 
 .SplitPane > * {
-  box-sizing: border-box !important;
+  margin: 0 !important;
   padding: 0 !important;
+  border: 0 !important;
 }
 
 .SplitPane > :not(:nth-child(2)) {
