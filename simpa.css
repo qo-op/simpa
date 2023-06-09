@@ -680,29 +680,29 @@ button[disabled] img {
 }
 
 @supports (overflow: overlay) {
+  .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]) {
+    overflow: overlay !important;
+  }
+
+  .ScrollPane[data-scrollbar-overlay]:not(
+      [data-scrollbar-overlay="false"]
+    )[data-policy="scrollbar-never"],
+  .ScrollPane[data-scrollbar-overlay]:not(
+      [data-scrollbar-overlay="false"]
+    )[data-vertical-policy="scrollbar-never"] {
+    overflow-y: hidden !important;
+  }
+
+  .ScrollPane[data-scrollbar-overlay]:not(
+      [data-scrollbar-overlay="false"]
+    )[data-policy="scrollbar-never"],
+  .ScrollPane[data-scrollbar-overlay]:not(
+      [data-scrollbar-overlay="false"]
+    )[data-horizontal-policy="scrollbar-never"] {
+    overflow-x: hidden !important;
+  }
+
   @media not (pointer: coarse) {
-    .ScrollPane[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]) {
-      overflow: overlay !important;
-    }
-
-    .ScrollPane[data-scrollbar-overlay]:not(
-        [data-scrollbar-overlay="false"]
-      )[data-policy="scrollbar-never"],
-    .ScrollPane[data-scrollbar-overlay]:not(
-        [data-scrollbar-overlay="false"]
-      )[data-vertical-policy="scrollbar-never"] {
-      overflow-y: hidden !important;
-    }
-
-    .ScrollPane[data-scrollbar-overlay]:not(
-        [data-scrollbar-overlay="false"]
-      )[data-policy="scrollbar-never"],
-    .ScrollPane[data-scrollbar-overlay]:not(
-        [data-scrollbar-overlay="false"]
-      )[data-horizontal-policy="scrollbar-never"] {
-      overflow-x: hidden !important;
-    }
-
     .ScrollPane[data-scrollbar-overlay]:not(
         [data-scrollbar-overlay="false"]
       )::-webkit-scrollbar {
@@ -767,29 +767,29 @@ button[disabled] img {
 }
 
 @supports (overflow: overlay) {
+  .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]) {
+    overflow: overlay !important;
+  }
+
+  .ScrollTable[data-scrollbar-overlay]:not(
+      [data-scrollbar-overlay="false"]
+    )[data-policy="scrollbar-never"],
+  .ScrollTable[data-scrollbar-overlay]:not(
+      [data-scrollbar-overlay="false"]
+    )[data-vertical-policy="scrollbar-never"] {
+    overflow-y: hidden !important;
+  }
+
+  .ScrollTable[data-scrollbar-overlay]:not(
+      [data-scrollbar-overlay="false"]
+    )[data-policy="scrollbar-never"],
+  .ScrollTable[data-scrollbar-overlay]:not(
+      [data-scrollbar-overlay="false"]
+    )[data-horizontal-policy="scrollbar-never"] {
+    overflow-x: hidden !important;
+  }
+
   @media not (pointer: coarse) {
-    .ScrollTable[data-scrollbar-overlay]:not([data-scrollbar-overlay="false"]) {
-      overflow: overlay !important;
-    }
-
-    .ScrollTable[data-scrollbar-overlay]:not(
-        [data-scrollbar-overlay="false"]
-      )[data-policy="scrollbar-never"],
-    .ScrollTable[data-scrollbar-overlay]:not(
-        [data-scrollbar-overlay="false"]
-      )[data-vertical-policy="scrollbar-never"] {
-      overflow-y: hidden !important;
-    }
-
-    .ScrollTable[data-scrollbar-overlay]:not(
-        [data-scrollbar-overlay="false"]
-      )[data-policy="scrollbar-never"],
-    .ScrollTable[data-scrollbar-overlay]:not(
-        [data-scrollbar-overlay="false"]
-      )[data-horizontal-policy="scrollbar-never"] {
-      overflow-x: hidden !important;
-    }
-
     .ScrollTable[data-scrollbar-overlay]:not(
         [data-scrollbar-overlay="false"]
       )::-webkit-scrollbar {
