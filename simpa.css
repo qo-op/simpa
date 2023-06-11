@@ -43,6 +43,7 @@ body {
   display: grid !important;
   grid-template-rows: auto 1fr auto !important;
   grid-template-columns: auto 1fr auto !important;
+  place-items: stretch;
 }
 
 .Frame > *,
