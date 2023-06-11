@@ -931,6 +931,10 @@ button[disabled] img {
   pointer-events: none;
 }
 
+.SplitPane[data-draggable="false"] .SplitPaneDivider {
+  pointer-events: none;
+}
+
 /**
  * Tabbed pane
  */
