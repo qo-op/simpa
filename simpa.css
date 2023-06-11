@@ -586,7 +586,7 @@ button[disabled] img {
   cursor: pointer;
 }
 
-@media (pointer: hover) {
+@media (hover: hover) {
   .MenuBar li:not(hr):hover,
   .MenuBar:not(:hover) li[data-selected] {
     background-color: rgba(128, 128, 128, 0.25);
@@ -712,7 +712,7 @@ button[disabled] img {
       height: 16px;
     }
 
-    @media (pointer: hover) {
+    @media (hover: hover) {
       .ScrollPane[data-scrollbar-overlay]:not(
           [data-scrollbar-overlay="false"]
         ):hover::-webkit-scrollbar-thumb {
@@ -801,7 +801,7 @@ button[disabled] img {
       height: 16px;
     }
 
-    @media (pointer: hover) {
+    @media (hover: hover) {
       .ScrollTable[data-scrollbar-overlay]:not(
           [data-scrollbar-overlay="false"]
         ):hover::-webkit-scrollbar-thumb {
@@ -929,7 +929,7 @@ button[disabled] img {
   }
 }
 
-@media (pointer: hover) {
+@media (hover: hover) {
   .SplitPane .SplitPaneDivider:hover {
     background-color: rgba(128, 128, 128, 0.5);
   }
@@ -1209,7 +1209,7 @@ button[disabled] img {
   grid-row: 1 !important;
 }
 
-@media (pointer: hover) {
+@media (hover: hover) {
   .Tree li > :not(ul):hover {
     background-color: rgba(128, 128, 128, 0.25);
   }
