@@ -1,65 +1,65 @@
+<!-- GlassPaneDemo.html -->
+<!-- An HTML version of Oracle's GlassPaneDemo example -->
 <!DOCTYPE html>
 <html>
   <head>
     <link rel="stylesheet" href="../../../simpa.css" />
     <script src="../../../simpa.js"></script>
+    <style>
+      /* GlassPaneDemo.css */
+    </style>
+    <script>
+      /* GlassPaneDemo.js */
+    </script>
   </head>
-  <body class="Frame">
-    <!-- <div class="ScrollPane" style="scroll-snap-type: y mandatory"> -->
-    <div class="ScrollPane" style="scroll-snap-type: y mandatory">
-      <!-- <div style="scroll-snap-align: start; scroll-margin-top: -20px"> -->
-      <div style="scroll-snap-align: start; scroll-margin-top: -20px">
-        <div style="height: 20px; border: 1px solid Gray">Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
-        <div>Hello, World!</div>
+  <body class="Frame" id="glass-pane-demo">
+    <div class="ScrollPane" data-scrollbar-overlay>
+      <div
+        class="GridBagConstraints"
+        data-anchor="page-start"
+        style="padding: 0.25em"
+      >
+        <div class="BorderLayout" style="border: 1px solid gray">
+          <div class="LayeredPane">
+            <div class="BorderLayout">
+              <div class="PageStart">
+                <ul class="MenuBar">
+                  <li>
+                    <div class="Menu">
+                      <span>Menu</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="MenuItem">
+                          <span></span>
+                          <span>Do nothing</span>
+                          <span></span>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="EmptyBorder" style="padding: 0.5em">
+                <div class="FlowLayout" style="gap: 0.5em">
+                  <button>Button 1</button>
+                  <button>Button 2</button>
+                </div>
+              </div>
+            </div>
+            <!-- GlassPane -->
+            <div class="GlassPane" style="visibility: visible"></div>
+          </div>
+          <div
+            class="PageEnd"
+            style="border: solid Gray; border-width: 1px 0 0 0; padding: 0.5em"
+          >
+            <label>
+              <input type="checkbox" />
+              Glass pane "visible"
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   </body>

@@ -521,6 +521,14 @@ button[disabled] img {
 }
 
 /**
+ * Glass Pane
+ */
+
+.GlassPane {
+  z-index: 200 !important;
+}
+
+/**
  * Layered Pane
  */
 
