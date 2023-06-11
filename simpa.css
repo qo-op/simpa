@@ -923,8 +923,10 @@ button[disabled] img {
   }
 }
 
-.SplitPane .SplitPaneDivider:hover {
-  background-color: rgba(128, 128, 128, 0.5);
+@media (pointer: hover) {
+  .SplitPane .SplitPaneDivider:hover {
+    background-color: rgba(128, 128, 128, 0.5);
+  }
 }
 
 .SplitPane .SplitPaneDivider * {
