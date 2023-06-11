@@ -586,9 +586,11 @@ button[disabled] img {
   cursor: pointer;
 }
 
-.MenuBar li:not(hr):hover,
-.MenuBar:not(:hover) li[data-selected] {
-  background-color: rgba(128, 128, 128, 0.25);
+@media (pointer: hover) {
+  .MenuBar li:not(hr):hover,
+  .MenuBar:not(:hover) li[data-selected] {
+    background-color: rgba(128, 128, 128, 0.25);
+  }
 }
 
 /**
@@ -710,10 +712,12 @@ button[disabled] img {
       height: 16px;
     }
 
-    .ScrollPane[data-scrollbar-overlay]:not(
-        [data-scrollbar-overlay="false"]
-      ):hover::-webkit-scrollbar-thumb {
-      background-color: rgba(128, 128, 128, 0.25);
+    @media (pointer: hover) {
+      .ScrollPane[data-scrollbar-overlay]:not(
+          [data-scrollbar-overlay="false"]
+        ):hover::-webkit-scrollbar-thumb {
+        background-color: rgba(128, 128, 128, 0.25);
+      }
     }
 
     .ScrollPane[data-scrollbar-overlay]:not(
@@ -797,10 +801,12 @@ button[disabled] img {
       height: 16px;
     }
 
-    .ScrollTable[data-scrollbar-overlay]:not(
-        [data-scrollbar-overlay="false"]
-      ):hover::-webkit-scrollbar-thumb {
-      background-color: rgba(128, 128, 128, 0.25);
+    @media (pointer: hover) {
+      .ScrollTable[data-scrollbar-overlay]:not(
+          [data-scrollbar-overlay="false"]
+        ):hover::-webkit-scrollbar-thumb {
+        background-color: rgba(128, 128, 128, 0.25);
+      }
     }
 
     .ScrollTable[data-scrollbar-overlay]:not(
@@ -1203,6 +1209,8 @@ button[disabled] img {
   grid-row: 1 !important;
 }
 
-.Tree li > :not(ul):hover {
-  background-color: rgba(128, 128, 128, 0.25);
+@media (pointer: hover) {
+  .Tree li > :not(ul):hover {
+    background-color: rgba(128, 128, 128, 0.25);
+  }
 }
