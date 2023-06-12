@@ -634,6 +634,7 @@ button[disabled] img {
 .MenuBar ul .Menu > :first-child,
 .MenuBar ul .Menu > :last-child:not(:nth-child(2)) {
   width: 1em;
+  height: 1em;
   margin: 0;
   font-size: 1em;
 }
@@ -1155,6 +1156,7 @@ button[disabled] img {
 .TabbedPane > :first-child > button > :first-child > :first-child,
 .TabbedPane > :first-child > button > :first-child > :last-child {
   min-width: 1em;
+  height: 1em;
   font-size: 1em;
 }
 
