@@ -630,9 +630,9 @@ button[disabled] img {
 }
 
 .MenuItem > :first-child,
-.MenuItem > :last-child,
+.MenuItem > :last-child:not(:nth-child(2)),
 .MenuBar ul .Menu > :first-child,
-.MenuBar ul .Menu > :last-child {
+.MenuBar ul .Menu > :last-child:not(:nth-child(2)) {
   width: 1em;
   margin: 0;
   font-size: 1em;
