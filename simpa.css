@@ -638,7 +638,7 @@ button[disabled] img {
   margin: 0;
   font-size: 1em;
   display: grid;
-  place-self: stretch;
+  place-items: stretch;
 }
 
 /**
