@@ -638,6 +638,8 @@ button[disabled] img {
   margin: 0;
   font-size: 1em;
   display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
   place-items: stretch;
 }
 
