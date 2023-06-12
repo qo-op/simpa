@@ -1,144 +1,150 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta
+      name="description"
+      content="This example shows how to use a menu using html, css and javascript. It is based on the example found at 'How to Use Menus' https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html"
+    />
+    <meta name="author" content="Yassuo Toda" />
+    <title>Menu Example</title>
 
-<head>
-	<meta name="description"
-		content="This example shows how to use a menu using html, css and javascript. It is based on the example found at 'How to Use Menus' https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html">
-	<meta name="author" content="Yassuo Toda">
-	<title>Menu Example</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
 
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../../../simpa.css" />
+    <script src="../../../simpa.js"></script>
 
-	<link rel="stylesheet" href="../../../simpa.css">
-	<script src="../../../simpa.js"></script>
+    <script>
+      function hello(ev) {
+        console.log("Hello, World!");
+      }
+      function eggs(ev) {
+        console.log("Eggs aren't supposed to be green.");
+      }
+    </script>
+  </head>
 
-	<script>
-		function hello(ev) {
-			console.log("Hello, World!");
-		};
-		function eggs(ev) {
-			console.log("Eggs aren't supposed to be green.");
-		};
-	</script>
-</head>
-
-<body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
-	<div class="BoxLayout" data-axis="page-axis">
-		<div class="BorderLayout" style="border: 1px solid gray; width: 450px; height: 300px;">
-			<div class="PageStart">
-				<ul class="MenuBar">
-					<li>
-						<div class="Menu">
-							<span>A Menu</span>
-						</div>
-						<ul>
-							<li>
-								<div class="MenuItem" onpointerup="hello(event);">
-									<span></span>
-									<div class="MenuItemShortCut">
-										<span style="margin-inline-end: 2em;">A text-only menu item</span>
-										<span>Alt 1</span>
-									</div>
-									<span></span>
-								</div>
-							</li>
-							<li>
-								<div class="MenuItem">
-									<span class="material-icons" style="color: gold;">star</span>
-									<span>Both text and icon</span>
-									<span></span>
-								</div>
-							</li>
-							<li>
-								<div class="MenuItem">
-									<span class="material-icons" style="color: gold;">star</span>
-									<span></span>
-									<span></span>
-								</div>
-							</li>
-							<li class="Separator">
-								<hr>
-							</li>
-							<li>
-								<div class="MenuItem">
-									<input type="radio" name="group" checked>
-									<span>A radio button menu item</span>
-									<span></span>
-								</div>
-							</li>
-							<li>
-								<div class="MenuItem">
-									<input type="radio" name="group">
-									<span>Another one</span>
-									<span></span>
-								</div>
-							</li>
-							<li class="Separator">
-								<hr>
-							</li>
-							<li>
-								<div class="MenuItem">
-									<input type="checkbox">
-									<span>A check box menu item</span>
-									<span></span>
-								</div>
-							</li>
-							<li>
-								<div class="MenuItem">
-									<input type="checkbox">
-									<span>Another one</span>
-									<span></span>
-								</div>
-							</li>
-							<li class="Separator">
-								<hr>
-							</li>
-							<li>
-								<div class="Menu">
-									<span></span>
-									<span>A submenu</span>
-									<span class="material-icons">navigate_next</span>
-								</div>
-								<ul>
-									<li>
-										<div class="MenuItem" onpointerup="eggs(event);">
-											<span></span>
-											<div class="MenuItemShortCut">
-												<span style="margin-inline-end: 2em;">An item in submenu</span>
-												<span>Alt 2</span>
-											</div>
-											<span></span>
-										</div>
-									</li>
-									<li>
-										<div class="MenuItem">
-											<span></span>
-											<span>Another item</span>
-											<span></span>
-										</div>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<div class="Menu">
-							<span>Another Menu</span>
-						</div>
-						<ul>
-							<li>
-								<div class="MenuItem">
-									<span></span>
-									<span>Another text-only menu item</span>
-									<span></span>
-								</div>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</body>
-
+  <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden">
+    <div class="BoxLayout" data-axis="page-axis">
+      <div
+        class="BorderLayout"
+        style="border: 1px solid gray; width: 450px; height: 300px"
+      >
+        <div class="PageStart">
+          <ul class="MenuBar">
+            <li>
+              <div class="Menu">
+                <span>A Menu</span>
+              </div>
+              <ul>
+                <li>
+                  <div class="MenuItem" onpointerup="hello(event);">
+                    <span></span>
+                    <div class="MenuItemShortcut">
+                      <span>A text-only menu item</span>
+                      <span>Alt 1</span>
+                    </div>
+                    <span></span>
+                  </div>
+                </li>
+                <li>
+                  <div class="MenuItem">
+                    <span class="material-icons" style="color: gold">star</span>
+                    <span>Both text and icon</span>
+                    <span></span>
+                  </div>
+                </li>
+                <li>
+                  <div class="MenuItem">
+                    <span class="material-icons" style="color: gold">star</span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </li>
+                <li class="Separator">
+                  <hr />
+                </li>
+                <li>
+                  <div class="MenuItem">
+                    <input type="radio" name="group" checked />
+                    <span>A radio button menu item</span>
+                    <span></span>
+                  </div>
+                </li>
+                <li>
+                  <div class="MenuItem">
+                    <input type="radio" name="group" />
+                    <span>Another one</span>
+                    <span></span>
+                  </div>
+                </li>
+                <li class="Separator">
+                  <hr />
+                </li>
+                <li>
+                  <div class="MenuItem">
+                    <input type="checkbox" />
+                    <span>A check box menu item</span>
+                    <span></span>
+                  </div>
+                </li>
+                <li>
+                  <div class="MenuItem">
+                    <input type="checkbox" />
+                    <span>Another one</span>
+                    <span></span>
+                  </div>
+                </li>
+                <li class="Separator">
+                  <hr />
+                </li>
+                <li>
+                  <div class="Menu">
+                    <span></span>
+                    <span>A submenu</span>
+                    <span class="material-icons">navigate_next</span>
+                  </div>
+                  <ul>
+                    <li>
+                      <div class="MenuItem" onpointerup="eggs(event);">
+                        <span></span>
+                        <div class="MenuItemShortcut">
+                          <span>An item in submenu</span>
+                          <span>Alt 2</span>
+                        </div>
+                        <span></span>
+                      </div>
+                    </li>
+                    <li>
+                      <div class="MenuItem">
+                        <span></span>
+                        <span>Another item</span>
+                        <span></span>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <div class="Menu">
+                <span>Another Menu</span>
+              </div>
+              <ul>
+                <li>
+                  <div class="MenuItem">
+                    <span></span>
+                    <span>Another text-only menu item</span>
+                    <span></span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
