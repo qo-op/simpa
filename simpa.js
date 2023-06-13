@@ -216,6 +216,19 @@ var MenuBar = /** @class */ (function () {
                 if (menuBar.dataset.open === undefined) {
                     MenuBar.open(menuBar);
                 }
+                else {
+                    var input = li.querySelector(":scope>input, :scope>:not(ul) input");
+                    if (input !== null) {
+                        if (input.type === "radio") {
+                            if (!input.checked) {
+                                input.checked = true;
+                            }
+                        }
+                        else if (input.type === "checkbox") {
+                            input.checked = !input.checked;
+                        }
+                    }
+                }
             }
         }
         finally {
@@ -228,17 +241,20 @@ var MenuBar = /** @class */ (function () {
         if (li === null) {
             return;
         }
-        var input = li.querySelector(":scope>input, :scope>:not(ul) input");
+        /*
+        const input: HTMLInputElement | null = li.querySelector(
+          ":scope>input, :scope>:not(ul) input"
+        );
         if (input !== null) {
-            if (input.type === "radio") {
-                if (!input.checked) {
-                    input.checked = true;
-                }
+          if (input.type === "radio") {
+            if (!input.checked) {
+              input.checked = true;
             }
-            else if (input.type === "checkbox") {
-                input.checked = !input.checked;
-            }
+          } else if (input.type === "checkbox") {
+            input.checked = !input.checked;
+          }
         }
+        */
         var menuBar = ev.currentTarget;
         if (li.parentElement === menuBar) {
             // menu
@@ -1001,8 +1017,8 @@ var KeyboardShortcut = /** @class */ (function () {
         if (element === null) {
             return;
         }
-        element.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
-        element.dispatchEvent(new PointerEvent("pointerup", { bubbles: true, cancelable: true }));
+        element.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
+        element.dispatchEvent(new PointerEvent("pointerup", { bubbles: true }));
         element.click();
         ev.preventDefault();
     };

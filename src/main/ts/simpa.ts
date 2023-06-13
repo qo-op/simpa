@@ -252,6 +252,19 @@ class MenuBar {
         menuBar.dataset.closed = "";
         if (menuBar.dataset.open === undefined) {
           MenuBar.open(menuBar);
+        } else {
+          const input: HTMLInputElement | null = li.querySelector(
+            ":scope>input, :scope>:not(ul) input"
+          );
+          if (input !== null) {
+            if (input.type === "radio") {
+              if (!input.checked) {
+                input.checked = true;
+              }
+            } else if (input.type === "checkbox") {
+              input.checked = !input.checked;
+            }
+          }
         }
       }
     } finally {
@@ -265,6 +278,7 @@ class MenuBar {
     if (li === null) {
       return;
     }
+    /*
     const input: HTMLInputElement | null = li.querySelector(
       ":scope>input, :scope>:not(ul) input"
     );
@@ -277,6 +291,7 @@ class MenuBar {
         input.checked = !input.checked;
       }
     }
+    */
     const menuBar = ev.currentTarget as HTMLElement;
     if (li.parentElement === menuBar) {
       // menu
@@ -1264,12 +1279,8 @@ class KeyboardShortcut {
     if (element === null) {
       return;
     }
-    element.dispatchEvent(
-      new PointerEvent("pointerdown", { bubbles: true, cancelable: true })
-    );
-    element.dispatchEvent(
-      new PointerEvent("pointerup", { bubbles: true, cancelable: true })
-    );
+    element.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
+    element.dispatchEvent(new PointerEvent("pointerup", { bubbles: true }));
     element.click();
     ev.preventDefault();
   };
