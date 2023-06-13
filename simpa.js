@@ -113,7 +113,8 @@ var MenuBar = /** @class */ (function () {
         menuBar.removeAttribute("data-open");
         MenuBar.select(menuBar, menuBar, null);
     };
-    MenuBar.select = function (menuBar, ul, li) {
+    MenuBar.select = function (menuBar, ul, li, timeout) {
+        if (timeout === void 0) { timeout = 0; }
         MenuBar.clearTimeout(menuBar);
         if (ul === menuBar) {
             if (li !== null && li.dataset.selected !== undefined) {
@@ -129,35 +130,26 @@ var MenuBar = /** @class */ (function () {
             }
         }
         else {
-            if (li === null) {
-                MenuBar.setTimeout(menuBar, function () {
-                    for (var i = 0; i < ul.children.length; i++) {
-                        ul.children[i].removeAttribute("data-selected");
+            MenuBar.setTimeout(function () {
+                for (var i = 0; i < ul.children.length; i++) {
+                    var child = ul.children[i];
+                    if (child === li) {
+                        child.dataset.selected = "";
                     }
-                }, 250);
-            }
-            else {
-                MenuBar.setTimeout(menuBar, function () {
-                    for (var i = 0; i < ul.children.length; i++) {
-                        var child = ul.children[i];
-                        if (child === li) {
-                            child.dataset.selected = "";
-                        }
-                        else {
-                            child.removeAttribute("data-selected");
-                        }
+                    else {
+                        child.removeAttribute("data-selected");
                     }
-                }, 250);
-            }
+                }
+            }, timeout);
         }
     };
     MenuBar.clearTimeout = function (menuBar) {
-        if (menuBar.dataset.timeoutId !== undefined) {
-            clearTimeout(+menuBar.dataset.timeoutId);
+        if (MenuBar.timeoutId !== undefined) {
+            clearTimeout(MenuBar.timeoutId);
         }
     };
-    MenuBar.setTimeout = function (menuBar, handler, timeout) {
-        menuBar.dataset.timeoutId = "" + setTimeout(handler, timeout);
+    MenuBar.setTimeout = function (handler, timeout) {
+        MenuBar.timeoutId = setTimeout(handler, timeout);
     };
     MenuBar.pointerdown = function (ev) {
         var currentTarget = ev.currentTarget;
@@ -270,7 +262,7 @@ var MenuBar = /** @class */ (function () {
         if (ul === null) {
             return;
         }
-        MenuBar.select(menuBar, ul, li);
+        MenuBar.select(menuBar, ul, li, 250);
     };
     MenuBar.mouseleave = function (ev) {
         var menuBar = ev.currentTarget;

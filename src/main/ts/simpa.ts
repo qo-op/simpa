@@ -140,7 +140,8 @@ class MenuBar {
   static select = (
     menuBar: HTMLElement,
     ul: HTMLElement,
-    li: HTMLElement | null
+    li: HTMLElement | null,
+    timeout: number = 0
   ) => {
     MenuBar.clearTimeout(menuBar);
     if (ul === menuBar) {
@@ -156,32 +157,16 @@ class MenuBar {
         li.dataset.selected = "";
       }
     } else {
-      if (li === null) {
-        MenuBar.setTimeout(
-          menuBar,
-          () => {
-            for (let i: number = 0; i < ul.children.length; i++) {
-              ul.children[i].removeAttribute("data-selected");
-            }
-          },
-          250
-        );
-      } else {
-        MenuBar.setTimeout(
-          menuBar,
-          () => {
-            for (let i: number = 0; i < ul.children.length; i++) {
-              const child = ul.children[i] as HTMLElement;
-              if (child === li) {
-                child.dataset.selected = "";
-              } else {
-                child.removeAttribute("data-selected");
-              }
-            }
-          },
-          250
-        );
-      }
+      MenuBar.setTimeout(() => {
+        for (let i: number = 0; i < ul.children.length; i++) {
+          const child = ul.children[i] as HTMLElement;
+          if (child === li) {
+            child.dataset.selected = "";
+          } else {
+            child.removeAttribute("data-selected");
+          }
+        }
+      }, timeout);
     }
   };
 
@@ -195,18 +180,16 @@ class MenuBar {
     return null;
   }
 
+  static timeoutId: number;
+
   static clearTimeout = (menuBar: HTMLElement) => {
-    if (menuBar.dataset.timeoutId !== undefined) {
-      clearTimeout(+menuBar.dataset.timeoutId);
+    if (MenuBar.timeoutId !== undefined) {
+      clearTimeout(MenuBar.timeoutId);
     }
   };
 
-  static setTimeout = (
-    menuBar: HTMLElement,
-    handler: TimerHandler,
-    timeout: number
-  ) => {
-    menuBar.dataset.timeoutId = "" + setTimeout(handler, timeout);
+  static setTimeout = (handler: TimerHandler, timeout: number) => {
+    MenuBar.timeoutId = setTimeout(handler, timeout);
   };
 
   static pointerdown = (ev: PointerEvent) => {
@@ -319,7 +302,7 @@ class MenuBar {
     if (ul === null) {
       return;
     }
-    MenuBar.select(menuBar, ul, li);
+    MenuBar.select(menuBar, ul, li, 250);
   };
 
   static mouseleave = (ev: MouseEvent) => {
