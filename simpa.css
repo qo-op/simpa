@@ -636,12 +636,16 @@ button[disabled] img {
 
 .MenuItem > :first-child,
 .MenuItem > :last-child,
+.MenuItem > .material-icons,
+.MenuItem > img,
+.MenuItem > svg,
+.MenuItem > input,
 .MenuBar ul .Menu > :first-child,
 .MenuBar ul .Menu > :last-child,
-.MenuBar ul .Menu .material-icons,
-.MenuBar ul .Menu img,
-.MenuBar ul .Menu svg,
-.MenuBar ul .Menu input {
+.MenuBar ul .Menu > .material-icons,
+.MenuBar ul .Menu > img,
+.MenuBar ul .Menu > svg,
+.MenuBar ul .Menu > input {
   margin: 0;
   width: 1em;
   height: 1em;
