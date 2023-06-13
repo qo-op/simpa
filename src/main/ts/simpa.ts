@@ -252,6 +252,7 @@ class MenuBar {
         menuBar.dataset.closed = "";
         if (menuBar.dataset.open === undefined) {
           MenuBar.open(menuBar);
+          /*
         } else {
           const input: HTMLInputElement | null = li.querySelector(
             ":scope>input, :scope>:not(ul) input"
@@ -265,6 +266,7 @@ class MenuBar {
               input.checked = !input.checked;
             }
           }
+          */
         }
       }
     } finally {

@@ -215,19 +215,21 @@ var MenuBar = /** @class */ (function () {
                 menuBar.dataset.closed = "";
                 if (menuBar.dataset.open === undefined) {
                     MenuBar.open(menuBar);
-                }
-                else {
-                    var input = li.querySelector(":scope>input, :scope>:not(ul) input");
+                    /*
+                  } else {
+                    const input: HTMLInputElement | null = li.querySelector(
+                      ":scope>input, :scope>:not(ul) input"
+                    );
                     if (input !== null) {
-                        if (input.type === "radio") {
-                            if (!input.checked) {
-                                input.checked = true;
-                            }
+                      if (input.type === "radio") {
+                        if (!input.checked) {
+                          input.checked = true;
                         }
-                        else if (input.type === "checkbox") {
-                            input.checked = !input.checked;
-                        }
+                      } else if (input.type === "checkbox") {
+                        input.checked = !input.checked;
+                      }
                     }
+                    */
                 }
             }
         }
