@@ -630,42 +630,31 @@ button[disabled] img {
 .MenuItem,
 .MenuBar ul .Menu {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 0.5em;
+  grid-template-columns: auto 1fr auto auto;
   align-items: center;
 }
 
 .MenuItem > :first-child,
-.MenuItem > :last-child:not(:nth-child(2)),
+.MenuItem > :last-child,
 .MenuBar ul .Menu > :first-child,
-.MenuBar ul .Menu > :last-child:not(:nth-child(2)) {
+.MenuBar ul .Menu > :last-child,
+.MenuBar ul .Menu .material-icons,
+.MenuBar ul .Menu img,
+.MenuBar ul .Menu svg,
+.MenuBar ul .Menu input {
+  margin: 0;
   width: 1em;
   height: 1em;
-  margin: 0;
   font-size: 1em;
-  display: grid;
-  place-items: stretch;
 }
 
-.MenuItem > :first-child > *,
-.MenuItem > :last-child:not(:nth-child(2)) > *,
-.MenuBar ul .Menu > :first-child > *,
-.MenuBar ul .Menu > :last-child:not(:nth-child(2)) > * {
-  grid-row: 1;
-  grid-column: 1;
-  overflow: hidden;
+.MenuItem > :not(:first-child):not(:last-child),
+.MenuBar ul .Menu > :not(:first-child):not(:last-child) {
+  padding-inline: 0.5em;
 }
 
-/**
- * Menu Item Shortcut Layout
- */
-.MenuItemShortcut {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 2em;
-}
-
-.MenuItemShortcut > :last-child {
+.MenuItem > :nth-child(3):not(:last-child),
+.MenuBar ul .Menu > :nth-child(3):not(:last-child) {
   font-family: monospace;
 }
 
