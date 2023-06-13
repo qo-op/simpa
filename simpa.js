@@ -985,16 +985,16 @@ var KeyboardShortcut = /** @class */ (function () {
     KeyboardShortcut.keyDown = function (ev) {
         var selector = "";
         if (ev.altKey) {
-            selector += "[data-altKey]";
+            selector += "[data-alt]";
         }
         if (ev.ctrlKey) {
-            selector += "[data-ctrlKey]";
+            selector += "[data-ctrl]";
         }
         if (ev.metaKey) {
-            selector += "[data-metaKey]";
+            selector += "[data-meta]";
         }
         if (ev.shiftKey) {
-            selector += "[data-shiftKey]";
+            selector += "[data-shift]";
         }
         selector += "[data-key=\"".concat(ev.key, "\"]");
         var element = document.querySelector(selector);
