@@ -130,7 +130,20 @@ var MenuBar = /** @class */ (function () {
             }
         }
         else {
-            MenuBar.setTimeout(function () {
+            if (timeout) {
+                MenuBar.setTimeout(function () {
+                    for (var i = 0; i < ul.children.length; i++) {
+                        var child = ul.children[i];
+                        if (child === li) {
+                            child.dataset.selected = "";
+                        }
+                        else {
+                            child.removeAttribute("data-selected");
+                        }
+                    }
+                }, timeout);
+            }
+            else {
                 for (var i = 0; i < ul.children.length; i++) {
                     var child = ul.children[i];
                     if (child === li) {
@@ -140,7 +153,7 @@ var MenuBar = /** @class */ (function () {
                         child.removeAttribute("data-selected");
                     }
                 }
-            }, timeout);
+            }
         }
     };
     MenuBar.clearTimeout = function (menuBar) {

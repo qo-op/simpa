@@ -157,7 +157,18 @@ class MenuBar {
         li.dataset.selected = "";
       }
     } else {
-      MenuBar.setTimeout(() => {
+      if (timeout) {
+        MenuBar.setTimeout(() => {
+          for (let i: number = 0; i < ul.children.length; i++) {
+            const child = ul.children[i] as HTMLElement;
+            if (child === li) {
+              child.dataset.selected = "";
+            } else {
+              child.removeAttribute("data-selected");
+            }
+          }
+        }, timeout);
+      } else {
         for (let i: number = 0; i < ul.children.length; i++) {
           const child = ul.children[i] as HTMLElement;
           if (child === li) {
@@ -166,7 +177,7 @@ class MenuBar {
             child.removeAttribute("data-selected");
           }
         }
-      }, timeout);
+      }
     }
   };
 
