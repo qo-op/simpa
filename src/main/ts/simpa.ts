@@ -1239,6 +1239,42 @@ class TabComponent {
   };
 }
 
+/**
+ * KeyboardShortcut
+ *
+ * @author Yassuo Toda
+ */
+class KeyboardShortcut {
+  static keyDown = (ev: KeyboardEvent) => {
+    let selector = "";
+    if (ev.altKey) {
+      selector += "[data-altKey]";
+    }
+    if (ev.ctrlKey) {
+      selector += "[data-ctrlKey]";
+    }
+    if (ev.metaKey) {
+      selector += "[data-metaKey]";
+    }
+    if (ev.shiftKey) {
+      selector += "[data-shiftKey]";
+    }
+    selector += `[data-key="${ev.key}"]`;
+    const element = document.querySelector(selector) as HTMLElement;
+    if (element === null) {
+      return;
+    }
+    element.dispatchEvent(
+      new PointerEvent("pointerdown", { bubbles: true, cancelable: true })
+    );
+    element.dispatchEvent(
+      new PointerEvent("pointerup", { bubbles: true, cancelable: true })
+    );
+    element.click();
+    ev.preventDefault();
+  };
+}
+
 document.addEventListener("pointerdown", Dialog.pointerdown);
 
 document.addEventListener("pointerdown", MenuBar.pointerdown);
@@ -1246,6 +1282,8 @@ document.addEventListener("pointerdown", MenuBar.pointerdown);
 document.addEventListener("pointerdown", SplitPane.pointerdown);
 
 document.addEventListener("pointerdown", TabComponent.pointerdown);
+
+document.addEventListener("keydown", KeyboardShortcut.keyDown);
 
 /**
  *  No FOUC (Flash Of Unstyled Content)

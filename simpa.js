@@ -974,10 +974,45 @@ var TabComponent = /** @class */ (function () {
     };
     return TabComponent;
 }());
+/**
+ * KeyboardShortcut
+ *
+ * @author Yassuo Toda
+ */
+var KeyboardShortcut = /** @class */ (function () {
+    function KeyboardShortcut() {
+    }
+    KeyboardShortcut.keyDown = function (ev) {
+        var selector = "";
+        if (ev.altKey) {
+            selector += "[data-altKey]";
+        }
+        if (ev.ctrlKey) {
+            selector += "[data-ctrlKey]";
+        }
+        if (ev.metaKey) {
+            selector += "[data-metaKey]";
+        }
+        if (ev.shiftKey) {
+            selector += "[data-shiftKey]";
+        }
+        selector += "[data-key=\"".concat(ev.key, "\"]");
+        var element = document.querySelector(selector);
+        if (element === null) {
+            return;
+        }
+        element.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, cancelable: true }));
+        element.dispatchEvent(new PointerEvent("pointerup", { bubbles: true, cancelable: true }));
+        element.click();
+        ev.preventDefault();
+    };
+    return KeyboardShortcut;
+}());
 document.addEventListener("pointerdown", Dialog.pointerdown);
 document.addEventListener("pointerdown", MenuBar.pointerdown);
 document.addEventListener("pointerdown", SplitPane.pointerdown);
 document.addEventListener("pointerdown", TabComponent.pointerdown);
+document.addEventListener("keydown", KeyboardShortcut.keyDown);
 /**
  *  No FOUC (Flash Of Unstyled Content)
  */
