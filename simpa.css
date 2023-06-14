@@ -874,11 +874,14 @@ button[disabled] img {
  * Split Pane
  */
 
+.SplitPane {
+  overflow: hidden;
+}
+
 .SplitPane > * {
   margin: 0 !important;
   padding: 0 !important;
   border: 0 !important;
-  overflow: hidden;
 }
 
 .SplitPane > :not(:nth-child(2)) {
