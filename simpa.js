@@ -116,32 +116,19 @@ var MenuBar = /** @class */ (function () {
     MenuBar.select = function (menuBar, ul, li, timeout) {
         if (timeout === void 0) { timeout = 0; }
         MenuBar.clearTimeout(menuBar);
-        if (ul === menuBar) {
-            if (li !== null && li.dataset.selected !== undefined) {
-                return;
-            }
-            menuBar
-                .querySelectorAll(":scope li[data-selected]")
-                .forEach(function (selected) {
-                selected.removeAttribute("data-selected");
-            });
-            if (li !== null) {
-                li.dataset.selected = "";
-            }
-        }
-        else {
-            if (timeout) {
-                MenuBar.setTimeout(function () {
-                    for (var i = 0; i < ul.children.length; i++) {
-                        var child = ul.children[i];
-                        if (child === li) {
-                            child.dataset.selected = "";
-                        }
-                        else {
-                            child.removeAttribute("data-selected");
-                        }
-                    }
-                }, timeout);
+        MenuBar.setTimeout(function () {
+            if (ul === menuBar) {
+                if (li !== null && li.dataset.selected !== undefined) {
+                    return;
+                }
+                menuBar
+                    .querySelectorAll(":scope li[data-selected]")
+                    .forEach(function (selected) {
+                    selected.removeAttribute("data-selected");
+                });
+                if (li !== null) {
+                    li.dataset.selected = "";
+                }
             }
             else {
                 for (var i = 0; i < ul.children.length; i++) {
@@ -154,7 +141,7 @@ var MenuBar = /** @class */ (function () {
                     }
                 }
             }
-        }
+        }, timeout);
     };
     MenuBar.clearTimeout = function (menuBar) {
         if (MenuBar.timeoutId !== undefined) {
@@ -215,21 +202,6 @@ var MenuBar = /** @class */ (function () {
                 menuBar.dataset.closed = "";
                 if (menuBar.dataset.open === undefined) {
                     MenuBar.open(menuBar);
-                    /*
-                  } else {
-                    const input: HTMLInputElement | null = li.querySelector(
-                      ":scope>input, :scope>:not(ul) input"
-                    );
-                    if (input !== null) {
-                      if (input.type === "radio") {
-                        if (!input.checked) {
-                          input.checked = true;
-                        }
-                      } else if (input.type === "checkbox") {
-                        input.checked = !input.checked;
-                      }
-                    }
-                    */
                 }
             }
         }
@@ -243,10 +215,8 @@ var MenuBar = /** @class */ (function () {
         if (li === null) {
             return;
         }
+        var input = li.querySelector(":scope>input, :scope>:not(ul) input");
         /*
-        const input: HTMLInputElement | null = li.querySelector(
-          ":scope>input, :scope>:not(ul) input"
-        );
         if (input !== null) {
           if (input.type === "radio") {
             if (!input.checked) {
