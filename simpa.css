@@ -610,17 +610,18 @@ button[disabled] img {
 /**
  * Menu Bar layout
  */
+
 .MenuBar {
-  display: grid !important;
-  align-content: stretch !important;
-  justify-content: start !important;
-  align-items: stretch !important;
+  display: grid;
+  align-content: stretch;
+  justify-content: start;
+  align-items: stretch;
 }
 
 .MenuBar > * {
-  grid-row: 1 !important;
+  grid-row: 1;
   display: grid;
-  align-items: center;
+  place-content: center;
 }
 
 /**
