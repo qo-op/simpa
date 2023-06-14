@@ -913,8 +913,9 @@ button[disabled] img {
 }
 
 @media (pointer: coarse) {
-  .SplitPane .SplitPaneDivider,
-  .SplitPane[data-orientation="horizontal-split"] .SplitPaneDivider {
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2)
+    .SplitPaneDivider {
     position: absolute;
     inset-block-start: 0;
     inset-inline-start: -24px;
@@ -922,7 +923,9 @@ button[disabled] img {
     height: 100%;
   }
 
-  .SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2)
+    .SplitPaneDivider {
     position: absolute;
     inset-block-start: -24px;
     inset-inline-start: 0;
@@ -932,8 +935,9 @@ button[disabled] img {
 }
 
 @media (pointer: fine) {
-  .SplitPane .SplitPaneDivider,
-  .SplitPane[data-orientation="horizontal-split"] .SplitPaneDivider {
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2)
+    .SplitPaneDivider {
     position: absolute;
     inset-block-start: 0;
     inset-inline-start: -4px;
@@ -941,7 +945,9 @@ button[disabled] img {
     height: 100%;
   }
 
-  .SplitPane[data-orientation="vertical-split"] .SplitPaneDivider {
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2)
+    .SplitPaneDivider {
     position: absolute;
     inset-block-start: -4px;
     inset-inline-start: 0;
