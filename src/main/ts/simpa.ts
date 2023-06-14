@@ -144,19 +144,30 @@ class MenuBar {
     timeout: number = 0
   ) => {
     MenuBar.clearTimeout(menuBar);
-    MenuBar.setTimeout(() => {
-      if (ul === menuBar) {
-        if (li !== null && li.dataset.selected !== undefined) {
-          return;
-        }
-        menuBar
-          .querySelectorAll(":scope li[data-selected]")
-          .forEach((selected: Element) => {
-            selected.removeAttribute("data-selected");
-          });
-        if (li !== null) {
-          li.dataset.selected = "";
-        }
+    if (ul === menuBar) {
+      if (li !== null && li.dataset.selected !== undefined) {
+        return;
+      }
+      menuBar
+        .querySelectorAll(":scope li[data-selected]")
+        .forEach((selected: Element) => {
+          selected.removeAttribute("data-selected");
+        });
+      if (li !== null) {
+        li.dataset.selected = "";
+      }
+    } else {
+      if (timeout) {
+        MenuBar.setTimeout(() => {
+          for (let i: number = 0; i < ul.children.length; i++) {
+            const child = ul.children[i] as HTMLElement;
+            if (child === li) {
+              child.dataset.selected = "";
+            } else {
+              child.removeAttribute("data-selected");
+            }
+          }
+        }, timeout);
       } else {
         for (let i: number = 0; i < ul.children.length; i++) {
           const child = ul.children[i] as HTMLElement;
@@ -167,7 +178,7 @@ class MenuBar {
           }
         }
       }
-    }, timeout);
+    }
   };
 
   static getSelected(menuBar: HTMLElement): HTMLElement | null {
@@ -257,8 +268,8 @@ class MenuBar {
     const input: HTMLInputElement | null = li.querySelector(
       ":scope>input, :scope>:not(ul) input"
     );
-    /*
     if (input !== null) {
+      /*
       if (input.type === "radio") {
         if (!input.checked) {
           input.checked = true;
@@ -266,8 +277,9 @@ class MenuBar {
       } else if (input.type === "checkbox") {
         input.checked = !input.checked;
       }
+      */
+      input.click();
     }
-    */
     const menuBar = ev.currentTarget as HTMLElement;
     if (li.parentElement === menuBar) {
       // menu

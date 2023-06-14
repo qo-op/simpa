@@ -662,6 +662,10 @@ button[disabled] img {
   font-family: monospace;
 }
 
+.MenuBar input {
+  pointer-events: none;
+}
+
 /**
  * Scroll Pane
  */
