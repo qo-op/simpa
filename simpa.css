@@ -662,6 +662,7 @@ button[disabled] img {
   font-family: monospace;
 }
 
+.MenuBar label,
 .MenuBar input {
   pointer-events: none;
 }
