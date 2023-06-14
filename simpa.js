@@ -1,8 +1,8 @@
 /**
  * Simpa.ts
  *
- *  If you are using TypeScript, you can use OptionPane by following this syntax:
- * (window as any).OptionPane.showMessageDialog("Hello, World!");
+ * If you are using TypeScript, you can use OptionPane by following this syntax:
+ * await (window as any).OptionPane.showMessageDialog("Hello, World!");
  *
  * @author Yassuo Toda
  */
