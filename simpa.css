@@ -881,7 +881,7 @@ button[disabled] img {
 }
 
 .SplitPane > :not(:nth-child(2)) {
-  overflow: hidden !important;
+  overflow: hidden;
 }
 
 .SplitPane:not([data-orientation="vertical-split"]) > :first-child {
