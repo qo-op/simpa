@@ -261,70 +261,60 @@ body {
 }
 
 /**
- * Grid Bag Layout
+ * Grid Constraints
  */
 
-.GridBagLayout {
+.GridConstraints {
   display: grid !important;
   align-content: center !important;
   justify-content: center !important;
 }
 
-/**
- * Grid Bag Constraints
- */
-
-.GridBagConstraints {
-  display: grid !important;
-  align-content: center !important;
-  justify-content: center !important;
-}
-
-.GridBagConstraints[data-anchor="page-start"] {
+.GridConstraints[data-anchor="page-start"] {
   align-content: start !important;
 }
 
-.GridBagConstraints[data-anchor="page-end"] {
+.GridConstraints[data-anchor="page-end"] {
   align-content: end !important;
 }
 
-.GridBagConstraints[data-anchor="line-start"] {
+.GridConstraints[data-anchor="line-start"] {
   justify-content: start !important;
 }
 
-.GridBagConstraints[data-anchor="line-end"] {
+.GridConstraints[data-anchor="line-end"] {
   justify-content: end !important;
 }
 
-.GridBagConstraints[data-anchor="first-line-start"] {
+.GridConstraints[data-anchor="first-line-start"] {
   align-content: start !important;
   justify-content: start !important;
 }
 
-.GridBagConstraints[data-anchor="first-line-end"] {
+.GridConstraints[data-anchor="first-line-end"] {
   align-content: start !important;
   justify-content: end !important;
 }
 
-.GridBagConstraints[data-anchor="last-line-start"] {
+.GridConstraints[data-anchor="last-line-start"] {
   align-content: end !important;
   justify-content: start !important;
 }
 
-.GridBagConstraints[data-anchor="last-line-end"] {
+.GridConstraints[data-anchor="last-line-end"] {
   align-content: end !important;
   justify-content: end !important;
 }
 
-.GridBagConstraints[data-fill="horizontal"] {
+.GridConstraints[data-fill="horizontal"] {
   justify-content: stretch !important;
 }
 
-.GridBagConstraints[data-fill="vertical"] {
+.GridConstraints[data-fill="vertical"] {
   align-content: stretch !important;
 }
 
-.GridBagConstraints[data-fill="both"] {
+.GridConstraints[data-fill="both"] {
   align-content: stretch !important;
   justify-content: stretch !important;
 }

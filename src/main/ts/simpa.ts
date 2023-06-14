@@ -666,7 +666,7 @@ class OptionPane {
     this.dialogIconPane.style.gridRow = "1";
     this.dialogIconPane.style.gridColumn = "1";
 
-    this.dialogIconPane.classList.add("GridBagConstraints");
+    this.dialogIconPane.classList.add("GridConstraints");
     this.dialogIconPane.dataset.anchor = "center";
 
     if (img) {
@@ -685,7 +685,7 @@ class OptionPane {
     this.dialogMessagePane.style.gridColumn = "2";
     this.dialogMainPane.appendChild(this.dialogMessagePane);
 
-    this.dialogMessagePane.classList.add("GridBagConstraints");
+    this.dialogMessagePane.classList.add("GridConstraints");
     this.dialogMessagePane.dataset.anchor = "center";
     this.dialogMessagePane.dataset.fill = "horizontal";
 
@@ -699,7 +699,7 @@ class OptionPane {
       this.dialogInputPane.style.gridColumn = "2";
       this.dialogMainPane.appendChild(this.dialogInputPane);
 
-      this.dialogInputPane.classList.add("GridBagConstraints");
+      this.dialogInputPane.classList.add("GridConstraints");
       this.dialogInputPane.dataset.fill = "both";
 
       this.dialogInputPane.appendChild(input);
