@@ -987,12 +987,21 @@ var TabComponent = /** @class */ (function () {
 /**
  * KeyboardShortcut
  *
+ * Function keys (F1 to F24)
+ * Keys combined with Alt or Ctrl
+ *
  * @author Yassuo Toda
  */
 var KeyboardShortcut = /** @class */ (function () {
     function KeyboardShortcut() {
     }
     KeyboardShortcut.keyDown = function (ev) {
+        if (!ev.key || ev.key === "Unidentified") {
+            return;
+        }
+        if (!ev.key.startsWith("F") && !ev.altKey && !ev.ctrlKey) {
+            return;
+        }
         var selector = "";
         if (ev.altKey) {
             selector += "[data-alt]";

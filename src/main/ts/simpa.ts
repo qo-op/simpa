@@ -1251,10 +1251,19 @@ class TabComponent {
 /**
  * KeyboardShortcut
  *
+ * Function keys (F1 to F24)
+ * Keys combined with Alt or Ctrl
+ *
  * @author Yassuo Toda
  */
 class KeyboardShortcut {
   static keyDown = (ev: KeyboardEvent) => {
+    if (!ev.key || ev.key === "Unidentified") {
+      return;
+    }
+    if (!ev.key.startsWith("F") && !ev.altKey && !ev.ctrlKey) {
+      return;
+    }
     let selector = "";
     if (ev.altKey) {
       selector += "[data-alt]";
