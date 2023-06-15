@@ -927,6 +927,22 @@ button[disabled] img {
     width: 100%;
     content: "";
   }
+
+  .SplitPane:not([data-orientation="vertical-split"]) > :first-child {
+    padding-inline-end: 24px;
+  }
+
+  .SplitPane:not([data-orientation="vertical-split"]) > :last-child {
+    padding-inline-start: 24px;
+  }
+
+  .SplitPane[data-orientation="vertical-split"] > :first-child {
+    padding-block-end: 24px;
+  }
+
+  .SplitPane[data-orientation="vertical-split"] > :last-child {
+    padding-block-start: 24px;
+  }
 }
 
 @media (pointer: fine) {
@@ -946,6 +962,22 @@ button[disabled] img {
     height: 8px;
     width: 100%;
     content: "";
+  }
+
+  .SplitPane:not([data-orientation="vertical-split"]) > :first-child {
+    padding-inline-end: 4px;
+  }
+
+  .SplitPane:not([data-orientation="vertical-split"]) > :last-child {
+    padding-inline-start: 4px;
+  }
+
+  .SplitPane[data-orientation="vertical-split"] > :first-child {
+    padding-block-end: 4px;
+  }
+
+  .SplitPane[data-orientation="vertical-split"] > :last-child {
+    padding-block-start: 4px;
   }
 }
 
