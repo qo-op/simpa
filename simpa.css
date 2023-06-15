@@ -894,7 +894,7 @@ button[disabled] img {
 
 .SplitPane:not([data-orientation="vertical-split"]) > :first-child,
 .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2) {
-  float: left !important;
+  float: left;
 }
 
 .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2) {
@@ -909,29 +909,6 @@ button[disabled] img {
   cursor: ns-resize;
 }
 
-/*
-@media (pointer: coarse) {
-  .SplitPane:not([data-orientation="vertical-split"])
-    > :nth-child(2)
-    .SplitPaneDivider {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: -24px;
-    width: 48px;
-    height: 100%;
-  }
-
-  .SplitPane[data-orientation="vertical-split"]
-    > :nth-child(2)
-    .SplitPaneDivider {
-    position: absolute;
-    inset-block-start: -24px;
-    inset-inline-start: 0;
-    height: 48px;
-    width: 100%;
-  }
-}
-*/
 @media (pointer: coarse) {
   .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2)::before {
     position: absolute;
@@ -952,29 +929,6 @@ button[disabled] img {
   }
 }
 
-/*
-@media (pointer: fine) {
-  .SplitPane:not([data-orientation="vertical-split"])
-    > :nth-child(2)
-    .SplitPaneDivider {
-    position: absolute;
-    inset-block-start: 0;
-    inset-inline-start: -4px;
-    width: 8px;
-    height: 100%;
-  }
-
-  .SplitPane[data-orientation="vertical-split"]
-    > :nth-child(2)
-    .SplitPaneDivider {
-    position: absolute;
-    inset-block-start: -4px;
-    inset-inline-start: 0;
-    height: 8px;
-    width: 100%;
-  }
-}
-*/
 @media (pointer: fine) {
   .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2)::before {
     position: absolute;
@@ -995,28 +949,11 @@ button[disabled] img {
   }
 }
 
-/*
-@media (hover: hover) {
-  .SplitPane .SplitPaneDivider:hover {
-    background-color: rgba(128, 128, 128, 0.5);
-  }
-}
-*/
 @media (hover: hover) {
   .SplitPane > :nth-child(2):hover::before {
     background-color: rgba(128, 128, 128, 0.5);
   }
 }
-
-/*
-.SplitPane .SplitPaneDivider * {
-  pointer-events: none;
-}
-
-.SplitPane .SplitPaneDivider[data-draggable="false"] {
-  pointer-events: none;
-}
-*/
 
 /**
  * Tabbed pane
