@@ -1014,14 +1014,20 @@ class SplitPane {
 
   static pointerdown = (ev: PointerEvent) => {
     const target = ev.target as HTMLElement;
-    if (!target.classList.contains("SplitPaneDivider")) {
+    if (!target.parentElement) {
       return;
     }
+    if (!target.parentElement.classList.contains("SplitPane")) {
+      return;
+    }
+    SplitPane.splitPane = target.parentElement;
     SplitPane.dragStart = true;
+    /*
     SplitPane.splitPaneDivider = target;
     SplitPane.splitPane = SplitPane.splitPaneDivider.closest(
       ".SplitPane"
     ) as HTMLElement;
+    */
     SplitPane.leftComponent = SplitPane.splitPane.children[0] as HTMLElement;
     SplitPane.rightComponent = SplitPane.splitPane.children[2] as HTMLElement;
     const leftComponentRect: DOMRect =
