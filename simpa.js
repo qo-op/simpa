@@ -903,6 +903,7 @@ var SplitPane = /** @class */ (function () {
         if (SplitPane.dragLayer !== null) {
             SplitPane.dragLayer.style.visibility = "hidden";
         }
+        SplitPane.divider.dispatchEvent(new PointerEvent("pointerup"));
     };
     return SplitPane;
 }());
