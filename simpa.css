@@ -910,16 +910,16 @@ button[disabled] img {
   cursor: ns-resize;
 }
 
+/**
+ * EmptyDivider
+ */
+
 .SplitPane:not([data-orientation="vertical-split"])
   > :nth-child(2).EmptyDivider {
   width: 0 !important;
   position: relative !important;
   cursor: ew-resize;
 }
-
-/**
- * EmptyDivider
- */
 
 .SplitPane[data-orientation="vertical-split"] > :nth-child(2).EmptyDivider {
   height: 0 !important;
@@ -967,6 +967,112 @@ button[disabled] img {
     inset-inline-start: 0;
     height: 8px;
     width: 100%;
+    content: "";
+  }
+}
+
+/**
+ * LineDivider
+ */
+
+.SplitPane:not([data-orientation="vertical-split"])
+  > :nth-child(2).LineDivider {
+  width: 0 !important;
+  position: relative !important;
+  cursor: ew-resize;
+  background-color: Gray;
+}
+
+.SplitPane[data-orientation="vertical-split"] > :nth-child(2).LineDivider {
+  height: 0 !important;
+  position: relative !important;
+  cursor: ns-resize;
+}
+
+@media (pointer: coarse) {
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).LineDivider::before {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -16px;
+    width: 32px;
+    height: 100%;
+    content: "";
+  }
+
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).LineDivider::after {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -0.5px;
+    width: 1px;
+    height: 100%;
+    background-color: Gray;
+    content: "";
+  }
+
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).LineDivider::before {
+    position: absolute;
+    inset-block-start: -16px;
+    inset-inline-start: 0;
+    height: 32px;
+    width: 100%;
+    content: "";
+  }
+
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).LineDivider::after {
+    position: absolute;
+    inset-block-start: -0.5px;
+    inset-inline-start: 0;
+    height: 1px;
+    width: 100%;
+    background-color: Gray;
+    content: "";
+  }
+}
+
+@media (pointer: fine) {
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).LineDivider::before {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -4px;
+    width: 8px;
+    height: 100%;
+    content: "";
+  }
+
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).LineDivider::after {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -0.5px;
+    width: 1px;
+    height: 100%;
+    background-color: Gray;
+    content: "";
+  }
+
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).LineDivider::before {
+    position: absolute;
+    inset-block-start: -4px;
+    inset-inline-start: 0;
+    height: 8px;
+    width: 100%;
+    content: "";
+  }
+
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).LineDivider::after {
+    position: absolute;
+    inset-block-start: -0.5px;
+    inset-inline-start: 0;
+    height: 1px;
+    width: 100%;
+    background-color: Gray;
     content: "";
   }
 }
