@@ -805,14 +805,26 @@ var SplitPane = /** @class */ (function () {
         var rightComponentRect = SplitPane.rightComponent.getBoundingClientRect();
         SplitPane.verticalSplit =
             SplitPane.splitPane.dataset.orientation === "vertical-split";
+        var splitPaneStyle = window.getComputedStyle(SplitPane.splitPane);
+        var leftComponentStyle = window.getComputedStyle(SplitPane.leftComponent);
+        var rightComponentStyle = window.getComputedStyle(SplitPane.rightComponent);
+        var nanValue = function (value, defaultValue) {
+            if (defaultValue === void 0) { defaultValue = 0; }
+            return isNaN(value) ? defaultValue : value;
+        };
         if (SplitPane.verticalSplit) {
-            var computedStyle = window.getComputedStyle(SplitPane.splitPane);
             SplitPane.size =
                 SplitPane.splitPane.clientHeight -
-                    parseFloat(computedStyle.paddingTop) -
-                    parseFloat(computedStyle.paddingBottom);
-            SplitPane.maximumDividerLocation =
+                    parseFloat(splitPaneStyle.paddingTop) -
+                    parseFloat(splitPaneStyle.paddingBottom);
+            SplitPane.endDividerLocation =
                 leftComponentRect.height + rightComponentRect.height;
+            SplitPane.minimumDividerLocation = Math.max(parseFloat(leftComponentStyle.minHeight), nanValue(SplitPane.endDividerLocation -
+                parseFloat(rightComponentStyle.maxHeight)));
+            SplitPane.maximumDividerLocation =
+                SplitPane.endDividerLocation -
+                    Math.max(parseFloat(rightComponentStyle.minHeight), nanValue(SplitPane.endDividerLocation -
+                        parseFloat(leftComponentStyle.maxHeight)));
             SplitPane.leftComponent.style.height =
                 (100 * leftComponentRect.height) / SplitPane.size + "%";
             SplitPane.rightComponent.style.height =
@@ -820,13 +832,18 @@ var SplitPane = /** @class */ (function () {
             SplitPane.offset = ev.clientY - leftComponentRect.height;
         }
         else {
-            var computedStyle = window.getComputedStyle(SplitPane.splitPane);
             SplitPane.size =
                 SplitPane.splitPane.clientWidth -
-                    parseFloat(computedStyle.paddingLeft) -
-                    parseFloat(computedStyle.paddingRight);
-            SplitPane.maximumDividerLocation =
+                    parseFloat(splitPaneStyle.paddingLeft) -
+                    parseFloat(splitPaneStyle.paddingRight);
+            SplitPane.endDividerLocation =
                 leftComponentRect.width + rightComponentRect.width;
+            SplitPane.minimumDividerLocation = Math.max(parseFloat(leftComponentStyle.minWidth), nanValue(SplitPane.endDividerLocation -
+                parseFloat(rightComponentStyle.maxWidth)));
+            SplitPane.maximumDividerLocation =
+                SplitPane.endDividerLocation -
+                    Math.max(parseFloat(rightComponentStyle.minWidth), nanValue(SplitPane.endDividerLocation -
+                        parseFloat(leftComponentStyle.maxWidth)));
             SplitPane.leftComponent.style.width =
                 (100 * leftComponentRect.width) / SplitPane.size + "%";
             SplitPane.rightComponent.style.width =
@@ -858,20 +875,20 @@ var SplitPane = /** @class */ (function () {
             return;
         }
         if (SplitPane.verticalSplit) {
-            var dividerLocation = Math.min(Math.max(ev.clientY - SplitPane.offset, 0), SplitPane.maximumDividerLocation);
+            var dividerLocation = Math.min(Math.max(ev.clientY - SplitPane.offset, SplitPane.minimumDividerLocation), SplitPane.maximumDividerLocation);
             var percentage = (100 * dividerLocation) / SplitPane.size;
             SplitPane.leftComponent.style.height = percentage + "%";
             percentage =
-                (100 * (SplitPane.maximumDividerLocation - dividerLocation)) /
+                (100 * (SplitPane.endDividerLocation - dividerLocation)) /
                     SplitPane.size;
             SplitPane.rightComponent.style.height = percentage + "%";
         }
         else {
-            var dividerLocation = Math.min(Math.max(ev.clientX - SplitPane.offset, 0), SplitPane.maximumDividerLocation);
+            var dividerLocation = Math.min(Math.max(ev.clientX - SplitPane.offset, SplitPane.minimumDividerLocation), SplitPane.maximumDividerLocation);
             var percentage = (100 * dividerLocation) / SplitPane.size;
             SplitPane.leftComponent.style.width = percentage + "%";
             percentage =
-                (100 * (SplitPane.maximumDividerLocation - dividerLocation)) /
+                (100 * (SplitPane.endDividerLocation - dividerLocation)) /
                     SplitPane.size;
             SplitPane.rightComponent.style.width = percentage + "%";
         }

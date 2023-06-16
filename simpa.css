@@ -932,8 +932,8 @@ button[disabled] img {
     > :nth-child(2).EmptyDivider::before {
     position: absolute;
     inset-block-start: 0;
-    inset-inline-start: -24px;
-    width: 48px;
+    inset-inline-start: -16px;
+    width: 32px;
     height: 100%;
     content: "";
   }
@@ -941,9 +941,9 @@ button[disabled] img {
   .SplitPane[data-orientation="vertical-split"]
     > :nth-child(2).EmptyDivider::before {
     position: absolute;
-    inset-block-start: -24px;
+    inset-block-start: -16px;
     inset-inline-start: 0;
-    height: 48px;
+    height: 32px;
     width: 100%;
     content: "";
   }
