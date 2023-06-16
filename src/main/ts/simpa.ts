@@ -1004,13 +1004,14 @@ class SplitPane {
   static dragStart: boolean = false;
   static dragLayer: HTMLElement;
 
-  static splitPaneDivider: HTMLElement;
   static splitPane: HTMLElement;
   static leftComponent: HTMLElement;
+  static divider: HTMLElement;
   static rightComponent: HTMLElement;
   static verticalSplit: boolean = false;
-  static offset: number;
+  static size: number;
   static maximumDividerLocation: number;
+  static offset: number;
 
   static pointerdown = (ev: PointerEvent) => {
     const target = ev.target as HTMLElement;
@@ -1022,13 +1023,8 @@ class SplitPane {
     }
     SplitPane.splitPane = target.parentElement;
     SplitPane.dragStart = true;
-    /*
-    SplitPane.splitPaneDivider = target;
-    SplitPane.splitPane = SplitPane.splitPaneDivider.closest(
-      ".SplitPane"
-    ) as HTMLElement;
-    */
     SplitPane.leftComponent = SplitPane.splitPane.children[0] as HTMLElement;
+    SplitPane.divider = SplitPane.splitPane.children[1] as HTMLElement;
     SplitPane.rightComponent = SplitPane.splitPane.children[2] as HTMLElement;
     const leftComponentRect: DOMRect =
       SplitPane.leftComponent.getBoundingClientRect();
@@ -1037,20 +1033,22 @@ class SplitPane {
     SplitPane.verticalSplit =
       SplitPane.splitPane.dataset.orientation === "vertical-split";
     if (SplitPane.verticalSplit) {
+      SplitPane.size = SplitPane.splitPane.clientHeight;
       SplitPane.maximumDividerLocation =
         leftComponentRect.height + rightComponentRect.height;
-      const percentage =
-        (100 * leftComponentRect.height) / SplitPane.maximumDividerLocation;
-      SplitPane.leftComponent.style.height = percentage + "%";
-      SplitPane.rightComponent.style.height = 100 - percentage + "%";
+      SplitPane.leftComponent.style.height =
+        (100 * leftComponentRect.height) / SplitPane.size + "%";
+      SplitPane.rightComponent.style.height =
+        (100 * rightComponentRect.height) / SplitPane.size + "%";
       SplitPane.offset = ev.clientY - leftComponentRect.height;
     } else {
+      SplitPane.size = SplitPane.splitPane.clientWidth;
       SplitPane.maximumDividerLocation =
         leftComponentRect.width + rightComponentRect.width;
-      const percentage =
-        (100 * leftComponentRect.width) / SplitPane.maximumDividerLocation;
-      SplitPane.leftComponent.style.width = percentage + "%";
-      SplitPane.rightComponent.style.width = 100 - percentage + "%";
+      SplitPane.leftComponent.style.width =
+        (100 * leftComponentRect.width) / SplitPane.size + "%";
+      SplitPane.rightComponent.style.width =
+        (100 * rightComponentRect.width) / SplitPane.size + "%";
       SplitPane.offset = ev.clientX - leftComponentRect.width;
     }
     if (SplitPane.verticalSplit) {
@@ -1063,7 +1061,6 @@ class SplitPane {
     });
     document.addEventListener("pointermove", SplitPane.pointermove);
     document.addEventListener("pointerup", SplitPane.pointerup);
-    // document.addEventListener("dragstart", SplitPane.dragstart);
     SplitPane.dragLayer = document.body.querySelector(
       ":scope>.DragLayer"
     ) as HTMLElement;
@@ -1089,19 +1086,23 @@ class SplitPane {
         Math.max(ev.clientY - SplitPane.offset, 0),
         SplitPane.maximumDividerLocation
       );
-      const percentage =
-        (100 * dividerLocation) / SplitPane.maximumDividerLocation;
+      let percentage = (100 * dividerLocation) / SplitPane.size;
       SplitPane.leftComponent.style.height = percentage + "%";
-      SplitPane.rightComponent.style.height = 100 - percentage + "%";
+      percentage =
+        (100 * (SplitPane.maximumDividerLocation - dividerLocation)) /
+        SplitPane.size;
+      SplitPane.rightComponent.style.height = percentage + "%";
     } else {
       const dividerLocation = Math.min(
         Math.max(ev.clientX - SplitPane.offset, 0),
         SplitPane.maximumDividerLocation
       );
-      const percentage =
-        (100 * dividerLocation) / SplitPane.maximumDividerLocation;
+      let percentage = (100 * dividerLocation) / SplitPane.size;
       SplitPane.leftComponent.style.width = percentage + "%";
-      SplitPane.rightComponent.style.width = 100 - percentage + "%";
+      percentage =
+        (100 * (SplitPane.maximumDividerLocation - dividerLocation)) /
+        SplitPane.size;
+      SplitPane.rightComponent.style.width = percentage + "%";
     }
     ev.preventDefault();
   };
@@ -1112,20 +1113,10 @@ class SplitPane {
     document.removeEventListener("touchmove", SplitPane.preventTouchMove);
     document.removeEventListener("pointermove", SplitPane.pointermove);
     document.removeEventListener("pointerup", SplitPane.pointerup);
-    // document.removeEventListener("dragstart", SplitPane.dragstart);
     if (SplitPane.dragLayer !== null) {
       SplitPane.dragLayer.style.visibility = "hidden";
     }
   };
-
-  /*
-    static dragstart = (ev: PointerEvent) => {
-      if (ev.target === SplitPane.splitPaneDivider) {
-        SplitPane.pointerup(ev);
-        ev.preventDefault();
-      }
-    };
-    */
 }
 
 /**

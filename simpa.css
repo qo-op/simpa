@@ -884,7 +884,8 @@ button[disabled] img {
 
 .SplitPane > * {
   margin: 0 !important;
-  box-sizing: border-box !important;
+  border: 0 !important;
+  padding: 0 !important;
   display: grid;
 }
 
@@ -893,7 +894,7 @@ button[disabled] img {
 }
 
 .SplitPane:not([data-orientation="vertical-split"]) > * {
-  height: 100% !important;
+  height: 100%;
 }
 
 .SplitPane:not([data-orientation="vertical-split"]) > :first-child,
@@ -902,19 +903,33 @@ button[disabled] img {
 }
 
 .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2) {
+  cursor: ew-resize;
+}
+
+.SplitPane[data-orientation="vertical-split"] > :nth-child(2) {
+  cursor: ns-resize;
+}
+
+.SplitPane:not([data-orientation="vertical-split"])
+  > :nth-child(2).EmptyDivider {
   width: 0 !important;
   position: relative !important;
   cursor: ew-resize;
 }
 
-.SplitPane[data-orientation="vertical-split"] > :nth-child(2) {
+/**
+ * EmptyDivider
+ */
+
+.SplitPane[data-orientation="vertical-split"] > :nth-child(2).EmptyDivider {
   height: 0 !important;
   position: relative !important;
   cursor: ns-resize;
 }
 
 @media (pointer: coarse) {
-  .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2)::before {
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).EmptyDivider::before {
     position: absolute;
     inset-block-start: 0;
     inset-inline-start: -24px;
@@ -923,7 +938,8 @@ button[disabled] img {
     content: "";
   }
 
-  .SplitPane[data-orientation="vertical-split"] > :nth-child(2)::before {
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).EmptyDivider::before {
     position: absolute;
     inset-block-start: -24px;
     inset-inline-start: 0;
@@ -934,7 +950,8 @@ button[disabled] img {
 }
 
 @media (pointer: fine) {
-  .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2)::before {
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).EmptyDivider::before {
     position: absolute;
     inset-block-start: 0;
     inset-inline-start: -4px;
@@ -943,19 +960,14 @@ button[disabled] img {
     content: "";
   }
 
-  .SplitPane[data-orientation="vertical-split"] > :nth-child(2)::before {
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).EmptyDivider::before {
     position: absolute;
     inset-block-start: -4px;
     inset-inline-start: 0;
     height: 8px;
     width: 100%;
     content: "";
-  }
-}
-
-@media (hover: hover) {
-  .SplitPane > :nth-child(2):hover::before {
-    background-color: rgba(128, 128, 128, 0.5);
   }
 }
 
