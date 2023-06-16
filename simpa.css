@@ -220,7 +220,7 @@ body {
 
 .CenterLayout {
   display: grid !important;
-  place-content: center !important;
+  place-items: center !important;
 }
 
 /**
@@ -270,57 +270,55 @@ body {
 
 .GridConstraints {
   display: grid !important;
-  align-content: center !important;
-  justify-content: center !important;
+  place-items: center !important;
 }
 
 .GridConstraints[data-anchor="page-start"] {
-  align-content: start !important;
+  align-items: start !important;
 }
 
 .GridConstraints[data-anchor="page-end"] {
-  align-content: end !important;
+  align-items: end !important;
 }
 
 .GridConstraints[data-anchor="line-start"] {
-  justify-content: start !important;
+  justify-items: start !important;
 }
 
 .GridConstraints[data-anchor="line-end"] {
-  justify-content: end !important;
+  justify-items: end !important;
 }
 
 .GridConstraints[data-anchor="first-line-start"] {
-  align-content: start !important;
-  justify-content: start !important;
+  align-items: start !important;
+  justify-items: start !important;
 }
 
 .GridConstraints[data-anchor="first-line-end"] {
-  align-content: start !important;
-  justify-content: end !important;
+  align-items: start !important;
+  justify-items: end !important;
 }
 
 .GridConstraints[data-anchor="last-line-start"] {
-  align-content: end !important;
-  justify-content: start !important;
+  align-items: end !important;
+  justify-items: start !important;
 }
 
 .GridConstraints[data-anchor="last-line-end"] {
-  align-content: end !important;
-  justify-content: end !important;
+  align-items: end !important;
+  justify-items: end !important;
 }
 
 .GridConstraints[data-fill="horizontal"] {
-  justify-content: stretch !important;
+  justify-items: stretch !important;
 }
 
 .GridConstraints[data-fill="vertical"] {
-  align-content: stretch !important;
+  align-items: stretch !important;
 }
 
 .GridConstraints[data-fill="both"] {
-  align-content: stretch !important;
-  justify-content: stretch !important;
+  place-items: stretch !important;
 }
 
 /**
