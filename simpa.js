@@ -794,9 +794,12 @@ var SplitPane = /** @class */ (function () {
             return;
         }
         SplitPane.splitPane = target.parentElement;
+        SplitPane.divider = SplitPane.splitPane.children[1];
+        if (target !== SplitPane.divider) {
+            return;
+        }
         SplitPane.dragStart = true;
         SplitPane.leftComponent = SplitPane.splitPane.children[0];
-        SplitPane.divider = SplitPane.splitPane.children[1];
         SplitPane.rightComponent = SplitPane.splitPane.children[2];
         var leftComponentRect = SplitPane.leftComponent.getBoundingClientRect();
         var rightComponentRect = SplitPane.rightComponent.getBoundingClientRect();

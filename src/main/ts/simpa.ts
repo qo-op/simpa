@@ -1022,9 +1022,12 @@ class SplitPane {
       return;
     }
     SplitPane.splitPane = target.parentElement;
+    SplitPane.divider = SplitPane.splitPane.children[1] as HTMLElement;
+    if (target !== SplitPane.divider) {
+      return;
+    }
     SplitPane.dragStart = true;
     SplitPane.leftComponent = SplitPane.splitPane.children[0] as HTMLElement;
-    SplitPane.divider = SplitPane.splitPane.children[1] as HTMLElement;
     SplitPane.rightComponent = SplitPane.splitPane.children[2] as HTMLElement;
     const leftComponentRect: DOMRect =
       SplitPane.leftComponent.getBoundingClientRect();
