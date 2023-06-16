@@ -49,6 +49,10 @@ body {
 .BorderLayout > * {
   grid-row: 2 !important;
   grid-column: 2 !important;
+}
+
+.Frame > div,
+.BorderLayout > div {
   overflow: hidden;
 }
 
@@ -116,8 +120,8 @@ body {
   display: grid;
 }
 
-.Frame > .Center > *,
-.BorderLayout > .Center > * {
+.Frame > .Center > div,
+.BorderLayout > .Center > div {
   overflow: hidden;
 }
 
