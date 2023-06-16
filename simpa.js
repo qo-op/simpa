@@ -806,7 +806,11 @@ var SplitPane = /** @class */ (function () {
         SplitPane.verticalSplit =
             SplitPane.splitPane.dataset.orientation === "vertical-split";
         if (SplitPane.verticalSplit) {
-            SplitPane.size = SplitPane.splitPane.clientHeight;
+            var computedStyle = window.getComputedStyle(SplitPane.splitPane);
+            SplitPane.size =
+                SplitPane.splitPane.clientHeight -
+                    parseFloat(computedStyle.paddingTop) -
+                    parseFloat(computedStyle.paddingBottom);
             SplitPane.maximumDividerLocation =
                 leftComponentRect.height + rightComponentRect.height;
             SplitPane.leftComponent.style.height =
@@ -816,7 +820,11 @@ var SplitPane = /** @class */ (function () {
             SplitPane.offset = ev.clientY - leftComponentRect.height;
         }
         else {
-            SplitPane.size = SplitPane.splitPane.clientWidth;
+            var computedStyle = window.getComputedStyle(SplitPane.splitPane);
+            SplitPane.size =
+                SplitPane.splitPane.clientWidth -
+                    parseFloat(computedStyle.paddingLeft) -
+                    parseFloat(computedStyle.paddingRight);
             SplitPane.maximumDividerLocation =
                 leftComponentRect.width + rightComponentRect.width;
             SplitPane.leftComponent.style.width =
