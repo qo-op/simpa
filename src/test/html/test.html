@@ -1,7 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head> </head>
+  <head>
+    <style>
+      .slider-container {
+        width: 300px;
+      }
+
+      .slider {
+        width: 100%;
+      }
+
+      #sliderValue {
+        text-align: center;
+      }
+    </style>
+  </head>
   <body>
-    <progress value="70" max="100">70 %</progress>
+    <div class="slider-container">
+      <input
+        type="range"
+        min="1"
+        max="100"
+        value="50"
+        class="slider"
+        id="mySlider"
+      />
+      <p id="sliderValue">50</p>
+    </div>
+
+    <script>
+      var slider = document.getElementById("mySlider");
+      var sliderValue = document.getElementById("sliderValue");
+
+      sliderValue.textContent = slider.value; // Display initial value
+
+      slider.oninput = function () {
+        sliderValue.textContent = this.value; // Update value as slider is moved
+      };
+    </script>
   </body>
 </html>

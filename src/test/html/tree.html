@@ -1,132 +1,180 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta name="description"
-        content="This example shows how to use a tree using html, css and javascript. It is based on the example found at 'How to Use Trees' https://docs.oracle.com/javase/tutorial/uiswing/components/tree.html">
-    <meta name="author" content="Yassuo Toda">
+  <head>
+    <meta
+      name="description"
+      content="This example shows how to use a tree using html, css and javascript. It is based on the example found at 'How to Use Trees' https://docs.oracle.com/javase/tutorial/uiswing/components/tree.html"
+    />
+    <meta name="author" content="Yassuo Toda" />
     <title>Tree Example</title>
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
 
-    <link rel="stylesheet" href="../../../simpa.css">
+    <link rel="stylesheet" href="../../../simpa.css" />
     <script src="../../../simpa.js"></script>
 
     <style>
-        .Tree {
-            white-space: nowrap;
-        }
+      .Tree {
+        white-space: nowrap;
+      }
 
-        .Tree .material-icons::after {
-            content: "description";
-            color: gray;
-        }
+      .Tree .material-icons::after {
+        content: "description";
+        color: gray;
+      }
 
-        .Tree .material-icons.star::after {
-            content: "star";
-            color: gold;
-        }
+      .Tree .material-icons.star::after {
+        content: "star";
+        color: gold;
+      }
 
-        .Tree li>.material-icons.folder::after,
-        .Tree li>:not(ul) .material-icons.folder::after {
-            content: "keyboard_arrow_right";
-        }
+      .Tree li > .material-icons.folder::after,
+      .Tree li > :not(ul) .material-icons.folder::after {
+        content: "keyboard_arrow_right";
+      }
 
-        .Tree li[data-folder="open"]>.material-icons.folder::after,
-        .Tree li[data-folder="open"]>:not(ul) .material-icons.folder::after {
-            content: "keyboard_arrow_down";
-        }
+      .Tree li[data-folder="open"] > .material-icons.folder::after,
+      .Tree li[data-folder="open"] > :not(ul) .material-icons.folder::after {
+        content: "keyboard_arrow_down";
+      }
     </style>
     <script>
-        function expandOrCollapse(ev) {
-            const treeNode = ev.currentTarget;
-            const li = treeNode.parentElement;
-            if (li.dataset.folder === "open") {
-                li.dataset.folder = "closed";
-            } else {
-                li.dataset.folder = "open";
-            }
+      function expandOrCollapse(ev) {
+        const treeNode = ev.currentTarget;
+        const li = treeNode.parentElement;
+        if (li.dataset.folder === "open") {
+          li.dataset.folder = "closed";
+        } else {
+          li.dataset.folder = "open";
         }
-        function showUserObject(ev) {
-            const treeNode = ev.currentTarget;
-            const userObject = treeNode.dataset.userObject;
-            alert(userObject);
-        }
+      }
+      function showUserObject(ev) {
+        const treeNode = ev.currentTarget;
+        const userObject = treeNode.dataset.userObject;
+        alert(userObject);
+      }
     </script>
-</head>
+  </head>
 
-<body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
+  <body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden">
     <div class="CenterLayout">
-        <div class="ScrollPane" style="border: 1px solid gray; padding: 5px;">
-            <ul class="Tree" id="tree">
-                <li>
-                    <div class="TreeNode" onclick="expandOrCollapse(event);">
-                        <span class="material-icons folder"></span>
-                        <span class="TreeNode-text">Books for Java Programmers</span>
-                    </div>
-                    <ul>
-                        <li>
-                            <div class="TreeNode" data-user-object="tutorial.html" onclick="showUserObject(event);">
-                                <span class="material-icons star"></span>
-                                <span class="TreeNode-text">The Java Tutorial: A Short Course on the Basics</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="TreeNode" data-user-object="tutorialcont.html" onclick="showUserObject(event);">
-                                <span class="material-icons star"></span>
-                                <span class="TreeNode-text">The Java Tutorial Continued: The Rest of the JDK</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="TreeNode" data-user-object="swingtutorial.html"
-                                onclick="showUserObject(event);">
-                                <span class="material-icons star"></span>
-                                <span class="TreeNode-text">The Swing Tutorial: A Guide to Constructing GUIs</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="TreeNode" data-user-object="bloch.html" onclick="showUserObject(event);">
-                                <span class="material-icons"></span>
-                                <span class="TreeNode-text">Effective Java Programming Language Guide</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="TreeNode" data-user-object="arnold.html" onclick="showUserObject(event);">
-                                <span class="material-icons"></span>
-                                <span class="TreeNode-text">The Java Programming Language</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="TreeNode" data-user-object="chan.html" onclick="showUserObject(event);">
-                                <span class="material-icons"></span>
-                                <span class="TreeNode-text">The Java Developers Almanac</span>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <div class="TreeNode" onclick="expandOrCollapse(event);">
-                        <span class="material-icons folder"></span>
-                        <span class="TreeNode-text">Books for Java Implementers</span>
-                    </div>
-                    <ul>
-                        <li>
-                            <div class="TreeNode" data-user-object="vm.html" onclick="showUserObject(event);">
-                                <span class="material-icons"></span>
-                                <span class="TreeNode-text">The Java Virtual Machine Specification</span>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="TreeNode" data-user-object="jls.html" onclick="showUserObject(event);">
-                                <span class="material-icons"></span>
-                                <span class="TreeNode-text">The Java Language Specification</span>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+      <div class="ScrollPane" style="border: 1px solid gray; padding: 5px">
+        <ul class="Tree" id="tree">
+          <li>
+            <div class="TreeNode" onclick="expandOrCollapse(event);">
+              <span class="material-icons folder"></span>
+              <span class="TreeNode-text">Books for Java Programmers</span>
+            </div>
+            <ul>
+              <li>
+                <div
+                  class="TreeNode"
+                  data-user-object="tutorial.html"
+                  onclick="showUserObject(event);"
+                >
+                  <span class="material-icons star"></span>
+                  <span class="TreeNode-text"
+                    >The Java Tutorial: A Short Course on the Basics</span
+                  >
+                </div>
+              </li>
+              <li>
+                <div
+                  class="TreeNode"
+                  data-user-object="tutorialcont.html"
+                  onclick="showUserObject(event);"
+                >
+                  <span class="material-icons star"></span>
+                  <span class="TreeNode-text"
+                    >The Java Tutorial Continued: The Rest of the JDK</span
+                  >
+                </div>
+              </li>
+              <li>
+                <div
+                  class="TreeNode"
+                  data-user-object="swingtutorial.html"
+                  onclick="showUserObject(event);"
+                >
+                  <span class="material-icons star"></span>
+                  <span class="TreeNode-text"
+                    >The Swing Tutorial: A Guide to Constructing GUIs</span
+                  >
+                </div>
+              </li>
+              <li>
+                <div
+                  class="TreeNode"
+                  data-user-object="bloch.html"
+                  onclick="showUserObject(event);"
+                >
+                  <span class="material-icons"></span>
+                  <span class="TreeNode-text"
+                    >Effective Java Programming Language Guide</span
+                  >
+                </div>
+              </li>
+              <li>
+                <div
+                  class="TreeNode"
+                  data-user-object="arnold.html"
+                  onclick="showUserObject(event);"
+                >
+                  <span class="material-icons"></span>
+                  <span class="TreeNode-text"
+                    >The Java Programming Language</span
+                  >
+                </div>
+              </li>
+              <li>
+                <div
+                  class="TreeNode"
+                  data-user-object="chan.html"
+                  onclick="showUserObject(event);"
+                >
+                  <span class="material-icons"></span>
+                  <span class="TreeNode-text">The Java Developers Almanac</span>
+                </div>
+              </li>
             </ul>
-        </div>
+          </li>
+          <li>
+            <div class="TreeNode" onclick="expandOrCollapse(event);">
+              <span class="material-icons folder"></span>
+              <span class="TreeNode-text">Books for Java Implementers</span>
+            </div>
+            <ul>
+              <li>
+                <div
+                  class="TreeNode"
+                  data-user-object="vm.html"
+                  onclick="showUserObject(event);"
+                >
+                  <span class="material-icons"></span>
+                  <span class="TreeNode-text"
+                    >The Java Virtual Machine Specification</span
+                  >
+                </div>
+              </li>
+              <li>
+                <div
+                  class="TreeNode"
+                  data-user-object="jls.html"
+                  onclick="showUserObject(event);"
+                >
+                  <span class="material-icons"></span>
+                  <span class="TreeNode-text"
+                    >The Java Language Specification</span
+                  >
+                </div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
     </div>
-</body>
-
+  </body>
 </html>

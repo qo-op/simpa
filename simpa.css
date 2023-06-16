@@ -1222,6 +1222,13 @@ button[disabled] img {
   grid-row: 1 !important;
 }
 
+.Tree .TreeNode > :first-child {
+  margin: 0;
+  width: 1em;
+  height: 1em;
+  font-size: 1em;
+}
+
 @media (hover: hover) {
   .Tree li > :not(ul):hover {
     background-color: rgba(128, 128, 128, 0.25);
