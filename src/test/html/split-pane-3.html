@@ -10,6 +10,11 @@
 
     <link rel="stylesheet" href="../../../simpa.css" />
     <script src="../../../simpa.js"></script>
+    <script>
+      function handlePointerUp(event) {
+        console.log("handlePointerUp");
+      }
+    </script>
   </head>
 
   <body class="CenterLayout" style="margin: 0; height: 100vh; overflow: hidden">
@@ -22,7 +27,7 @@
       <!-- left component -->
       <div style="width: 50%; min-width: 16px; background-color: Cyan"></div>
       <!-- split pane divider-->
-      <div class="LineDivider"></div>
+      <div class="LineDivider" onpointerup="handlePointerUp(event);"></div>
       <!-- right component -->
       <div
         style="width: 50%; min-width: 16px; background-color: LightGreen"
