@@ -36,32 +36,43 @@ var Dialog = /** @class */ (function () {
     Dialog.dragStart = false;
     Dialog.pointerdown = function (ev) {
         var dialogTitleBar;
-        var target = ev.target;
-        if (target.classList.contains("DialogTitleBar")) {
-            dialogTitleBar = target;
-        }
-        else {
-            dialogTitleBar = target.closest(".DialogTitleBar");
-            if (dialogTitleBar === null) {
-                return;
+        var currentTarget = ev.currentTarget;
+        if (currentTarget === document) {
+            var target = ev.target;
+            if (target.classList.contains("DialogTitleBar")) {
+                dialogTitleBar = target;
+            }
+            else {
+                dialogTitleBar = target.closest(".DialogTitleBar");
+                if (dialogTitleBar === null) {
+                    return;
+                }
             }
         }
-        Dialog.dragStart = true;
-        Dialog.dialog = dialogTitleBar.closest(".Dialog");
-        var rect = Dialog.dialog.getBoundingClientRect();
-        Dialog.x = ev.clientX - rect.left;
-        Dialog.y = ev.clientY - rect.top;
-        Dialog.width = rect.width;
-        Dialog.height = rect.height;
-        Dialog.dialog.style.position = "fixed";
-        Dialog.dialog.style.top = rect.top + "px";
-        Dialog.dialog.style.left = rect.left + "px";
-        document.addEventListener("touchmove", Dialog.preventTouchMove, {
-            passive: false,
-        });
-        document.addEventListener("pointermove", Dialog.pointermove);
-        document.addEventListener("pointerup", Dialog.pointerup);
-        document.addEventListener("pointerenter", Dialog.pointerenter);
+        else {
+            dialogTitleBar = currentTarget;
+        }
+        try {
+            Dialog.dragStart = true;
+            Dialog.dialog = dialogTitleBar.closest(".Dialog");
+            var rect = Dialog.dialog.getBoundingClientRect();
+            Dialog.x = ev.clientX - rect.left;
+            Dialog.y = ev.clientY - rect.top;
+            Dialog.width = rect.width;
+            Dialog.height = rect.height;
+            Dialog.dialog.style.position = "fixed";
+            Dialog.dialog.style.top = rect.top + "px";
+            Dialog.dialog.style.left = rect.left + "px";
+            document.addEventListener("touchmove", Dialog.preventTouchMove, {
+                passive: false,
+            });
+            document.addEventListener("pointermove", Dialog.pointermove);
+            document.addEventListener("pointerup", Dialog.pointerup);
+            document.addEventListener("pointerenter", Dialog.pointerenter);
+        }
+        finally {
+            ev.stopPropagation();
+        }
     };
     Dialog.pointermove = function (ev) {
         if (!Dialog.dragStart) {
@@ -483,6 +494,7 @@ var OptionPane = /** @class */ (function () {
     OptionPane.createDialogTitleBar = function () {
         var dialogTitleBar = document.createElement("div");
         dialogTitleBar.classList.add("DialogTitleBar");
+        dialogTitleBar.onpointerdown = Dialog.pointerdown;
         return dialogTitleBar;
     };
     OptionPane.createDialogTitleTextPane = function (title) {

@@ -56,31 +56,40 @@ class Dialog {
 
   static pointerdown = (ev: PointerEvent) => {
     let dialogTitleBar: HTMLElement;
-    const target = ev.target as HTMLElement;
-    if (target.classList.contains("DialogTitleBar")) {
-      dialogTitleBar = target;
-    } else {
-      dialogTitleBar = target.closest(".DialogTitleBar") as HTMLElement;
-      if (dialogTitleBar === null) {
-        return;
+    const currentTarget = ev.currentTarget;
+    if (currentTarget === document) {
+      const target = ev.target as HTMLElement;
+      if (target.classList.contains("DialogTitleBar")) {
+        dialogTitleBar = target;
+      } else {
+        dialogTitleBar = target.closest(".DialogTitleBar") as HTMLElement;
+        if (dialogTitleBar === null) {
+          return;
+        }
       }
+    } else {
+      dialogTitleBar = currentTarget as HTMLElement;
     }
-    Dialog.dragStart = true;
-    Dialog.dialog = dialogTitleBar.closest(".Dialog") as HTMLElement;
-    var rect = Dialog.dialog.getBoundingClientRect();
-    Dialog.x = ev.clientX - rect.left;
-    Dialog.y = ev.clientY - rect.top;
-    Dialog.width = rect.width;
-    Dialog.height = rect.height;
-    Dialog.dialog.style.position = "fixed";
-    Dialog.dialog.style.top = rect.top + "px";
-    Dialog.dialog.style.left = rect.left + "px";
-    document.addEventListener("touchmove", Dialog.preventTouchMove, {
-      passive: false,
-    });
-    document.addEventListener("pointermove", Dialog.pointermove);
-    document.addEventListener("pointerup", Dialog.pointerup);
-    document.addEventListener("pointerenter", Dialog.pointerenter);
+    try {
+      Dialog.dragStart = true;
+      Dialog.dialog = dialogTitleBar.closest(".Dialog") as HTMLElement;
+      var rect = Dialog.dialog.getBoundingClientRect();
+      Dialog.x = ev.clientX - rect.left;
+      Dialog.y = ev.clientY - rect.top;
+      Dialog.width = rect.width;
+      Dialog.height = rect.height;
+      Dialog.dialog.style.position = "fixed";
+      Dialog.dialog.style.top = rect.top + "px";
+      Dialog.dialog.style.left = rect.left + "px";
+      document.addEventListener("touchmove", Dialog.preventTouchMove, {
+        passive: false,
+      });
+      document.addEventListener("pointermove", Dialog.pointermove);
+      document.addEventListener("pointerup", Dialog.pointerup);
+      document.addEventListener("pointerenter", Dialog.pointerenter);
+    } finally {
+      ev.stopPropagation();
+    }
   };
 
   static preventTouchMove(ev: TouchEvent) {
@@ -836,6 +845,7 @@ class OptionPane {
   static createDialogTitleBar() {
     const dialogTitleBar = document.createElement("div");
     dialogTitleBar.classList.add("DialogTitleBar");
+    dialogTitleBar.onpointerdown = Dialog.pointerdown;
     return dialogTitleBar;
   }
 
