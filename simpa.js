@@ -1040,7 +1040,7 @@ var KeyboardShortcut = /** @class */ (function () {
     function KeyboardShortcut() {
     }
     KeyboardShortcut.dispatchEvents = function (element) {
-        if (window.getComputedStyle(element).pointerEvents === "none") {
+        while (window.getComputedStyle(element).pointerEvents === "none") {
             element = element.parentElement;
             if (!element) {
                 return;

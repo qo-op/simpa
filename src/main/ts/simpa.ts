@@ -1347,7 +1347,7 @@ class KeyboardShortcut {
     ev.preventDefault();
   };
   static dispatchEvents(element: HTMLElement) {
-    if (window.getComputedStyle(element).pointerEvents === "none") {
+    while (window.getComputedStyle(element).pointerEvents === "none") {
       element = element.parentElement;
       if (!element) {
         return;
