@@ -7,6 +7,10 @@
  * @author Yassuo Toda
  */
 
+:root {
+  --gap: 0;
+}
+
 body {
   -webkit-text-size-adjust: none;
   overflow: hidden;
@@ -51,10 +55,12 @@ body {
   grid-column: 2 !important;
 }
 
+/*
 .Frame > div,
 .BorderLayout > div {
   overflow: hidden;
 }
+*/
 
 .Frame > .North,
 .Frame > .PageStart,
@@ -63,6 +69,7 @@ body {
   grid-row: 1 !important;
   grid-column: 1 / -1 !important;
   overflow: unset;
+  margin-block-end: var(--row-gap, var(--gap));
 }
 
 .Frame > .South,
@@ -72,6 +79,7 @@ body {
   grid-row: 3 !important;
   grid-column: 1 / -1 !important;
   overflow: unset;
+  margin-block-start: var(--row-gap, var(--gap));
 }
 
 .Frame > .West,
@@ -81,6 +89,7 @@ body {
   grid-row: 2 !important;
   grid-column: 1 !important;
   overflow: unset;
+  margin-inline-end: var(--column-gap, var(--gap));
 }
 
 .Frame > .East,
@@ -90,13 +99,16 @@ body {
   grid-row: 2 !important;
   grid-column: 3 !important;
   overflow: unset;
+  margin-inline-start: var(--column-gap, var(--gap));
 }
 
 .Frame > .Center,
 .BorderLayout > .Center {
   grid-row: 2 !important;
   grid-column: 2 !important;
+  /*
   overflow: hidden;
+  */
 }
 
 .Frame > .North,
@@ -120,10 +132,12 @@ body {
   display: grid;
 }
 
+/*
 .Frame > .Center > div,
 .BorderLayout > .Center > div {
   overflow: hidden;
 }
+*/
 
 /**
  * Box Layout
@@ -659,6 +673,14 @@ button[disabled] img {
 .MenuBar label,
 .MenuBar input {
   pointer-events: none;
+}
+
+/**
+ * Panel
+ */
+
+.Panel {
+  overflow: hidden;
 }
 
 /**
