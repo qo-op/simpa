@@ -1039,6 +1039,17 @@ var TabComponent = /** @class */ (function () {
 var KeyboardShortcut = /** @class */ (function () {
     function KeyboardShortcut() {
     }
+    KeyboardShortcut.dispatchEvents = function (element) {
+        if (window.getComputedStyle(element).pointerEvents === "none") {
+            element = element.parentElement;
+            if (!element) {
+                return;
+            }
+        }
+        element.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
+        element.dispatchEvent(new PointerEvent("pointerup", { bubbles: true }));
+        element.click();
+    };
     KeyboardShortcut.keyDown = function (ev) {
         if (!ev.key || ev.key === "Unidentified") {
             return;
@@ -1064,9 +1075,7 @@ var KeyboardShortcut = /** @class */ (function () {
         if (element === null) {
             return;
         }
-        element.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
-        element.dispatchEvent(new PointerEvent("pointerup", { bubbles: true }));
-        element.click();
+        KeyboardShortcut.dispatchEvents(element);
         ev.preventDefault();
     };
     return KeyboardShortcut;

@@ -1343,11 +1343,20 @@ class KeyboardShortcut {
     if (element === null) {
       return;
     }
+    KeyboardShortcut.dispatchEvents(element);
+    ev.preventDefault();
+  };
+  static dispatchEvents(element: HTMLElement) {
+    if (window.getComputedStyle(element).pointerEvents === "none") {
+      element = element.parentElement;
+      if (!element) {
+        return;
+      }
+    }
     element.dispatchEvent(new PointerEvent("pointerdown", { bubbles: true }));
     element.dispatchEvent(new PointerEvent("pointerup", { bubbles: true }));
     element.click();
-    ev.preventDefault();
-  };
+  }
 }
 
 document.addEventListener("pointerdown", Dialog.pointerdown);
