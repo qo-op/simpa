@@ -2,41 +2,40 @@
 <html>
   <head>
     <style>
-      .slider-container {
-        width: 300px;
+      body {
+        margin: 0;
+        padding: 0;
       }
 
-      .slider {
-        width: 100%;
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
       }
 
-      #sliderValue {
-        text-align: center;
+      .foggy-cloud {
+        background-color: rgba(
+          200,
+          200,
+          200,
+          0.5
+        ); /* Adjust the opacity as desired */
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      h1 {
+        color: white;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Add a subtle shadow effect */
       }
     </style>
   </head>
   <body>
-    <div class="slider-container">
-      <input
-        type="range"
-        min="1"
-        max="100"
-        value="50"
-        class="slider"
-        id="mySlider"
-      />
-      <p id="sliderValue">50</p>
+    <div class="container">
+      <div class="foggy-cloud">
+        <h1>Your Text</h1>
+      </div>
     </div>
-
-    <script>
-      var slider = document.getElementById("mySlider");
-      var sliderValue = document.getElementById("sliderValue");
-
-      sliderValue.textContent = slider.value; // Display initial value
-
-      slider.oninput = function () {
-        sliderValue.textContent = this.value; // Update value as slider is moved
-      };
-    </script>
   </body>
 </html>

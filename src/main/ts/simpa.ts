@@ -278,15 +278,6 @@ class MenuBar {
       ":scope>input, :scope>:not(ul) input"
     );
     if (input !== null) {
-      /*
-      if (input.type === "radio") {
-        if (!input.checked) {
-          input.checked = true;
-        }
-      } else if (input.type === "checkbox") {
-        input.checked = !input.checked;
-      }
-      */
       input.click();
     }
     const menuBar = ev.currentTarget as HTMLElement;
@@ -662,12 +653,15 @@ class OptionPane {
     this.dialogContentPane = OptionPane.createDialogContentPane();
     this.dialog.appendChild(this.dialogContentPane);
 
-    this.dialogContentPane.classList.add("BorderLayout");
+    this.dialogContentPane.classList.add("BoxLayout");
+    this.dialogContentPane.dataset.axis = "page-axis";
+    this.dialogContentPane.dataset.alignmentX = "stretch";
+    this.dialogContentPane.style.gap = ".5em";
+    this.dialogContentPane.style.padding = ".5em";
 
     this.dialogMainPane = OptionPane.createDialogMainPane();
     this.dialogContentPane.appendChild(this.dialogMainPane);
 
-    this.dialogMainPane.style.padding = ".5em";
     this.dialogMainPane.style.display = "grid";
     this.dialogMainPane.style.gap = ".5em";
 
@@ -715,10 +709,8 @@ class OptionPane {
     }
 
     this.dialogButtonPane = OptionPane.createDialogButtonPane();
-    this.dialogButtonPane.classList.add("PageEnd");
     this.dialogContentPane.appendChild(this.dialogButtonPane);
 
-    this.dialogButtonPane.style.padding = "0 .5em .5em .5em";
     this.dialogButtonPane.classList.add("FlowLayout");
     this.dialogButtonPane.style.gap = ".5em";
 
