@@ -1276,9 +1276,11 @@ button[disabled] img {
   grid-column: unset !important;
 }
 
-.TabbedPane > :first-child > button > :first-child > :first-child,
-.TabbedPane > :first-child > button > :first-child > :last-child {
-  min-width: 1em;
+.TabbedPane > :first-child > button > :first-child > .material-icons,
+.TabbedPane > :first-child > button > :first-child > img,
+.TabbedPane > :first-child > button > :first-child > svg {
+  margin: 0;
+  width: 1em;
   height: 1em;
   font-size: 1em;
 }
