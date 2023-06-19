@@ -632,14 +632,6 @@ button[disabled] img {
 }
 
 /**
- * Panel
- */
-
-.Panel {
-  overflow: hidden;
-}
-
-/**
  * Scroll Pane
  */
 
@@ -849,12 +841,6 @@ button[disabled] img {
 /**
  * Split Pane
  */
-
-/*
-.SplitPane {
-  overflow: hidden;
-}
-*/
 
 .SplitPane > * {
   margin: 0 !important;
@@ -1260,13 +1246,6 @@ button[disabled] img {
   height: 1em;
   font-size: 1em;
 }
-
-/**
- * Tabbed Pane Card Layout
-.TabbedPane .CardLayout {
-  overflow: hidden;
-}
- */
 
 /**
  * Tabbed Pane default background colors
