@@ -7,10 +7,6 @@
  * @author Yassuo Toda
  */
 
-:root {
-  --gap: 0;
-}
-
 body {
   -webkit-text-size-adjust: none;
   overflow: hidden;
@@ -61,7 +57,6 @@ body {
 .BorderLayout > .PageStart {
   grid-row: 1 !important;
   grid-column: 1 / -1 !important;
-  margin-block-end: var(--row-gap, var(--gap));
 }
 
 .Frame > .South,
@@ -70,7 +65,6 @@ body {
 .BorderLayout > .PageEnd {
   grid-row: 3 !important;
   grid-column: 1 / -1 !important;
-  margin-block-start: var(--row-gap, var(--gap));
 }
 
 .Frame > .West,
@@ -79,7 +73,6 @@ body {
 .BorderLayout > .LineStart {
   grid-row: 2 !important;
   grid-column: 1 !important;
-  margin-inline-end: var(--column-gap, var(--gap));
 }
 
 .Frame > .East,
@@ -88,7 +81,6 @@ body {
 .BorderLayout > .LineEnd {
   grid-row: 2 !important;
   grid-column: 3 !important;
-  margin-inline-start: var(--column-gap, var(--gap));
 }
 
 .Frame > .Center,
