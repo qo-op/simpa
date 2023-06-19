@@ -152,7 +152,7 @@ class MenuBar {
     li: HTMLElement | null,
     timeout: number = 0
   ) => {
-    MenuBar.clearTimeout(menuBar);
+    MenuBar.clearTimeout();
     if (ul === menuBar) {
       if (li !== null && li.dataset.selected !== undefined) {
         return;
@@ -202,7 +202,7 @@ class MenuBar {
 
   static timeoutId: number;
 
-  static clearTimeout = (menuBar: HTMLElement) => {
+  static clearTimeout = () => {
     if (MenuBar.timeoutId !== undefined) {
       clearTimeout(MenuBar.timeoutId);
     }
@@ -320,8 +320,8 @@ class MenuBar {
   };
 
   static mouseleave = (ev: MouseEvent) => {
+    MenuBar.clearTimeout();
     const menuBar = ev.currentTarget as HTMLElement;
-    MenuBar.clearTimeout(menuBar);
     menuBar
       .querySelectorAll(":scope li[data-selected]")
       .forEach((selected: Element) => {
@@ -1310,7 +1310,7 @@ class TabComponent {
  * @author Yassuo Toda
  */
 class KeyboardShortcut {
-  static keyDown = (ev: KeyboardEvent) => {
+  static keydown = (ev: KeyboardEvent) => {
     if (!ev.key || ev.key === "Unidentified") {
       return;
     }
@@ -1359,7 +1359,7 @@ document.addEventListener("pointerdown", SplitPane.pointerdown);
 
 document.addEventListener("pointerdown", TabComponent.pointerdown);
 
-document.addEventListener("keydown", KeyboardShortcut.keyDown);
+document.addEventListener("keydown", KeyboardShortcut.keydown);
 
 /**
  *  No FOUC (Flash Of Unstyled Content)

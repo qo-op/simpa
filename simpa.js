@@ -126,7 +126,7 @@ var MenuBar = /** @class */ (function () {
     };
     MenuBar.select = function (menuBar, ul, li, timeout) {
         if (timeout === void 0) { timeout = 0; }
-        MenuBar.clearTimeout(menuBar);
+        MenuBar.clearTimeout();
         if (ul === menuBar) {
             if (li !== null && li.dataset.selected !== undefined) {
                 return;
@@ -167,7 +167,7 @@ var MenuBar = /** @class */ (function () {
             }
         }
     };
-    MenuBar.clearTimeout = function (menuBar) {
+    MenuBar.clearTimeout = function () {
         if (MenuBar.timeoutId !== undefined) {
             clearTimeout(MenuBar.timeoutId);
         }
@@ -282,8 +282,8 @@ var MenuBar = /** @class */ (function () {
         MenuBar.select(menuBar, ul, li, 250);
     };
     MenuBar.mouseleave = function (ev) {
+        MenuBar.clearTimeout();
         var menuBar = ev.currentTarget;
-        MenuBar.clearTimeout(menuBar);
         menuBar
             .querySelectorAll(":scope li[data-selected]")
             .forEach(function (selected) {
@@ -1042,7 +1042,7 @@ var KeyboardShortcut = /** @class */ (function () {
         element.dispatchEvent(new PointerEvent("pointerup", { bubbles: true }));
         element.click();
     };
-    KeyboardShortcut.keyDown = function (ev) {
+    KeyboardShortcut.keydown = function (ev) {
         if (!ev.key || ev.key === "Unidentified") {
             return;
         }
@@ -1076,7 +1076,7 @@ document.addEventListener("pointerdown", Dialog.pointerdown);
 document.addEventListener("pointerdown", MenuBar.pointerdown);
 document.addEventListener("pointerdown", SplitPane.pointerdown);
 document.addEventListener("pointerdown", TabComponent.pointerdown);
-document.addEventListener("keydown", KeyboardShortcut.keyDown);
+document.addEventListener("keydown", KeyboardShortcut.keydown);
 /**
  *  No FOUC (Flash Of Unstyled Content)
  */
