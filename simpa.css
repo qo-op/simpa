@@ -506,20 +506,6 @@ button[disabled] img {
 }
 
 /**
- * Layered Pane
- */
-
-.LayeredPane {
-  display: grid !important;
-  position: relative;
-}
-
-.LayeredPane > * {
-  grid-row: 1 !important;
-  grid-column: 1 !important;
-}
-
-/**
  * Menu Bar
  */
 
