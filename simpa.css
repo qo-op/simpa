@@ -870,6 +870,26 @@ button[disabled] img {
   cursor: ns-resize;
 }
 
+@media (pointer: coarse) {
+  .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2) {
+    width: 32px;
+  }
+
+  .SplitPane[data-orientation="vertical-split"] > :nth-child(2) {
+    height: 32px;
+  }
+}
+
+@media (pointer: fine) {
+  .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2) {
+    width: 8px;
+  }
+
+  .SplitPane[data-orientation="vertical-split"] > :nth-child(2) {
+    height: 8px;
+  }
+}
+
 /**
  * EmptyDivider
  */

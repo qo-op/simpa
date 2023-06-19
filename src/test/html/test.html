@@ -1,61 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
     <style>
-      .tooltip-container {
-        position: relative;
-        display: inline-block;
+      @media (pointer: coarse) {
+        #divider {
+          width: 32px;
+        }
       }
-
-      .tooltip {
-        visibility: hidden;
-        width: 200px;
-        background-color: #555;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 10px;
-        position: absolute;
-        z-index: 1;
-        bottom: 125%;
-        left: 50%;
-        transform: translateX(-50%);
-        opacity: 0;
-        transition: opacity 0.3s;
-      }
-
-      .tooltip-container:hover .tooltip {
-        visibility: visible;
-        opacity: 1;
+      @media (pointer: fine) {
+        #divider {
+          width: 8px;
+        }
       }
     </style>
   </head>
-  <body>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <div class="tooltip-container">
-      <span class="tooltip-trigger">Hover over me</span>
-      <div class="tooltip">This is the tooltip content.</div>
+  <body class="Frame" id="split-pane-demo">
+    <div class="SplitPane">
+      <div id="left-container">
+        <button>Left</button>
+      </div>
+      <div id="divider"></div>
+      <div id="right-container">
+        <button>Right</button>
+      </div>
     </div>
-
-    <script>
-      const tooltipTrigger = document.querySelector(".tooltip-trigger");
-      const tooltip = document.querySelector(".tooltip");
-
-      tooltipTrigger.addEventListener("mouseenter", () => {
-        tooltip.style.visibility = "visible";
-        tooltip.style.opacity = "1";
-      });
-
-      tooltipTrigger.addEventListener("mouseout", () => {
-        tooltip.style.visibility = "hidden";
-        tooltip.style.opacity = "0";
-      });
-    </script>
   </body>
 </html>
