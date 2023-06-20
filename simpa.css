@@ -618,6 +618,8 @@ button[disabled] img {
   margin-block: 0.1em;
   width: 1em;
   height: 1em;
+  font-size: 1em;
+  line-height: 1.2;
 }
 
 .MenuItem > :not(:first-child):not(:last-child),
@@ -1273,6 +1275,8 @@ button[disabled] img {
   margin-block: 0.1em;
   width: 1em;
   height: 1em;
+  font-size: 1em;
+  line-height: 1.2;
 }
 
 /**
