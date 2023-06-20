@@ -610,9 +610,9 @@ button[disabled] img {
 .MenuBar ul .Menu > img,
 .MenuBar ul .Menu > svg,
 .MenuBar ul .Menu > input {
-  margin: 0;
+  margin-block: 0.1em;
   width: 1em;
-  height: 1em;
+  height: 1.2em;
   font-size: 1em;
 }
 
@@ -1256,14 +1256,15 @@ button[disabled] img {
 .TabbedPane > :first-child > button > :first-child > * {
   grid-row: 1 !important;
   grid-column: unset !important;
+  line-height: 1.2;
 }
 
 .TabbedPane > :first-child > button > :first-child > .material-icons,
 .TabbedPane > :first-child > button > :first-child > img,
 .TabbedPane > :first-child > button > :first-child > svg {
-  margin: 0;
+  margin-block: 0.1em;
   width: 1em;
-  height: 1em;
+  height: 1.2em;
   font-size: 1em;
 }
 
