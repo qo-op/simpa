@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Border Layout Example</title>
+    <meta name="description"
+        content="This example shows how to use a border layout using html and css. It is based on the example found at 'How to Use BorderLayout' https://docs.oracle.com/javase/tutorial/uiswing/layout/border.html">
+    <meta name="author" content="Yassuo Toda">
+
+    <link rel="stylesheet" href="../../../simpa.css">
+    <script src="../../../simpa.js"></script>
+    
+</head>
+
+<body class="BorderLayout" style="margin: 0; height: 100vh; overflow: hidden;">
+    <div class="CenterLayout">
+        <div class="BorderLayout">
+        	<div class="PageStart">
+            	<button>Button 1 (PageStart)</button>
+        	</div>
+            <button style="width: 200px; height: 100px">Button 2 (Center)</button>
+        	<div class="LineStart">
+            	<button>Button 3 (LineStart)</button>
+        	</div>
+            <div class="PageEnd">
+            	<button>Long-Named Button 4 (PageEnd)</button>
+            </div>
+            <div class="LineEnd">
+            	<button>5 (LineEnd)</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<!-- MenuDemo.html -->
+<!-- An HTML version of Oracle's MenuDemo example -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../simpa.css" />
+    <script src="../../../simpa.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <style>
+      /* MenuDemo.css */
+    </style>
+    <script>
+      /* MenuDemo.js */
+      function handlePointerUp(event) {
+        const menuItem = event.currentTarget;
+        const output = document.getElementById("output");
+        if (output.value) {
+          output.value += "\n";
+        }
+        output.value +=
+          "Clicked: " + menuItem.textContent.trim().replace(/\s+/g, " ");
+      }
+      function handleChange(event) {
+        const input = event.currentTarget;
+        const menuItem = input.closest(".MenuItem");
+        const output = document.getElementById("output");
+        if (output.value) {
+          output.value += "\n";
+        }
+        output.value +=
+          "Clicked: " + menuItem.textContent.trim().replace(/\s+/g, " ");
+        output.value +=
+          " (type: " + input.type + ", checked: " + input.checked + ")";
+      }
+    </script>
+  </head>
+  <body class="Frame" style="padding-block: 0.25em" id="menu-demo">
+    <div class="BorderLayout">
+      <div class="PageStart">
+        <ul class="MenuBar" style="background-color: WhiteSmoke">
+          <li>
+            <div class="Menu">
+              <span data-key="a" data-alt> <u>A</u> Menu </span>
+            </div>
+            <ul>
+              <li>
+                <div class="MenuItem" onpointerup="handlePointerUp(event);">
+                  <span></span>
+                  <span data-key="t" data-alt>
+                    A <u>t</u>ext-only menu item
+                  </span>
+                  <span data-key="1" data-alt> Alt+1 </span>
+                  <span></span>
+                </div>
+              </li>
+              <li>
+                <div class="MenuItem" onpointerup="handlePointerUp(event);">
+                  <img src="../images/middle.gif" />
+                  <span data-key="b" data-alt> <u>B</u>oth text and icon </span>
+                  <span></span>
+                </div>
+              </li>
+              <li>
+                <div class="MenuItem" onpointerup="handlePointerUp(event);">
+                  <img src="../images/middle.gif" />
+                  <span></span>
+                  <span></span>
+                </div>
+              </li>
+              <li>
+                <hr />
+              </li>
+              <li>
+                <label class="MenuItem">
+                  <input
+                    type="radio"
+                    name="group"
+                    onchange="handleChange(event);"
+                    checked
+                  />
+                  <span data-key="r" data-alt>
+                    A <u>r</u>adio button menu item
+                  </span>
+                  <span></span>
+                </label>
+              </li>
+              <li>
+                <label class="MenuItem">
+                  <input
+                    type="radio"
+                    name="group"
+                    onchange="handleChange(event);"
+                  />
+                  <span data-key="o" data-alt> An<u>o</u>ther one </span>
+                  <span></span>
+                </label>
+              </li>
+              <li>
+                <hr />
+              </li>
+              <li>
+                <label class="MenuItem">
+                  <input type="checkbox" onchange="handleChange(event);" />
+                  <span data-key="c" data-alt>
+                    A <u>c</u>heck box menu item
+                  </span>
+                  <span></span>
+                </label>
+              </li>
+              <li>
+                <label class="MenuItem">
+                  <input type="checkbox" onchange="handleChange(event);" />
+                  <span data-key="h" data-alt> Anot<u>h</u>er one </span>
+                  <span></span>
+                </label>
+              </li>
+              <li>
+                <hr />
+              </li>
+              <li>
+                <div class="Menu">
+                  <span></span>
+                  <span data-key="s" data-alt> A <u>s</u>ubmenu </span>
+                  <span class="material-icons"> navigate_next </span>
+                </div>
+                <ul>
+                  <li>
+                    <div
+                      class="MenuItem"
+                      onpointerup="handlePointerUp(event);"
+                      data-key="2"
+                      data-alt
+                    >
+                      <span></span>
+                      <span> An item in submenu </span>
+                      <span> Alt+2 </span>
+                      <span></span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="MenuItem" onpointerup="handlePointerUp(event);">
+                      <span></span>
+                      <span> Another item </span>
+                      <span></span>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <div class="Menu">
+              <span data-key="n" data-alt> A<u>n</u>other Menu </span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="BorderLayout">
+        <textarea class="ScrollPane" readonly id="output"></textarea>
+      </div>
+    </div>
+  </body>
+</html>

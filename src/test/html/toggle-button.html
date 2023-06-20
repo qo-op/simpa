@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        button {
+            /* Styles for the button
+            padding: 10px 20px;
+            background-color: #ccc;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+             */
+        }
+
+        button.active {
+            /* Styles for the active button */
+            /* background-color: #00aaff; */
+            filter: brightness(80%);
+        }
+    </style>
+</head>
+
+<body>
+    <button id="toggleButton" onclick="toggleButton()">
+        Toggle
+    </button>
+
+    <script>
+        function toggleButton() {
+            var button = document.getElementById("toggleButton");
+
+            // Check if the button is currently active
+            if (button.classList.contains("active")) {
+                // Deactivate the button
+                button.classList.remove("active");
+                // button.textContent = "Toggle";
+                // Perform actions for when the button is deactivated
+                // ...
+            } else {
+                // Activate the button
+                button.classList.add("active");
+                // button.textContent = "Toggle (Active)";
+                // Perform actions for when the button is activated
+                // ...
+            }
+        }
+    </script>
+</body>
+
+</html>

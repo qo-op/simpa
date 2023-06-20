@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../../simpa.css" />
+  </head>
+
+  <body class="CenterLayout">
+    <!--
+    <div style="margin-top: .5em;
+                border: 1px solid Gray;
+                background-color: White;
+                padding-top: .5em;
+                display: grid;
+                position: relative;">
+        <h1 style="font-size: inherit;
+                   font-weight: inherit;
+                   margin: 0;
+                   padding: 0;
+                   margin-inline-start: .5em;
+                   position: absolute;
+                   top: -.5em;
+                   background-color: inherit;
+                   padding-inline: .5em;
+                   justify-self: start;">title</h1>
+            Hello, World!
+    </div>
+    -->
+    <div class="BoxLayout" style="gap: 0.5em">
+      <div class="TitledBorder">
+        <span>title</span>
+        <div class="CenterLayout">Hello, World!</div>
+      </div>
+      <div
+        class="TitledBorder"
+        data-title-justification="center"
+        style="height: 100px"
+      >
+        <span>title</span>
+        <div class="CenterLayout">Hello, World!</div>
+      </div>
+      <div
+        class="TitledBorder"
+        data-title-justification="trailing"
+        style="height: 100px"
+      >
+        <span>title</span>
+        <div class="CenterLayout">Hello, World!</div>
+      </div>
+      <div class="LoweredEtchedBorder">Hello, World!</div>
+      <div class="RaisedEtchedBorder">Hello, World!</div>
+    </div>
+  </body>
+</html>

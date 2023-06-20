@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Center Child Div Example</title>
+  <style>
+    #parentDiv {
+      position: relative;
+      /* text-align: center; */
+      height: 300px; /* Set a specific height for the parent div */
+      border: 1px solid black; /* Optional: Adding border for visualization */
+    }
+
+    #childDiv {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <div id="parentDiv">
+    <div id="childDiv"><h1 style="font-size: 100px;">Centered Text</h1></div>
+  </div>
+</body>
+</html>
