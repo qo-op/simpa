@@ -601,19 +601,23 @@ button[disabled] img {
 .MenuItem > :first-child,
 .MenuItem > :last-child,
 .MenuItem > .material-icons,
+.MenuBar ul .Menu > :first-child,
+.MenuBar ul .Menu > :last-child,
+.MenuBar ul .Menu > .material-icons {
+  width: 1em;
+  font-size: 1em;
+  line-height: 1.2;
+}
+
 .MenuItem > img,
 .MenuItem > svg,
 .MenuItem > input,
-.MenuBar ul .Menu > :first-child,
-.MenuBar ul .Menu > :last-child,
-.MenuBar ul .Menu > .material-icons,
 .MenuBar ul .Menu > img,
 .MenuBar ul .Menu > svg,
 .MenuBar ul .Menu > input {
   margin-block: 0.1em;
   width: 1em;
-  height: 1.2em;
-  font-size: 1em;
+  height: 1em;
 }
 
 .MenuItem > :not(:first-child):not(:last-child),
@@ -1256,16 +1260,19 @@ button[disabled] img {
 .TabbedPane > :first-child > button > :first-child > * {
   grid-row: 1 !important;
   grid-column: unset !important;
+}
+
+.TabbedPane > :first-child > button > :first-child > .material-icons {
+  width: 1em;
+  font-size: 1em;
   line-height: 1.2;
 }
 
-.TabbedPane > :first-child > button > :first-child > .material-icons,
 .TabbedPane > :first-child > button > :first-child > img,
 .TabbedPane > :first-child > button > :first-child > svg {
   margin-block: 0.1em;
   width: 1em;
-  height: 1.2em;
-  font-size: 1em;
+  height: 1em;
 }
 
 /**
