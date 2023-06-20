@@ -598,15 +598,17 @@ button[disabled] img {
   align-items: center;
 }
 
-.MenuItem > :first-child,
-.MenuItem > :last-child,
-.MenuItem > .material-icons,
-.MenuBar ul .Menu > :first-child,
-.MenuBar ul .Menu > :last-child,
-.MenuBar ul .Menu > .material-icons {
-  width: 1em;
+.MenuItem > *,
+.MenuBar ul .Menu > * {
   font-size: 1em;
   line-height: 1.2;
+}
+
+.MenuItem > :first-child,
+.MenuItem > :last-child,
+.MenuBar ul .Menu > :first-child,
+.MenuBar ul .Menu > :last-child {
+  width: 1em;
 }
 
 .MenuItem > img,
@@ -618,8 +620,6 @@ button[disabled] img {
   margin-block: 0.1em;
   width: 1em;
   height: 1em;
-  font-size: 1em;
-  line-height: 1.2;
 }
 
 .MenuItem > :not(:first-child):not(:last-child),
@@ -1262,12 +1262,12 @@ button[disabled] img {
 .TabbedPane > :first-child > button > :first-child > * {
   grid-row: 1 !important;
   grid-column: unset !important;
+  font-size: 1em;
+  line-height: 1.2;
 }
 
 .TabbedPane > :first-child > button > :first-child > .material-icons {
   width: 1em;
-  font-size: 1em;
-  line-height: 1.2;
 }
 
 .TabbedPane > :first-child > button > :first-child > img,
@@ -1275,8 +1275,6 @@ button[disabled] img {
   margin-block: 0.1em;
   width: 1em;
   height: 1em;
-  font-size: 1em;
-  line-height: 1.2;
 }
 
 /**
