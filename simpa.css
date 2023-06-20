@@ -1319,6 +1319,7 @@ button[disabled] img {
 
 .Tree .TreeNode {
   display: grid !important;
+  align-content: stretch !important;
   justify-content: start !important;
   align-items: center;
   gap: 0.2em;
@@ -1326,13 +1327,20 @@ button[disabled] img {
 
 .Tree .TreeNode > * {
   grid-row: 1 !important;
+  grid-column: unset !important;
+  font-size: 1em;
+  line-height: 1.2;
 }
 
-.Tree .TreeNode > :first-child {
-  margin: 0;
+.Tree .TreeNode > .material-icons {
+  width: 1em;
+}
+
+.Tree .TreeNode > img,
+.Tree .TreeNode > svg {
+  margin-block: 0.1em;
   width: 1em;
   height: 1em;
-  font-size: 1em;
 }
 
 @media (hover: hover) {
