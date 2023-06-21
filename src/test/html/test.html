@@ -1,30 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
-    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
     <style>
-      @media (pointer: coarse) {
-        #divider {
-          width: 32px;
-        }
-      }
-      @media (pointer: fine) {
-        #divider {
-          width: 8px;
-        }
+      .customizable {
+        /* Reset specific properties to their initial/default values */
+        all: initial;
+        /* Add any additional styles or customizations as needed */
+        /* For example: */
+        /* background-color: red; */
+        /* color: white; */
+        /* padding: 10px; */
+        /* etc. */
       }
     </style>
   </head>
-  <body class="Frame" id="split-pane-demo">
-    <div class="SplitPane">
-      <div id="left-container">
-        <button>Left</button>
-      </div>
-      <div id="divider"></div>
-      <div id="right-container">
-        <button>Right</button>
-      </div>
-    </div>
+  <body>
+    <button class="customizable">Button</button>
   </body>
 </html>
