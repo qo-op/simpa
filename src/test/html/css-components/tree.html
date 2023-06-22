@@ -6,46 +6,31 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
     />
-    <script>
-      function expandOrCollapse(event) {
-        const treeNode = event.currentTarget;
-        const closed = treeNode.dataset.closed;
-        treeNode.dataset.closed = closed === "false" ? "true" : "false";
-      }
-    </script>
   </head>
   <body>
     <!-- Tree -->
     <ul class="Tree">
       <li>
-        <!-- Tree Node -->
-        <!-- data-closed="true" -->
-        <div
-          class="TreeNode"
-          data-closed="true"
-          onclick="expandOrCollapse(event);"
-        >
+        <!-- tree node with data-closed="true" -->
+        <div class="TreeNode" data-closed="true">
           <span class="material-icons"> folder </span>
           <span>Appliances</span>
         </div>
         <ul>
           <li>
-            <!-- Tree Node -->
-            <div class="TreeNode" style="padding: 0 0 0 1em">
+            <div class="TreeNode" style="padding: 0 0 0 24px">
               <span class="material-icons"> blender </span>
               <span>Blender</span>
             </div>
           </li>
           <li>
-            <!-- Tree Node -->
-            <div class="TreeNode" style="padding: 0 0 0 1em">
+            <div class="TreeNode" style="padding: 0 0 0 24px">
               <span class="material-icons"> coffee_maker </span>
               <span>Coffee Maker</span>
             </div>
           </li>
           <li>
-            <!-- Tree Node -->
-            <div class="TreeNode" style="padding: 0 0 0 1em">
+            <div class="TreeNode" style="padding: 0 0 0 24px">
               <span class="material-icons"> iron </span>
               <span>Iron</span>
             </div>
