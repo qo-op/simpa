@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
     <script>
       function handleChange(ev) {
-        const value = ev.currentTarget.value;
+        const comboBox = ev.currentTarget;
+        const value = comboBox.value;
         const container = document.getElementById("container");
         const cards = container.children;
         for (let i = 0; i < cards.length; i++) {
@@ -18,31 +19,30 @@
       }
     </script>
   </head>
-
-  <body class="Frame">
+  <body>
     <div class="CenterLayout">
       <div
         class="BorderLayout"
         style="border: 1px solid Gray; height: 100px; padding: 10px"
       >
-        <div class="PageStart">
-          <!-- combo box -->
+        <div class="PageStart" style="margin: 0 0 10px 0">
+          <!-- Combo Box -->
           <select onchange="handleChange(event);">
             <option value="Card 1" selected>1st Card</option>
             <option value="Card 2">2nd Card</option>
             <option value="Card 3">3rd Card</option>
           </select>
         </div>
-        <!-- card layout -->
-        <div class="CardLayout" id="container" style="padding: 10px">
+        <!-- Card Container -->
+        <div class="CardLayout" id="container">
           <button data-name="Card 1" style="visibility: inherit">
-            <u>First</u> Button
+            First Button
           </button>
           <button data-name="Card 2" style="visibility: hidden">
-            <u>Second</u> Button
+            Second Button
           </button>
           <button data-name="Card 3" style="visibility: hidden">
-            <u>Third</u> Button
+            Third Button
           </button>
         </div>
       </div>
