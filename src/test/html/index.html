@@ -2,16 +2,711 @@
 <html>
   <head>
     <link rel="stylesheet" href="../../../simpa.css" />
+    <script src="../../../simpa.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <style>
+      .TreeNode > .material-icons::after {
+        content: "description";
+      }
+      .TreeNode[data-closed="true"] > .material-icons::after {
+        content: "keyboard_arrow_right";
+      }
+      .TreeNode[data-closed="false"] > .material-icons::after {
+        content: "keyboard_arrow_down";
+      }
+    </style>
+    <script>
+      function expandOrCollapse(event) {
+        const treeNode = event.currentTarget;
+        const closed = treeNode.dataset.closed;
+        treeNode.dataset.closed = closed === "true" ? "false" : "true";
+      }
+      function show(event) {
+        const treeNode = event.currentTarget;
+        const userObject = treeNode.dataset.userObject;
+        const iframe = document.getElementById("iframe");
+        iframe.src = userObject;
+      }
+    </script>
   </head>
-  <body>
-    <!-- Container with BorderLayout -->
-    <div class="BorderLayout" style="height: 100px">
-      <!-- PageStart -->
-      <div class="PageStart">
-        <button>Button 1</button>
+  <body class="Frame">
+    <div class="PageStart">
+      <div class="CenterLayout">
+        <span>Simpa Tests</span>
       </div>
-      <!-- Center -->
-      <button>Button 2</button>
+    </div>
+    <div class="SplitPane">
+      <div>
+        <nav class="ScrollPane" style="padding: 0.5em">
+          <ul class="Tree">
+            <li>
+              <div
+                class="TreeNode"
+                data-closed="true"
+                onclick="expandOrCollapse(event);"
+              >
+                <span class="material-icons"></span>
+                <span>CSS Layouts</span>
+              </div>
+              <ul>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/border-layout.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>border-layout.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/border-layout-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>border-layout-2.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/box-layout.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>box-layout.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/box-layout-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>box-layout-2.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/box-layout-3.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>box-layout-3.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/box-layout-4.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>box-layout-4.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/box-layout-5.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>box-layout-5.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/card-layout.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>card-layout.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/card-layout-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>card-layout-2.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/center-layout.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>center-layout.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/flow-layout.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>flow-layout.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/flow-layout-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>flow-layout-2.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/flow-layout-3.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>flow-layout-3.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/grid-constraints.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>grid-constraints.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/grid-constraints-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>grid-constraints-2.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/grid-layout.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>grid-layout.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-layouts/grid-layout-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>grid-layout-2.html</span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <div
+                class="TreeNode"
+                data-closed="false"
+                onclick="expandOrCollapse(event);"
+              >
+                <span class="material-icons"></span>
+                <span>CSS Components</span>
+              </div>
+              <ul>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-components/scroll-pane.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>scroll-pane.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-components/scroll-pane-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>scroll-pane-2.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-components/scroll-table.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>scroll-table.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-components/scroll-table-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>scroll-table-2.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-components/tree.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>tree.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="css-components/tree-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>tree-2.html</span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <div
+                class="TreeNode"
+                data-closed="false"
+                onclick="expandOrCollapse(event);"
+              >
+                <span class="material-icons"></span>
+                <span>JS Components</span>
+              </div>
+              <ul>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="js-components/dialog.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>dialog.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="js-components/dialog-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>dialog-2.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="js-components/dialog-3.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>dialog-3.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="js-components/dialog-4.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>dialog-4.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="js-components/menu-bar.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>menu-bar.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="js-components/menu-bar-2.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>menu-bar-2.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="js-components/split-pane.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>split-pane.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="js-components/tabbed-pane.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>tabbed-pane.html</span>
+                  </div>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <div
+                class="TreeNode"
+                data-closed="false"
+                onclick="expandOrCollapse(event);"
+              >
+                <span class="material-icons"></span>
+                <span>Examples</span>
+              </div>
+              <ul>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/border-layout-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>border-layout-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/box-layout-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>box-layout-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/card-layout-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>card-layout-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/flow-layout-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>flow-layout-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/grid-bag-layout-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>grid-bag-layout-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/border-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>border-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/button-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>button-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/check-box-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>check-box-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/color-chooser-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>color-chooser-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/combo-box-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>combo-box-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/dialog-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>dialog-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/file-chooser-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>file-chooser-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/glass-pane-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>glass-pane-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/icon-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>icon-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/layered-pane-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>layered-pane-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/menu-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>menu-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/progress-bar-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>progress-bar-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/radio-button-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>radio-button-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/scroll-pane-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>scroll-pane-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/slider-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>slider-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/split-pane-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>split-pane-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/tabbed-pane-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>tabbed-pane-demo.html</span>
+                  </div>
+                </li>
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/table-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>table-demo.html</span>
+                  </div>
+                </li>
+                <!--
+                <li>
+                  <div
+                    class="TreeNode"
+                    style="padding: 0 0 0 1em"
+                    data-user-object="examples/tree-demo.html"
+                    onclick="show(event);"
+                  >
+                    <span class="material-icons"></span>
+                    <span>tree-demo.html</span>
+                  </div>
+                </li>
+                -->
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="LineDivider"></div>
+      <div>
+        <iframe
+          style="width: 100%; height: 100%; border: none"
+          id="iframe"
+        ></iframe>
+      </div>
     </div>
   </body>
 </html>

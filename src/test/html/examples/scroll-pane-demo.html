@@ -1,0 +1,72 @@
+<!-- ScrollPaneDemo.html -->
+<!-- An HTML version of Oracle's ScrollDemo2 example, using simpa.} -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* ScrollPaneDemo.css */
+      .Circle {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        position: absolute;
+      }
+    </style>
+    <script>
+      /* ScrollPaneDemo.js */
+      colors = [
+        "Red",
+        "Blue",
+        "LightGreen",
+        "Orange",
+        "Cyan",
+        "Magenta",
+        "DarkGray",
+        "Yellow",
+      ];
+      colorIndex = 0;
+      function handleClick(event) {
+        const scrollPane = event.currentTarget;
+        const scrollPaneRect = scrollPane.getBoundingClientRect();
+        const circle = document.createElement("div");
+        circle.classList.add("Circle");
+        circle.style.left =
+          event.clientX -
+          scrollPaneRect.left +
+          scrollPane.scrollLeft -
+          50 +
+          "px";
+        circle.style.top =
+          event.clientY - scrollPaneRect.top + scrollPane.scrollTop - 50 + "px";
+        circle.style.backgroundColor = colors[colorIndex++ % colors.length];
+        scrollPane.appendChild(circle);
+        circle.scrollIntoView();
+      }
+      function handleContextMenu(event) {
+        event.preventDefault();
+        const scrollPane = event.currentTarget;
+        while (scrollPane.firstElementChild) {
+          scrollPane.firstElementChild.remove();
+        }
+      }
+    </script>
+  </head>
+  <body class="Frame" id="scroll-pane-demo">
+    <div class="ScrollPane" data-overlay>
+      <div class="CenterLayout" style="padding: 0.25em">
+        <div style="display: grid">
+          <span>Click left mouse button to place a circle.</span>
+          <span>Click right mouse button to clear drawing area.</span>
+          <div
+            class="ScrollPane"
+            style="border: 1px solid Gray; height: 200px; position: relative"
+            onclick="handleClick(event);"
+            oncontextmenu="handleContextMenu(event);"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

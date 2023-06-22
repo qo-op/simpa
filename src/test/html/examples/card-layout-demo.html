@@ -1,0 +1,69 @@
+<!-- CardLayoutDemo.html -->
+<!-- An HTML version of Oracle's CardLayoutDemo example, using simpa. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* CardLayoutDemo.css */
+    </style>
+    <script>
+      /* CardLayoutDemo.js */
+      function handleChange(event) {
+        const value = event.currentTarget.value;
+        const container = document.getElementById("container");
+        const cards = container.children;
+        for (let i = 0; i < cards.length; i++) {
+          const card = container.children[i];
+          if (card.dataset.name === value) {
+            card.style.visibility = "inherit";
+          } else {
+            card.style.visibility = "hidden";
+          }
+        }
+      }
+    </script>
+  </head>
+  <body class="Frame" id="card-layout-demo">
+    <div class="ScrollPane" data-overlay>
+      <div class="CenterLayout" style="padding: 0.25em">
+        <div
+          class="BorderLayout"
+          style="border: 1px solid Gray; padding: 0.5em"
+        >
+          <div class="PageStart CenterLayout">
+            <!-- combo box -->
+            <select onchange="handleChange(event);">
+              <option value="Card with Buttons" selected>
+                Card with Buttons
+              </option>
+              <option value="Card with Text Field">Card with Text Field</option>
+            </select>
+          </div>
+          <!-- card layout -->
+          <div class="CardLayout" style="padding: 0.5em 0 0 0" id="container">
+            <!-- card with buttons -->
+            <div
+              class="FlowLayout"
+              data-name="Card with Buttons"
+              style="gap: 0.5em; visibility: inherit"
+            >
+              <button>Button 1</button>
+              <button>Button 2</button>
+              <button>Button 3</button>
+            </div>
+            <!-- card with text field -->
+            <div
+              class="BorderLayout"
+              data-name="Card with Text Field"
+              style="visibility: hidden"
+            >
+              <input type="text" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

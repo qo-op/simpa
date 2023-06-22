@@ -1,0 +1,39 @@
+<!-- ComboBoxDemo.html -->
+<!-- An HTML version of Oracle's ComboBoxDemo example, using simpa. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* ComboBoxDemo.css */
+    </style>
+    <script>
+      /* ComboBoxDemo.js */
+      function handleChange(event) {
+        const comboBox = event.currentTarget;
+        const value = comboBox.value;
+        const picture = document.getElementById("picture");
+        picture.src = "../images/" + value + ".gif";
+      }
+    </script>
+  </head>
+  <body class="Frame" id="combo-box-demo">
+    <div class="ScrollPane" data-overlay>
+      <div class="CenterLayout" style="padding: 0.25em">
+        <div class="BoxLayout" data-axis="page-axis" style="gap: 0.5em">
+          <!-- combo box -->
+          <select onchange="handleChange(event);">
+            <option value="Bird">Bird</option>
+            <option value="Cat">Cat</option>
+            <option value="Dog">Dog</option>
+            <option value="Rabbit">Rabbit</option>
+            <option value="Pig" selected>Pig</option>
+          </select>
+          <!-- picture -->
+          <img src="../images/Pig.gif" alt="Pet image" id="picture" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+<!-- GlassPaneDemo.html -->
+<!-- An HTML version of Oracle's GlassPaneDemo example, using simpa. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* GlassPaneDemo.css */
+      .Circle {
+        width: 20px;
+        height: 20px;
+        background-color: Red;
+        border-radius: 10px;
+        position: fixed;
+      }
+    </style>
+    <script>
+      /* GlassPaneDemo.js */
+      function handleChange(event) {
+        const checkBox = event.currentTarget;
+        const glassPane = document.getElementById("glass-pane");
+        while (glassPane.firstElementChild) {
+          glassPane.firstElementChild.remove();
+        }
+        glassPane.style.visibility = checkBox.checked ? "inherit" : "hidden";
+      }
+      function handleClick(event) {
+        const glassPane = event.currentTarget;
+        while (glassPane.firstElementChild) {
+          glassPane.firstElementChild.remove();
+        }
+        const circle = document.createElement("div");
+        circle.classList.add("Circle");
+        circle.style.left = event.clientX - 10 + "px";
+        circle.style.top = event.clientY - 10 + "px";
+        glassPane.appendChild(circle);
+      }
+    </script>
+  </head>
+  <body class="Frame" id="glass-pane-demo">
+    <div class="ScrollPane" data-overlay>
+      <div class="CenterLayout" style="padding: 0.25em">
+        <div class="BorderLayout" style="border: 1px solid gray">
+          <div class="BorderLayout">
+            <div class="BorderLayout">
+              <div class="PageStart">
+                <!-- menu bar -->
+                <ul class="MenuBar">
+                  <li>
+                    <div class="Menu">
+                      <span>Menu</span>
+                    </div>
+                    <ul>
+                      <li>
+                        <div class="MenuItem">
+                          <span></span>
+                          <span>Do nothing</span>
+                          <span></span>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <!-- content pane -->
+              <div class="FlowLayout" style="gap: 0.5em; padding: 0.5em">
+                <button>Button 1</button>
+                <button>Button 2</button>
+              </div>
+            </div>
+            <!-- GlassPane -->
+            <div
+              class="GlassPane"
+              style="visibility: hidden; background-color: rgba(0, 0, 0, 0.2)"
+              onclick="handleClick(event);"
+              id="glass-pane"
+            ></div>
+          </div>
+          <div
+            class="PageEnd"
+            style="border: solid Gray; border-width: 1px 0 0 0; padding: 0.5em"
+          >
+            <label>
+              <input type="checkbox" onchange="handleChange(event);" />
+              Glass pane "visible"
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

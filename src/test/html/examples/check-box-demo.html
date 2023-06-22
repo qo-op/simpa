@@ -1,0 +1,94 @@
+<!-- CheckBoxDemo.html -->
+<!-- An HTML version of Oracle's CheckBoxDemo example, using simpa. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* CheckBoxDemo.css */
+    </style>
+    <script>
+      /* CheckBoxDemo.js */
+      choices = "cght".split("");
+      function updatePicture(event) {
+        let index = 0;
+        const checkBox = event.currentTarget;
+        let c = checkBox.value;
+        switch (c) {
+          case "c":
+            index = 0;
+            break;
+          case "g":
+            index = 1;
+            break;
+          case "h":
+            index = 2;
+            break;
+          case "t":
+            index = 3;
+            break;
+        }
+        if (!checkBox.checked) {
+          c = "-";
+        }
+        choices[index] = c;
+        const picture = document.getElementById("picture");
+        picture.src = "../images/geek-" + choices.join("") + ".gif";
+      }
+    </script>
+  </head>
+  <body class="Frame" id="check-box-demo">
+    <div class="ScrollPane" data-overlay>
+      <div class="CenterLayout" style="padding: 0.25em">
+        <div class="BoxLayout" style="gap: 0.5em">
+          <!-- check boxes -->
+          <form>
+            <!-- Chin check box -->
+            <label>
+              <input
+                type="checkbox"
+                value="c"
+                onchange="updatePicture(event);"
+                checked
+              />
+              Chin </label
+            ><br />
+            <!-- Glasses check box -->
+            <label>
+              <input
+                type="checkbox"
+                value="g"
+                onchange="updatePicture(event);"
+                checked
+              />
+              Glasses </label
+            ><br />
+            <!-- Hair check box -->
+            <label>
+              <input
+                type="checkbox"
+                value="h"
+                onchange="updatePicture(event);"
+                checked
+              />
+              Hair </label
+            ><br />
+            <!-- Teeth check box -->
+            <label>
+              <input
+                type="checkbox"
+                value="t"
+                onchange="updatePicture(event);"
+                checked
+              />
+              Teeth
+            </label>
+          </form>
+          <!-- picture -->
+          <img src="../images/geek-cght.gif" alt="Geek image" id="picture" />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

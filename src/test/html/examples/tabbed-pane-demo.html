@@ -1,0 +1,82 @@
+<!-- TabbedPaneDemo.html -->
+<!-- An HTML version of Oracle's TabbedPaneDemo example, using simpa. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* TabbedPaneDemo.css */
+    </style>
+    <script>
+      /* TabbedPaneDemo.js */
+    </script>
+  </head>
+  <body class="Frame" id="tabbed-pane-demo">
+    <div class="ScrollPane" data-overlay>
+      <div class="CenterLayout" style="padding: 0.25em">
+        <!-- tabbed pane -->
+        <div class="TabbedPane" style="border: 1px solid Gray">
+          <!-- tab container -->
+          <div>
+            <button value="panel1" tabindex="-1">
+              <span>
+                <img src="../images/middle.gif" />
+                <span data-key="1" data-alt> Tab <u>1</u> </span>
+              </span>
+            </button>
+            <button value="panel2">
+              <span>
+                <img src="../images/middle.gif" />
+                <span data-key="2" data-alt> Tab <u>2</u> </span>
+              </span>
+            </button>
+            <button value="panel3">
+              <span>
+                <img src="../images/middle.gif" />
+                <span data-key="3" data-alt> Tab <u>3</u> </span>
+              </span>
+            </button>
+            <button value="panel4">
+              <span>
+                <img src="../images/middle.gif" />
+                <span data-key="4" data-alt> Tab <u>4</u> </span>
+              </span>
+            </button>
+          </div>
+          <!-- card container -->
+          <div class="CardLayout">
+            <div
+              class="CenterLayout"
+              data-name="panel1"
+              style="visibility: inherit"
+            >
+              Panel #1
+            </div>
+            <div
+              class="CenterLayout"
+              data-name="panel2"
+              style="visibility: hidden"
+            >
+              Panel #2
+            </div>
+            <div
+              class="CenterLayout"
+              data-name="panel3"
+              style="visibility: hidden"
+            >
+              Panel #3
+            </div>
+            <div
+              class="CenterLayout"
+              data-name="panel4"
+              style="width: 320px; height: 160px; visibility: hidden"
+            >
+              Panel #4 (has a size of 320 x 160).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

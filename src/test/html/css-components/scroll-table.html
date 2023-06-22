@@ -4,16 +4,46 @@
     <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
   </head>
   <body>
-    <div
-      class="ScrollPane"
-      style="
-        width: 200px;
-        white-space: nowrap;
-        border: 1px solid Gray;
-        background-color: WhiteSmoke;
-      "
-    >
-      <p>This is a long text that requires scrolling.</p>
+    <div class="CenterLayout">
+      <!-- ScrollTable -->
+      <div class="ScrollTable" style="max-width: 500px">
+        <table>
+          <!-- Table Data -->
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>35</td>
+              <td>Engineer</td>
+              <td>Male</td>
+              <td>United States</td>
+            </tr>
+            <tr>
+              <td>Jane Smith</td>
+              <td>28</td>
+              <td>Teacher</td>
+              <td>Female</td>
+              <td>Canada</td>
+            </tr>
+            <tr>
+              <td>Michael Johnson</td>
+              <td>42</td>
+              <td>Doctor</td>
+              <td>Male</td>
+              <td>Australia</td>
+            </tr>
+          </tbody>
+          <!-- Column Headers -->
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Occupation</th>
+              <th>Gender</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
   </body>
 </html>

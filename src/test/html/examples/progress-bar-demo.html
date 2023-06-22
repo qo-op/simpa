@@ -1,0 +1,59 @@
+<!-- ProgressBarDemo.html -->
+<!-- An HTML version of Oracle's ProgressBarDemo example, using simpa. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* ProgressBarDemo.css */
+    </style>
+    <script>
+      /* ProgressBarDemo.js */
+      async function start(event) {
+        const button = event.currentTarget;
+        button.disabled = true;
+        const output = document.getElementById("output");
+        const progress = document.getElementById("progress");
+        progress.value = 0;
+        while (progress.value < 100) {
+          await sleep(Math.floor(Math.random() * 1000));
+          progress.value = Math.min(
+            100,
+            progress.value + Math.floor(Math.random() * 10)
+          );
+          output.value += "Completed " + progress.value + "% of task.\n";
+          output.scrollTop = output.scrollHeight;
+        }
+        output.value += "Done!\n";
+        output.scrollTop = output.scrollHeight;
+        button.disabled = false;
+      }
+      function sleep(millis) {
+        return new Promise((resolve) => setTimeout(resolve, millis));
+      }
+    </script>
+  </head>
+  <body class="Frame" id="progress-bar-demo">
+    <div class="ScrollPane" data-overlay>
+      <div class="CenterLayout" style="padding: 0.25em">
+        <div class="BorderLayout">
+          <div class="PageStart">
+            <div class="BoxLayout" style="gap: 0.5em">
+              <button onclick="start(event);">Start</button>
+              <progress max="100" id="progress"></progress>
+            </div>
+          </div>
+          <div class="EmptyBorder" style="padding: 0.5em 0 0 0">
+            <textarea
+              rows="5"
+              class="ScrollPane"
+              readonly
+              id="output"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!-- SplitPaneDemo.html -->
+<!-- An HTML version of Oracle's SplitPaneDemo example, using simpa. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* SplitPaneDemo.css */
+    </style>
+    <script>
+      /* SplitPaneDemo.js */
+      function handleClick(event) {
+        const ul = event.currentTarget;
+        const li = event.target;
+        let index = Array.from(ul.children).indexOf(li);
+        if (index === -1) {
+          return;
+        }
+        for (let i = 0; i < ul.children.length; i++) {
+          const child = ul.children[i];
+          child.style.backgroundColor = i === index ? "LightGray" : "";
+        }
+        const value = li.textContent;
+        const picture = document.getElementById("picture");
+        picture.src = "../images/" + value + ".gif";
+      }
+    </script>
+  </head>
+  <body class="Frame" id="split-pane-demo">
+    <div class="ScrollPane" data-overlay>
+      <div class="CenterLayout" style="padding: 0.25em">
+        <div class="SplitPane" style="width: 300px; height: 150px">
+          <!-- left container -->
+          <div>
+            <div class="ScrollPane" style="border: 1px solid Gray">
+              <ul
+                style="
+                  margin: 0;
+                  padding: 0;
+                  list-style-type: none;
+                  cursor: default;
+                "
+                onclick="handleClick(event);"
+              >
+                <li style="background-color: LightGray">Bird</li>
+                <li>Cat</li>
+                <li>Dog</li>
+                <li>Rabbit</li>
+                <li>Pig</li>
+                <li>dukeWaveRed</li>
+                <li>left</li>
+                <li>middle</li>
+                <li>right</li>
+              </ul>
+            </div>
+          </div>
+          <!-- divider -->
+          <div></div>
+          <!-- right container -->
+          <div>
+            <div class="ScrollPane CenterLayout" style="border: 1px solid Gray">
+              <img src="../images/Bird.gif" alt="Pet image" id="picture" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

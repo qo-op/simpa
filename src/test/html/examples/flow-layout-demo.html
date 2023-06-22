@@ -1,0 +1,61 @@
+<!-- FlowLayoutDemo.html -->
+<!-- An HTML version of Oracle's FlowLayoutDemo example, using simpa. -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <style>
+      /* FlowLayoutDemo.css */
+    </style>
+    <script>
+      /* FlowLayoutDemo.js */
+      function applyComponentOrientation(event) {
+        event.preventDefault();
+        const button = event.currentTarget;
+        const form = button.parentElement;
+        const checkedRadioButton = form.querySelector(":scope input:checked");
+        const value = checkedRadioButton.value;
+        const compsToExperiment = document.getElementById("compsToExperiment");
+        compsToExperiment.style.direction = value;
+      }
+    </script>
+  </head>
+  <body class="Frame" id="flow-layout-demo">
+    <div class="ScrollPane" data-overlay>
+      <div class="CenterLayout" style="padding: 0.25em">
+        <div
+          class="BorderLayout"
+          style="border: 1px solid gray; padding: 0.5em"
+        >
+          <div
+            class="FlowLayout"
+            style="gap: 0.5em; padding: 0 0 0.5em 0"
+            id="compsToExperiment"
+          >
+            <button>Button 1</button>
+            <button>Button 2</button>
+            <button>Button 3</button>
+            <button>Long-Named Button 4</button>
+            <button>5</button>
+          </div>
+          <div class="PageEnd">
+            <form class="FlowLayout" style="gap: 0.5em">
+              <label>
+                <input type="radio" name="option" value="ltr" checked />
+                Left to right
+              </label>
+              <label>
+                <input type="radio" name="option" value="rtl" />
+                Right to left
+              </label>
+              <button onclick="applyComponentOrientation(event);">
+                Apply component orientation
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

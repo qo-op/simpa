@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://qo-op.github.io/simpa/simpa.css" />
+    <script src="https://qo-op.github.io/simpa/simpa.js"></script>
+    <script>
+      async function handleClick(event) {
+        const textarea = document.getElementById("textarea");
+        const choice = await OptionPane.showConfirmDialog(
+          "Would you like green eggs and ham?",
+          "An Inane Question",
+          "yes-no"
+        );
+        if (choice === "Yes") {
+          textarea.value += "Ewww!\n";
+        } else {
+          textarea.value += "Me neither!\n";
+        }
+        textarea.scrollTop = textarea.scrollHeight;
+      }
+    </script>
+  </head>
+  <body class="Frame">
+    <div class="CenterLayout">
+      <div class="BoxLayout" data-axis="page-axis" style="gap: 0.5em">
+        <button onclick="handleClick(event);">Click me!</button>
+        <textarea rows="3" cols="40" id="textarea"></textarea>
+      </div>
+    </div>
+  </body>
+</html>
