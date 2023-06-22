@@ -591,29 +591,29 @@ button[disabled] img {
  * Menu Item Layout
  */
 
-.MenuItem,
+.MenuBar .MenuItem,
 .MenuBar ul .Menu {
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   align-items: center;
 }
 
-.MenuItem > *,
+.MenuBar .MenuItem > *,
 .MenuBar ul .Menu > * {
   font-size: 1em;
   line-height: 1.2;
 }
 
-.MenuItem > :first-child,
-.MenuItem > :last-child,
+.MenuBar .MenuItem > :first-child,
+.MenuBar .MenuItem > :last-child,
 .MenuBar ul .Menu > :first-child,
 .MenuBar ul .Menu > :last-child {
   width: 1em;
 }
 
-.MenuItem > img,
-.MenuItem > svg,
-.MenuItem > input,
+.MenuBar .MenuItem > img,
+.MenuBar .MenuItem > svg,
+.MenuBar .MenuItem > input,
 .MenuBar ul .Menu > img,
 .MenuBar ul .Menu > svg,
 .MenuBar ul .Menu > input {
@@ -622,12 +622,12 @@ button[disabled] img {
   height: 1em;
 }
 
-.MenuItem > :not(:first-child):not(:last-child),
+.MenuBar .MenuItem > :not(:first-child):not(:last-child),
 .MenuBar ul .Menu > :not(:first-child):not(:last-child) {
   padding-inline: 0.5em;
 }
 
-.MenuItem > :nth-child(3):not(:last-child),
+.MenuBar .MenuItem > :nth-child(3):not(:last-child),
 .MenuBar ul .Menu > :nth-child(3):not(:last-child) {
   font-family: monospace;
 }
