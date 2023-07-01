@@ -3,8 +3,6 @@
  *
  * If you are using TypeScript, you can use OptionPane by following this syntax:
  * await (window as any).OptionPane.showMessageDialog("Hello, World!");
- *
- * @author Yassuo Toda
  */
 
 if ((window as any).Dialog) {
@@ -41,8 +39,6 @@ if ((window as any).TabComponent) {
  * Based on the javax.swing.JDialog
  * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/JDialog.html
- *
- * @author Yassuo Toda
  */
 
 class Dialog {
@@ -131,8 +127,6 @@ class Dialog {
  * Based on the javax.swing.JMenu
  * https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/JMenuBar.html
- *
- * @author Yassuo Toda
  */
 
 class MenuBar {
@@ -339,8 +333,6 @@ class MenuBar {
  * Based on the javax.swing.JOptionPane
  * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/JOptionPane.html
- *
- * @author Yassuo Toda
  */
 
 class OptionPane {
@@ -998,8 +990,6 @@ class OptionPane {
  * Based on the javax.swing.JSplitPane
  * https://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/JSplitPane.html
- *
- * @author Yassuo Toda
  */
 
 class SplitPane {
@@ -1189,14 +1179,10 @@ class SplitPane {
  * https://docs.oracle.com/javase/7/docs/api/javax/swing/JTabbedPane.html
  * https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html
  * https://docs.oracle.com/javase/7/docs/api/java/awt/CardLayout.html
- *
- * @author Yassuo Toda
  */
 
 /**
  * TabContainer
- *
- * @author Yassuo Toda
  */
 class TabContainer {
   static setSelectedTabComponent = (
@@ -1228,8 +1214,6 @@ class TabContainer {
 
 /**
  * CardContainer
- *
- * @author Yassuo Toda
  */
 class CardContainer {
   static show = (cardContainer: HTMLElement, name: string) => {
@@ -1267,8 +1251,6 @@ class CardContainer {
 
 /**
  * TabComponent
- *
- * @author Yassuo Toda
  */
 class TabComponent {
   static pointerdown = (ev: PointerEvent) => {
@@ -1306,8 +1288,6 @@ class TabComponent {
  *
  * Function keys (F1 to F24)
  * Keys combined with Alt or Ctrl
- *
- * @author Yassuo Toda
  */
 class KeyboardShortcut {
   static keydown = (ev: KeyboardEvent) => {

@@ -3,8 +3,6 @@
  *
  * If you are using TypeScript, you can use OptionPane by following this syntax:
  * await (window as any).OptionPane.showMessageDialog("Hello, World!");
- *
- * @author Yassuo Toda
  */
 if (window.Dialog) {
     document.removeEventListener("pointerdown", window.Dialog.pointerdown);
@@ -24,8 +22,6 @@ if (window.TabComponent) {
  * Based on the javax.swing.JDialog
  * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/JDialog.html
- *
- * @author Yassuo Toda
  */
 var Dialog = /** @class */ (function () {
     function Dialog() {
@@ -101,8 +97,6 @@ var Dialog = /** @class */ (function () {
  * Based on the javax.swing.JMenu
  * https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/JMenuBar.html
- *
- * @author Yassuo Toda
  */
 var MenuBar = /** @class */ (function () {
     function MenuBar() {
@@ -301,8 +295,6 @@ var MenuBar = /** @class */ (function () {
  * Based on the javax.swing.JOptionPane
  * https://docs.oracle.com/javase/tutorial/uiswing/components/dialog.html
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/JOptionPane.html
- *
- * @author Yassuo Toda
  */
 var OptionPane = /** @class */ (function () {
     function OptionPane(resolve, reject, input, message, title, optionType, messageType, img, options) {
@@ -778,8 +770,6 @@ var OptionPane = /** @class */ (function () {
  * Based on the javax.swing.JSplitPane
  * https://docs.oracle.com/javase/tutorial/uiswing/components/splitpane.html
  * https://docs.oracle.com/javase/8/docs/api/javax/swing/JSplitPane.html
- *
- * @author Yassuo Toda
  */
 var SplitPane = /** @class */ (function () {
     function SplitPane() {
@@ -919,13 +909,9 @@ var SplitPane = /** @class */ (function () {
  * https://docs.oracle.com/javase/7/docs/api/javax/swing/JTabbedPane.html
  * https://docs.oracle.com/javase/tutorial/uiswing/layout/card.html
  * https://docs.oracle.com/javase/7/docs/api/java/awt/CardLayout.html
- *
- * @author Yassuo Toda
  */
 /**
  * TabContainer
- *
- * @author Yassuo Toda
  */
 var TabContainer = /** @class */ (function () {
     function TabContainer() {
@@ -956,8 +942,6 @@ var TabContainer = /** @class */ (function () {
 }());
 /**
  * CardContainer
- *
- * @author Yassuo Toda
  */
 var CardContainer = /** @class */ (function () {
     function CardContainer() {
@@ -990,8 +974,6 @@ var CardContainer = /** @class */ (function () {
 }());
 /**
  * TabComponent
- *
- * @author Yassuo Toda
  */
 var TabComponent = /** @class */ (function () {
     function TabComponent() {
@@ -1025,8 +1007,6 @@ var TabComponent = /** @class */ (function () {
  *
  * Function keys (F1 to F24)
  * Keys combined with Alt or Ctrl
- *
- * @author Yassuo Toda
  */
 var KeyboardShortcut = /** @class */ (function () {
     function KeyboardShortcut() {

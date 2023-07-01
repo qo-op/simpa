@@ -1,10 +1,6 @@
 /**
  * Simpa.css
  * CSS definitions for Single-Page Applications
- *
- * ^ +\*
- *
- * @author Yassuo Toda
  */
 
 body {
@@ -24,291 +20,6 @@ body {
   bottom: 0 !important;
   left: 0 !important;
   overflow: hidden;
-}
-
-/**
- * No FOUC (Flash Of Unstyled Content)
- */
-
-.NoFouc {
-  visibility: hidden;
-}
-
-/**
- * Border Layout
- */
-
-.Frame,
-.BorderLayout {
-  display: grid !important;
-  grid-template-rows: auto minmax(0, 1fr) auto !important;
-  grid-template-columns: auto minmax(0, 1fr) auto !important;
-}
-
-.Frame > *,
-.BorderLayout > * {
-  grid-row: 2 !important;
-  grid-column: 2 !important;
-}
-
-.Frame > .North,
-.Frame > .PageStart,
-.BorderLayout > .North,
-.BorderLayout > .PageStart {
-  grid-row: 1 !important;
-  grid-column: 1 / -1 !important;
-}
-
-.Frame > .South,
-.Frame > .PageEnd,
-.BorderLayout > .South,
-.BorderLayout > .PageEnd {
-  grid-row: 3 !important;
-  grid-column: 1 / -1 !important;
-}
-
-.Frame > .West,
-.Frame > .LineStart,
-.BorderLayout > .West,
-.BorderLayout > .LineStart {
-  grid-row: 2 !important;
-  grid-column: 1 !important;
-}
-
-.Frame > .East,
-.Frame > .LineEnd,
-.BorderLayout > .East,
-.BorderLayout > .LineEnd {
-  grid-row: 2 !important;
-  grid-column: 3 !important;
-}
-
-.Frame > .Center,
-.BorderLayout > .Center {
-  grid-row: 2 !important;
-  grid-column: 2 !important;
-}
-
-.Frame > .North,
-.Frame > .South,
-.Frame > .West,
-.Frame > .East,
-.Frame > .PageStart,
-.Frame > .PageEnd,
-.Frame > .LineStart,
-.Frame > .LineEnd,
-.Frame > .Center,
-.BorderLayout > .North,
-.BorderLayout > .South,
-.BorderLayout > .West,
-.BorderLayout > .East,
-.BorderLayout > .PageStart,
-.BorderLayout > .PageEnd,
-.BorderLayout > .LineStart,
-.BorderLayout > .LineEnd,
-.BorderLayout > .Center {
-  display: grid;
-}
-
-.Frame > .Center,
-.BorderLayout > .Center {
-  grid-template-rows: minmax(0, 1fr);
-  grid-template-columns: minmax(0, 1fr);
-}
-
-/**
- * Box Layout
- */
-
-.BoxLayout,
-.BoxLayout[data-axis="x-axis"],
-.BoxLayout[data-axis="line-axis"] {
-  display: grid !important;
-  align-content: stretch !important;
-  justify-content: start !important;
-  align-items: center !important;
-}
-
-.BoxLayout[data-axis="y-axis"],
-.BoxLayout[data-axis="page-axis"] {
-  display: grid !important;
-  align-content: start !important;
-  justify-content: stretch !important;
-  justify-items: center !important;
-}
-
-.BoxLayout[data-axis="y-axis"][data-alignment-x="start"],
-.BoxLayout[data-axis="page-axis"][data-alignment-x="start"] {
-  justify-items: start !important;
-}
-
-.BoxLayout[data-alignment-x="center"],
-.BoxLayout[data-axis="x-axis"][data-alignment-x="center"],
-.BoxLayout[data-axis="line-axis"][data-alignment-x="center"] {
-  justify-content: center !important;
-}
-
-.BoxLayout[data-alignment-x="end"],
-.BoxLayout[data-axis="x-axis"][data-alignment-x="end"],
-.BoxLayout[data-axis="line-axis"][data-alignment-x="end"] {
-  justify-content: end !important;
-}
-
-.BoxLayout[data-axis="y-axis"][data-alignment-x="end"],
-.BoxLayout[data-axis="page-axis"][data-alignment-x="end"] {
-  justify-items: end !important;
-}
-
-.BoxLayout[data-axis="y-axis"][data-alignment-x="stretch"],
-.BoxLayout[data-axis="page-axis"][data-alignment-x="stretch"] {
-  justify-items: stretch !important;
-}
-
-.BoxLayout[data-alignment-y="start"],
-.BoxLayout[data-axis="x-axis"][data-alignment-y="start"],
-.BoxLayout[data-axis="line-axis"][data-alignment-y="start"] {
-  align-items: start !important;
-}
-
-.BoxLayout[data-axis="y-axis"][data-alignment-y="center"],
-.BoxLayout[data-axis="page-axis"][data-alignment-y="center"] {
-  align-content: center !important;
-}
-
-.BoxLayout[data-alignment-y="end"],
-.BoxLayout[data-axis="x-axis"][data-alignment-y="end"],
-.BoxLayout[data-axis="line-axis"][data-alignment-y="end"] {
-  align-items: end !important;
-}
-
-.BoxLayout[data-axis="y-axis"][data-alignment-y="end"],
-.BoxLayout[data-axis="page-axis"][data-alignment-y="end"] {
-  align-content: end !important;
-}
-
-.BoxLayout[data-alignment-y="stretch"],
-.BoxLayout[data-axis="x-axis"][data-alignment-y="stretch"],
-.BoxLayout[data-axis="line-axis"][data-alignment-y="stretch"] {
-  align-items: stretch !important;
-}
-
-.BoxLayout > *,
-.BoxLayout[data-axis="x-axis"] > *,
-.BoxLayout[data-axis="line-axis"] > * {
-  grid-row: 1 !important;
-  grid-column: unset !important;
-}
-
-.BoxLayout[data-axis="y-axis"] > *,
-.BoxLayout[data-axis="page-axis"] > * {
-  grid-row: unset !important;
-  grid-column: 1 !important;
-}
-
-/**
- * Center Layout
- */
-
-.CenterLayout {
-  display: grid !important;
-  place-items: center !important;
-}
-
-/**
- * Card Layout
- */
-
-.CardLayout {
-  display: grid !important;
-  grid-template-rows: minmax(0, 1fr) !important;
-  grid-template-columns: minmax(0, 1fr) !important;
-}
-
-.CardLayout > * {
-  grid-row: 1 !important;
-  grid-column: 1 !important;
-  outline: none;
-}
-
-/**
- * Flow Layout
- */
-
-.FlowLayout {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  align-content: start !important;
-  align-items: center;
-}
-
-.FlowLayout,
-.FlowLayout[data-alignment="center"] {
-  justify-content: center !important;
-}
-
-.FlowLayout[data-alignment="leading"] {
-  justify-content: start !important;
-}
-
-.FlowLayout[data-alignment="trailing"] {
-  justify-content: end !important;
-}
-
-/**
- * Grid Constraints
- */
-
-.GridConstraints {
-  display: grid !important;
-  place-items: center !important;
-}
-
-.GridConstraints[data-anchor="page-start"] {
-  align-items: start !important;
-}
-
-.GridConstraints[data-anchor="page-end"] {
-  align-items: end !important;
-}
-
-.GridConstraints[data-anchor="line-start"] {
-  justify-items: start !important;
-}
-
-.GridConstraints[data-anchor="line-end"] {
-  justify-items: end !important;
-}
-
-.GridConstraints[data-anchor="first-line-start"] {
-  align-items: start !important;
-  justify-items: start !important;
-}
-
-.GridConstraints[data-anchor="first-line-end"] {
-  align-items: start !important;
-  justify-items: end !important;
-}
-
-.GridConstraints[data-anchor="last-line-start"] {
-  align-items: end !important;
-  justify-items: start !important;
-}
-
-.GridConstraints[data-anchor="last-line-end"] {
-  align-items: end !important;
-  justify-items: end !important;
-}
-
-.GridConstraints[data-fill="horizontal"] {
-  justify-items: stretch !important;
-}
-
-.GridConstraints[data-fill="vertical"] {
-  align-items: stretch !important;
-}
-
-.GridConstraints[data-fill="both"] {
-  place-items: stretch !important;
 }
 
 /**
@@ -1347,4 +1058,289 @@ button[disabled] img {
   .Tree li > :not(ul):hover {
     background-color: rgba(128, 128, 128, 0.25);
   }
+}
+
+/**
+ * Border Layout
+ */
+
+.Frame,
+.BorderLayout {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+}
+
+.Frame > *,
+.BorderLayout > * {
+  grid-row: 2 !important;
+  grid-column: 2 !important;
+}
+
+.Frame > .North,
+.Frame > .PageStart,
+.BorderLayout > .North,
+.BorderLayout > .PageStart {
+  grid-row: 1 !important;
+  grid-column: 1 / -1 !important;
+}
+
+.Frame > .South,
+.Frame > .PageEnd,
+.BorderLayout > .South,
+.BorderLayout > .PageEnd {
+  grid-row: 3 !important;
+  grid-column: 1 / -1 !important;
+}
+
+.Frame > .West,
+.Frame > .LineStart,
+.BorderLayout > .West,
+.BorderLayout > .LineStart {
+  grid-row: 2 !important;
+  grid-column: 1 !important;
+}
+
+.Frame > .East,
+.Frame > .LineEnd,
+.BorderLayout > .East,
+.BorderLayout > .LineEnd {
+  grid-row: 2 !important;
+  grid-column: 3 !important;
+}
+
+.Frame > .Center,
+.BorderLayout > .Center {
+  grid-row: 2 !important;
+  grid-column: 2 !important;
+}
+
+.Frame > .North,
+.Frame > .South,
+.Frame > .West,
+.Frame > .East,
+.Frame > .PageStart,
+.Frame > .PageEnd,
+.Frame > .LineStart,
+.Frame > .LineEnd,
+.Frame > .Center,
+.BorderLayout > .North,
+.BorderLayout > .South,
+.BorderLayout > .West,
+.BorderLayout > .East,
+.BorderLayout > .PageStart,
+.BorderLayout > .PageEnd,
+.BorderLayout > .LineStart,
+.BorderLayout > .LineEnd,
+.BorderLayout > .Center {
+  display: grid;
+}
+
+.Frame > .Center,
+.BorderLayout > .Center {
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/**
+ * Box Layout
+ */
+
+.BoxLayout,
+.BoxLayout[data-axis="x-axis"],
+.BoxLayout[data-axis="line-axis"] {
+  display: grid !important;
+  align-content: stretch !important;
+  justify-content: start !important;
+  align-items: center !important;
+}
+
+.BoxLayout[data-axis="y-axis"],
+.BoxLayout[data-axis="page-axis"] {
+  display: grid !important;
+  align-content: start !important;
+  justify-content: stretch !important;
+  justify-items: center !important;
+}
+
+.BoxLayout[data-axis="y-axis"][data-alignment-x="start"],
+.BoxLayout[data-axis="page-axis"][data-alignment-x="start"] {
+  justify-items: start !important;
+}
+
+.BoxLayout[data-alignment-x="center"],
+.BoxLayout[data-axis="x-axis"][data-alignment-x="center"],
+.BoxLayout[data-axis="line-axis"][data-alignment-x="center"] {
+  justify-content: center !important;
+}
+
+.BoxLayout[data-alignment-x="end"],
+.BoxLayout[data-axis="x-axis"][data-alignment-x="end"],
+.BoxLayout[data-axis="line-axis"][data-alignment-x="end"] {
+  justify-content: end !important;
+}
+
+.BoxLayout[data-axis="y-axis"][data-alignment-x="end"],
+.BoxLayout[data-axis="page-axis"][data-alignment-x="end"] {
+  justify-items: end !important;
+}
+
+.BoxLayout[data-axis="y-axis"][data-alignment-x="stretch"],
+.BoxLayout[data-axis="page-axis"][data-alignment-x="stretch"] {
+  justify-items: stretch !important;
+}
+
+.BoxLayout[data-alignment-y="start"],
+.BoxLayout[data-axis="x-axis"][data-alignment-y="start"],
+.BoxLayout[data-axis="line-axis"][data-alignment-y="start"] {
+  align-items: start !important;
+}
+
+.BoxLayout[data-axis="y-axis"][data-alignment-y="center"],
+.BoxLayout[data-axis="page-axis"][data-alignment-y="center"] {
+  align-content: center !important;
+}
+
+.BoxLayout[data-alignment-y="end"],
+.BoxLayout[data-axis="x-axis"][data-alignment-y="end"],
+.BoxLayout[data-axis="line-axis"][data-alignment-y="end"] {
+  align-items: end !important;
+}
+
+.BoxLayout[data-axis="y-axis"][data-alignment-y="end"],
+.BoxLayout[data-axis="page-axis"][data-alignment-y="end"] {
+  align-content: end !important;
+}
+
+.BoxLayout[data-alignment-y="stretch"],
+.BoxLayout[data-axis="x-axis"][data-alignment-y="stretch"],
+.BoxLayout[data-axis="line-axis"][data-alignment-y="stretch"] {
+  align-items: stretch !important;
+}
+
+.BoxLayout > *,
+.BoxLayout[data-axis="x-axis"] > *,
+.BoxLayout[data-axis="line-axis"] > * {
+  grid-row: 1 !important;
+  grid-column: unset !important;
+}
+
+.BoxLayout[data-axis="y-axis"] > *,
+.BoxLayout[data-axis="page-axis"] > * {
+  grid-row: unset !important;
+  grid-column: 1 !important;
+}
+
+/**
+ * Center Layout
+ */
+
+.CenterLayout {
+  display: grid !important;
+  place-items: center !important;
+}
+
+/**
+ * Card Layout
+ */
+
+.CardLayout {
+  display: grid !important;
+  grid-template-rows: minmax(0, 1fr) !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.CardLayout > * {
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+  outline: none;
+}
+
+/**
+ * Flow Layout
+ */
+
+.FlowLayout {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-content: start !important;
+  align-items: center;
+}
+
+.FlowLayout,
+.FlowLayout[data-alignment="center"] {
+  justify-content: center !important;
+}
+
+.FlowLayout[data-alignment="leading"] {
+  justify-content: start !important;
+}
+
+.FlowLayout[data-alignment="trailing"] {
+  justify-content: end !important;
+}
+
+/**
+ * Grid Constraints
+ */
+
+.GridConstraints {
+  display: grid !important;
+  place-items: center !important;
+}
+
+.GridConstraints[data-anchor="page-start"] {
+  align-items: start !important;
+}
+
+.GridConstraints[data-anchor="page-end"] {
+  align-items: end !important;
+}
+
+.GridConstraints[data-anchor="line-start"] {
+  justify-items: start !important;
+}
+
+.GridConstraints[data-anchor="line-end"] {
+  justify-items: end !important;
+}
+
+.GridConstraints[data-anchor="first-line-start"] {
+  align-items: start !important;
+  justify-items: start !important;
+}
+
+.GridConstraints[data-anchor="first-line-end"] {
+  align-items: start !important;
+  justify-items: end !important;
+}
+
+.GridConstraints[data-anchor="last-line-start"] {
+  align-items: end !important;
+  justify-items: start !important;
+}
+
+.GridConstraints[data-anchor="last-line-end"] {
+  align-items: end !important;
+  justify-items: end !important;
+}
+
+.GridConstraints[data-fill="horizontal"] {
+  justify-items: stretch !important;
+}
+
+.GridConstraints[data-fill="vertical"] {
+  align-items: stretch !important;
+}
+
+.GridConstraints[data-fill="both"] {
+  place-items: stretch !important;
+}
+
+/**
+ * No FOUC (Flash Of Unstyled Content)
+ */
+
+.NoFouc {
+  visibility: hidden;
 }
