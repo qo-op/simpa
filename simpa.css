@@ -1069,6 +1069,10 @@ button[disabled] img {
   content: "keyboard_arrow_down";
 }
 
+.TreeNode * {
+  pointer-events: none;
+}
+
 /**
  * Border Layout
  */

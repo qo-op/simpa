@@ -1003,6 +1003,29 @@ var TabComponent = /** @class */ (function () {
     return TabComponent;
 }());
 /**
+ * TreeNode
+ *
+ * Based on the javax.swing.JTree
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/tree.html
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JTree.html
+ */
+var TreeNode = /** @class */ (function () {
+    function TreeNode() {
+    }
+    TreeNode.click = function (ev) {
+        var treeNode = ev.target;
+        if (!treeNode.classList.contains("TreeNode")) {
+            return;
+        }
+        var closed = treeNode.dataset.closed;
+        if (closed === undefined) {
+            return;
+        }
+        treeNode.dataset.closed = closed === "true" ? "false" : "true";
+    };
+    return TreeNode;
+}());
+/**
  * KeyboardShortcut
  *
  * Function keys (F1 to F24)
@@ -1056,6 +1079,7 @@ document.addEventListener("pointerdown", Dialog.pointerdown);
 document.addEventListener("pointerdown", MenuBar.pointerdown);
 document.addEventListener("pointerdown", SplitPane.pointerdown);
 document.addEventListener("pointerdown", TabComponent.pointerdown);
+document.addEventListener("click", TreeNode.click);
 document.addEventListener("keydown", KeyboardShortcut.keydown);
 /**
  *  No FOUC (Flash Of Unstyled Content)

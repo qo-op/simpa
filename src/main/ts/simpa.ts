@@ -1284,6 +1284,27 @@ class TabComponent {
 }
 
 /**
+ * TreeNode
+ *
+ * Based on the javax.swing.JTree
+ * https://docs.oracle.com/javase/tutorial/uiswing/components/tree.html
+ * https://docs.oracle.com/javase/8/docs/api/javax/swing/JTree.html
+ */
+class TreeNode {
+  static click = (ev: MouseEvent) => {
+    const treeNode = ev.target as HTMLElement;
+    if (!treeNode.classList.contains("TreeNode")) {
+      return;
+    }
+    const closed = treeNode.dataset.closed;
+    if (closed === undefined) {
+      return;
+    }
+    treeNode.dataset.closed = closed === "true" ? "false" : "true";
+  };
+}
+
+/**
  * KeyboardShortcut
  *
  * Function keys (F1 to F24)
@@ -1338,6 +1359,8 @@ document.addEventListener("pointerdown", MenuBar.pointerdown);
 document.addEventListener("pointerdown", SplitPane.pointerdown);
 
 document.addEventListener("pointerdown", TabComponent.pointerdown);
+
+document.addEventListener("click", TreeNode.click);
 
 document.addEventListener("keydown", KeyboardShortcut.keydown);
 
