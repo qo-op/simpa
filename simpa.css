@@ -1059,9 +1059,6 @@ button[disabled] img {
   }
 }
 
-.TreeNode > .material-icons::after {
-  content: "insert_drive_file";
-}
 .TreeNode[data-closed="true"] > .material-icons::after {
   content: "keyboard_arrow_right";
 }
