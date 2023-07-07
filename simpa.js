@@ -1103,4 +1103,3 @@ module.exports = {
   TabComponent,
 };
 */
-//# sourceMappingURL=simpa.js.map

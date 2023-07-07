@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom Dialog Popup on Click</title>
+    <style>
+      .my-div {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background-color: lightblue;
+        cursor: pointer;
+      }
+
+      .dialog-popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 200px;
+        background-color: white;
+        border: 1px solid black;
+        padding: 20px;
+        display: none;
+      }
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var myDiv = document.querySelector(".my-div");
+        var dialogPopup = document.querySelector(".dialog-popup");
+
+        myDiv.addEventListener("click", function () {
+          dialogPopup.style.display = "block";
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="my-div"></div>
+
+    <div class="dialog-popup">
+      <h2>Dialog Popup</h2>
+      <p>This is a custom dialog popup.</p>
+      <button onclick="closeDialog()">Close</button>
+    </div>
+
+    <script>
+      function closeDialog() {
+        var dialogPopup = document.querySelector(".dialog-popup");
+        dialogPopup.style.display = "none";
+      }
+    </script>
+  </body>
+</html>

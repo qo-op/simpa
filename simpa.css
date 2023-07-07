@@ -161,30 +161,6 @@ button[disabled] img {
   user-select: none;
 }
 
-.ModalLayer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 200 !important;
-  overflow: hidden;
-}
-
-/**
- * Drag Layer
- */
-
-.DragLayer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 400 !important;
-  overflow: hidden;
-}
-
 /**
  * File Chooser
  */
@@ -213,6 +189,28 @@ button[disabled] img {
  */
 
 .GlassPane {
+  z-index: 200 !important;
+}
+
+/**
+ * Layers
+ */
+
+.DragLayer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 400 !important;
+}
+
+.ModalLayer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   z-index: 200 !important;
 }
 
@@ -566,7 +564,8 @@ button[disabled] img {
 }
 
 .SplitPane > :not(:nth-child(2)) {
-  overflow: hidden;
+  grid-template-rows: minmax(0, 1fr) !important;
+  grid-template-columns: minmax(0, 1fr) !important;
 }
 
 .SplitPane:not([data-orientation="vertical-split"]) > * {
@@ -683,6 +682,7 @@ button[disabled] img {
   height: 0 !important;
   position: relative !important;
   cursor: ns-resize;
+  background-color: Gray;
 }
 
 @media (pointer: coarse) {
@@ -703,7 +703,7 @@ button[disabled] img {
     inset-inline-start: -0.5px;
     width: 1px;
     height: 100%;
-    background-color: Gray;
+    background-color: inherit;
     content: "";
   }
 
@@ -724,7 +724,7 @@ button[disabled] img {
     inset-inline-start: 0;
     height: 1px;
     width: 100%;
-    background-color: Gray;
+    background-color: inherit;
     content: "";
   }
 }
@@ -747,7 +747,7 @@ button[disabled] img {
     inset-inline-start: -0.5px;
     width: 1px;
     height: 100%;
-    background-color: Gray;
+    background-color: inherit;
     content: "";
   }
 
@@ -768,7 +768,7 @@ button[disabled] img {
     inset-inline-start: 0;
     height: 1px;
     width: 100%;
-    background-color: Gray;
+    background-color: inherit;
     content: "";
   }
 }
