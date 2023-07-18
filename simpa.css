@@ -564,8 +564,11 @@ button[disabled] img {
 }
 
 .SplitPane > :not(:nth-child(2)) {
+  /*
   grid-template-rows: minmax(0, 1fr) !important;
   grid-template-columns: minmax(0, 1fr) !important;
+  */
+  overflow: hidden;
 }
 
 .SplitPane:not([data-orientation="vertical-split"]) > * {
