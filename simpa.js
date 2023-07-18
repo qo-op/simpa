@@ -991,7 +991,7 @@ var TabComponent = /** @class */ (function () {
         if (!tabbedPane.classList.contains("TabbedPane")) {
             return;
         }
-        var cardContainer = tabbedPane.children[tabbedPane.childElementCount - 1];
+        var cardContainer = tabbedPane.querySelector(":scope .CardLayout");
         if (cardContainer === null) {
             return;
         }

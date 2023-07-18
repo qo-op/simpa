@@ -1,54 +1,57 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Custom Dialog Popup on Click</title>
     <style>
-      .my-div {
-        position: relative;
-        width: 200px;
-        height: 200px;
-        background-color: lightblue;
-        cursor: pointer;
-      }
-
-      .dialog-popup {
+      #myElement {
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 300px;
-        height: 200px;
-        background-color: white;
-        border: 1px solid black;
-        padding: 20px;
-        display: none;
+        width: 100px;
+        height: 100px;
+        background-color: red;
       }
     </style>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var myDiv = document.querySelector(".my-div");
-        var dialogPopup = document.querySelector(".dialog-popup");
-
-        myDiv.addEventListener("click", function () {
-          dialogPopup.style.display = "block";
-        });
-      });
-    </script>
   </head>
   <body>
-    <div class="my-div"></div>
-
-    <div class="dialog-popup">
-      <h2>Dialog Popup</h2>
-      <p>This is a custom dialog popup.</p>
-      <button onclick="closeDialog()">Close</button>
-    </div>
+    <div id="myElement" draggable="true"></div>
 
     <script>
-      function closeDialog() {
-        var dialogPopup = document.querySelector(".dialog-popup");
-        dialogPopup.style.display = "none";
+      // Get the draggable element
+      const draggableElement = document.getElementById("myElement");
+
+      // Variables to store initial position and mouse cursor position
+      let initialX, initialY, offsetX, offsetY;
+
+      // Function to handle drag start
+      function dragStart(e) {
+        initialX = e.clientX;
+        initialY = e.clientY;
+        offsetX = initialX - draggableElement.offsetLeft;
+        offsetY = initialY - draggableElement.offsetTop;
       }
+
+      // Function to handle drag over
+      function dragOver(e) {
+        e.preventDefault();
+      }
+
+      // Function to handle drag
+      function drag(e) {
+        const currentX = e.clientX;
+        const currentY = e.clientY;
+
+        const distanceX = currentX - initialX;
+        const distanceY = currentY - initialY;
+
+        const elementX = offsetX + distanceX;
+        const elementY = offsetY + distanceY;
+
+        draggableElement.style.left = elementX + "px";
+        draggableElement.style.top = elementY + "px";
+      }
+
+      // Attach event listeners for drag events
+      draggableElement.addEventListener("dragstart", dragStart);
+      draggableElement.addEventListener("dragover", dragOver);
+      draggableElement.addEventListener("drag", drag);
     </script>
   </body>
 </html>

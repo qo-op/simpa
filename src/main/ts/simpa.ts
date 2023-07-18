@@ -1266,9 +1266,9 @@ class TabComponent {
     if (!tabbedPane.classList.contains("TabbedPane")) {
       return;
     }
-    const cardContainer: HTMLElement = tabbedPane.children[
-      tabbedPane.childElementCount - 1
-    ] as HTMLElement;
+    const cardContainer: HTMLElement = tabbedPane.querySelector(
+      ":scope .CardLayout"
+    ) as HTMLElement;
     if (cardContainer === null) {
       return;
     }
