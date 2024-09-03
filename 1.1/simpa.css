@@ -1,0 +1,1359 @@
+/**
+ * Simpa.css
+ * CSS definitions for Single-Page Applications
+ */
+
+body {
+  -webkit-text-size-adjust: none;
+  overflow: hidden;
+}
+
+/**
+ * Frame
+ */
+
+.Frame {
+  margin: 0 !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  overflow: hidden;
+}
+
+/**
+ * Borders
+ */
+
+.LoweredBevelBorder {
+  display: grid !important;
+  border: 2px solid;
+  border-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5)
+    rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5);
+}
+
+.RaisedBevelBorder {
+  display: grid !important;
+  border: 2px solid;
+  border-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.5)
+    rgba(255, 255, 255, 0.5);
+}
+
+.TitledBorder {
+  position: relative !important;
+  display: grid !important;
+  grid-template-rows: auto 1fr !important;
+  grid-template-columns: 1fr !important;
+  grid-auto-rows: 1fr;
+}
+
+.TitledBorder::before {
+  position: absolute;
+  top: calc(0.6em + 0.5px);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 1px solid rgba(128, 128, 128, 0.5);
+  content: "";
+}
+
+.TitledBorder > * {
+  transform: translateZ(0);
+}
+
+.TitledBorder > :first-child,
+.TitledBorder[data-title-justification="leading"] > :first-child {
+  margin-inline: 0.5em;
+  background-color: White;
+  padding-inline: 0.5em;
+  line-height: 1.2em;
+  justify-self: left;
+}
+
+.TitledBorder[data-title-justification="center"] > :first-child {
+  justify-self: center;
+}
+
+.TitledBorder[data-title-justification="trailing"] > :first-child {
+  justify-self: right;
+}
+
+.LoweredEtchedBorder {
+  position: relative !important;
+  margin: 1px;
+  border: 1px solid;
+  border-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.5)
+    rgba(255, 255, 255, 0.5);
+}
+
+.LoweredEtchedBorder::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5)
+    rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5);
+}
+
+.RaisedEtchedBorder {
+  position: relative !important;
+  margin: 1px;
+  border: 1px solid;
+  border-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.5)
+    rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5);
+}
+
+.RaisedEtchedBorder::before {
+  content: "" !important;
+  position: absolute !important;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  border: 1px solid;
+  border-color: rgba(255, 255, 255, 0.5) rgba(0, 0, 0, 0.5) rgba(0, 0, 0, 0.5)
+    rgba(255, 255, 255, 0.5);
+}
+
+.LineBorder,
+.EmptyBorder,
+.CompoundBorder {
+  display: grid !important;
+}
+
+/**
+ * Button
+ */
+
+button[disabled] img {
+  filter: grayscale(100%);
+  opacity: 0.2;
+}
+
+/**
+ * Color Chooser
+ */
+
+.ColorChooser {
+  display: grid !important;
+}
+
+.ColorChooser > * {
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+}
+
+/**
+ * Dialog
+ */
+
+.Dialog {
+  background-color: WhiteSmoke;
+  box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.25);
+}
+
+.Dialog .DialogTitleBar {
+  background-color: LightGray;
+  user-select: none;
+}
+
+/**
+ * File Chooser
+ */
+
+.FileChooser {
+  display: grid !important;
+  position: relative !important;
+}
+
+.FileChooser > * {
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+}
+
+.FileChooser input {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  bottom: 50%;
+  left: 50%;
+  visibility: hidden;
+}
+
+/**
+ * Glass Pane
+ */
+
+.GlassPane {
+  z-index: 200 !important;
+}
+
+/**
+ * Layers
+ */
+
+.DragLayer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 400 !important;
+}
+
+.ModalLayer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 200 !important;
+}
+
+/**
+ * Menu Bar
+ */
+
+.MenuBar {
+  user-select: none !important;
+}
+
+.MenuBar,
+.MenuBar ul {
+  list-style-type: none !important;
+  white-space: nowrap !important;
+  margin: 0;
+  padding: 0;
+}
+
+.MenuBar li {
+  position: relative !important;
+}
+
+.MenuBar ul {
+  position: absolute !important;
+  display: none !important;
+  z-index: 300;
+}
+
+.MenuBar[data-open] li[data-selected] > ul {
+  display: block !important;
+}
+
+.MenuBar li > * {
+  padding-inline: 0.5em;
+}
+
+.MenuBar li > ul {
+  inset-inline-start: calc(100% - 0.5em);
+  inset-block-start: -0.5em;
+  box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.25);
+  background-color: whitesmoke;
+  padding-block: 0.5em;
+  padding-inline: 0;
+}
+
+.MenuBar > li > ul {
+  inset-inline-start: 0;
+  inset-block-start: 100%;
+}
+
+.MenuBar li > :not(ul):not(hr) {
+  cursor: pointer;
+}
+
+@media (hover: hover) {
+  .MenuBar li:hover,
+  .MenuBar:not(:hover) li[data-selected] {
+    background-color: rgba(128, 128, 128, 0.25);
+  }
+}
+
+@media not (hover: hover) {
+  .MenuBar li[data-selected] {
+    background-color: rgba(128, 128, 128, 0.25);
+  }
+}
+
+/**
+ * Menu Bar layout
+ */
+
+.MenuBar {
+  display: grid;
+  align-content: stretch;
+  justify-content: start;
+  align-items: stretch;
+}
+
+.MenuBar > * {
+  grid-row: 1;
+  display: grid;
+  place-content: center;
+}
+
+/**
+ * Menu Item Layout
+ */
+
+.MenuBar .MenuItem,
+.MenuBar ul .Menu {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+}
+
+.MenuBar .MenuItem > *,
+.MenuBar ul .Menu > * {
+  font-size: 1em;
+  line-height: 1.2;
+}
+
+.MenuBar .MenuItem > :first-child,
+.MenuBar .MenuItem > :last-child,
+.MenuBar ul .Menu > :first-child,
+.MenuBar ul .Menu > :last-child {
+  width: 1em;
+}
+
+.MenuBar .MenuItem > img,
+.MenuBar .MenuItem > svg,
+.MenuBar .MenuItem > input,
+.MenuBar ul .Menu > img,
+.MenuBar ul .Menu > svg,
+.MenuBar ul .Menu > input {
+  margin-block: 0.1em;
+  width: 1em;
+  height: 1em;
+}
+
+.MenuBar .MenuItem > :not(:first-child):not(:last-child),
+.MenuBar ul .Menu > :not(:first-child):not(:last-child) {
+  padding-inline: 0.5em;
+}
+
+.MenuBar .MenuItem > :nth-child(3):not(:last-child),
+.MenuBar ul .Menu > :nth-child(3):not(:last-child) {
+  font-family: monospace;
+}
+
+.MenuBar .MenuItem * {
+  pointer-events: none;
+}
+
+/**
+ * Scroll Pane
+ */
+
+.ScrollPane {
+  overflow: auto !important;
+}
+
+.ScrollPane[data-policy="scrollbar-as-needed"],
+.ScrollPane[data-vertical-policy="scrollbar-as-needed"] {
+  overflow-y: auto !important;
+}
+
+.ScrollPane[data-policy="scrollbar-never"],
+.ScrollPane[data-vertical-policy="scrollbar-never"] {
+  overflow-y: hidden !important;
+}
+
+.ScrollPane[data-policy="scrollbar-always"],
+.ScrollPane[data-vertical-policy="scrollbar-always"] {
+  overflow-y: scroll !important;
+}
+
+.ScrollPane[data-policy="scrollbar-as-needed"],
+.ScrollPane[data-horizontal-policy="scrollbar-as-needed"] {
+  overflow-x: auto !important;
+}
+
+.ScrollPane[data-policy="scrollbar-never"],
+.ScrollPane[data-horizontal-policy="scrollbar-never"] {
+  overflow-x: hidden !important;
+}
+
+.ScrollPane[data-policy="scrollbar-always"],
+.ScrollPane[data-horizontal-policy="scrollbar-always"] {
+  overflow-x: scroll !important;
+}
+
+@supports (overflow: overlay) {
+  .ScrollPane[data-overlay]:not([data-overlay="false"]) {
+    overflow: overlay !important;
+  }
+
+  .ScrollPane[data-overlay]:not(
+      [data-overlay="false"]
+    )[data-policy="scrollbar-never"],
+  .ScrollPane[data-overlay]:not(
+      [data-overlay="false"]
+    )[data-vertical-policy="scrollbar-never"] {
+    overflow-y: hidden !important;
+  }
+
+  .ScrollPane[data-overlay]:not(
+      [data-overlay="false"]
+    )[data-policy="scrollbar-never"],
+  .ScrollPane[data-overlay]:not(
+      [data-overlay="false"]
+    )[data-horizontal-policy="scrollbar-never"] {
+    overflow-x: hidden !important;
+  }
+
+  @media not (pointer: coarse) {
+    .ScrollPane[data-overlay]:not([data-overlay="false"])::-webkit-scrollbar {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media (hover: hover) {
+      .ScrollPane[data-overlay]:not(
+          [data-overlay="false"]
+        ):hover::-webkit-scrollbar-thumb {
+        background-color: rgba(128, 128, 128, 0.25);
+      }
+    }
+
+    .ScrollPane[data-overlay]:not(
+        [data-overlay="false"]
+      )::-webkit-scrollbar-corner {
+      background-color: transparent;
+    }
+  }
+}
+
+/**
+ * Scroll Table
+ */
+
+.ScrollTable {
+  display: grid !important;
+  grid-template-rows: 1fr !important;
+  grid-template-columns: 1fr !important;
+  overflow: auto !important;
+  overscroll-behavior: none;
+}
+
+.ScrollTable[data-policy="scrollbar-as-needed"],
+.ScrollTable[data-vertical-policy="scrollbar-as-needed"] {
+  overflow-y: auto !important;
+}
+
+.ScrollTable[data-policy="scrollbar-never"],
+.ScrollTable[data-vertical-policy="scrollbar-never"] {
+  overflow-y: hidden !important;
+}
+
+.ScrollTable[data-policy="scrollbar-always"],
+.ScrollTable[data-vertical-policy="scrollbar-always"] {
+  overflow-y: scroll !important;
+}
+
+.ScrollTable[data-policy="scrollbar-as-needed"],
+.ScrollTable[data-horizontal-policy="scrollbar-as-needed"] {
+  overflow-x: auto !important;
+}
+
+.ScrollTable[data-policy="scrollbar-never"],
+.ScrollTable[data-horizontal-policy="scrollbar-never"] {
+  overflow-x: hidden !important;
+}
+
+.ScrollTable[data-policy="scrollbar-always"],
+.ScrollTable[data-horizontal-policy="scrollbar-always"] {
+  overflow-x: scroll !important;
+}
+
+@supports (overflow: overlay) {
+  .ScrollTable[data-overlay]:not([data-overlay="false"]) {
+    overflow: overlay !important;
+  }
+
+  .ScrollTable[data-overlay]:not(
+      [data-overlay="false"]
+    )[data-policy="scrollbar-never"],
+  .ScrollTable[data-overlay]:not(
+      [data-overlay="false"]
+    )[data-vertical-policy="scrollbar-never"] {
+    overflow-y: hidden !important;
+  }
+
+  .ScrollTable[data-overlay]:not(
+      [data-overlay="false"]
+    )[data-policy="scrollbar-never"],
+  .ScrollTable[data-overlay]:not(
+      [data-overlay="false"]
+    )[data-horizontal-policy="scrollbar-never"] {
+    overflow-x: hidden !important;
+  }
+
+  @media not (pointer: coarse) {
+    .ScrollTable[data-overlay]:not([data-overlay="false"])::-webkit-scrollbar {
+      width: 16px;
+      height: 16px;
+    }
+
+    @media (hover: hover) {
+      .ScrollTable[data-overlay]:not(
+          [data-overlay="false"]
+        ):hover::-webkit-scrollbar-thumb {
+        background-color: rgba(128, 128, 128, 0.25);
+      }
+    }
+
+    .ScrollTable[data-overlay]:not(
+        [data-overlay="false"]
+      )::-webkit-scrollbar-corner {
+      background-color: transparent;
+    }
+  }
+}
+
+.ScrollTable > * {
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+}
+
+.ScrollTable table {
+  border-spacing: 0;
+}
+
+.ScrollTable thead {
+  position: sticky !important;
+  inset-block-start: 0 !important;
+  background-color: WhiteSmoke;
+  /* -webkit-transform: translate3d(0,0,0); */
+}
+
+.ScrollTable:not([data-show-grid="false"]) {
+  border: 1px solid Gray;
+}
+
+.ScrollTable:not([data-show-grid="false"]) th,
+.ScrollTable:not([data-show-grid="false"]) tr:not(:last-child) > td {
+  border-block-end: 1px solid Gray;
+}
+
+.ScrollTable:not([data-show-grid="false"]) th:not(:last-child),
+.ScrollTable:not([data-show-grid="false"]) td:not(:last-child) {
+  border-inline-end: 1px solid Gray;
+}
+
+.ScrollTable[data-row-header]:not([data-row-header="false"]) th:first-child,
+.ScrollTable[data-row-header]:not([data-row-header="false"]) td:first-child {
+  position: sticky !important;
+  inset-inline-start: 0 !important;
+  background-color: WhiteSmoke;
+}
+
+/**
+ * Split Pane
+ */
+
+.SplitPane > * {
+  margin: 0 !important;
+  border: 0 !important;
+  padding: 0 !important;
+  display: grid;
+}
+
+.SplitPane > :not(:nth-child(2)) {
+  /*
+  grid-template-rows: minmax(0, 1fr) !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  */
+  overflow: hidden;
+}
+
+.SplitPane:not([data-orientation="vertical-split"]) > * {
+  height: 100%;
+}
+
+.SplitPane:not([data-orientation="vertical-split"]) > :first-child,
+.SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2) {
+  float: left;
+}
+
+.SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2) {
+  cursor: ew-resize;
+}
+
+.SplitPane[data-orientation="vertical-split"] > :nth-child(2) {
+  cursor: ns-resize;
+}
+
+@media (pointer: coarse) {
+  .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2) {
+    width: 32px;
+  }
+
+  .SplitPane[data-orientation="vertical-split"] > :nth-child(2) {
+    height: 32px;
+  }
+}
+
+@media (pointer: fine) {
+  .SplitPane:not([data-orientation="vertical-split"]) > :nth-child(2) {
+    width: 8px;
+  }
+
+  .SplitPane[data-orientation="vertical-split"] > :nth-child(2) {
+    height: 8px;
+  }
+}
+
+/**
+ * EmptyDivider
+ */
+
+.SplitPane:not([data-orientation="vertical-split"])
+  > :nth-child(2).EmptyDivider {
+  width: 0 !important;
+  position: relative !important;
+  cursor: ew-resize;
+}
+
+.SplitPane[data-orientation="vertical-split"] > :nth-child(2).EmptyDivider {
+  height: 0 !important;
+  position: relative !important;
+  cursor: ns-resize;
+}
+
+@media (pointer: coarse) {
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).EmptyDivider::before {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -16px;
+    width: 32px;
+    height: 100%;
+    content: "";
+  }
+
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).EmptyDivider::before {
+    position: absolute;
+    inset-block-start: -16px;
+    inset-inline-start: 0;
+    height: 32px;
+    width: 100%;
+    content: "";
+  }
+}
+
+@media (pointer: fine) {
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).EmptyDivider::before {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -4px;
+    width: 8px;
+    height: 100%;
+    content: "";
+  }
+
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).EmptyDivider::before {
+    position: absolute;
+    inset-block-start: -4px;
+    inset-inline-start: 0;
+    height: 8px;
+    width: 100%;
+    content: "";
+  }
+}
+
+/**
+ * LineDivider
+ */
+
+.SplitPane:not([data-orientation="vertical-split"])
+  > :nth-child(2).LineDivider {
+  width: 0 !important;
+  position: relative !important;
+  cursor: ew-resize;
+  background-color: Gray;
+}
+
+.SplitPane[data-orientation="vertical-split"] > :nth-child(2).LineDivider {
+  height: 0 !important;
+  position: relative !important;
+  cursor: ns-resize;
+  background-color: Gray;
+}
+
+@media (pointer: coarse) {
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).LineDivider::before {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -16px;
+    width: 32px;
+    height: 100%;
+    content: "";
+  }
+
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).LineDivider::after {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -0.5px;
+    width: 1px;
+    height: 100%;
+    background-color: inherit;
+    content: "";
+  }
+
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).LineDivider::before {
+    position: absolute;
+    inset-block-start: -16px;
+    inset-inline-start: 0;
+    height: 32px;
+    width: 100%;
+    content: "";
+  }
+
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).LineDivider::after {
+    position: absolute;
+    inset-block-start: -0.5px;
+    inset-inline-start: 0;
+    height: 1px;
+    width: 100%;
+    background-color: inherit;
+    content: "";
+  }
+}
+
+@media (pointer: fine) {
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).LineDivider::before {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -4px;
+    width: 8px;
+    height: 100%;
+    content: "";
+  }
+
+  .SplitPane:not([data-orientation="vertical-split"])
+    > :nth-child(2).LineDivider::after {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: -0.5px;
+    width: 1px;
+    height: 100%;
+    background-color: inherit;
+    content: "";
+  }
+
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).LineDivider::before {
+    position: absolute;
+    inset-block-start: -4px;
+    inset-inline-start: 0;
+    height: 8px;
+    width: 100%;
+    content: "";
+  }
+
+  .SplitPane[data-orientation="vertical-split"]
+    > :nth-child(2).LineDivider::after {
+    position: absolute;
+    inset-block-start: -0.5px;
+    inset-inline-start: 0;
+    height: 1px;
+    width: 100%;
+    background-color: inherit;
+    content: "";
+  }
+}
+
+/**
+ * Tabbed pane
+ */
+
+.TabbedPane,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"],
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"],
+.TabbedPane[data-tab-placement="page-start"],
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"],
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"] {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+}
+
+.TabbedPane > :first-child,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"] > :first-child,
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"] > :first-child,
+.TabbedPane[data-tab-placement="page-start"] > :first-child,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]
+  > :first-child,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]
+  > :first-child {
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+}
+
+.TabbedPane > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"]
+  > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"]
+  > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="page-start"]
+  > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]
+  > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]
+  > :not(:first-child):not(:last-child) {
+  grid-row: 1 !important;
+  grid-column: 2 !important;
+}
+
+.TabbedPane > :last-child,
+.TabbedPane[data-tab-layout-policy="wrap-tab-layout"] > :last-child,
+.TabbedPane[data-tab-layout-policy="scroll-tab-layout"] > :last-child,
+.TabbedPane[data-tab-placement="page-start"] > :last-child,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="wrap-tab-layout"]
+  > :last-child,
+.TabbedPane[data-tab-placement="page-start"][data-tab-layout-policy="scroll-tab-layout"]
+  > :last-child {
+  grid-row: 2 !important;
+  grid-column: 1 / -1 !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"],
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"],
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"] {
+  display: grid !important;
+  grid-template-rows: minmax(0, 1fr) auto !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"] > :first-child,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]
+  > :first-child,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]
+  > :first-child {
+  grid-row: 2 !important;
+  grid-column: 1 !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"]
+  > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]
+  > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]
+  > :not(:first-child):not(:last-child) {
+  grid-row: 2 !important;
+  grid-column: 2 !important;
+}
+
+.TabbedPane[data-tab-placement="page-end"] > :last-child,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="wrap-tab-layout"]
+  > :last-child,
+.TabbedPane[data-tab-placement="page-end"][data-tab-layout-policy="scroll-tab-layout"]
+  > :last-child {
+  grid-row: 1 !important;
+  grid-column: 1 / -1 !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"],
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"],
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"] {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  grid-template-columns: auto minmax(0, 1fr) !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"]
+  > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]
+  > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]
+  > :not(:first-child):not(:last-child) {
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"] > :first-child,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]
+  > :first-child,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]
+  > :first-child {
+  grid-row: 2 !important;
+  grid-column: 1 !important;
+}
+
+.TabbedPane[data-tab-placement="line-start"] > :last-child,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="wrap-tab-layout"]
+  > :last-child,
+.TabbedPane[data-tab-placement="line-start"][data-tab-layout-policy="scroll-tab-layout"]
+  > :last-child {
+  grid-row: 1 / -1 !important;
+  grid-column: 2 !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"],
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"],
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"] {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"]
+  > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]
+  > :not(:first-child):not(:last-child),
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]
+  > :not(:first-child):not(:last-child) {
+  grid-row: 1 !important;
+  grid-column: 2 !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"] > :first-child,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]
+  > :first-child,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]
+  > :first-child {
+  grid-row: 2 !important;
+  grid-column: 2 !important;
+}
+
+.TabbedPane[data-tab-placement="line-end"] > :last-child,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="wrap-tab-layout"]
+  > :last-child,
+.TabbedPane[data-tab-placement="line-end"][data-tab-layout-policy="scroll-tab-layout"]
+  > :last-child {
+  grid-row: 1 / -1 !important;
+  grid-column: 1 !important;
+}
+
+/**
+ * Tab component
+ */
+
+.TabbedPane > :first-child > button {
+  user-select: none !important;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  line-height: inherit;
+  padding: 0 0.5em;
+  margin: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  float: left;
+}
+
+.TabbedPane > :first-child > button * {
+  pointer-events: none;
+}
+
+/**
+ * Tab component Layout
+ */
+
+.TabbedPane > :first-child > button > :first-child {
+  display: grid !important;
+  align-content: stretch !important;
+  justify-content: start !important;
+  align-items: center !important;
+  gap: 0.5em;
+}
+
+.TabbedPane > :first-child > button > :first-child > * {
+  grid-row: 1 !important;
+  grid-column: unset !important;
+  font-size: 1em;
+  line-height: 1.2;
+}
+
+.TabbedPane > :first-child > button > :first-child > .material-icons {
+  width: 1em;
+}
+
+.TabbedPane > :first-child > button > :first-child > img,
+.TabbedPane > :first-child > button > :first-child > svg {
+  margin-block: 0.1em;
+  width: 1em;
+  height: 1em;
+}
+
+/**
+ * Tabbed Pane default background colors
+ */
+
+.TabbedPane > :first-child {
+  background-color: whitesmoke;
+  gap: 1px;
+}
+
+.TabbedPane > :first-child > button {
+  background-color: rgba(128, 128, 128, 0.25);
+}
+
+.TabbedPane > :first-child > button[tabindex="-1"] {
+  background-color: white;
+}
+
+/**
+ * Tree
+ */
+
+.Tree {
+  user-select: none;
+}
+
+.Tree,
+.Tree ul {
+  list-style-type: none !important;
+  margin: 0;
+  padding: 0;
+}
+
+.Tree ul {
+  display: block !important;
+}
+
+.Tree .TreeNode[data-closed]:not([data-closed="false"]) ~ ul {
+  display: none !important;
+}
+
+.Tree .TreeNode {
+  display: grid !important;
+  align-content: stretch !important;
+  justify-content: start !important;
+  align-items: center;
+  gap: 0.2em;
+}
+
+.Tree .TreeNode > * {
+  grid-row: 1 !important;
+  grid-column: unset !important;
+  font-size: 1em;
+  line-height: 1.2;
+}
+
+.Tree .TreeNode > .material-icons {
+  width: 1em;
+}
+
+.Tree .TreeNode > img,
+.Tree .TreeNode > svg {
+  margin-block: 0.1em;
+  width: 1em;
+  height: 1em;
+}
+
+@media (hover: hover) {
+  .Tree li > :not(ul):hover {
+    background-color: rgba(128, 128, 128, 0.25);
+  }
+}
+
+.TreeNode[data-closed="true"] > .material-icons::after {
+  content: "keyboard_arrow_right";
+}
+.TreeNode[data-closed="false"] > .material-icons::after {
+  content: "keyboard_arrow_down";
+}
+
+.TreeNode * {
+  pointer-events: none;
+}
+
+/**
+ * Border Layout
+ */
+
+.Frame,
+.BorderLayout {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+}
+
+.Frame > *,
+.BorderLayout > * {
+  grid-row: 2 !important;
+  grid-column: 2 !important;
+}
+
+.Frame > .North,
+.Frame > .PageStart,
+.BorderLayout > .North,
+.BorderLayout > .PageStart {
+  grid-row: 1 !important;
+  grid-column: 1 / -1 !important;
+}
+
+.Frame > .South,
+.Frame > .PageEnd,
+.BorderLayout > .South,
+.BorderLayout > .PageEnd {
+  grid-row: 3 !important;
+  grid-column: 1 / -1 !important;
+}
+
+.Frame > .West,
+.Frame > .LineStart,
+.BorderLayout > .West,
+.BorderLayout > .LineStart {
+  grid-row: 2 !important;
+  grid-column: 1 !important;
+}
+
+.Frame > .East,
+.Frame > .LineEnd,
+.BorderLayout > .East,
+.BorderLayout > .LineEnd {
+  grid-row: 2 !important;
+  grid-column: 3 !important;
+}
+
+.Frame > .Center,
+.BorderLayout > .Center {
+  grid-row: 2 !important;
+  grid-column: 2 !important;
+}
+
+.Frame > .North,
+.Frame > .South,
+.Frame > .West,
+.Frame > .East,
+.Frame > .PageStart,
+.Frame > .PageEnd,
+.Frame > .LineStart,
+.Frame > .LineEnd,
+.Frame > .Center,
+.BorderLayout > .North,
+.BorderLayout > .South,
+.BorderLayout > .West,
+.BorderLayout > .East,
+.BorderLayout > .PageStart,
+.BorderLayout > .PageEnd,
+.BorderLayout > .LineStart,
+.BorderLayout > .LineEnd,
+.BorderLayout > .Center {
+  display: grid;
+}
+
+.Frame > .Center,
+.BorderLayout > .Center {
+  grid-template-rows: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+/**
+ * Box Layout
+ */
+
+.BoxLayout,
+.BoxLayout[data-axis="x-axis"],
+.BoxLayout[data-axis="line-axis"] {
+  display: grid !important;
+  align-content: stretch !important;
+  justify-content: start !important;
+  align-items: center !important;
+}
+
+.BoxLayout[data-axis="y-axis"],
+.BoxLayout[data-axis="page-axis"] {
+  display: grid !important;
+  align-content: start !important;
+  justify-content: stretch !important;
+  justify-items: center !important;
+}
+
+.BoxLayout[data-axis="y-axis"][data-alignment-x="start"],
+.BoxLayout[data-axis="page-axis"][data-alignment-x="start"] {
+  justify-items: start !important;
+}
+
+.BoxLayout[data-alignment-x="center"],
+.BoxLayout[data-axis="x-axis"][data-alignment-x="center"],
+.BoxLayout[data-axis="line-axis"][data-alignment-x="center"] {
+  justify-content: center !important;
+}
+
+.BoxLayout[data-alignment-x="end"],
+.BoxLayout[data-axis="x-axis"][data-alignment-x="end"],
+.BoxLayout[data-axis="line-axis"][data-alignment-x="end"] {
+  justify-content: end !important;
+}
+
+.BoxLayout[data-axis="y-axis"][data-alignment-x="end"],
+.BoxLayout[data-axis="page-axis"][data-alignment-x="end"] {
+  justify-items: end !important;
+}
+
+.BoxLayout[data-axis="y-axis"][data-alignment-x="stretch"],
+.BoxLayout[data-axis="page-axis"][data-alignment-x="stretch"] {
+  justify-items: stretch !important;
+}
+
+.BoxLayout[data-alignment-y="start"],
+.BoxLayout[data-axis="x-axis"][data-alignment-y="start"],
+.BoxLayout[data-axis="line-axis"][data-alignment-y="start"] {
+  align-items: start !important;
+}
+
+.BoxLayout[data-axis="y-axis"][data-alignment-y="center"],
+.BoxLayout[data-axis="page-axis"][data-alignment-y="center"] {
+  align-content: center !important;
+}
+
+.BoxLayout[data-alignment-y="end"],
+.BoxLayout[data-axis="x-axis"][data-alignment-y="end"],
+.BoxLayout[data-axis="line-axis"][data-alignment-y="end"] {
+  align-items: end !important;
+}
+
+.BoxLayout[data-axis="y-axis"][data-alignment-y="end"],
+.BoxLayout[data-axis="page-axis"][data-alignment-y="end"] {
+  align-content: end !important;
+}
+
+.BoxLayout[data-alignment-y="stretch"],
+.BoxLayout[data-axis="x-axis"][data-alignment-y="stretch"],
+.BoxLayout[data-axis="line-axis"][data-alignment-y="stretch"] {
+  align-items: stretch !important;
+}
+
+.BoxLayout > *,
+.BoxLayout[data-axis="x-axis"] > *,
+.BoxLayout[data-axis="line-axis"] > * {
+  grid-row: 1 !important;
+  grid-column: unset !important;
+}
+
+.BoxLayout[data-axis="y-axis"] > *,
+.BoxLayout[data-axis="page-axis"] > * {
+  grid-row: unset !important;
+  grid-column: 1 !important;
+}
+
+/**
+ * Center Layout
+ */
+
+.CenterLayout {
+  display: grid !important;
+  place-items: center !important;
+}
+
+/**
+ * Card Layout
+ */
+
+.CardLayout {
+  display: grid !important;
+  grid-template-rows: minmax(0, 1fr) !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+}
+
+.CardLayout > * {
+  grid-row: 1 !important;
+  grid-column: 1 !important;
+  outline: none;
+}
+
+/**
+ * Flow Layout
+ */
+
+.FlowLayout {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-content: start !important;
+  align-items: center;
+}
+
+.FlowLayout,
+.FlowLayout[data-alignment="center"] {
+  justify-content: center !important;
+}
+
+.FlowLayout[data-alignment="leading"] {
+  justify-content: start !important;
+}
+
+.FlowLayout[data-alignment="trailing"] {
+  justify-content: end !important;
+}
+
+/**
+ * Grid Constraints
+ */
+
+.GridConstraints {
+  display: grid !important;
+  place-items: center !important;
+}
+
+.GridConstraints[data-anchor="page-start"] {
+  align-items: start !important;
+}
+
+.GridConstraints[data-anchor="page-end"] {
+  align-items: end !important;
+}
+
+.GridConstraints[data-anchor="line-start"] {
+  justify-items: start !important;
+}
+
+.GridConstraints[data-anchor="line-end"] {
+  justify-items: end !important;
+}
+
+.GridConstraints[data-anchor="first-line-start"] {
+  align-items: start !important;
+  justify-items: start !important;
+}
+
+.GridConstraints[data-anchor="first-line-end"] {
+  align-items: start !important;
+  justify-items: end !important;
+}
+
+.GridConstraints[data-anchor="last-line-start"] {
+  align-items: end !important;
+  justify-items: start !important;
+}
+
+.GridConstraints[data-anchor="last-line-end"] {
+  align-items: end !important;
+  justify-items: end !important;
+}
+
+.GridConstraints[data-fill="horizontal"] {
+  justify-items: stretch !important;
+}
+
+.GridConstraints[data-fill="vertical"] {
+  align-items: stretch !important;
+}
+
+.GridConstraints[data-fill="both"] {
+  place-items: stretch !important;
+}
+
+/**
+ * No FOUC (Flash Of Unstyled Content)
+ */
+
+.NoFouc {
+  visibility: hidden;
+}
